@@ -1,0 +1,126 @@
+.loginMain{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 8em 0;
+    background-position: 20%;
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+                  url("../../images/digital-world-map-hologram-blue-background.jpg");
+                  min-height: 100vh;
+}
+input:focus{
+    outline: none;
+}
+.formMain_login input{
+    min-width: 390px;
+    min-height: 50px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color:#B9244C;
+    margin: 10px 0;
+    border-bottom: 1px solid white;
+    color: white;
+}
+.formMain_login{
+    width: 32%;
+    margin: 0 auto;
+}
+.login__box__login h1{
+    padding-bottom: 2em;
+}
+.formTable_login label{
+    padding-right: 1em;
+}
+.a_Links{
+    display: flex;
+    padding: 2em 4em;
+}
+.a_Links a{
+   padding: 1em 2em;
+ margin-right: 2em;
+}
+.login__box__login{
+    padding: 8em 0;
+    background-color:#0D1430;
+    min-height: 80vh;
+}
+.loginMain span{
+    color: #B9244C;
+}
+.formTable_login tr{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+}
+.password_icon_1,.password_icon_2{
+    color: white;
+    padding: 1em 0.2em;
+    background-color: #0D1430;
+    cursor: pointer;
+}
+
+
+.password__flow{
+    display: flex;
+}
+
+.password_icon_1{
+    display: none;
+}
+
+
+.formTable_login{
+    text-align: start;
+     
+ }
+
+
+
+
+
+
+@media screen and (max-width: 768px){
+    .formMain_login{
+        margin-left: 0.2em;
+    }
+    .formMain_login input{
+        min-width: 210px;
+        min-height: 35px;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color:#B9244C;
+        margin: 10px 0;
+        border-bottom: 1px solid white;
+        color: white;
+    }
+    .a_Links{
+        display: flex;
+        padding: 2em 5em;
+    }
+    .a_Links a{
+        padding: 1em 0.8em;
+        
+        margin-right: 1em;
+     }
+     .formTable_login label{
+        padding-right: 0.4em;
+    }
+    .formMain_login{
+    width: 68%;
+    margin: 0 auto;
+    }
+    .formTable_login tr{
+        display: grid;
+        grid-template-columns: repeat(1,2fr);
+       padding-left: 1em;
+    }
+    /* .LoginInput input{
+    margin-left: -2em;    
+} */
+.formTable_login{
+   text-align: start;
+    
+}
+
+}

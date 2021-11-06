@@ -1,0 +1,54 @@
+{
+  "name": "my-setapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@barba/core": "^2.9.7",
+    "@dogstudio/highway": "^2.2.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "affiliate": "^3.0.2",
+    "animate.css": "^4.1.0",
+    "axios": "^0.19.2",
+    "date-fns": "^2.19.0",
+    "formik": "^2.1.5",
+    "gsap": "^3.5.0",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.29.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.6.1",
+    "react-datepicker": "^4.2.0",
+    "react-dom": "^16.13.1",
+    "react-moment": "^1.1.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.3.0",
+    "react-toastify": "^6.0.8",
+    "react-transition-group": "^4.4.1",
+    "serve": "^12.0.1",
+    "swup": "^2.0.11",
+    "yup": "^0.29.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:8000/"
+}

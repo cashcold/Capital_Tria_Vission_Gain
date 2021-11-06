@@ -1,0 +1,47 @@
+.aboutMain{
+    padding: 8em 0;
+    background-position: 20%;
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+                  url("../../images/digital-world-map-hologram-blue-background.jpg");
+                  min-height: 100vh;
+}
+
+.allAboutInfo{
+    padding: 1.5em 4em;
+    background-color:#0D1430;
+    /* color: #B9244C; */
+    width: 90%;
+    margin: 0 auto;
+}
+.allAboutInfo h1{
+    padding: 1.5em 4em;
+    color: #B9244C;
+}
+.otherAboutText p{
+    padding-bottom: 3em;
+    width: 80%;
+    margin: 0 auto;
+    line-height: 1.8rem;
+    font-size: 1.3rem;
+}
+.otherAboutText h3{
+    color: #B9244C;
+    padding-bottom: 1em;
+}
+
+@media screen and (max-width: 768px){
+    .otherAboutText p{
+        padding-bottom: 3em;
+        width: 100%;
+        margin: 0 auto;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+    .allAboutInfo{
+        padding: 1.5em 1em;
+        background-color:#0D1430;
+        /* color: #B9244C; */
+        width: 95%;
+        margin: 0 auto;
+    }
+}

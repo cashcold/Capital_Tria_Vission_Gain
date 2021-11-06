@@ -1,0 +1,222 @@
+.other__navbar h1,h1,h3,h4:hover{
+    cursor: pointer;
+}
+
+
+.other__navbar{
+    background-color:#0D1430;
+    min-height: 10vh;
+    padding: 1.4em 0em;
+    border-bottom: 2px solid red;
+}
+
+i{
+    color: red;
+    padding: 0 0.1em;
+}
+.other__i__1{
+    color: #F7931A;
+    padding: 0 0.1em;
+}
+.other__i__2{
+    color: #627EEA;
+    padding: 0 0.1em;
+}
+
+.other_bar_flow{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: -10em;
+    /* padding-top: 1em; */
+    
+}
+.other__nav_chat__3{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    /* grid-gap: 0.4em; */
+    
+}
+.other__nav_chat__3 img{
+        width: 27px;   
+        padding: 0 0.1em;
+}
+.other__i__3 img{
+        width: 45px; 
+        display: none;
+        border-radius: 50%;
+        background-color: red; 
+        padding: 0 0.1em; 
+}
+.other__i__4{
+    border-radius: 50px;
+    margin-top: 0.5em;
+}
+.other_bar_flow{
+    padding-right: 7em;
+}
+
+
+.navMain{
+    width: 100%;
+    /* background-image: url('../../images/5039684.jpg');
+    background-position: center;
+    background-size: cover; */
+    
+    background-attachment: fixed;
+}
+.navMain nav{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    padding-right: 10em;
+    padding-top: 2em;
+    min-height: 15vh;
+    background-color:#0C1733;
+    opacity: 0.9;
+    position: relative;
+}
+.links{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    margin-top: 1.5em;
+    grid-gap: 20px;
+}
+.links  a:hover{
+    color: red;
+    cursor: pointer;
+}
+.btn-join-us:hover{
+    color:white;
+    cursor: pointer;
+    background-color: yellow;
+}
+.other__navbar:hover{
+    cursor: pointer;
+}
+
+.logoImg h1{
+    color: white;
+    background-color: blue;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #F43055 61%, white 30%);;
+    font-size: 2rem;
+}
+.btn-join-us{
+    background-color: #F42F54; 
+    border-radius: 30%;
+    padding: 0.8em 2.2em;
+    color: white;
+}
+.btn-login-in{
+  
+    border: 2px solid #F42F54;
+    border-radius: 30%;
+    padding: 0.8em 2.2em;
+    color: white;
+    margin: 0 1em;
+}
+.toggle__bar{
+    display: none;
+    margin-top: -1em;
+}
+.logoImg:hover{
+    cursor: pointer;
+}
+.toggle__bar div{
+    background-color: white;
+    width: 30px;
+    height: 5px;
+    margin: 4px 0;
+}
+.togglo__dash{
+    display: none;
+}
+.dash__both{
+    display: flex;
+}
+.other_h1_nav{
+    color: white;
+}
+
+@media screen and (max-width: 768px){
+    h1{
+        font-size: 1.5rem;
+    }
+    h2{
+        font-size: 1.2rem;
+    }
+    h3{
+        font-size: 1rem;
+    }
+    .other_bar_flow{
+        padding-right: 1em;
+    }
+    .other_bar_flow{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        margin-left: -4em;
+        
+    }
+    .other__nav_chat__3{
+        margin-left: 4em;
+    }
+   
+
+
+
+
+
+
+    /* end other__navbar */
+    .links{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 10px;
+        margin-top: 3em;
+        margin-left: -2em;
+    }
+    .logoImg h1{
+        font-size: 1.5rem;
+        display: flex;
+    }
+    .logoImg h1{
+        margin-left: 1em;
+    }
+    .toggle__bar{
+        display: block;
+        position: absolute;
+        top: 2em;
+        right: 4em;
+    color: white;
+    background-color: blue;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    background-image: linear-gradient(to bottom, #d4e20a 0%, #ff1010 100%);;
+    }
+    .nav__links{
+        display: none;
+    }
+    .navMain nav{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        padding-right: 10em;
+        padding-top: 2em;
+        min-height: 8vh;
+        /* background-color:#2B0945; */
+        position: relative;
+    }
+    .dash__both{
+    display: flex;
+    flex-direction: column;
+    }
+    .btn-login-in_account{
+        margin-bottom: 1em;
+    }
+}
+@media screen and (max-width: 500px){
+
+}

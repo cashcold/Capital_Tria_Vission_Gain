@@ -1,0 +1,124 @@
+.confirmLine{
+    display: flex;
+}
+.confirmDepositNow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lastDepositConfirm{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.confirmLine{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px; 
+}
+.confirm{
+    width: 90%;
+    margin: 0 auto;
+    min-height: 80vh;
+    padding: 3em 0;
+   
+    background-color:#0D1430;
+}
+.planInfo{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.lastConfirm{
+    display: block;
+}
+.confirmBtnInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5em;
+}
+.btnConfirm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputHide{
+    display: none;
+}
+.wallertNumber{
+    margin: 30px 0;
+}
+.automatic img{
+    margin: 30px 0;
+}
+.confirmDepositNow h1{
+    margin: 40px 0;
+}
+.automatic img{
+    width: 30px;
+}
+
+.planInfo p:nth-child(2){
+    color: #B9244C;
+}
+.planInfo p{
+    font-size: 1em;
+    padding: 5px 0;
+}
+
+.confirm img{
+    width: 60%;
+}
+
+.confirmLine{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 12em;
+    
+}
+
+@media screen and (max-width: 768px){
+    .confirmDepositNow h1{
+        font-size: 20px;
+    }
+    .lastConfirm{
+        width: 100%;
+        min-height: 700px;
+    }
+    .lastConfirm p{
+        font-size: 1.5rem;
+    }
+    .wallertNumber{
+        margin: 30px 0;
+        font-size: 0.5rem;
+    }
+    .planInfo p{
+        font-size: 0.9rem;
+        padding: 1em 0;
+    }
+    .confirmBtnInfo p{
+        font-size: 0.9rem;
+    }
+    .confirm{
+        width: 98%;
+        margin: 0 auto;
+        min-height: 80vh;
+        padding: 3em 0;
+       
+        background-color:#0D1430;
+    }
+    .confirmLine{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 0em;
+        
+    }
+    .blockchainQbar_pic{
+       margin: 0 auto;
+       margin-bottom: 4em;
+    }
+}

@@ -1,0 +1,79 @@
+/* .edit__main{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 8em 0;
+    background-position: 20%;
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+                  url("../../images/digital-world-map-hologram-blue-background.jpg");
+                  min-height: 100vh;
+} */
+.edit__main span{
+    color: #B9244C;
+}
+.edit__main h1{
+    padding: 2em 0em;
+    background-color:#0D1430;
+    width: 90%;
+    margin: 0 auto;
+}
+.edit__box__1{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+.edit_now{
+    padding: 5.5em 0;
+    background-color:#0D1430;
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 2em;
+}
+.edit__main input{
+    padding: 0em 1em;
+    border: none;
+    border-bottom: 2px solid red;
+    width: 80%;
+    margin: 0 auto;
+    height: 40px;
+}
+.update_h5{
+  padding: 0.7em 0em;
+  background-color: red;
+  width: 30%;
+  margin: 0 auto;
+}
+
+
+
+
+@media screen and (max-width: 768px){
+    .edit_now{
+        padding: 5.5em 0;
+        background-color:#0D1430;
+        width: 98%;
+        margin: 0 auto;
+        display: grid;
+        grid-column-gap: 1em;
+    }
+    .edit__main input{
+        padding: 0em 0.5em;
+        border: none;
+        border-bottom: 2px solid red;
+        width: 100%;
+        margin: 0 auto;
+        height: 30px;
+    }
+    .edit__main h1{
+        padding: 1em 0em;
+        background-color:#0D1430;
+        width: 98%;
+        margin: 0 auto;
+    }
+    .update_h5{
+        padding: 0.7em 0em;
+        background-color: red;
+        width: 70%;
+        margin: 0 auto;
+      }
+}

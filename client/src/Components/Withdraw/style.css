@@ -1,0 +1,100 @@
+.withdraw__main{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 8em 0;
+    background-position: 20%;
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+                  url("../../images/digital-world-map-hologram-blue-background.jpg");
+                  min-height: 100vh;
+}
+.widthraw__h1{
+    padding: 0.8em 0em;
+    background-color: green;
+    width: 90%;
+    margin: 0 auto;
+     margin-bottom: 2em;
+}
+.All__flow__withdraw{
+    width: 90%;
+    margin: 0 auto;
+    min-height: 40vh;
+    background-color:#0D1430;
+}
+.flow__text{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 3em;
+}
+
+.withdraw__box__1{
+   padding: 2em 0em;
+}
+.widthdraw__info{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 0em;
+    margin-bottom: 1.5em;
+}
+.width__process__1 h4{
+    color: #B9244C;
+}
+.style__h4{
+    color: #B9244C;
+}
+
+.width__method{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 0em;
+   padding: 0em 1.8em;
+}
+.wallet{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 0em;
+    padding: 2em 0em;
+    padding-right: 1em;
+}
+.blink_me {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  .textInfo{
+      width: 90%;
+      margin: 0 auto;
+      margin-bottom: 1em;
+       padding: 2em 0em;
+  }
+
+ .withdrawBtn{
+     display: none;
+     margin:  0 auto;
+ }
+
+@media screen and (max-width: 768px){
+    .widthraw__h1{
+        padding: 0.8em 0em;
+        background-color: green;
+        width: 98%;
+        margin: 0 auto;
+         margin-bottom: 2em;
+    }
+    .All__flow__withdraw{
+        width: 98%;
+        margin: 0 auto;
+        min-height: 40vh;
+        background-color:#0D1430;
+    }
+    .textInfo{
+        width: 98%;
+        margin: 0 auto;
+        margin-bottom: 1em;
+         padding: 2em 0em;
+    }
+}

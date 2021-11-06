@@ -1,0 +1,15 @@
+[0522/005725.698:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[0522/005725.698:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[0522/005725.698:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[0522/005725.698:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0522/005725.776:ERROR:exception_snapshot_win.cc(98)] thread ID 12624 not found in process
+[0522/005725.698:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0713/172928.889:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0116/115241.499:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0116/125412.480:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0116/131503.153:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0116/140044.964:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0118/070305.285:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0119/073251.748:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0121/090317.506:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0121/150657.177:ERROR:crash_report_database_win.cc(455)] unexpected header

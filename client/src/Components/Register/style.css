@@ -1,0 +1,87 @@
+.register{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 8em 0;
+    background-position: 20%;
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+                  url("../../images/digital-world-map-hologram-blue-background.jpg");
+                  min-height: 100vh;
+}
+
+
+.allRegister{
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+
+input:focus{
+    outline: none;
+}
+.formMain input{
+    min-width: 320px;
+    min-height: 50px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color:#0D1430;
+    margin: 10px 0;
+    border-bottom: 1px solid #B9244C;
+}
+.registerH1{
+    padding-bottom: 2em;
+    color: #B9244C;
+}
+.register span{
+    color: #B9244C;
+}
+.registerNow h1,.otherRegisterInfo h1{
+    padding-bottom: 1em;
+}
+.formMain label{
+    padding-right: 1.5em;
+}
+
+.upFontLine{
+    padding: 2em 0;
+}
+
+input{
+    color: white;
+}
+#dropdown-basic-button{
+    width: 100%;
+    height: 5vh;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color:#0D1430;
+    margin: 10px 0;
+    border-bottom: 1px solid #B9244C;
+    color: white;
+}
+
+
+@media screen and (max-width: 768px){
+    
+.allRegister{
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 5em;
+}
+.formMain input{
+    min-width: 170px;
+    min-height: 25px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color:#0D1430;
+    margin: 10px 0;
+    border-bottom: 1px solid #B9244C;
+}
+}

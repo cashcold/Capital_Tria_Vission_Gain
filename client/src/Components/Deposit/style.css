@@ -1,0 +1,148 @@
+.depositMain{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 8em 0;
+    background-position: 20%;
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+                  url("../../images/digital-world-map-hologram-blue-background.jpg");
+                  min-height: 100vh;
+}
+.depositInfo__innerbox__1{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.deposit__box__1{
+    min-height: 20vh;
+    background-color:#0D1430;
+    width: 90%;
+    margin: 0 auto;
+    padding: 3em 0em;
+}
+.depositInfo__lay__1{
+    margin-bottom: 1.5em;
+}
+.depositInfo__box__1{
+    margin-bottom: 1.5em;
+}
+.newDeposit{
+    padding-bottom: 2em;
+}
+.depositMain span{
+    color: #B9244C;
+}
+.depositInfo__lay__1 h3{
+    padding: 0.5em 0em;
+       background-color:red;
+}
+.allSection{
+    display: grid;
+    grid-gap: 3em;
+}
+.other__inner_box{
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-gap: 10em;
+}
+.other__inner_box_2{
+    padding: 2.5em 0em;
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-gap: 10em;
+}
+.other_deposit_box_1{
+    min-height: 40vh;
+    background-color:#0D1430;
+    width: 90%;
+    margin: 0 auto;
+    padding: 3em 0em;
+}
+.other__inner_box{
+    padding: 2em 0em;
+    background-color: #B9244C;
+}
+.innerH5 input{
+    padding: 0em 1em;
+    border: none;
+    border-bottom: 2px solid red;
+    width: 100%;
+    height: 40px;
+}
+
+.other__inner_box_2 ::placeholder {
+    color: red;
+    width: 100%;
+    text-align: right;
+  }
+.bit__btn{
+    padding: 2.5em 0em;
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-gap: 10em;
+}
+.planBtn4{
+    margin-right: 1em;
+}
+.bit__btn_2{
+    padding: 0.8em 0em;
+    background-color: red;
+    width: 40%;
+    margin: 0 auto;
+}
+.other__inner_box_2 input{
+    background-color: black;
+}
+
+
+@media screen and (max-width: 768px){
+    .deposit__box__1{
+        min-height: 20vh;
+        background-color:#0D1430;
+        width: 98%;
+        margin: 0 auto;
+        padding: 1.5em 0em;
+    }
+    .depositInfo__lay__1{
+        margin-bottom: 1em;
+    }
+    .depositInfo__box__1{
+        margin-bottom: 1em;
+    }
+    .newDeposit{
+        padding-bottom: 2em;
+    }
+    .allSection{
+        display: grid;
+        grid-gap: 2em;
+    }
+    .other__inner_box{
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-gap: 3em;
+}
+.other__inner_box_2{
+    padding: 2.5em 0em;
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-gap: 3em;
+}
+.other_deposit_box_1{
+    min-height: 40vh;
+    background-color:#0D1430;
+    width: 98%;
+    margin: 0 auto;
+    padding: 1em 0em;
+}
+.bit__btn_2{
+    padding: 0.8em 0em;
+    background-color: red;
+    width: 80%;
+    margin: 0 auto;
+}
+.bit__btn{
+    padding: 1.5em 0em;
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-gap: 3em;
+}
+}
