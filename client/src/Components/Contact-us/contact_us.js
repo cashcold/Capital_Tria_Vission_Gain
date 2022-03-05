@@ -42,7 +42,6 @@ class ContactMain extends Component {
                                 <div className='supportInfo'>
                                     <h1> <i class="fas fa-envelope-square fa-3x"></i></h1>
                                     <h4>OUR <span>E-MAIL</span></h4>
-                                    <p>capitalgainmanagement.com</p>
                                     <p>supportcapitalgainmanagement@gmail.com</p>
                                 </div>
                             </div>

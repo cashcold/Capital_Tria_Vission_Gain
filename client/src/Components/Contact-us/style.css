@@ -9,6 +9,8 @@
 .bothSupportA{
     width: 100%;
     text-align: center;
+    display: grid;
+    grid-row-gap: 2em;
 }
 .bothSupportB{
     margin: 2rem 0;
@@ -59,7 +61,7 @@
     background-color: #3C1054;
 }
 .mainContact h1{
-padding-bottom: 2em;
+padding-bottom: 0em;
 }
 .mainContact span{
     color:  #F8941D;

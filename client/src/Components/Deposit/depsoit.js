@@ -185,7 +185,7 @@ class DepositMain extends Component {
                              <div className="depositInfo__box__2">
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
-                                            <h4>Plan 2</h4>
+                                            <h4>3 DAYS</h4>
                                             <h4>$60.00 - $119.00	</h4>
                                             <h4>29</h4>
                                         </div>
@@ -212,7 +212,7 @@ class DepositMain extends Component {
                              <div className="depositInfo__box__2">
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
-                                            <h4>Plan 3</h4>
+                                            <h4>5 DAYS</h4>
                                             <h4>$120.00 - $199.00	</h4>
                                             <h4>49.5</h4>
                                         </div>
@@ -239,7 +239,7 @@ class DepositMain extends Component {
                              <div className="depositInfo__box__2">
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
-                                            <h4>Plan 4</h4>
+                                            <h4>7 DAYS</h4>
                                             <h4>$200.00 - $300.00	</h4>
                                             <h4>70</h4>
                                         </div>

@@ -105,6 +105,14 @@ class RegisterUser extends Component {
             toast.warn('Please agree with Terms and conditions')
             return false
         }
+        if(SaveNewUser.question.length < 1){
+            toast.warn('Please Create Qustion')
+            return false
+        }
+        if(SaveNewUser.question__ans.length < 1){
+            toast.warn('Please Provide Secret Answer')
+            return false
+        }
 
         console.log(SaveNewUser)
         event.preventDefault()

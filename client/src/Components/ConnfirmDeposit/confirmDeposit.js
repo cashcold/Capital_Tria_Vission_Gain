@@ -155,6 +155,7 @@ class ConfirmDeposit extends Component {
 
 
     render() { 
+        const Amount_to_send = this.state.depositAmount * 0.000025
         return(
             <div className='confirm'>
                 <div className='confirmDepositNow'>
@@ -198,7 +199,7 @@ class ConfirmDeposit extends Component {
                             </div>
 
                             <div className='confirmBtnInfo'>
-                                <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'></span> BTC to<br/>
+                                <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{Amount_to_send}</span> BTC to<br/>
                                 <p className='wallertNumber'><span>14VoBZY3Pap6NUeTxNttspyGHBx92d1wAh</span></p>
                                 
                                 <h4>Order status: <span>Waiting for payment</span></h4>
