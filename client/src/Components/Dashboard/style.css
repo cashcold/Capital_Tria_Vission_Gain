@@ -168,26 +168,30 @@
         
     }
     .dashboard__section_box__3{
-        background-color:#0D1430;
+        /* background-color:blue; */
+        /* background-color:#0D1430; */
         min-height: 30vh;
         width: 100%;
         margin:  0 auto;
         display: grid;
         grid-template-columns: repeat(1,1fr);
-        grid-gap: 1em;
+        grid-row-gap: 2em;
         padding: 4em 0em;
-        grid-gap: 0em;
+        grid-row-gap: 2em;
     }
     .dash__box__1{
         background-color:#080f2b; 
         width: 100%;
-        min-height: 10vh;
+        min-height: 8vh;
     }
     .dash__box__1{
     padding: 2em 1em;
     display: grid;
     grid-template-columns: repeat(1,1fr);
     grid-gap: 1em;
+}
+.welcome__user{
+    margin-bottom: 2em;
 }
     .dashboard__section_box__2 ul a{
         color: #B9244C;

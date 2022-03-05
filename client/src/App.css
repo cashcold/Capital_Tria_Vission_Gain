@@ -47,15 +47,20 @@ h2,h3,h4,h5{
     font-family: 'Sarabun', sans-serif;
 }
 
-/* .mainApp{
-    margin-bottom: 900%
-} */
+.mainApp{
+    width: 95%;
+    margin: 0 auto;
+}
 .google__id{
     widows: 30%;
     text-align: left
 }
 
 @media screen and (max-width: 768px){
+    .mainApp{
+        width: 100%;
+        margin: 0 auto;
+    }
     h1{
         font-size: 1.3rem;
     }

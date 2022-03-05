@@ -36,7 +36,7 @@ class MainApp extends Component {
             sessionStorage.setItem('x-access-token',RefreshToken)
         }
        
-    }
+    } 
     render() { 
         return ( 
             <Router>

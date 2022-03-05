@@ -161,7 +161,7 @@ class AccountRouter extends Component {
                  <section className='dashboard__section_box__3'>
                     <div className="dash__box__1">
                         <i class="fas fa-coins fa-3x"></i>
-                        <div className="dashText">
+                        <div className="dashText"> 
                             <h5>TOTAL INVESTMENT</h5>
                             <h5> $ {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
                         </div>
