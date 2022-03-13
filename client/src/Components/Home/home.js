@@ -300,7 +300,7 @@ class Home extends Component {
                             <i class="fas fa-registered fa-4x" ></i>
                             </div>
                             <div className="Advanteage__inner__box__2">
-                                <h3>REAL REGISTERED COMPANY</h3>
+                                <h3>REAL COMPANY</h3>
                                 <p>Our company is legally with the proper authority.</p>
                             </div>
                         </div>
@@ -351,34 +351,7 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
-                <section className="top_investor">
-                     <h1>OUR TOP <span>MINING INVESTORS</span></h1>
-                    <div className="invest_topList_flow">
-                       
-                        {
-                                this.state.recent_info_both.map( user => {
-                                    return(
-                                        <div>
-                                            <img className='recent_both_img' src={user.picture.thumbnail}/>
-                                            <h5>User Name:<uo>
-                                                <li> {user.name.first }</li></uo></h5>
-                                            <p>Country: {user.location.country}</p>
-                                            <p>Rating <span> Premium VIP</span>: {
-                                            <div className='icon'>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div> }</p>
-                                            
-                                            
-                                        </div>
-                                    )
-                                })
-                            }
-                    </div>
-                </section>
+                
                
                 <section className='reffer__main'>
                     <div className="reffer__me__now">
