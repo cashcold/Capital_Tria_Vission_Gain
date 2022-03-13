@@ -240,6 +240,22 @@ img{
 
 
 
+.recent_both_img{
+    width: 10%;
+    border-radius: 50%;
+}
+.invest_topList_flow{
+    padding: 3em 0em;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 2em;
+    margin: 3em 0em;
+}
+.icon i{
+    color: yellow;
+}
+
+
 @media screen and (max-width: 768px){
     .home__main__box__1{
         display: grid;
@@ -345,5 +361,16 @@ img{
     }
     .reffer__main{
         padding: 0 0.8em;
+    }
+    .invest_topList_flow{
+        padding: 2em 0em;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 1em;
+        margin: 3em 0em;
+    }
+    .recent_both_img{
+        width: 30%;
+        border-radius: 50%;
     }
 }

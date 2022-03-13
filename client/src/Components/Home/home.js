@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './style.css'
+import axios from 'axios'
+import {Card,Button} from 'react-bootstrap'
 
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            amountCalculate: ''
+            amountCalculate: '',
+            recent_info_both: []
          }
 
         this.handleChange = this.handleChange.bind(this)
@@ -18,6 +21,13 @@ class Home extends Component {
     }
 
     componentDidMount(){
+
+        axios.get(`https://randomuser.me/api/?results=9`)
+        .then((data)=>{
+            this.setState({
+                recent_info_both: data.data.results
+            })
+        })
 
         const urlSearchParams = new URLSearchParams(window.location.search);
         for(var pair of urlSearchParams.entries()) {
@@ -78,12 +88,9 @@ class Home extends Component {
             
               
         }
-                
-            //    document.querySelector('.toatlProfit').style.cssText = "font-size: 30px"
-            //    document.querySelector('.toatalAllMoney').innerHTML ="$"+OverAllProfit + " TOATAL PROFIT RECEIVED   "
-            //    document.querySelector('.toatalAllMoney').style.cssText = "display: block; font-size: 30px " 
+          
         CalculatorEngine()
-        console.log(this.state.amountCalculate)
+        console.log(this.state.recent_info_both)
         return ( 
             
             <div className='main__home'>
@@ -103,7 +110,7 @@ class Home extends Component {
                             <div className="flow__box__2 flow__boxMe flowAnimate">
                                  <i class="fas fa-user fa-3x flowAnimate"></i>
                                  <hr className='flowAnimate'/>
-                                 <p className='flowAnimate'>Choose a Plan and Deposit</p>
+                                 <p className='flowAnimate'>Choose a Mining Plan and<br/> Deposit</p>
                                  <a href='#' className='btn-home flowAnimate'>Deposit</a>
                             </div>
                             <div className="flow__box__3 flow__boxMe flowAnimate">
@@ -120,7 +127,7 @@ class Home extends Component {
                 </section>
                 <section className='about__investmentt__plan  '>
                     <div className="header__text">
-                        <h2>OUR <span>INVESTMENT</span> PLANS</h2>
+                        <h2>OUR <span>MINING MACHINES  </span> PLANS</h2>
                     </div>
                     <div className="investmentt__plan">
                          <section className='pricingNow'>
@@ -132,6 +139,10 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>DAILY FOREVER</h3>
+                           <h5>Beginer</h5>
+                           <div className='icon'>
+                                                <i class="fas fa-star"></i>
+                                            </div>
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
@@ -156,6 +167,12 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>3 DAYS</h3>
+                           <h5>VIP</h5>
+                           <div className='icon'>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
@@ -180,6 +197,13 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>5 DAYS</h3>
+                           <h5>Premium</h5>
+                           <div className='icon'>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
@@ -204,6 +228,14 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>7 DAYS</h3>
+                           <h5>Premium VIP</h5>
+                           <div className='icon'>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
@@ -269,7 +301,7 @@ class Home extends Component {
                             </div>
                             <div className="Advanteage__inner__box__2">
                                 <h3>REAL REGISTERED COMPANY</h3>
-                                <p>Our company is legally registered in the United Kingdom with the proper authority.</p>
+                                <p>Our company is legally with the proper authority.</p>
                             </div>
                         </div>
                         <div className="advanteage__box__1 advan__box">
@@ -319,12 +351,41 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
+                <section className="top_investor">
+                     <h1>OUR TOP <span>MINING INVESTORS</span></h1>
+                    <div className="invest_topList_flow">
+                       
+                        {
+                                this.state.recent_info_both.map( user => {
+                                    return(
+                                        <div>
+                                            <img className='recent_both_img' src={user.picture.thumbnail}/>
+                                            <h5>User Name:<uo>
+                                                <li> {user.name.first }</li></uo></h5>
+                                            <p>Country: {user.location.country}</p>
+                                            <p>Rating <span> Premium VIP</span>: {
+                                            <div className='icon'>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div> }</p>
+                                            
+                                            
+                                        </div>
+                                    )
+                                })
+                            }
+                    </div>
+                </section>
+               
                 <section className='reffer__main'>
                     <div className="reffer__me__now">
                         <i class="fas fa-people-arrows fa-8x"></i>
                         <div className="reff__box">
                             <h1><span>5%</span></h1>
-                            <h4>REFERRAL COMMISSIO</h4>
+                            <h4>REFERRAL COMMISSION</h4>
                         </div>
                         <div className="refferText">
                             <p>You've got the opportunity to invite your friends, family, or other groups to enjoy our Invest plans and benefit from our lucrative affiliate program.</p>
