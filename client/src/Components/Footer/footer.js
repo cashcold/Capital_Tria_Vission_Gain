@@ -28,7 +28,7 @@ class FooterMain extends Component {
                         <div className="foot__box3">
                             <h1>CONTACTS:</h1>
                             <p><i class="fas fa-envelope-square"></i>Support<br/>@CapitalGainManagement.COM</p>
-                            <p><i class="fas fa-map-marker-alt"></i>58 Union Terrace,<br/> LONDON, UNITED KINGDOM, E15 6NY</p>
+                            {/* <p><i class="fas fa-map-marker-alt"></i>58 Union Terrace,<br/> LONDON, UNITED KINGDOM, E15 6NY</p> */}
                         </div>
                         
                         <div className="foot__box1">

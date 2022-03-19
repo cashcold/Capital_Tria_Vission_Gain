@@ -158,6 +158,10 @@ class Home extends Component {
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
                               </div>
+                              <div className="innerTypeAmount innerTypeAmount2">
+                                  <p>Monthly dues,<br/> 26 Times in Calendar:</p>
+                                  <p className='typeAmountSpan'>20% of Profits Made</p>
+                              </div>
                            </div>
                        </div>
                        <div className="box_box__1">
@@ -187,6 +191,10 @@ class Home extends Component {
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
+                              </div>
+                              <div className="innerTypeAmount innerTypeAmount2">
+                                  <p>Monthly dues,<br/> 9 Times in Calendar:</p>
+                                  <p className='typeAmountSpan'>24% of Profits Made</p>
                               </div>
                            </div>
                        </div>
@@ -219,6 +227,10 @@ class Home extends Component {
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
                               </div>
+                              <div className="innerTypeAmount innerTypeAmount2">
+                                  <p>Monthly dues,<br/> 5 Times in Calendar:</p>
+                                  <p className='typeAmountSpan'>30% of Profits Made</p>
+                              </div>
                            </div>
                        </div>
                        <div className="box_box__1">
@@ -250,6 +262,10 @@ class Home extends Component {
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
+                              </div>
+                              <div className="innerTypeAmount innerTypeAmount2">
+                                  <p>Monthly dues,<br/> 4 Times in Calendar:</p>
+                                  <p className='typeAmountSpan'>35% of Profits</p>
                               </div>
                            </div>
                        </div>
