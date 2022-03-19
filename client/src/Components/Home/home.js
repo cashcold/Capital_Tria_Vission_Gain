@@ -90,7 +90,6 @@ class Home extends Component {
         }
           
         CalculatorEngine()
-        console.log(this.state.recent_info_both)
         return ( 
             
             <div className='main__home'>
