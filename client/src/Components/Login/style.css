@@ -96,10 +96,12 @@ input:focus{
     }
     .a_Links{
         display: flex;
-        padding: 2em 5em;
+        /* padding: 2em 5em; */
+       
     }
     .a_Links a{
         padding: 1em 0.8em;
+        margin: 0em 2em;
         
         margin-right: 1em;
      }
@@ -107,7 +109,7 @@ input:focus{
         padding-right: 0.4em;
     }
     .formMain_login{
-    width: 68%;
+    width: 90%;
     margin: 0 auto;
     }
     .formTable_login tr{
@@ -115,12 +117,11 @@ input:focus{
         grid-template-columns: repeat(1,2fr);
        padding-left: 1em;
     }
-    /* .LoginInput input{
-    margin-left: -2em;    
-} */
+    
 .formTable_login{
    text-align: start;
     
 }
+
 
 }

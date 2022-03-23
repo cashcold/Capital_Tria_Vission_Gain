@@ -75,8 +75,8 @@ input{
     grid-gap: 5em;
 }
 .formMain input{
-    min-width: 170px;
-    min-height: 25px;
+    min-width: 290px;
+    min-height: 30px;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -84,4 +84,21 @@ input{
     margin: 10px 0;
     border-bottom: 1px solid #B9244C;
 }
+
+.formTable tr{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    padding: 1em 0em;
+}
+.otherRegisterInfo table tr{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    padding: 1em 0em;
+}
+
+
+
+
+
+
 }

@@ -134,7 +134,7 @@ class RegisterUser extends Component {
                         <div className='formMain'>
                             <form>
                                 <table className='formTable'>
-                                    <tr>
+                                    <tr> 
                                         <td><label>Your Full Name:</label></td>
                                         <td><input  className='' type='text' name='full_Name' onChange={this.handleChange('full_Name')}/></td>
                                     </tr>

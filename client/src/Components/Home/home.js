@@ -157,6 +157,7 @@ class Home extends Component {
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
                               </div>
+                              <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Monthly dues,<br/> 26 Times in Calendar:</p>
                                   <p className='typeAmountSpan'>20% of Profits Made</p>
@@ -191,6 +192,7 @@ class Home extends Component {
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
                               </div>
+                              <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Monthly dues,<br/> 9 Times in Calendar:</p>
                                   <p className='typeAmountSpan'>24% of Profits Made</p>
@@ -226,6 +228,7 @@ class Home extends Component {
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
                               </div>
+                              <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Monthly dues,<br/> 5 Times in Calendar:</p>
                                   <p className='typeAmountSpan'>30% of Profits Made</p>
@@ -262,6 +265,7 @@ class Home extends Component {
                                   <p>Withdraw:</p>
                                   <p className='typeAmountSpan'>INSTANT</p>
                               </div>
+                              <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Monthly dues,<br/> 4 Times in Calendar:</p>
                                   <p className='typeAmountSpan'>35% of Profits</p>
@@ -299,7 +303,7 @@ class Home extends Component {
                 <section className='about__us__main'>
                     <div className="about__box_1">
                         <h1>ABOUT <span>OUR COMPANY</span></h1>
-                        <p>Capital Gain Management Co. is at heart a bitcoin investment company. However, we are opportunistic and are looking at other cryptocurrency resource opportunities that present a favorable upside.</p>
+                        <p>Capital Gain Management Co. is at heart a bitcoin Mining company. However, we are opportunistic and are looking at other cryptocurrency resource opportunities that present a favorable upside.</p>
                         <p>The Company is well financed and management has a wealth of experience in all aspects of mineral exploration and development. Capital Gain Management Co. is also a place to invest and earn profits with stable percent.</p>
                         <a href='/about-us' classname='btn btn__read_more'>READ MORE</a>
                     </div>
