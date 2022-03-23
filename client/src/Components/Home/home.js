@@ -160,7 +160,7 @@ class Home extends Component {
                               </div>
                               <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
-                                  <p>Monthly dues,<br/> 26 Times in Calendar:</p>
+                                  <p>Monthly dues,<br/> 26 Times Mark One Calendar:</p>
                                   <p className='typeAmountSpan'>20% of Profits Made</p>
                               </div>
                            </div>
@@ -195,7 +195,7 @@ class Home extends Component {
                               </div>
                               <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
-                                  <p>Monthly dues,<br/> 9 Times in Calendar:</p>
+                                  <p>Monthly dues,<br/> 9 Times Mark One Calendar:</p>
                                   <p className='typeAmountSpan'>24% of Profits Made</p>
                               </div>
                            </div>
@@ -231,7 +231,7 @@ class Home extends Component {
                               </div>
                               <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
-                                  <p>Monthly dues,<br/> 5 Times in Calendar:</p>
+                                  <p>Monthly dues,<br/> 5 Times Mark One Calendar:</p>
                                   <p className='typeAmountSpan'>30% of Profits Made</p>
                               </div>
                            </div>
@@ -268,7 +268,7 @@ class Home extends Component {
                               </div>
                               <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
-                                  <p>Monthly dues,<br/> 4 Times in Calendar:</p>
+                                  <p>Monthly dues,<br/> 4 Times Mark One Calendar:</p>
                                   <p className='typeAmountSpan'>35% of Profits</p>
                               </div>
                            </div>
