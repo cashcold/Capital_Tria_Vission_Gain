@@ -140,8 +140,9 @@ class Home extends Component {
                            <h3 className='planType'>DAILY FOREVER</h3>
                            <h5>Beginer</h5>
                            <div className='icon'>
-                                                <i class="fas fa-star"></i>
-                                            </div>
+                                <i class="fas fa-star"></i>
+                                <i class="fa fa-star-half" aria-hidden="true"></i>
+                             </div>
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
