@@ -277,12 +277,12 @@ img{
         padding: 6em 0em;
         display: grid;
         grid-template-columns: repeat(1,1fr);
-       margin: 3em;
+       margin: 3em 0em;
     }
     .flow__boxMe{
         background-color:#0D1430;
         width: 98%;
-        min-height: 20vh;
+        min-height: 30vh;
         padding: 4em 0em;
         margin-bottom: 3em;
         border-radius:5%;
