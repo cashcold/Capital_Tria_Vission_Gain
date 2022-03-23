@@ -251,6 +251,7 @@ img{
     background-color: #0D1430;
     border-radius: 20%;
     border-bottom-color: #D34747;
+  
 }
 
 
@@ -370,7 +371,7 @@ img{
         background-color: #0D1430;
         border-radius: 20%;
         border-bottom-color: #D34747;
-        padding: 0em 3em;
+        padding: 1em 3em;
         margin: 3em 1em;
     }
 }
