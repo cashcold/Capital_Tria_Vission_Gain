@@ -27,6 +27,8 @@ Router.post('/register/', async(req,res)=>{
 
     const salt = await bcrypt.genSalt(10)
     const hashPassword = await bcrypt.hash(req.body.password, salt)
+    const userEmail= req.body.email
+    const user_Name= req.body.user_Name
 
     const saveUser = new User({
         full_Name: req.body.full_Name,
@@ -45,10 +47,13 @@ Router.post('/register/', async(req,res)=>{
 
     var mailgun = require('mailgun-js')({apiKey: process.env.API_key, domain: process.env.API_baseURL});
     var data = {
-        from: 'PayItForward <payitforwardisnvestmentlimited@gmail.com>',
-        to: 'frankainoo@gmail.com',
-        subject: 'Hello',
-        text: 'Thank you for making Bussiness with us, Have a nice day. Thank You'
+        from: 'Capital Gain Co. <capitalgain_support@gmail.com>',
+        to: `${userEmail}`,
+        subject: `Welcome!! ${user_Name}`,
+        text: `
+        <h3>Thank you for making Capital Gain your first choice.>br/> we are hoping for a good relation with you in the future.<br/> It’s a Great Support for us.We at Capital Gain Co. genuinely appreciate your business,<br/> and we’re grateful for the trust you’ve placed in us</h3>
+        `
+      
     };
     mailgun.messages().send(data, function (error, body) {
         console.log(body);
@@ -117,12 +122,17 @@ Router.post('/forgotpassword', async (req,res,next)=>{
        },
        (token,user,done)=>{
         var mailgun = require('mailgun-js')({apiKey: process.env.API_key, domain: process.env.API_baseURL});
+        
         var data = {
-            from: 'PayItForward <payitforwardinvestmentlimited@gmail.com>',
+            from: 'Capital Gain Co <capitalgain_support@gmail.com>',
             to: userEmail,
             subject: 'Password Reset',
-            html: ` <h1>Please Follow the link to restart your password </h1>
-                <p>${process.env.forgotPasswordLink}/${token}</p>
+            html: `
+            <div class="person">
+            <h2>Please Follow the link to restart your password through the link below</h2>
+            <p>Click on The link to Restart Your Password Now</p>\n
+            </div>
+            <a href='${process.env.forgotPasswordLink}/${token}'>${process.env.forgotPasswordLink}/${token}</a>
             `
         };
          mailgun.messages().send(data, function (error, body) {

@@ -32,7 +32,7 @@ class ActivitPassword extends Component {
         }
 
         if(saveLinkPassword.password.length < 6){
-            toast.warn('Password must be at lest 6')
+            toast.warn('Password must be at lest 6') 
             return false
         } 
         const token  = this.props.match.params.token

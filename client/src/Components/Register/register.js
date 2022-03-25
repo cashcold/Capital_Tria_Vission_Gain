@@ -34,8 +34,11 @@ class RegisterUser extends Component {
     handleChange = input => (event)=>{
         this.setState({[input]: event.target.value})
     }
+   
 
     componentDidMount(){
+
+       
 
         const DateTime = new Date().toString()
         this.setState({
@@ -137,6 +140,7 @@ class RegisterUser extends Component {
                                     <tr> 
                                         <td><label>Your Full Name:</label></td>
                                         <td><input  className='' type='text' name='full_Name' onChange={this.handleChange('full_Name')}/></td>
+                                       
                                     </tr>
                                     <tr>
                                          <td><label>Your Username:</label></td>

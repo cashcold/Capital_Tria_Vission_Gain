@@ -25,7 +25,8 @@ class ForgotPassword extends Component {
         }
         if(!saveRestartLinkPassword.email){
             return(toast.warning("Enter Email",{position: 'top-center'}))
-        }    
+           
+        }   
 
         axios.post ("/users/forgotpassword",saveRestartLinkPassword)
         .then(res => (toast.success("Link have sent to email address")))
@@ -36,9 +37,9 @@ class ForgotPassword extends Component {
     render() { 
         return ( 
             <div className='passwordForgot'>
-                <ToastContainer />
+                <ToastContainer /> 
                 <div className='mainPassword'>
-                    <h1 className='animate__animated animate__zoomInRight animate__slower'><span>RECOVERY</span> YOUR <span>PASSWORD</span> VIA INBOX</h1>
+                    <h1 className='animate__animated animate__zoomInRight animate__slower'><span>RECOVERY</span> YOUR<br/> <span>PASSWORD </span> VIA INBOX</h1>
                     <div className='recoverInput animate__animated animate__zoomInLeft animate__slower'>
                         <input placeholder='email' onChange={this.handleChange("restartLinkPassword")}  name='restartLinkPassword'/>
                     </div>
