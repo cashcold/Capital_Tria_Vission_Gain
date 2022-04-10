@@ -81,7 +81,6 @@ class Other__NavBar extends Component {
                             <p><i class="far fa-clock fa-2x"></i>{this.state.currentDateTime}</p>
                             </div>
                             <div className="other__nav_chat__2">
-                                <p><i class="fab fa-telegram-plane fa-2x"> </i> Telegram Chat</p>
                             </div>
                             <div className="other__nav_chat__3">
                                 <p><i class="fab fa-bitcoin fa-2x other__i__1"></i> ${this.state.bitcoinApi} </p>
