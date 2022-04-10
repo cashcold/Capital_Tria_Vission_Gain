@@ -53,7 +53,6 @@ class DepositTransaction extends Component {
           endDate: this.state.endDate
         }
 
-        console.log(checkTotalTransaction)
         axios.post('/users/transaction_depositInfo_query',checkTotalTransaction).then(data => this.setState({
           transaction_depositInfo_query: data.data
       }))
@@ -80,9 +79,7 @@ class DepositTransaction extends Component {
       }
     render() {  
 
-     setTimeout(()=>{
-      console.log(this.state.transaction_depositInfo_query)
-     },1000)
+    
 
       if(Number(this.state.totalDeposit.map(user => user.depositAmount)) > 1){
         document.querySelector(".NoTransaction_P").style.display = "none"

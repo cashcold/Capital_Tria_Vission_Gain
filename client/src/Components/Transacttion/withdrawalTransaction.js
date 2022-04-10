@@ -53,7 +53,6 @@ class WithdrawalTransaction extends Component {
           endDate: this.state.endDate
         }
 
-        console.log(checkTotalTransaction)
         axios.post('/users/transaction_withdrawInfo_query',checkTotalTransaction).then(data => this.setState({
           transaction_withdrawInfo_query: data.data
       }))
@@ -80,9 +79,7 @@ class WithdrawalTransaction extends Component {
       }
     render() {  
 
-     setTimeout(()=>{
-      console.log(this.state.transaction_withdrawInfo_query)
-     },1000)
+     
 
       if(Number(this.state.withdrawTotal.map(user => user.WithdrawAmount)) > 1){
         document.querySelector(".NoTransaction_P").style.display = "none"

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import './style.css'
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
@@ -129,8 +130,14 @@ class RegisterUser extends Component {
         console.log(this.state.reffer)
         return ( 
             <div className='register'>
+                 <Helmet>
+                    <base />
+                    <title>Capital Gain Registration</title>
+                    <meta name="description" content="Capital Gain Registration" />
+                    <link rel="canonical" href="next-platform.com" />
+                </Helmet>
              <ToastContainer/>
-                <h1  className='registerH1'>CREATE AN ACCOUNT</h1>
+             <h1  className='registerH1'>CREATE AN ACCOUNT</h1>
                 <div className="allRegister">
                     <div className='registerNow'>
                         <h1>PERSONAL <span>INFORMATION</span></h1>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import './style.css'
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
@@ -70,6 +71,12 @@ class Login extends Component {
     render() { 
         return ( 
             <div className='loginMain'>
+                 <Helmet>
+                    <base />
+                    <title>Capital Gain Login</title>
+                    <meta name="description" content="Capital Gain Registration" />
+                    <link rel="canonical" href="next-platform.com" />
+                </Helmet>
                 <ToastContainer/>
                 <section className='login__box__login'>
                          <h1>MEMBER <span>LOG IN</span></h1>    
