@@ -115,6 +115,7 @@ img{
     grid-template-columns: repeat(4,1fr);
     grid-gap: 2em;
     margin-bottom: 4em;
+    padding: 0em 3em;
 }
 .calculateMe{
     display: grid;
@@ -292,6 +293,8 @@ img{
         display: grid;
         grid-template-columns: repeat(1,1fr);
         grid-gap: 2em;
+        padding: 0em 1em;
+        
     }
     .calculateMe{
         display: grid;

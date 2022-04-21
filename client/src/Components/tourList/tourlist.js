@@ -1,8 +1,8 @@
 export const tourData = [
     {
       id: 1,
-      title: "What is Capital Gain Management Co. ?",
-      about: "Capital Gain Management Co. is an online investment platform who was appointed representative of Capital Gain Management Co. who are authorised and regulated by the United Kingdom Company House Authority under firm reference number 10873519. This information can be verified on the Company House website. Capital Gain Management Co. is registered in LONDON No.  10873519. Registered office, 58 Union Terrace, UNITED KINGDOM,  E15 6NY",
+      title: "What is Capital Gain Management Co. ?", 
+      about: "Capital Gain Management Co. is an online bitcoin mining investment platform who was appointed representative of Capital Gain Management Co. 58 Union Terrace, UNITED KINGDOM,  E15 6NY",
      
     },
     {
@@ -50,7 +50,7 @@ export const tourData = [
     {
       id: 9,
       title: "What if I can't log into my account because I forgot my password?",
-      about: "Click forgot password link, type your username or e-mail and you'll receive your account information.",
+      about: "Click forgot password link, type your  e-mail and you'll receive your account information.",
      
     },
     {

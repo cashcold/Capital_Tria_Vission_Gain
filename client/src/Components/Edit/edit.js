@@ -38,7 +38,7 @@ class EditMain extends Component {
 
 
         const token = sessionStorage.getItem('x-access-token')
-        const decoded = jwt_decode(token)
+        const decoded = jwt_decode(token) 
          JSON.stringify( sessionStorage.setItem('user_id',decoded.user_id))
          JSON.stringify( sessionStorage.setItem('email',decoded.email))
          JSON.stringify( sessionStorage.setItem('full_Name',decoded.full_Name))

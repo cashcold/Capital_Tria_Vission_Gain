@@ -20,6 +20,7 @@ import AccountRouter from './Components/InnerRouter/accountRouter/accountRouter'
 import TotalTransaction from './Components/Transacttion/transaction';
 import ForgotPassword from './Components/Password/forgotpassword';
 import ActivitPassword from './Components/Password/activePassword';
+import FAQSETUP from './Components/FAQ/faqsSetup';
 
 class MainApp extends Component {
     constructor(props) {
@@ -49,7 +50,8 @@ class MainApp extends Component {
                            <Switch>
                               <Route path='/' exact component={Home}/> 
                               <Route path='/about-us' exact component={AboutMain}/> 
-                              <Route path='/faqs' exact component={FAQSMAIN}/> 
+                              <Route path='/faq' exact component={FAQSMAIN}/> 
+                              <Route path='/faqs' exact component={FAQSETUP}/> 
                               <Route path='/contact-us' exact component={ContactMain}/> 
                               <Route path='/login' exact component={Login}/> 
                               <Route path='/register' exact component={RegisterUser}/> 

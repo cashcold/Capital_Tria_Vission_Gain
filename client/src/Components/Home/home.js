@@ -131,7 +131,7 @@ class Home extends Component {
                     <div className="investmentt__plan">
                          <section className='pricingNow'>
                    <div className='container container__2'>
-                       <div className="box_box__1">
+                       <div className="box_box__1"> 
                            <h1>PLAN I</h1>
                            <div className="innerPlan innerPlanother">
                                <h1 className='percentRate'>9.5</h1>

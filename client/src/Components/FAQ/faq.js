@@ -4,10 +4,12 @@ import './style.css'
 class FAQSMAIN extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            faqs: tourData,
-            isShow: false
+        this.state = {  
+            isShow: false,
          }
+    }
+    componentDidMount(){
+      
     }
     handleInfo = ()=>{
         this.setState({
@@ -15,21 +17,19 @@ class FAQSMAIN extends Component {
         })
     }
     render() { 
-        console.log(this.state.faqs)
+        const {id,title,about} = this.props.data
+     
         return (
-            <div className='faqMain'>
+            <div className='faqsState'>
                 <section className='faqSection_1'>
-                    <h1>FREQUENTLY <span>ASKED QUESTION</span></h1>
+                   
                     <section className='mainfaqs'>
-                        {this.state.faqs.map(faqs =>{
-                            return (
-                            <div key={faqs.id} className='faqsState'>
-                                <h2 onClick={this.handleInfo}><i class="fas fa-plus"></i> {faqs.title} </h2>
-                                {this.state.isShow &&    <h5>{faqs.about}</h5>}
-                              
-                            </div>
-                            )
-                        })}
+                      <div>
+                      <h2 onClick={this.handleInfo}><i class="fas fa-plus"></i>{ title}</h2><br/>
+                      {this.state.isShow &&  <h5>{ about}</h5>}
+                     
+                      </div>
+
                     </section>
                 </section>
             </div>

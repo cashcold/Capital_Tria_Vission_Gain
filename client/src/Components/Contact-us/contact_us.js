@@ -42,7 +42,7 @@ class ContactMain extends Component {
                                 <div className='supportInfo'>
                                     <h1> <i class="fas fa-envelope-square fa-3x"></i></h1>
                                     <h4>OUR <span>E-MAIL</span></h4>
-                                    <p>supportcapitalgainmanagement@gmail.com</p>
+                                    <p>capitalgainhelp@gmail.com</p>
                                 </div>
                             </div>
                             <div className='bothMenu bothMenuCount2' >

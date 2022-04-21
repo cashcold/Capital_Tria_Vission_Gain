@@ -11,18 +11,20 @@
 .faqSection_1{
     width: 96%;
     margin: 0 auto;
-    min-height: 100vh;
     background-color:#0D1430;
-    padding: 5em 0em;
+    padding: 0.5em 0em;
 }
-.faqsState h2{
-    padding: 1em 0;
+.faqSection_1 h1{
+    padding: 3em 0em;
+}
+.faqSection_1 h2{
+    padding: 0.1em 0;
     color: #B9244C;
     cursor: pointer;
     width: 60%;
     margin:  0 auto;
 }
-.faqsState h5{
+.faqSection_1 h5{
     width: 80%;
     margin: 0 auto;
     line-height: 1.8em;
