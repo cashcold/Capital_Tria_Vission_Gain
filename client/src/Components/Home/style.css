@@ -113,9 +113,9 @@ img{
 .pricingNow .container{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    grid-gap: 2em;
+    grid-column-gap: 4em;
     margin-bottom: 4em;
-    padding: 0em 3em;
+    padding: 0em 2.8em;
 }
 .calculateMe{
     display: grid;
