@@ -329,6 +329,19 @@ Router.post('/checkdate',async(req,res)=>{
     
     
 })
+Router.post('/user_profile_display',async(req,res)=>{
+   
+    user_id = req.body.id
+    const user = await User.findById(user_id);
+    if(user){
+        res.send(user)
+    }else{
+        res.send('Not User')
+    }
+
+    
+    
+})
 Router.post('/user_balance',async(req,res)=>{
    
     user_id = req.body.id

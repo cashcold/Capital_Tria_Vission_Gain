@@ -19,6 +19,7 @@ class EditMain extends Component {
             password: '',
             confirmPassword: '',
             register_date: '',
+            user_profile_display: []
          }
          this.handleChange = this.handleChange.bind(this)
          this.onSubmit = this.onSubmit.bind(this)
@@ -30,6 +31,8 @@ class EditMain extends Component {
     }
 
     componentDidMount(){
+        console.log(this.state.user_profile_display)
+
         const Refres_profile_hToken = sessionStorage.getItem('Refres_profile_hToken')
         if(Refres_profile_hToken){
             sessionStorage.removeItem('x-access-token')
@@ -39,6 +42,7 @@ class EditMain extends Component {
 
         const token = sessionStorage.getItem('x-access-token')
         const decoded = jwt_decode(token) 
+        const id = decoded.user_id
          JSON.stringify( sessionStorage.setItem('user_id',decoded.user_id))
          JSON.stringify( sessionStorage.setItem('email',decoded.email))
          JSON.stringify( sessionStorage.setItem('full_Name',decoded.full_Name))
@@ -55,6 +59,10 @@ class EditMain extends Component {
             ip_address: decoded.ip_address,
             register_date: decoded.date
          })
+
+         axios.post('/users/user_profile_display',{id}).then(data => this.setState({
+            user_profile_display: data.data
+         }))
     }
 
     onSubmit = (event)=>{
@@ -84,10 +92,13 @@ class EditMain extends Component {
     });
     }
     render() { 
+        console.log(this.state.user_profile_display)
+        const {full_Name,bitcoin,email} = this.state.user_profile_display
         return ( 
             <div className='edit__main'>
                 <ToastContainer/>
                 <h1>ACCOUNT <span>SETTINGS</span></h1>
+               
                 <section className='edit_now'>
                     <div className="edit__box__1_main">
                         <div className="edit__inner__box__1">
@@ -118,7 +129,7 @@ class EditMain extends Component {
                             <h5>Your Full Name:</h5>
                         </div>
                         <div className="edit__inner__box__2">
-                            <h5><input  name='full_Name' placeholder={this.state.full_Name} onChange={this.handleChange('full_Name')}/></h5>
+                            <h5><input  name='full_Name' placeholder={full_Name} onChange={this.handleChange('full_Name')}/></h5>
                         </div>
                     </div>
                     <div className="edit__box__1_main">
@@ -142,7 +153,7 @@ class EditMain extends Component {
                             <h5>Your Bitcoin acc no:</h5>
                         </div>
                         <div className="edit__inner__box__2">
-                            <h5><input name='bitcoin' onChange={this.handleChange('bitcoin')} placeholder={this.state.bitcoin} /></h5>
+                            <h5><input name='bitcoin' onChange={this.handleChange('bitcoin')} placeholder={bitcoin} /></h5>
                         </div>
                     </div>
                     <div className="edit__box__1_main">
@@ -150,7 +161,7 @@ class EditMain extends Component {
                             <h5>Your E-mail address:</h5>
                         </div>
                         <div className="edit__inner__box__2">
-                            <h5><input name='email' onChange={this.handleChange('email')} placeholder={this.state.bitcoin} placeholder={this.state.email} /></h5>
+                            <h5><input name='email' onChange={this.handleChange('email')} placeholder={email} /></h5>
                         </div>
                     </div>
                     <h5 className='update_h5'><a href='#' onClick={this.onSubmit}>CHANGE ACCOUNT DATA</a></h5>

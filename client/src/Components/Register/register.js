@@ -51,7 +51,7 @@ class RegisterUser extends Component {
             ip_address: data.ip
         }))
 
-        const reffer = sessionStorage.getItem('reffer')
+        const reffer = localStorage.getItem('reffer')
 
         this.setState({reffer: reffer})
        
