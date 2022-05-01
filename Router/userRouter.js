@@ -475,7 +475,7 @@ res.send(RefreshToken)
         ip_address: user.ip_address,           
         date: user.Date,
         accountBalance: user.accountBalance,
-        activetDeposit: user.activetDeposit,
+        activetDeposit: user.activetDeposit, 
         date: user.date
     }
 const Refres_profile_hToken = jwt.sign(payload, process.env.Refres_profile_hToken)

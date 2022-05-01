@@ -130,6 +130,7 @@ class EditMain extends Component {
                         </div>
                         <div className="edit__inner__box__2">
                             <h5><input  name='full_Name' placeholder={full_Name} onChange={this.handleChange('full_Name')}/></h5>
+                            {/* <h5><input  name='full_Name' placeholder={this.state.EditProfilfull_Name} onChange={this.handleChange('full_Name')}/></h5> */}
                         </div>
                     </div>
                     <div className="edit__box__1_main">
