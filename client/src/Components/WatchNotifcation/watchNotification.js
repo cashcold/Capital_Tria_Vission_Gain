@@ -28,6 +28,15 @@ class WatchNotificationMain extends Component {
                var li = document.createElement("li")
                li.textContent =  live_deposit;
                deposit_message.appendChild(li)
+               toast.success(live_deposit,{
+                position: "top-right",
+                autoClose: false,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                })
             })
      
   
@@ -35,7 +44,7 @@ class WatchNotificationMain extends Component {
     }
     render() { 
     let socket = io('http://localhost:3000/')
-    
+
      return ( 
             <div className='watch_notifi_main'>
                 <ToastContainer/>
@@ -45,7 +54,7 @@ class WatchNotificationMain extends Component {
                     
                  </section>
                 <section>
-                    <ul id="deposit_message"></ul>
+                    <ul  id="deposit_message"></ul>
                 </section>
                  <section className="flow">
                      <input  name='live_deposit'  onChange={this.handleChange('live_deposit')}/>
