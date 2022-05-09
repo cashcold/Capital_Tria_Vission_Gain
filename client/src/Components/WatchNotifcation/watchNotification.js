@@ -50,7 +50,7 @@ class WatchNotificationMain extends Component {
                 <ToastContainer/>
 
                 <section className="watch_not">
-                    <h1 >WE ARE ABOUT TO WATCH THE NOTIFICATION</h1>
+                    <h1 >WE ARE ABOUT TO WATCH THE NOTIFICATION!!!</h1>
                     
                  </section>
                 <section>
