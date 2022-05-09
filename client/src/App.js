@@ -21,6 +21,7 @@ import TotalTransaction from './Components/Transacttion/transaction';
 import ForgotPassword from './Components/Password/forgotpassword';
 import ActivitPassword from './Components/Password/activePassword';
 import FAQSETUP from './Components/FAQ/faqsSetup';
+import WatchNotificationMain from './Components/WatchNotifcation/watchNotification';
 
 class MainApp extends Component {
     constructor(props) {
@@ -61,6 +62,7 @@ class MainApp extends Component {
                               <Route path='/dashboard' render={(props)=> <Dashboard {...props} />} />
                               <Route path='/forgotpassword' exact component={ForgotPassword}/> 
                               <Route path='/activitPassword/:token' exact component={ActivitPassword}/> 
+                              <Route path='/user_admin_watch_notification' exact component={WatchNotificationMain}/> 
                           </Switch>
                         </div>
                        <FooterMain/>
