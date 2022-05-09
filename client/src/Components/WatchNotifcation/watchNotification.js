@@ -24,7 +24,7 @@ class WatchNotificationMain extends Component {
         let socket = io('http://localhost:3000/')
 
         var  deposit_message = document.getElementById('deposit_message')
-        socket.on('incoming_deposit', live_deposit =>{
+             socket.on('incoming_deposit', live_deposit =>{
                var li = document.createElement("li")
                li.textContent =  live_deposit;
                deposit_message.appendChild(li)
@@ -37,8 +37,24 @@ class WatchNotificationMain extends Component {
                 draggable: true,
                 progress: undefined,
                 })
-            })
-     
+         })
+         
+         socket.on('NewDeposit',NewDeposit =>{
+            toast.success(
+            <div className='New_Deposit_main'>
+                <h2>User {NewDeposit.user_Name}<br/>Have Made New Deposit of {NewDeposit.depositAmount}$<br/>
+                Time: {NewDeposit.date}
+                </h2>
+            </div>,{
+                position: "top-right",
+                autoClose: false,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                })
+         })
   
         
     }
@@ -56,15 +72,6 @@ class WatchNotificationMain extends Component {
                 <section>
                     <ul  id="deposit_message"></ul>
                 </section>
-                 <section className="flow">
-                     <input  name='live_deposit'  onChange={this.handleChange('live_deposit')}/>
-                     <a onClick={(event)=>{
-                         event.preventDefault()
-                         socket.emit('live_deposit', this.state.live_deposit)
-                        
-
-                     }} className='btn-btn-warning' href='#' >Send</a>
-                 </section>
                  {/* <section className="flow">
                      <input  name='live_deposit'  onChange={this.handleChange('live_deposit')}/>
                      <a onClick={()=>{

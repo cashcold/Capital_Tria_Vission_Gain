@@ -5,6 +5,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import jwt_decode from 'jwt-decode'
+import { io } from "socket.io-client";
+
+
 class ConfirmDeposit extends Component {
     constructor(props) {
         super(props);
@@ -132,7 +135,8 @@ class ConfirmDeposit extends Component {
         
     }
 
-    
+   
+
    onSubmit = ()=>{
         const NewDeposit = {
         user_id: this.state.user_id,
@@ -140,12 +144,16 @@ class ConfirmDeposit extends Component {
         user_Name: this.state.user_Name,
         full_Name: this.state.full_Name,
         fixedDepositAmount: this.state.fixedDepositAmount,
-        depositAmount: Number(this.state.depositAmount),
+        depositAmount: Number(this.state.depositAmount), 
         walletAddress: this.state.walletAddress,
         deposit_date: this.state.deposit_date,
         date: this.state.date
 
        }
+       let socket = io('http://localhost:3000/')
+
+       socket.emit('NewDeposit', NewDeposit)
+
        
        axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Blockchain confirmation')}).then(res => setTimeout(()=>{
             window.location='/dashboard'

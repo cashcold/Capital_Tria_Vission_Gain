@@ -33,17 +33,20 @@ app.use(cors())
 app.use(bodyParser.json())
 
 io.on('connection', socket => {
-    console.log(socket.id)
-   console.log('new connection')
+    
 
    socket.on('live_deposit', live_deposit =>{
        socket.broadcast.emit('incoming_deposit', live_deposit)
-       console.log(live_deposit)
+   })
+
+   socket.on('NewDeposit',NewDeposit =>{
+       socket.broadcast.emit('NewDeposit',NewDeposit)
    })
 
 
    
   });
+  
 app.use('/users',userRouter)
 
 

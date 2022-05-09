@@ -148,28 +148,7 @@ Router.post('/forgotpassword', async (req,res,next)=>{
  
      
  })
-    // Router.post('/editeProfil', async(req,res)=>{
-    //     console.log(req.body)
-    //     const salt = await bcrypt.genSalt(10)
-    //     const editPassword = await bcrypt.hash(req.body.password, salt)
-
-        
-    //     const EditProfit = new User({
-    //         full_Name: req.body.full_Name,
-    //         password: editPassword,
-    //         bitcoin: req.body.bitcoin
-    //     })
-        
-    //    const userName =  await User.updateOne({full_Name: req.body.full_Name})
-    //    const userBitcoin =  await User.updateOne({bitcoin: req.body.bitcoin})
-    //    const userpassword =  await User.updateOne({password: EditProfit.password})
-
-        
-        
-
-    //     await EditProfit.save()
-    // })
-
+  
 
 
  Router.post('/activtypassword/:token', async(req,res)=>{
