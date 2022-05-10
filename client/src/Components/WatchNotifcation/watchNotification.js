@@ -21,7 +21,8 @@ class WatchNotificationMain extends Component {
     }
     componentDidMount(){
     
-        let socket = io('http://localhost:3000/')
+        // let socket = io('http://localhost:3000/')
+        let socket = io('http://capitalgain.herokuapp.com/')
 
         var  deposit_message = document.getElementById('deposit_message')
              socket.on('incoming_deposit', live_deposit =>{
