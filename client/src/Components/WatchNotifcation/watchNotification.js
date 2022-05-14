@@ -39,6 +39,7 @@ class WatchNotificationMain extends Component {
                 progress: undefined,
                 })
          })
+           
          
          socket.on('NewDeposit',NewDeposit =>{
             toast.success(
@@ -48,6 +49,22 @@ class WatchNotificationMain extends Component {
                 </h2>
             </div>,{
                 position: "top-right",
+                autoClose: false,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                })
+         })
+         socket.on('Withdraw',Withdraw =>{
+            toast.info(
+            <div className='New_Deposit_main'>
+                <h2>User {Withdraw.user_Name}<br/>Have Made New Withdraw of {Withdraw.activetDeposit}$<br/>
+                Time: {Withdraw.date}
+                </h2>
+            </div>,{
+                position: "top-left",
                 autoClose: false,
                 hideProgressBar: false,
                 closeOnClick: true,

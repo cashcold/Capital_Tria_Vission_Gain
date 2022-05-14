@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { io } from "socket.io-client";
 
 class WithdrawMain extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class WithdrawMain extends Component {
     WithdrawNowFound = ()=>{
         this.setState({depositAmount: Number(0)})
         setTimeout(()=>
-        {toast.success(`Payment Have Sent to Your Bitcoin Wallert`)},800)
+        {toast.success(`Payment Will Sent to Your Bitcoin Wallert`)},800)
 
         // sessionStorage.removeItem('token')
         
@@ -55,8 +56,11 @@ class WithdrawMain extends Component {
             activetDeposit: this.state.activetDeposit__amount,
             
         }
+        let socket = io()
+
+        socket.emit('Withdraw', Withdraw)
         const id  = this.props.match.params.id
-        console.log(Withdraw)
+        
         axios.post(`/users/withdraw/${id}`,Withdraw).then(res => { 
             sessionStorage.setItem('RefreshToken',JSON.stringify(res.data))
             return res.data;

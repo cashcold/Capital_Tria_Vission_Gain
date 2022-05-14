@@ -42,6 +42,10 @@ io.on('connection', socket => {
    socket.on('NewDeposit',NewDeposit =>{
        socket.broadcast.emit('NewDeposit',NewDeposit)
    })
+   
+   socket.on('Withdraw',Withdraw =>{
+       socket.broadcast.emit('Withdraw',Withdraw)
+   })
 
 
    
