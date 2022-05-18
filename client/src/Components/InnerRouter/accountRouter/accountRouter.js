@@ -12,7 +12,7 @@ class AccountRouter extends Component {
             user_Name: '',
             ip_address: '',
             bitcoin: '',
-            user_id: '',
+            user_id: [],
             email: '',
             register_date: '',
             accountBalance: '',
@@ -66,12 +66,6 @@ class AccountRouter extends Component {
          })
 
          const id = decoded.user_id
-         
-        
-        axios.post('/users/checkdate',{id}).then(data => this.setState({
-            timestamp: data.data.map(user => user.lastDate)
-            // timestampT: data.data.map(user => console.log(user.lastDate)),
-         }))
 
          axios.post('/users/depositInfo',{id}).then(data => this.setState({
             totalDeposit: data.data
@@ -79,16 +73,26 @@ class AccountRouter extends Component {
           axios.post('/users/withdrawInfo',{id}).then(data => this.setState({
             withdrawTotal: data.data
          }))
-         
-          axios.post('/users/user_balance',{id}).then(data => this.setState({
-            user_balance: data.data
+          
+         axios.post('/users/user_balance',{id}).then(data => this.setState({
+           user_balance: data.data
+        }))
+        // axios.post('/users/checkdate',{id}).then(data => console.log(data.lastDate))
+        axios.post('/users/checkdate',{id}).then(data => this.setState({
+            timestamp: data.data.map(user => user.lastDate)
          }))
+         
+       
+
+         
          
          
         
     }
     
     render() { 
+        
+       
        const CreditDashboard = ()=>{
        
 
