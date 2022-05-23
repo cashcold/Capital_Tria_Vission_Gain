@@ -206,30 +206,78 @@ Router.post('/depositInfo',async(req,res)=>{
     
     
 })
-Router.post('/total_transaction_checkAmount_all',async(req,res)=>{
-   
-    user_id = req.body.id
-    const user = await UserDeposit.findOne({user_id: req.body.id})
-    const user_total_transaction_deposit = await UserDeposit.find()
-    const user_total_transaction_withdraw = await WithdrawDeposit.find()
+// Router.post('/total_transaction_checkAmount_all',async(req,res)=>{
+//     user_id = req.body.id
+//     const user = await UserDeposit.findOne({user_id: req.body.id})
 
-    if(user){
-        const currentDeposit = await UserDeposit.aggregate([
-            {
-                $group : {
-                    _id: null,
-                    amount: { $sum: { $add : [ 
-                        user_total_transaction_deposit, user_total_transaction_withdraw 
-                    ]}},
-                }
-            },
+//     if(user){
+//         await UserDeposit.aggregate([
+//          {
+              
+//               $lookup: {
+//                   from: "withdrawdeposits",
+//                   as: "total_transaction_checkAmount_all",
+//                   let: {user_id: "$user_id"},
+//                   pipeline: [
+//                       { $match: {$expr: {$eq: ['$user_id', '$$user_id']}} },
+//                      { $group: {_id: "$user_id", checkAmount_all: { $sum: "$activetDeposit"},} }
+//                   ]
+//               }
+//           },
+          
+//           {
+//               $project: {
+//                 user_id: 1,
+//                 user_Name: 1,
+//                 depositAmount: 1,
+//                 checkAmount_all: 1,
+//                 WithdrawAmount: 1,
+//                 total_transaction_checkAmount_all: 1,
+//               }
+//           }
+//     ]).exec((err, result) => {
+//         if(err){
+//             res.send(err)
+//         }
+//         if(result){
+//             res.send({
+//                 error: false,
+//                 data: result
+//             })
+//         }
+//     })
+     
+//     }else{
+//         res.send('wrong transaction')
+//     }
+   
+
+// })
+
+// Router.post('/total_transaction_checkAmount_all',async(req,res)=>{
+   
+//     user_id = req.body.id
+//     const user = await UserDeposit.findOne({user_id: req.body.id})
+//     const user_total_transaction_deposit = await UserDeposit.find()
+//     const user_total_transaction_withdraw = await WithdrawDeposit.find()
+
+//     if(user){
+//         const currentDeposit = await UserDeposit.aggregate([
+//             {
+//                 $group : {
+//                     _id: null,
+//                     amount: { $sum: { $add : [ 
+//                         user_total_transaction_deposit, user_total_transaction_withdraw 
+//                     ]}},
+//                 }
+//             },
             
-        ])
-    res.send(currentDeposit)
-    }
+//         ])
+//     res.send(currentDeposit)
+//     }
     
     
-})
+// })
 
 
 Router.post('/total_transaction_history',async(req,res)=>{
@@ -237,7 +285,6 @@ Router.post('/total_transaction_history',async(req,res)=>{
     user_id = req.body.id
     fromDate = req.body.fromDate
     endDate = req.body.endDate
-    console.log(req.body)
     
     const user = await UserDeposit.findOne({user_id: req.body.id})
      const find_User_deposit = await UserDeposit.find({"createdAt": {$gte: fromDate , $lte: endDate }})

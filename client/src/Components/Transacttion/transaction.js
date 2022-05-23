@@ -16,7 +16,10 @@ class TotalTransaction extends Component {
         super(props);
         this.state = { 
             id: '',
+            totalDeposit: [],
+            withdrawTotal: [],
             total_transaction_history: [],
+            total_transaction_checkAmount_all: [],
             startDate: new Date(),
             endDate: new Date()
          }
@@ -40,6 +43,20 @@ class TotalTransaction extends Component {
           endDate: date,
         })
       }
+       componentDidMount(){
+        const id =  sessionStorage.getItem('user_id')
+
+        axios.post('/users/depositInfo',{id}).then(data => this.setState({
+          totalDeposit: data.data.map(data => data.depositAmount)
+      }))
+      axios.post('/users/withdrawInfo',{id}).then(data => this.setState({
+        withdrawTotal: data.data.map(data => data.WithdrawAmount)
+    }))
+
+        this.setState({
+          id
+        })
+      }
 
 
       onSubmit = (event)=>{
@@ -50,24 +67,23 @@ class TotalTransaction extends Component {
           fromDate: this.state.startDate,
           endDate: this.state.endDate
         }
+
         axios.post('/users/total_transaction_history',checkTotalTransaction).then(data => this.setState({
           total_transaction_history: data.data
       }))
+     
+      
+      //   axios.post('/users/total_transaction_checkAmount_all',checkTotalTransaction).then(data => this.setState({
+      //     total_transaction_checkAmount_all: data
+      // }))
+        
+        
         
       }
 
-      componentDidMount(){
-        const id =  sessionStorage.getItem('user_id')
-
-        this.setState({
-          id
-        })
-      }
+     
     render() { 
-      console.log(this.state.total_transaction_history)
-      setTimeout(()=>{
-        console.log(this.state.total_transaction_history)
-      },6000)
+      const Total_all_amount = Number(this.state.totalDeposit ) + Number(this.state.withdrawTotal)
         return ( 
             <div className='total_transaction'>
               <ToastContainer/>
@@ -131,8 +147,8 @@ class TotalTransaction extends Component {
                     </div>
                     <p className='NoTransaction_P'></p>
                       <div className="last__transac">
-                          <p className="transac_left">Total Transaction:</p>
-                          <p className="transac_right">$0.00</p>
+                      <p className="transac_left">Total Transaction:</p>
+                          <p className="transac_right">$ {Total_all_amount}.00</p>
                       </div>
                    </section>
             </div>
