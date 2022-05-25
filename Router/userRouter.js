@@ -347,7 +347,7 @@ Router.post('/checkdate',async(req,res)=>{
     if(user){
         const currentDeposit = await UserDeposit.aggregate([
             { $match : { user_id : user_id } },
-            {$group: {_id: "$user_id",lastDate : { $last: "$date" }}  },
+            {$group: {_id: "$user_id",lastDate : { $last: "$createdAt" }}  },
             
         ])
     res.json(currentDeposit)
