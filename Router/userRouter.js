@@ -411,7 +411,7 @@ Router.post("/updateAccountBalance/:id", async (req, res) => {
     res.send('Balance update');
 });
 
-Router.post('/withdraw/:id', async(req,res)=>{
+Router.post('/withdraw/:id', async(req,res)=>{ 
     const user = await User.findById(req.params.id);
     if (req.body.zero_accountBalance) user.activetDeposit = req.body.zero_accountBalance;
     await user.save();
