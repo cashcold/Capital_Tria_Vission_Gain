@@ -15,7 +15,7 @@ const io = require('socket.io')(server,{
       }
 });
 
-dotEnv.config()
+dotEnv.config() 
 
 
 mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true },()=>{

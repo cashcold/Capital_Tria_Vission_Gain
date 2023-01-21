@@ -9,7 +9,8 @@ class Home extends Component {
         super(props);
         this.state = { 
             amountCalculate: '',
-            recent_info_both: []
+            recent_info_both: [],
+            user_now: ''
          }
 
         this.handleChange = this.handleChange.bind(this)
