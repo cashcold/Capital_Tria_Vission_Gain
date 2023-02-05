@@ -113,9 +113,9 @@ img{
 .pricingNow .container{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    grid-column-gap: 4em;
-    margin-bottom: 4em;
-    padding: 0em 2.8em;
+    grid-gap: 2em;
+    margin-left: 2em;
+   
 }
 .calculateMe{
     display: grid;
@@ -123,7 +123,7 @@ img{
     grid-template-columns: repeat(6,1fr);
     grid-gap: 1em;
     min-height: 20vh;
-    width: 84%;
+    width: 95%;
     margin: 0 auto;
     padding: 3em 1em;
     background-color: #0D1430;
@@ -252,8 +252,25 @@ img{
     background-color: #0D1430;
     border-radius: 20%;
     border-bottom-color: #D34747;
+    min-width: 430px;
+    margin: 0 auto;
+    padding: 3.5em 2.5em;
+    transition: all 0.5s ease-in;
+ 
   
 }
+
+.overLay_section{
+    margin: 5em 0em;
+}
+
+.box_box__1:hover{
+    background-color: rgb(203, 15, 15)(134, 46, 46);
+    transform: scale(0.7);
+}
+
+
+
 
 
 
@@ -294,6 +311,7 @@ img{
         grid-template-columns: repeat(1,1fr);
         grid-gap: 2em;
         padding: 0em 1em;
+        margin-left: 0em;
         
     }
     .calculateMe{
@@ -372,9 +390,12 @@ img{
     }
     .box_box__1{
         background-color: #0D1430;
-        border-radius: 20%;
+        border-radius: 10%;
         border-bottom-color: #D34747;
-        padding: 1em 3em;
-        margin: 3em 1em;
+        min-width: 100px;
+        margin: 0 auto;
+        padding: 2.5em 1.5em;
+        transition: all 0.5s ease-in;
     }
+   
 }

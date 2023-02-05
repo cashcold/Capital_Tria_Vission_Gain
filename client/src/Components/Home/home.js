@@ -139,7 +139,7 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>DAILY FOREVER</h3>
-                           <h5>Antminer S9i/j 14.5T 16nm BTC Bitcoin Miner SHA256 Include APW3++ 1600W PSU</h5>
+                           <p>Antminer S9i/j 14.5T 16nm BTC Bitcoin Miner SHA256 Include APW3++ 1600W PSU</p>
                            <div className='icon'>
                                 <i class="fas fa-star"></i>
                                 <i class="fa fa-star-half" aria-hidden="true"></i>
@@ -169,7 +169,7 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>3 DAYS</h3>
-                           <h5>ONPULINK Bitcoin Miner,<br/>Antminer Renewed AntMiner L3+ ~504MH/s @ 1.6W/MH ASIC</h5>
+                           <p>ONPULINK Bitcoin Miner,<br/>Antminer Renewed AntMiner L3+ ~504MH/s @ 1.6W/MH ASIC</p>
                            <div className='icon'>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -200,7 +200,7 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>5 DAYS</h3>
-                           <h5>Whatsminer M20S 65Th/s BTC Miner, SHA256 ASIC Bitcoin Miner</h5>
+                           <p>Whatsminer M20S 65Th/s BTC Miner, SHA256 ASIC Bitcoin Miner</p>
                            <div className='icon'>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -232,7 +232,7 @@ class Home extends Component {
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>7 DAYS</h3>
-                           <h5>Bitmain Antminer S19 Pro 110TH - SHA-256 - Bitcoin Miner</h5>
+                           <p>Bitmain Antminer S19 Pro 110TH - SHA-256 - Bitcoin Miner</p>
                            <div className='icon'>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -259,6 +259,9 @@ class Home extends Component {
                            </div>
                        </div>
                    </div>
+                 </section>
+                 <section className='overLay_section'>
+              
                  </section>
                  <section className='calculateMe'>
                      <div className="calcualteNow__box_1">
