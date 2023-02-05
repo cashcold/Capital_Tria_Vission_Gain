@@ -66,8 +66,8 @@ img{
 .innerPlan{
     padding: 2em 0;
     background-color: rgb(211, 71, 71);
-    border-radius: 10%;
-    height: 9vh;
+    border-radius: 15%;
+    height: 7vh;
     color: white;
     min-width: 14%;
     margin: 0 auto;
@@ -205,6 +205,14 @@ img{
 .advan__box{
     padding: 2em 1em;
     background-color: #0D1430;
+    transition: all 0.5s ease-in-out;
+}
+.advan__box:hover{
+    background-color: red;
+    transform: translate(80px 50px);
+}
+.advan__box:hover i{
+    color: white;
 }
 .advan__box i{
     padding-right: 1em;
@@ -256,6 +264,7 @@ img{
     margin: 0 auto;
     padding: 3.5em 2.5em;
     transition: all 0.5s ease-in;
+    
  
   
 }
@@ -349,6 +358,16 @@ img{
         
         
     }
+    .innerPlan{
+        padding: 2em 0;
+        background-color: rgb(211, 71, 71);
+        border-radius: 15%;
+        height: 3vh;
+        color: white;
+        min-width: 14%;
+        margin: 0 auto;
+        position: relative;
+    }
     .about__box_1 p{
         line-height: 2rem;
         width: 100%;
@@ -396,6 +415,16 @@ img{
         margin: 0 auto;
         padding: 2.5em 1.5em;
         transition: all 0.5s ease-in;
+    }
+    .advan__box{
+        width: 98%;
+        margin: 0 auto;
+        display: block;
+       
+    }
+    .advan__box i{
+        padding-right: 0em;
+        margin: 0.5em 0em;
     }
    
 }
