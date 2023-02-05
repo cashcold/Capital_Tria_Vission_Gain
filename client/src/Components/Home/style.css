@@ -278,7 +278,19 @@ img{
     transform: scale(0.7);
 }
 
+.flow__boxMe{
+    transition: all 0.5s ease-in;
+    transform: scaleX(1) skew(20deg);
+}
 
+.flow__boxMe:hover {
+    transform: scaleX(1) skew(0deg);
+    cursor: pointer;
+  }
+
+  .flow__boxMe i{
+  
+  }
 
 
 
