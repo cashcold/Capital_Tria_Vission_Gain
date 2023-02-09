@@ -122,7 +122,7 @@ class Home extends Component {
                             </div>
                         </div>
                         <div className="home__box__2">
-                        <img src={require('../../images/farm-2852024_1920.jpg')} className='home__box__2_image'/> 
+                        {/* <img src={require('../../images/farm-2852024_1920.jpg')} className='home__box__2_image'/>  */}
                         </div>
                 </section>
                 <section className='about__investmentt__plan  '>

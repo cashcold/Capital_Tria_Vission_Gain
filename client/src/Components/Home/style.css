@@ -20,8 +20,34 @@
 img{
     width: 100%;
 }
-.home__box__2 img{
+.home__box__2{
+    background-image: url('../../images/farm-2852024_1920.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* height: 500px; */
+    width: 100%;
+  animation: move-bg 10s linear infinite;
+  filter: brightness(0.5);
+}
+@keyframes move-bg {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: 0 100%;
+    }
+  }
+
+
+
+.home__box__2{
     padding: 0em 2em;
+    transition: all 0.5s ease-in-out;
+}
+.home__box__2:hover{
+    transform: scale(1.1);
+  transform-origin: right bottom;
 }
 .home__box__1{
     padding: 0em 2em;
@@ -280,11 +306,10 @@ img{
 
 .flow__boxMe{
     transition: all 0.5s ease-in;
-    transform: scaleX(1) skew(20deg);
 }
 
 .flow__boxMe:hover {
-    transform: scaleX(1) skew(0deg);
+    transform: scaleX(1.1) skew(10deg);
     cursor: pointer;
   }
 
@@ -321,7 +346,7 @@ img{
     }
     .flow__boxMe{
         background-color:#0D1430;
-        width: 98%;
+        width: 100%;
         min-height: 30vh;
         padding: 4em 0em;
         margin-bottom: 3em;
@@ -438,5 +463,14 @@ img{
         padding-right: 0em;
         margin: 0.5em 0em;
     }
-   
+    .home__box__2{
+        background-image: url('../../images/farm-2852024_1920.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 300px;
+        width: 100%;
+      animation: move-bg 10s linear infinite;
+      filter: brightness(0.5);
+    }
 }
