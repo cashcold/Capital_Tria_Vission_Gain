@@ -91,7 +91,9 @@ class AccountRouter extends Component {
     }
     
     render() { 
-       
+       console.log(new Date(`${this.state.timestamp}`))
+       console.log(this.state.user_balance.activetDeposit
+        )
         
        
        const CreditDashboard = ()=>{
@@ -186,6 +188,9 @@ class AccountRouter extends Component {
                         <h4>Welcome {this.state.user_Name}!</h4>
                         <h4>IP Address : {this.state.ip_address}</h4>
                     </div>
+                </section>
+                <section className='progress_bar'>
+                    
                 </section>
                 <section className='about__all'>
                     <div className="all__about_-box__1">
