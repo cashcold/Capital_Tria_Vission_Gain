@@ -339,7 +339,7 @@ Router.post('/transaction_withdrawInfo_query',async(req,res)=>{
 
 
 
-Router.post('/checkdate',async(req,res)=>{
+Router.post('/checkdate',async(req,res)=>{   
    
     user_id = req.body.id
     const user = await UserDeposit.findOne({user_id: req.body.id})
@@ -355,6 +355,22 @@ Router.post('/checkdate',async(req,res)=>{
     
     
 })
+// Router.post('/checkdate_notify',async(req,res)=>{   
+   
+//     user_id = req.body.id
+//     const user = await UserDeposit.findOne({user_id: req.body.id})
+
+//     if(user){
+//         const currentDeposit = await UserDeposit.aggregate([
+//             { $match : { user_id : user_id } },
+//             {$group: {_id: "$user_id",lastDate : { $last: "$createdAt" }}  },
+            
+//         ])
+//     res.json(currentDeposit)
+//     }
+    
+    
+// })
 Router.post('/user_profile_display',async(req,res)=>{
    
     user_id = req.body.id

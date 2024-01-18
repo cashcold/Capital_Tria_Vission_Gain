@@ -3,5 +3,11 @@
 
         "markdown"
     ],
-    "emmet.triggerExpansionOnTab": true
+    "emmet.triggerExpansionOnTab": true,
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#bdd",
+        "titleBar.activeForeground": "#000000",
+        "titleBar.inactiveBackground": "#bdd",
+        "titleBar.inactiveForeground": "#000000"
+    }
 }

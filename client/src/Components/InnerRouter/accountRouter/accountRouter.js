@@ -92,9 +92,20 @@ class AccountRouter extends Component {
     
     render() { 
        console.log(new Date(`${this.state.timestamp}`))
-       console.log(this.state.user_balance.activetDeposit
-        )
-        
+    //    console.log(this.state.user_balance.activetDeposit
+    //     )
+       
+    const data_date = new Date(`${this.state.timestamp}`)
+    const current_date = new Date();
+    
+    if(data_date  > current_date ){
+    console.log("Data date is greater than current , yes");
+
+    } else {
+
+        document.querySelector('.invest_btn').style.display = 'none'
+        console.log("Data date is not greater than current date");
+      }
        
        const CreditDashboard = ()=>{
        
@@ -172,7 +183,7 @@ class AccountRouter extends Component {
                             <h5>TOTAL INVESTMENT</h5>
                             <h5> $ {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
                         </div>
-                        <a href='/dashboard/deposit'><h2 className='btn'>INVEST</h2></a>
+                        <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>
                     </div>
                     <div className="dash__box__1">
                         <i class="fas fa-comments-dollar fa-3x"></i>
