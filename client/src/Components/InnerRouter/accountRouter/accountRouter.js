@@ -91,22 +91,46 @@ class AccountRouter extends Component {
     }
     
     render() { 
-       console.log(new Date(`${this.state.timestamp}`))
-    //    console.log(this.state.user_balance.activetDeposit
-    //     )
+        // Assuming this.state.timestamp represents the user's deposit date
+        const data_date = this.state.timestamp ? new Date(this.state.timestamp) : null;
+        const current_date = new Date();
+        const date_24hrs = addDays(current_date, 1);
+        const date_3days = addDays(current_date, 3);
+        const date_5days = addDays(current_date, 5);
+        const date_7days = addDays(current_date, 7);
+
+        // Check if the user does not have a deposit date or if the deposit date has passed
+        const showInvestButton = !data_date || (data_date > date_24hrs || data_date > date_3days || data_date > date_5days || data_date > date_7days);
+
+         console.log("data_date:", data_date);
+        console.log("date_24hrs:", date_24hrs);
+        console.log("date_3days:", date_3days);
+        console.log("date_5days:", date_5days);
+        console.log("date_7days:", date_7days);
        
-    const data_date = new Date(`${this.state.timestamp}`)
-    const current_date = new Date();
+
+        // const data_date = new Date(`${this.state.timestamp}`);
+        // const current_date = new Date();
+        // const date_24hrs = addDays(current_date, 1);
+        // const date_3days = addDays(current_date, 3);
+        // const date_5days = addDays(current_date, 5);
+        // const date_7days = addDays(current_date, 7);
+        
+        // console.log("data_date:", data_date);
+        // console.log("date_24hrs:", date_24hrs);
+        // console.log("date_3days:", date_3days);
+        // console.log("date_5days:", date_5days);
+        // console.log("date_7days:", date_7days);
+        
+        // const showInvestButton = data_date > date_24hrs || data_date > date_3days || data_date > date_5days || data_date > date_7days;
+
+
+        
+        // console.log("showInvestButton:", showInvestButton);
+        
     
-    if(data_date  > current_date ){
-    console.log("Data date is greater than current , yes");
+    
 
-    } else {
-
-        document.querySelector('.invest_btn').style.display = 'none'
-        console.log("Data date is not greater than current date");
-      }
-       
        const CreditDashboard = ()=>{
        
 
@@ -183,7 +207,8 @@ class AccountRouter extends Component {
                             <h5>TOTAL INVESTMENT</h5>
                             <h5> $ {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
                         </div>
-                        <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>
+                        {showInvestButton && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>}
+                    
                     </div>
                     <div className="dash__box__1">
                         <i class="fas fa-comments-dollar fa-3x"></i>
