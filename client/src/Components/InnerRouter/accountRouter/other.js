@@ -94,12 +94,39 @@ class AccountRouter extends Component {
         // Assuming this.state.timestamp represents the user's deposit date
         const data_date = this.state.timestamp ? new Date(this.state.timestamp) : null;
         const current_date = new Date();
+        const date_24hrs = addDays(current_date, 1);
+        const date_3days = addDays(current_date, 3);
+        const date_5days = addDays(current_date, 5);
+        const date_7days = addDays(current_date, 7);
 
-        const showInvestButton = this.state.user_balance.activetDeposit === 0;
+        // Check if the user does not have a deposit date or if the deposit date has passed
+        const showInvestButton = !data_date || (data_date > date_24hrs || data_date > date_3days || data_date > date_5days || data_date > date_7days);
 
+         console.log("data_date:", data_date);
+        console.log("date_24hrs:", date_24hrs);
+        console.log("date_3days:", date_3days);
+        console.log("date_5days:", date_5days);
+        console.log("date_7days:", date_7days);
        
 
-      
+        // const data_date = new Date(`${this.state.timestamp}`);
+        // const current_date = new Date();
+        // const date_24hrs = addDays(current_date, 1);
+        // const date_3days = addDays(current_date, 3);
+        // const date_5days = addDays(current_date, 5);
+        // const date_7days = addDays(current_date, 7);
+        
+        // console.log("data_date:", data_date);
+        // console.log("date_24hrs:", date_24hrs);
+        // console.log("date_3days:", date_3days);
+        // console.log("date_5days:", date_5days);
+        // console.log("date_7days:", date_7days);
+        
+        // const showInvestButton = data_date > date_24hrs || data_date > date_3days || data_date > date_5days || data_date > date_7days;
+
+
+        
+        // console.log("showInvestButton:", showInvestButton);
         
     
     
