@@ -4,7 +4,7 @@
     align-items: center;
     padding: 8em 0;
     background-position: 20%;
-    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(14, 15, 16, 0.364)),
                   url("../../images/digital-world-map-hologram-blue-background.jpg");
                   min-height: 100vh;
 }
@@ -132,9 +132,13 @@
 .reff__box_2 h2{
     padding-bottom: 1.5em;
 }
+
+
 .dashboard_bot_drop{
     display: none;
 }
+
+
 .welcomeText{
 
 }
@@ -262,9 +266,13 @@
    .dashboard__section_box__2{
        display: none;
    }
+
+
    .dashboard_bot_drop{
     display: block;
     }
+
+    
     .account__router .btn{
         display: block;
     }

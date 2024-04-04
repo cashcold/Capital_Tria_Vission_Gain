@@ -34,15 +34,10 @@ class AccountRouter extends Component {
     }
 
     componentDidMount(){
+        // user_balance.activetDeposit
 
-        // const RefreshToken = sessionStorage.getItem('RefreshToken')
-        // const Refres_profile_hToken = sessionStorage.getItem('Refres_profile_hToken')
-        // if(RefreshToken || Refres_profile_hToken){
-        //     sessionStorage.removeItem('x-access-token')
-        //     sessionStorage.setItem('x-access-token',RefreshToken)
-        //     sessionStorage.setItem('x-access-token',Refres_profile_hToken)
-        // }
         
+
         const token = sessionStorage.getItem('x-access-token')
         const decoded = jwt_decode(token)
          JSON.stringify( sessionStorage.setItem('user_id',decoded.user_id))
@@ -76,6 +71,7 @@ class AccountRouter extends Component {
           
          axios.post('/users/user_balance',{id}).then(data => this.setState({
            user_balance: data.data
+           
         }))
         // axios.post('/users/checkdate',{id}).then(data => console.log(data.lastDate))
         axios.post('/users/checkdate',{id}).then(data => this.setState({
@@ -91,17 +87,18 @@ class AccountRouter extends Component {
     }
     
     render() { 
-        // Assuming this.state.timestamp represents the user's deposit date
-        const data_date = this.state.timestamp ? new Date(this.state.timestamp) : null;
-        const current_date = new Date();
 
         const showInvestButton = this.state.user_balance.activetDeposit === 0;
 
        
 
       
-        
+        console.log(this.state.user_balance.activetDeposit)
+        sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit)
+        // JSON.stringify( sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit))
+
     
+        
     
 
        const CreditDashboard = ()=>{

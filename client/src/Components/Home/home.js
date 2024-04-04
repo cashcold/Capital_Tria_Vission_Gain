@@ -98,7 +98,7 @@ class Home extends Component {
                         <div className="home__box__1">
                             <div className='home__h1'>
                                 <h1 className='home__box__h1'>Capital Gain Management Co.</h1>
-                                <h3 className='home__box__h3'>Earn up to 9.5% Daily, Easily with 3 STEPS</h3>
+                                <h3 className='home__box__h3'>Earn up to 10% Daily, Easily with 3 STEPS</h3>
                             </div>
                          <div className="home__flow__box">
                             <div className="flow__box__1 flow__boxMe flowAnimate">

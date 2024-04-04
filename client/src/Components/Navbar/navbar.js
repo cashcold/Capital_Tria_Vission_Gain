@@ -9,11 +9,12 @@ class Navbar extends Component {
          }
     }
     componentDidMount(){
-        if(sessionStorage.getItem('x-access-token') != null)  {
+        if(sessionStorage.getItem('x-access-token') != null)  { 
             this.setState({
                 isLogin: true,
             })
         }
+      
       
 
  
@@ -82,7 +83,7 @@ class Navbar extends Component {
                                 <div className='toggle'></div>
                             </div>
                      </div>
-                     </nav>
+                     </nav>s
                      
                </section>
             </div>
