@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './style.css'
+import './style.css';
+
 class AboutMain extends Component {
     constructor(props) {
         super(props);
@@ -9,20 +10,41 @@ class AboutMain extends Component {
         return ( 
             <div className='aboutMain'>
                 <section className='about_box__1'>
-                  <div className="allAboutInfo">
-                  <h1>ABOUT</h1>
-                    <div className="otherAboutText">
-                        <p>Capital Gain Management Co. is at heart a cryptocurrency Mining investment company. However, we are opportunistic and are looking at other financial resource opportunities that present a favorable upside. The Company is well financed and management has a wealth of experience in all aspects of cryptocurrency investment and development.
-                        </p>
-                        <p>Capital Gain Management Co. is also a place to invest and earn profits with stable percent. The company employ the uttermost skills, experiences and professional tactics in stock, Forex traders and gold trading. Our focus is to offer to individuals an exclusive funds management service. We are looking forward to have a long-term relationship with the investors and in turn we will do our best to provide quality services to our members. Our opinion about Investing, as a rule, is all about managing risks. For us, it means also, to provide our clients fast returns and payouts on time, and so share profits together and as a result, earn up more. The only way to guarantee our growth is to ensure that our investors grows first and this is the reason why we care about investors and their investment.</p>
-                        {/* <h3>COMPANY LEGAL</h3>
-                        <p>Capital Gain Management Co. was registered on 11 May 2016 The "Capital Gain Management Co." is the official and duly registered trade mark of Capital Gain Management Co. Who are authorised and regulated by the United Kingdom Company House Authority under firm reference number 10173512.</p>
-                        <p>Capital Gain Management Co. is registered in LONDON No.  10873519. Registered office, 58 Union Terrace, UNITED KINGDOM,  E15 6NY</p> */}
+                    <div className="allAboutInfo">
+                        <h1>ABOUT</h1>
+                        <div className="otherAboutText">
+                            <p>
+                                Capital Gain Management Co. is at heart a cryptocurrency mining investment company. However, we are opportunistic and are looking at other financial resource opportunities that present a favorable upside. The company is well-financed, and our management team has a wealth of experience in all aspects of cryptocurrency investment and development.
+                            </p>
+                            <h2>Our Mission</h2>
+                            <p>
+                                Our mission is to empower individuals and businesses with cutting-edge technology and expertise to maximize their returns in the cryptocurrency space. We believe in the transformative power of blockchain technology and aim to make bitcoin mining accessible to everyone, regardless of their technical background.
+                            </p>
+                            <h2>What We Do</h2>
+                            <p>
+                                Capital Gain specializes in bitcoin mining, utilizing state-of-the-art hardware and software to ensure the highest efficiency and profitability. Our team of experts continuously monitors the market and our mining operations to optimize performance and deliver consistent returns to our investors. Additionally, we employ the utmost skills, experience, and professional tactics in stock, Forex, and gold trading to offer a diversified investment portfolio.
+                            </p>
+                            <h2>Why Choose Us?</h2>
+                            <ul>
+                                <li><strong>Transparency:</strong> We believe in complete transparency. Our investors have real-time access to their mining activities, earnings, and account status.</li>
+                                <li><strong>Security:</strong> Your investment's security is our top priority. We use advanced security measures to protect your assets and personal information.</li>
+                                <li><strong>Expertise:</strong> With years of experience in the cryptocurrency and mining industry, our team has the knowledge and skills to navigate the complexities of the market.</li>
+                                <li><strong>Stable Returns:</strong> We provide stable and consistent profit percentages, ensuring fast returns and timely payouts.</li>
+                                <li><strong>Customer Support:</strong> We are committed to providing exceptional customer service. Our support team is available 24/7 to assist you with any questions or concerns.</li>
+                            </ul>
+                            <h2>Our Focus</h2>
+                            <p>
+                                At Capital Gain, we focus on offering individuals exclusive funds management services. We aim to build long-term relationships with our investors, providing high-quality services that prioritize their growth. Investing is about managing risks, and we are dedicated to delivering fast returns and sharing profits with our clients to ensure mutual growth.
+                            </p>
+                            <h2>Join Us Today</h2>
+                            <p>
+                                Whether you are a seasoned investor or new to the world of bitcoin and other financial markets, Capital Gain offers a reliable and profitable opportunity to grow your wealth. Join us today and take the first step towards financial freedom with our comprehensive investment solutions.
+                            </p>
+                        </div>
                     </div>
-                  </div>
                 </section>
             </div>
-         );
+        );
     }
 }
  

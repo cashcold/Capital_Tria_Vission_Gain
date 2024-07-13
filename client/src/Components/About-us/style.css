@@ -10,38 +10,59 @@
     padding: 1.5em 4em;
     background-color:#0D1430;
     /* color: #B9244C; */
-    width: 90%;
+ 
+    width: 70%;
     margin: 0 auto;
 }
-.allAboutInfo h1{
-    padding: 1.5em 4em;
-    color: #B9244C;
-}
-.otherAboutText p{
-    padding-bottom: 3em;
-    width: 80%;
+.aboutMain {
+   
+    width: 100%;
     margin: 0 auto;
-    line-height: 1.8rem;
-    font-size: 1.3rem;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
-.otherAboutText h3{
-    color: #B9244C;
-    padding-bottom: 1em;
+.aboutMain p {
+    margin: 10px 0;
+    color: #a7a2a2;
 }
 
-@media screen and (max-width: 768px){
-    .otherAboutText p{
+.aboutMain ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.aboutMain ul li {
+    margin-bottom: 10px;
+    color: #a7a2a2;
+}
+
+.aboutMain strong {
+    color: green;
+}
+
+
+@media screen and (max-width: 768px) {
+    .otherAboutText p {
         padding-bottom: 3em;
         width: 100%;
         margin: 0 auto;
         line-height: 1.8rem;
         font-size: 1rem;
     }
-    .allAboutInfo{
+    .allAboutInfo {
         padding: 1.5em 1em;
-        background-color:#0D1430;
-        /* color: #B9244C; */
         width: 95%;
         margin: 0 auto;
+    }
+    .aboutMain {
+        padding: 4em 0;
+    }
+    .aboutMain h1, h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .aboutMain ul {
+        margin-left: -1.5em;
     }
 }
