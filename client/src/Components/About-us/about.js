@@ -38,7 +38,7 @@ class AboutMain extends Component {
                             </p>
                             <h2>Join Us Today</h2>
                             <p>
-                                Whether you are a seasoned investor or new to the world of bitcoin and other financial markets, Capital Gain offers a reliable and profitable opportunity to grow your wealth. Join us today and take the first step towards financial freedom with our comprehensive investment solutions.
+                                Whether you are a seasoned investor or new to the world of bitcoin and other financial markets, Capital Gain offers a reliable and profitable opportunity to grow your wealth. Join us today and take the first step towards financial freedom with our comprehensive investment solutions world.
                             </p>
                         </div>
                     </div>
