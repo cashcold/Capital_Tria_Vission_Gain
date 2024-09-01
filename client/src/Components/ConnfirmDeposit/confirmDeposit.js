@@ -150,8 +150,8 @@ class ConfirmDeposit extends Component {
         date: this.state.date
 
        }
-       let socket = io()
-    //    let socket = io('http://capitalgain.herokuapp.com/')
+       
+       let socket = io('http://localhost:8000')
 
        socket.emit('NewDeposit', NewDeposit)
 

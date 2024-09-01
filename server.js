@@ -9,10 +9,11 @@ const cron = require("node-cron")
 const shell = require("shelljs")
 const app = express()
 const server = require('http').createServer(app);
-const io = require('socket.io')(server,{
+const io = require('socket.io')(server, { 
     cors: {
-        origin: "*",
-      }
+        origin: "http://localhost:3000", // Restrict to your frontend
+        methods: ["GET", "POST"]
+    }
 });
 
 dotEnv.config() 
@@ -29,7 +30,9 @@ const PORT = process.env.PORT || 8000
 // })
 
 
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:3000" // Allow requests from the frontend
+}));
 app.use(bodyParser.json())
 
 io.on('connection', socket => {

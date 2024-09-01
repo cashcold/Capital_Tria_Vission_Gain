@@ -28,7 +28,11 @@ class WatchNotificationMain extends Component {
     };
 
     componentDidMount() {
-        let socket = io();
+        const socket = io('http://localhost:8000', {
+            reconnection: true,
+            reconnectionAttempts: 10,
+            reconnectionDelay: 500
+        });
 
         var deposit_message = document.getElementById('deposit_message');
         socket.on('incoming_deposit', live_deposit => {
