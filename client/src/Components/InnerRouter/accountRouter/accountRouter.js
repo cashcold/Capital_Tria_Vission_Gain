@@ -225,7 +225,7 @@ class AccountRouter extends Component {
                             <p>$ {this.state.withdrawTotal.map(user => user.WithdrawAmount)}.00</p>
                         </div>
                         <div className="all__box">
-                            <p>Last Withdraw :</p>
+                            <p>Last Withdraw :</p>   
                             <p>$ {this.state.withdrawTotal.map(user => user.WithdrawAmountlast)}.00</p>
                         </div>
                     </div>

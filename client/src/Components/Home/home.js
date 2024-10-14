@@ -32,7 +32,7 @@ class Home extends Component {
 
         const urlSearchParams = new URLSearchParams(window.location.search);
         for(var pair of urlSearchParams.entries()) {
-            localStorage.setItem('reffer',(pair[1]) ) 
+            sessionStorage.setItem('reffer',(pair[1]) ) 
          }
        
     }

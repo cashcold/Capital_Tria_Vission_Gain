@@ -39,11 +39,23 @@ Router.post('/register/', async(req,res)=>{
         ip_address: req.body.ip_address,
         accountBalance: Number(req.body.accountBalance),
         reffer: req.body.reffer,
+        refferReward: req.body. refferReward,
         question: req.body.question,
         question__ans: req.body.question__ans,
-        activetDeposit: Number(req.body.activetDeposit),
+        activetDeposit: Number(req.body.activetDeposit), 
         date: req.body.date
     })
+
+       // Referral program logic
+       if (req.body.reffer) {
+        // Find the referrer by their referral code (could be the user_Name, email, or custom code)
+        const referrer = await User.findOne({ user_Name: req.body.reffer });
+        if (referrer) {
+            // Add reward to referrer's account balance (e.g., 10 units as a reward)
+            referrer.refferReward += 10; // You can adjust this amount
+            await referrer.save();
+        }
+    }
 
     var mailgun = require('mailgun-js')({apiKey: process.env.API_key, domain: process.env.API_baseURL});
     var data = {
@@ -82,6 +94,7 @@ Router.post('/login', async(req,res)=>{
                  full_Name: user.full_Name,
                  user_Name: user.user_Name,
                  email: user.email,
+                 refferReward: user.refferReward,
                  password: user.password,
                  bitcoin: user.bitcoin,
                  ip_address: user.ip_address,           
@@ -206,78 +219,6 @@ Router.post('/depositInfo',async(req,res)=>{
     
     
 })
-// Router.post('/total_transaction_checkAmount_all',async(req,res)=>{
-//     user_id = req.body.id
-//     const user = await UserDeposit.findOne({user_id: req.body.id})
-
-//     if(user){
-//         await UserDeposit.aggregate([
-//          {
-              
-//               $lookup: {
-//                   from: "withdrawdeposits",
-//                   as: "total_transaction_checkAmount_all",
-//                   let: {user_id: "$user_id"},
-//                   pipeline: [
-//                       { $match: {$expr: {$eq: ['$user_id', '$$user_id']}} },
-//                      { $group: {_id: "$user_id", checkAmount_all: { $sum: "$activetDeposit"},} }
-//                   ]
-//               }
-//           },
-          
-//           {
-//               $project: {
-//                 user_id: 1,
-//                 user_Name: 1,
-//                 depositAmount: 1,
-//                 checkAmount_all: 1,
-//                 WithdrawAmount: 1,
-//                 total_transaction_checkAmount_all: 1,
-//               }
-//           }
-//     ]).exec((err, result) => {
-//         if(err){
-//             res.send(err)
-//         }
-//         if(result){
-//             res.send({
-//                 error: false,
-//                 data: result
-//             })
-//         }
-//     })
-     
-//     }else{
-//         res.send('wrong transaction')
-//     }
-   
-
-// })
-
-// Router.post('/total_transaction_checkAmount_all',async(req,res)=>{
-   
-//     user_id = req.body.id
-//     const user = await UserDeposit.findOne({user_id: req.body.id})
-//     const user_total_transaction_deposit = await UserDeposit.find()
-//     const user_total_transaction_withdraw = await WithdrawDeposit.find()
-
-//     if(user){
-//         const currentDeposit = await UserDeposit.aggregate([
-//             {
-//                 $group : {
-//                     _id: null,
-//                     amount: { $sum: { $add : [ 
-//                         user_total_transaction_deposit, user_total_transaction_withdraw 
-//                     ]}},
-//                 }
-//             },
-            
-//         ])
-//     res.send(currentDeposit)
-//     }
-    
-    
-// })
 
 
 Router.post('/total_transaction_history',async(req,res)=>{

@@ -23,6 +23,7 @@ class RegisterUser extends Component {
             question: '',
             question__ans: '',
             reffer: '',
+            refferReward: '',
             restartLinkPassword: '',
             checkBox: '',
             date: ''
@@ -51,12 +52,12 @@ class RegisterUser extends Component {
             ip_address: data.ip
         }))
 
-        const reffer = localStorage.getItem('reffer')
+        const reffer = sessionStorage.getItem('reffer')
 
         this.setState({reffer: reffer})
        
         
-    }
+    } 
     onSubmit = (event)=>{
         event.preventDefault() 
         const SaveNewUser = {
@@ -70,6 +71,7 @@ class RegisterUser extends Component {
             accountBalance: this.state.accountBalance,
              activetDeposit: this.state.activetDeposit,
             reffer: this.state.reffer,
+            refferReward: this.state.refferReward,
             restartLinkPassword: this.state.restartLinkPassword,
             question: this.state.question,
             question__ans: this.state.question__ans,

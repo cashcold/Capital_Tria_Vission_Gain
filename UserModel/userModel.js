@@ -22,10 +22,13 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
     ip_address:{
-        type: String,
+        type: String, 
         require: true
     },
     accountBalance: {
+        type: Number,
+    },
+    refferReward: {
         type: Number,
     },
     reffer:{

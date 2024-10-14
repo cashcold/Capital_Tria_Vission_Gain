@@ -23,7 +23,20 @@ class WatchNotificationMain extends Component {
     playSound = (soundFile) => {
         const audio = new Audio(`/tones/${soundFile}`);
         audio.play()
-            .then(() => console.log('Sound played successfully.'))
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                    .then(() => console.log('Sound played successfully.'))
             .catch((error) => console.error('Error playing sound:', error));
     };
 
