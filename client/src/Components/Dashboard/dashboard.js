@@ -68,7 +68,6 @@ class Dashboard extends Component {
 
     const { user_balance } = this.state
 
-    console.log('this is user balance :', this.state. user_balance)
 
 
     return (

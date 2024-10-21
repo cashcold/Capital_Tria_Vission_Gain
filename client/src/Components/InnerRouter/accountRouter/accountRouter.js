@@ -8,6 +8,7 @@ class AccountRouter extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            user_profile_display: '',
             full_Name: '',
             user_Name: '',
             ip_address: '',
@@ -62,6 +63,9 @@ class AccountRouter extends Component {
 
          const id = decoded.user_id
 
+         axios.post('/users/user_profile_display',{id}).then(data => this.setState({
+            user_profile_display: data.data
+         }))
          axios.post('/users/depositInfo',{id}).then(data => this.setState({
             totalDeposit: data.data
          }))
@@ -87,13 +91,14 @@ class AccountRouter extends Component {
     }
     
     render() { 
+        console.log(this.state.user_profile_display.refferReward
+        )
 
         const showInvestButton = this.state.user_balance.activetDeposit === 0;
 
        
 
       
-        console.log(this.state.user_balance.activetDeposit)
         sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit)
         // JSON.stringify( sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit))
 
@@ -238,6 +243,11 @@ class AccountRouter extends Component {
                         <div className="reff__box_2">
                             <h2>Personal <span>Referral</span> Link:</h2>
                             <p className='reffLink'>https://capitalgain/?ref={this.state.user_Name}</p>
+                            <p className='btn btn-warning btn-referral'> Your Referral Reward: <span>${this.state.user_profile_display.refferReward}.00</span><br/>
+                            {this.state.user_profile_display.refferReward > 2 ? (
+                            <button className="btn-referral-cashout">Cashout</button>
+                            ) : null}
+                             </p>
                         </div>
                     </div>
                 </section>

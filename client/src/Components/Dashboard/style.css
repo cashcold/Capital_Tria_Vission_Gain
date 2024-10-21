@@ -169,6 +169,17 @@
     padding: 1em 0em;
     background-color: #B9244C;
 }
+.btn-referral{
+    width: 80%;
+    margin: 0 auto;
+    min-height: 20px;
+    padding: 1em 0em;
+   
+}
+.btn-referral-cashcout{
+    color: white;
+    background-color: green;
+}
 .reff__box_2 h2{
     padding-bottom: 1.5em;
 }
