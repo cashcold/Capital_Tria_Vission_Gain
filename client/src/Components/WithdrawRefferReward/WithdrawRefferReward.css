@@ -1,0 +1,118 @@
+/* Global Styles */
+body {
+    background-color: #fafafa;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* RefferReward Main Container */
+.RefferReward__main {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.RefferReward__h1 {
+    text-align: center;
+    color: #222;
+    font-size: 26px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* RefferReward Method Box */
+.RefferReward__method_box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f1f1f3;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.method_box h4 {
+    font-size: 18px;
+    color: #444;
+    margin: 0;
+    font-weight: 600;
+}
+
+.method_box .btn {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: #007bff;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.RefferReward__btn-success {
+    background-color: #28a745;
+}
+
+.RefferReward__btn-success:hover {
+    background-color: #218838;
+}
+
+.RefferReward__btn-danger {
+    background-color: #dc3545;
+}
+
+.RefferReward__btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* RefferReward Wallet Section */
+.RefferReward__wallet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f3f3f6;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.wallet h4 {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+.wallet__id h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .RefferReward__method_box {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .RefferReward__wallet {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wallet__id h4 {
+        text-align: left;
+    }
+}

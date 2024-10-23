@@ -22,6 +22,7 @@ import ForgotPassword from './Components/Password/forgotpassword';
 import ActivitPassword from './Components/Password/activePassword';
 import FAQSETUP from './Components/FAQ/faqsSetup';
 import WatchNotificationMain from './Components/WatchNotifcation/watchNotification';
+import WithdrawRefferReward from './Components/WithdrawRefferReward/WithdrawRefferReward';
 
 class MainApp extends Component {
     constructor(props) {
@@ -59,6 +60,7 @@ class MainApp extends Component {
                               <Route path='/deposit' exact component={DepositMain}/> 
                               <Route path='/edit' exact component={EditMain}/> 
                               <Route path='/withdraw' exact component={WithdrawMain}/>
+                              <Route path='/withdraw-refferReward' exact component={WithdrawRefferReward}/>
                               <Route path='/dashboard' render={(props)=> <Dashboard {...props} />} />
                               <Route path='/forgotpassword' exact component={ForgotPassword}/> 
                               <Route path='/activitPassword/:token' exact component={ActivitPassword}/> 
