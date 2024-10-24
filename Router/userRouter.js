@@ -296,22 +296,7 @@ Router.post('/checkdate',async(req,res)=>{
     
     
 })
-// Router.post('/checkdate_notify',async(req,res)=>{   
-   
-//     user_id = req.body.id
-//     const user = await UserDeposit.findOne({user_id: req.body.id})
 
-//     if(user){
-//         const currentDeposit = await UserDeposit.aggregate([
-//             { $match : { user_id : user_id } },
-//             {$group: {_id: "$user_id",lastDate : { $last: "$createdAt" }}  },
-            
-//         ])
-//     res.json(currentDeposit)
-//     }
-    
-    
-// })
 Router.post('/user_profile_display',async(req,res)=>{
    
     user_id = req.body.id
@@ -425,6 +410,34 @@ mailgun.messages().send(data, function (error, body) {
 
 res.send(RefreshToken)
  })
+
+    Router.post('/refferReward/:id', async (req, res) => {
+        try {
+            const userId = req.params.id;
+
+            // Find the user by ID
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            // Check if there's enough refferReward to withdraw
+            if (user.refferReward && user.refferReward > 0) {
+                // Set refferReward to 0 after withdrawal (or subtract some amount if partial withdrawal)
+                user.refferReward = 0;
+
+                // Save the updated user object
+                await user.save();
+
+                return res.status(200).json({ message: "Reffer reward withdrawn successfully" });
+            } else {
+                return res.status(400).json({ message: "No reffer reward to withdraw" });
+            }
+        } catch (error) {
+            return res.status(500).json({ message: "Server error", error: error.message });
+        }
+    });
 
 
  Router.post("/updateprofile/:id", async (req, res) => {
