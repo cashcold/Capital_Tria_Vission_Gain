@@ -19,7 +19,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: #121212; /* Dark background */
+    /* background: #121212;  */
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -107,7 +107,7 @@
     .div.invest_ui_ux_btn .no-deposit-card {
       padding: 20px;
       width: 100%;
-      max-width: 90%;
+      max-width: 98%;
     }
   
     .div.invest_ui_ux_btn .no-deposit-icon {
