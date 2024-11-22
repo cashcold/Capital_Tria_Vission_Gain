@@ -175,6 +175,21 @@ class AccountRouter extends Component {
        CreditDashboard()
         return ( 
             <div className='account__router'>
+                <section className="div invest_ui_ux_btn">
+                            <div class="no-deposit-container">
+                <div class="no-deposit-card">
+                    <div class="icon-wrapper">
+                    <img src="no-deposit-icon.png" alt="No Deposit" class="no-deposit-icon"/>
+                    </div>
+                    <h1>No Active Deposits</h1>
+                    <p>
+                    You currently don't have any active deposits in your mining account.
+                    Start earning by making your first deposit today!
+                    </p>
+                    <button class="deposit-button">Make a Deposit</button>
+                </div>
+                </div>
+                </section>
                  <section className='dashboard__section_box__3'>
                     <div className="dash__box__1">
                         <i class="fas fa-coins fa-3x"></i>

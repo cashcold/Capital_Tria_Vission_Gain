@@ -84,7 +84,7 @@ class Login extends Component {
                             <form>
                                 <table className='formTable_login'>
                                     <tr>
-                                        <td><label>Your Username: </label></td>
+                                        <td><label>Your UserName: </label></td>
                                         <td><input  className='LoginInput' type='text' name='user_Name'  onChange={this.handleChange('user_Name')}/></td>
                                     </tr>
                                     <br/>

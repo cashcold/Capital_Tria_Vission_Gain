@@ -168,7 +168,8 @@ class ConfirmDeposit extends Component {
         return(
             <div className='confirm'>
                 <div className='confirmDepositNow'>
-                    <h1 className='animate__animated animate__flash animate__slower'><span>DEPOSIT</span> CONFIRMATION:</h1>
+                    <h1 className='animate__animated animate__flash animate__slower'><span>DEPOSIT</span>
+                    CONFIRMATION:</h1>
                     <ToastContainer/>
                 </div>
                 <div className='confirmLine'>

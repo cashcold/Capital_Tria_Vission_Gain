@@ -85,7 +85,7 @@ class DepositMain extends Component {
         const CalculatorEngine = ()=>{
             if( this.state.amountCalculate){
                  if( this.state.amountCalculate <= 59){
-                 const Percentage = this.state.amountCalculate * 9.5/100
+                 const Percentage = this.state.amountCalculate * 10/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "$"+ totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage +" %"
@@ -160,10 +160,11 @@ class DepositMain extends Component {
                                         <div className="depositInfo__innerbox__1">
                                             <h4>24HRS</h4>
                                             <h4>$10.00 - $59.00	</h4>
-                                            <h4>9.5</h4>
+                                            <h4>10</h4>
                                         </div>
                                     </div>
                              </div>
+                             
                         </div>
                     </div>
                 </section>

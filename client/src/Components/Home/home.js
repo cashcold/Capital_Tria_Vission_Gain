@@ -40,7 +40,7 @@ class Home extends Component {
         const CalculatorEngine = ()=>{
            if( this.state.amountCalculate){
                 if( this.state.amountCalculate <= 59){
-                const Percentage = this.state.amountCalculate * 9.5/100
+                const Percentage = this.state.amountCalculate * 10/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                document.querySelector('.totalAmount').innerHTML = "$"+ totoalCheck
                document.querySelector('.percent_check').innerHTML = Percentage +" %"
@@ -135,7 +135,7 @@ class Home extends Component {
                        <div className="box_box__1"> 
                            <h1>PLAN I</h1>
                            <div className="innerPlan innerPlanother">
-                               <h1 className='percentRate'>9.5</h1>
+                               <h1 className='percentRate'>10</h1>
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>DAILY FOREVER</h3>

@@ -138,9 +138,8 @@ img{
 }
 .pricingNow .container{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(2,1fr);
     grid-gap: 2em;
-    margin-left: 2em;
    
 }
 .calculateMe{
