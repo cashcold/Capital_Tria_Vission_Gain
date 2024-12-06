@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import {addDays,addMinutes} from "date-fns"
+import moment from 'moment';
 import './style.css'
 
 class AccountRouter extends Component {
@@ -9,6 +10,7 @@ class AccountRouter extends Component {
         super(props);
         this.state = { 
             user_profile_display: '',
+            user_deposite_display: '',
             full_Name: '',
             user_Name: '',
             ip_address: '',
@@ -25,7 +27,8 @@ class AccountRouter extends Component {
             login: '',
             plan: '',
             timestamp: '',
-            Refedate: ''
+            Refedate: '',
+            showDetails: false, // State for popout card visibility
          }
 
          this.handleChange = this.handleChange.bind(this)
@@ -66,6 +69,9 @@ class AccountRouter extends Component {
          axios.post('/users/user_profile_display',{id}).then(data => this.setState({
             user_profile_display: data.data
          }))
+         axios.post('/users/user_deposite_display',{id}).then(data => this.setState({
+            user_deposite_display: data.data
+         }))
          axios.post('/users/depositInfo',{id}).then(data => this.setState({
             totalDeposit: data.data
          }))
@@ -82,15 +88,20 @@ class AccountRouter extends Component {
             timestamp: data.data.map(user => user.lastDate)
          }))
          
-       
 
-         
-         
-         
-        
     }
     
+
+    
+    toggleDetails = () => {
+        this.setState((prevState) => ({ showDetails: !prevState.showDetails }));
+      };
+
+
     render() { 
+
+
+
         console.log(this.state.user_profile_display.refferReward
         )
 
@@ -176,6 +187,11 @@ class AccountRouter extends Component {
 
 
        const CheckDeposit = this.state.user_balance.activetDeposit
+
+       const { showDetails, user_balance } = this.state;
+
+       const formattedDate = moment(this.state.user_deposite_display.createdAt).format('MMMM Do YYYY, h:mm:ss a'); 
+
         return ( 
             <div className='account__router'>
                 {
@@ -198,8 +214,49 @@ class AccountRouter extends Component {
 
                     )
                 }
-               
-                 <section className='dashboard__section_box__3'>
+                {
+                    CheckDeposit > 0 && (
+                        <section className="miningCard">
+                        <div class="main-container">
+                            <div class="card">
+                                <div class="robot-head">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                                <div class="antenna"></div>
+                                </div>
+                                <div class="info">
+                                <h1 class="title">Active Deposit</h1>
+                                <p class="amount">${this.state.user_balance.activetDeposit}.00</p>
+                                <p class="status">Status: <span class="status_active">Active</span></p>
+                                </div>
+                                <button class="view-details-btn" onClick={this.toggleDetails}>View Details</button>
+                            </div>
+                            </div>
+                        </section>
+
+                    )
+                }
+
+                {showDetails && (
+                    
+                <div className='popout-card'>
+                    <div className='card-content'>
+                    <h2>Mining Plan Details</h2>
+                    <p>
+                        <span>Plan </span>: {this.state.user_deposite_display.fixedDepositAmount} <br />
+                        <span>Miner</span>: Premium Miner <br />
+                       <span>Deposit Amount</span>: ${user_balance.activetDeposit}.00 <br />
+                       <span>Deposit Date</span>: {formattedDate} <br />
+                       <span> Status</span>: Active
+                    </p>
+                    <button className='close-btn' onClick={this.toggleDetails}>
+                        Close
+                    </button>
+                    </div>
+                </div>
+                )}
+
+                <section className='dashboard__section_box__3'>
                     <div className="dash__box__1">
                         <i class="fas fa-coins fa-3x"></i>
                         <div className="dashText"> 

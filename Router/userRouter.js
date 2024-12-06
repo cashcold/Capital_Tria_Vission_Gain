@@ -205,7 +205,7 @@ Router.post('/withdrawInfo',async(req,res)=>{
 })
 Router.post('/depositInfo',async(req,res)=>{
    
-    user_id = req.body.id
+    const user_id = req.body.id
     const user = await UserDeposit.findOne({user_id: req.body.id})
 
     if(user){
@@ -310,6 +310,21 @@ Router.post('/user_profile_display',async(req,res)=>{
     
     
 })
+Router.post('/user_deposite_display',async(req,res)=>{
+   
+    user_id = req.body.id
+    const user = await UserDeposit.findOne({user_id: req.body.id})
+    if(user){
+        res.send(user)
+    }else{
+        res.send('Not User')
+    }
+
+    
+    
+})
+
+
 Router.post('/user_balance',async(req,res)=>{
    
     user_id = req.body.id
