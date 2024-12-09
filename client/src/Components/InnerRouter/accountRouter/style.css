@@ -416,6 +416,98 @@
   }
 }
 
+.bitcoin-mining-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5em 0em;
+  padding: 0 20px; /* Adds some padding for smaller screens */
+}
+
+.mining-machine {
+  position: relative;
+  width: 80px; /* Smaller size for mobile view */
+  height: 80px;
+  margin-bottom: 20px;
+  border: 4px solid #f7931a;
+  border-radius: 50%;
+  animation: rotate 2s linear infinite;
+}
+
+.bitcoin-logo {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f7931a;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 3px #f7931a;
+}
+
+.bitcoin-logo::before {
+  content: "₿";
+  position: absolute;
+  font-size: 1.5rem; /* Adjusted for smaller viewports */
+  color: #fff;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.deposit-info {
+  font-size: 1rem; /* Adjusted for smaller viewports */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 3D Loading Bar */
+.loading-bar-container {
+  position: relative;
+  width: 90%; /* Use percentage for responsiveness */
+  max-width: 300px; /* Limit the width on larger screens */
+  height: 15px; /* Adjusted height for smaller viewports */
+  background: linear-gradient(145deg, #1c1c1c, #383838);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 2px 2px 5px #000, inset -2px -2px 5px #383838;
+}
+
+.loading-bar {
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f7931a, #ffc107, #f7931a);
+  box-shadow: 0 0 10px #f7931a;
+  animation: load 3s infinite;
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+
 
 
 
@@ -476,6 +568,23 @@
     .view-details-btn {
       font-size: 0.9rem;
       padding: 8px 15px;
+    }
+
+    .mining-machine {
+      width: 70px;
+      height: 70px;
+    }
+  
+    .bitcoin-logo::before {
+      font-size: 1.2rem;
+    }
+  
+    .deposit-info {
+      font-size: 0.9rem;
+    }
+  
+    .loading-bar-container {
+      height: 12px;
     }
   }
   

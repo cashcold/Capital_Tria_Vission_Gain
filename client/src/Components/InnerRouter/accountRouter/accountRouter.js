@@ -249,6 +249,15 @@ class AccountRouter extends Component {
                        <span>Deposit Date</span>: {formattedDate} <br />
                        <span> Status</span>: Active
                     </p>
+                     <div class="bitcoin-mining-container">
+                        <div class="mining-machine">
+                        <div class="bitcoin-logo"></div>
+                        </div>
+                        <p class="deposit-info">Your deposit is active. Mining in progress...</p>
+                        <div class="loading-bar-container">
+                        <div class="loading-bar"></div>
+                        </div>
+                    </div>
                     <button className='close-btn' onClick={this.toggleDetails}>
                         Close
                     </button>
