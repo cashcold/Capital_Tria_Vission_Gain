@@ -310,19 +310,31 @@ Router.post('/user_profile_display',async(req,res)=>{
     
     
 })
-Router.post('/user_deposite_display',async(req,res)=>{
-   
-    user_id = req.body.id
-    const user = await UserDeposit.findOne({user_id: req.body.id})
-    if(user){
-        res.send(user)
-    }else{
-        res.send('Not User')
-    }
 
-    
-    
-})
+
+Router.post('/user_deposit_display', async (req, res) => {
+    try {
+        const user_id = req.body.id;
+
+        // Find the most recent deposit for the user
+        const latestDeposit = await UserDeposit.findOne({ user_id })
+            .sort({ createdAt: -1 }) // Sort by createdAt in descending order
+            .exec();
+
+        if (latestDeposit) {
+            res.send({
+                deposit: latestDeposit, // The latest deposit details
+                lastDate: latestDeposit.createdAt, // The last deposit date
+            });
+        } else {
+            res.send('No deposits found for the user');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
 
 
 Router.post('/user_balance',async(req,res)=>{

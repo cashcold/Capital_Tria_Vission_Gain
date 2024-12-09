@@ -10,7 +10,7 @@ class AccountRouter extends Component {
         super(props);
         this.state = { 
             user_profile_display: '',
-            user_deposite_display: '',
+            user_deposit_display: '',
             full_Name: '',
             user_Name: '',
             ip_address: '',
@@ -69,8 +69,8 @@ class AccountRouter extends Component {
          axios.post('/users/user_profile_display',{id}).then(data => this.setState({
             user_profile_display: data.data
          }))
-         axios.post('/users/user_deposite_display',{id}).then(data => this.setState({
-            user_deposite_display: data.data
+         axios.post('/users/user_deposit_display',{id}).then(data => this.setState({
+            user_deposit_display: data.data.deposit
          }))
          axios.post('/users/depositInfo',{id}).then(data => this.setState({
             totalDeposit: data.data
@@ -190,7 +190,7 @@ class AccountRouter extends Component {
 
        const { showDetails, user_balance } = this.state;
 
-       const formattedDate = moment(this.state.user_deposite_display.createdAt).format('MMMM Do YYYY, h:mm:ss a'); 
+       const formattedDate = moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a'); 
 
         return ( 
             <div className='account__router'>
@@ -243,7 +243,7 @@ class AccountRouter extends Component {
                     <div className='card-content'>
                     <h2>Mining Plan Details</h2>
                     <p>
-                        <span>Plan </span>: {this.state.user_deposite_display.fixedDepositAmount} <br />
+                        <span>Plan </span>: {this.state.user_deposit_display.fixedDepositAmount} <br />
                         <span>Miner</span>: Premium Miner <br />
                        <span>Deposit Amount</span>: ${user_balance.activetDeposit}.00 <br />
                        <span>Deposit Date</span>: {formattedDate} <br />
