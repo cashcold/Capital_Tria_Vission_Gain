@@ -1,351 +1,151 @@
 import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode'
-import axios from 'axios'
-import {addDays,addMinutes} from "date-fns"
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
+import { addDays } from 'date-fns';
 import moment from 'moment';
-import './style.css'
+import './style.css';
 
 class AccountRouter extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            user_profile_display: '',
-            user_deposit_display: '',
-            full_Name: '',
-            user_Name: '',
-            ip_address: '',
-            bitcoin: '',
-            user_id: [],
-            email: '',
-            register_date: '',
-            accountBalance: '',
-            activetDeposit: '',
-            totalDeposit: [],
-            withdrawTotal: [],
-            user_balance: [],
-            totalDeposit_id: '',
-            login: '',
-            plan: '',
-            timestamp: '',
-            Refedate: '',
-            showDetails: false, // State for popout card visibility
-         }
+  constructor(props) {
+    super(props);
+    this.state = {
+      userProfile: null,
+      userDeposit: null,
+      userBalance: null,
+      activeDeposit: 0,
+      totalDeposits: 0,
+      withdrawals: 0,
+      timestamp: '',
+      showDetails: false, // Controls visibility of the details popout
+    };
+  }
 
-         this.handleChange = this.handleChange.bind(this)
-    }
-    handleChange = input => (event)=>{
-        this.setState({[input]: event.target.value})
+  componentDidMount() {
+
+    
+    const token = sessionStorage.getItem('x-access-token');
+    if (!token) {
+      // Handle missing token (e.g., redirect to login)
+      return;
     }
 
-    componentDidMount(){
-        // user_balance.activetDeposit
+    const decoded = jwt_decode(token);
+    sessionStorage.setItem('user_id', decoded.user_id);
+    sessionStorage.setItem('email', decoded.email);
 
-        
+    // Update state with user details
+    this.setState({
+    //   userBalance: decoded.accountBalance,
+      activeDeposit: decoded.activetDeposit,
+      timestamp: decoded.date,
+    });userProfile
 
-        const token = sessionStorage.getItem('x-access-token')
-        const decoded = jwt_decode(token)
-         JSON.stringify( sessionStorage.setItem('user_id',decoded.user_id))
-         JSON.stringify( sessionStorage.setItem('email',decoded.email))
-         JSON.stringify( sessionStorage.setItem('full_Name',decoded.full_Name))
-         JSON.stringify( sessionStorage.setItem('user_Name',decoded.user_Name))
-         JSON.stringify( sessionStorage.setItem('accountBalance',decoded.accountBalance))
-         JSON.stringify( sessionStorage.setItem('bitcoin',decoded.bitcoin))
-         JSON.stringify( sessionStorage.setItem(' register_date',decoded.date))
-         JSON.stringify( sessionStorage.setItem('ip_address',decoded.ip_address))
-        this.setState({
-            user_id: decoded.user_id,
-            full_Name: decoded.full_Name,
-            user_Name: decoded.user_Name,
-            email: decoded.email,
-            bitcoin: decoded.bitcoin,
-            accountBalance: decoded.accountBalance,
-            activetDeposit: decoded.activetDeposit,
-            ip_address: decoded.ip_address,
-            register_date: decoded.date
-         })
+    const userId = decoded.user_id;
 
-         const id = decoded.user_id
+    // Fetch user data
+    this.fetchUserData(userId);
 
-         axios.post('/users/user_profile_display',{id}).then(data => this.setState({
-            user_profile_display: data.data
-         }))
-         axios.post('/users/user_deposit_display',{id}).then(data => this.setState({
-            user_deposit_display: data.data.deposit
-         }))
-         axios.post('/users/depositInfo',{id}).then(data => this.setState({
-            totalDeposit: data.data
-         }))
-          axios.post('/users/withdrawInfo',{id}).then(data => this.setState({
-            withdrawTotal: data.data
-         }))
-          
-         axios.post('/users/user_balance',{id}).then(data => this.setState({
-           user_balance: data.data
-           
-        }))
-        // axios.post('/users/checkdate',{id}).then(data => console.log(data.lastDate))
-        axios.post('/users/checkdate',{id}).then(data => this.setState({
-            timestamp: data.data.map(user => user.lastDate)
-         }))
-         
+    console.log(this.state.userDeposit)
+  }
 
+  fetchUserData = async (userId) => {
+    try {
+      const [profileRes, depositRes, balanceRes, withdrawalRes] = await Promise.all([
+        axios.post('/users/user_profile_display', { id: userId }),
+        axios.post('/users/user_deposit_display', { id: userId }),
+        axios.post('/users/user_balance', { id: userId }),
+        axios.post('/users/withdrawInfo', { id: userId }),
+      ]);
+
+      this.setState({
+        userProfile: profileRes.data,
+        userDeposit: depositRes.data.deposit,
+        userBalance: balanceRes.data.activetDeposit,
+        totalDeposits: depositRes.data.totalDeposit,
+        withdrawals: withdrawalRes.data.total,
+      });
+    } catch (error) {
+      console.error('Error fetching user data:', error);
     }
-    
+  };
 
-    
-    toggleDetails = () => {
-        this.setState((prevState) => ({ showDetails: !prevState.showDetails }));
-      };
+  toggleDetails = () => {
+    this.setState((prevState) => ({ showDetails: !prevState.showDetails }));
+  };
 
+  calculateDepositStatus = () => {
+    const { activeDeposit, timestamp } = this.state;
+    const depositDate = new Date(timestamp);
+    const today = new Date();
 
-    render() { 
+    const depositThresholds = [
+      { amount: 59, duration: 1 },
+      { amount: 119, duration: 3 },
+      { amount: 199, duration: 5 },
+      { amount: Infinity, duration: 7 },
+    ];
 
+    for (const { amount, duration } of depositThresholds) {
+      if (activeDeposit <= amount && today > addDays(depositDate, duration)) {
+        return true;
+      }
+    }
+    return false;
+  };
 
+  render() {
 
-        console.log(this.state.user_profile_display.refferReward
-        )
+    console.log(this.state.userDeposit)
+    const { userBalance, activeDeposit, showDetails, userDeposit, totalDeposits } = this.state;
 
-        const showInvestButton = this.state.user_balance.activetDeposit === 0;
+    const formattedDate = userDeposit
+      ? moment(userDeposit.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+      : '';
 
-       
-
-      
-        sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit)
-        // JSON.stringify( sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit))
-
-    
-        
-    
-
-       const CreditDashboard = ()=>{
-       
-
-        const activetDeposit__amount = Number(this.state.user_balance.activetDeposit)
-        JSON.stringify( sessionStorage.setItem('activetDeposit__amount',activetDeposit__amount))
-        const date = new Date(`${this.state.timestamp}`);;
-
-        const today_date = new Date();
-        const date_24hrs = addDays(date,1)
-        const date_3days = addDays(date,3)
-        const date_5days = addDays(date,5)
-        const date_7days = addDays(date,7)
-
-            if(activetDeposit__amount){
-                if(activetDeposit__amount <= 59){
-                  if(today_date > date_24hrs){
-                      
-                        document.querySelector('.activetStatus').innerHTML = "$0.00"
-                        document.querySelector('.balanceMe').innerHTML = "$ "+activetDeposit__amount+".00"
-                        document.querySelector('.btn_balanceMe').style.display = 'block'
-                       
-                        
-                    
-                    }else{
-                    
-                    }
-                }
-            }
-            if(activetDeposit__amount){
-                if(activetDeposit__amount >= 60){
-                  if(today_date > date_3days){
-                        document.querySelector('.activetStatus').innerHTML = "$0.00"
-                        document.querySelector('.balanceMe').innerHTML = "$ "+activetDeposit__amount+".00"
-                        document.querySelector('.btn_balanceMe').style.display = 'block'
-                        
-                    
-                    }else{
-                    
-                    }
-                }
-            }
-            if(activetDeposit__amount){
-                if(activetDeposit__amount > 119){
-                  if(today_date > date_5days){
-                        document.querySelector('.activetStatus').innerHTML = "$0.00"
-                        document.querySelector('.balanceMe').innerHTML = "$ "+activetDeposit__amount+".00"
-                        document.querySelector('.btn_balanceMe').style.display = 'block'
-                    
-                    }else{
-                    
-                    }
-                }
-            }
-            if(activetDeposit__amount){
-                if(activetDeposit__amount > 199){
-                  if(today_date > date_7days){
-                        document.querySelector('.activetStatus').innerHTML = "$0.00"
-                        document.querySelector('.balanceMe').innerHTML = "$ "+activetDeposit__amount+".00"
-                        document.querySelector('.btn_balanceMe').style.display = 'block'
-                    
-                    }else{
-                    
-                    }
-                }
-            }
-       }
-       CreditDashboard()
-
-
-       const CheckDeposit = this.state.user_balance.activetDeposit
-
-       const { showDetails, user_balance } = this.state;
-
-       const formattedDate = moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a'); 
-
-        return ( 
-            <div className='account__router'>
-                {
-                    CheckDeposit === 0 && (
-                        <section className="div invest_ui_ux_btn">
-                        <div class="no-deposit-container">
-                        <div class="no-deposit-card">
-                            <div class="icon-wrapper">
-                            <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
-                            </div>
-                            <h1>No Active Deposits</h1>
-                            <p>
-                            You currently don't have any active deposits in your mining account.
-                            Start earning by making your first deposit today!
-                            </p>
-                            <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
-                        </div>
-                        </div>
-                    </section>
-
-                    )
-                }
-                {
-                    CheckDeposit > 0 && (
-                        <section className="miningCard">
-                        <div class="main-container">
-                            <div class="card">
-                                <div class="robot-head">
-                                <div class="eye left-eye"></div>
-                                <div class="eye right-eye"></div>
-                                <div class="antenna"></div>
-                                </div>
-                                <div class="info">
-                                <h1 class="title">Active Deposit</h1>
-                                <p class="amount">${this.state.user_balance.activetDeposit}.00</p>
-                                <p class="status">Status: <span class="status_active">Active</span></p>
-                                </div>
-                                <button class="view-details-btn" onClick={this.toggleDetails}>View Details</button>
-                            </div>
-                            </div>
-                        </section>
-
-                    )
-                }
-
-                {showDetails && (
-                    
-                <div className='popout-card'>
-                    <div className='card-content'>
-                    <h2>Mining Plan Details</h2>
-                    <p>
-                        <span>Plan </span>: {this.state.user_deposit_display.fixedDepositAmount} <br />
-                        <span>Miner</span>: Premium Miner <br />
-                       <span>Deposit Amount</span>: ${user_balance.activetDeposit}.00 <br />
-                       <span>Deposit Date</span>: {formattedDate} <br />
-                       <span> Status</span>: Active
-                    </p>
-                     <div class="bitcoin-mining-container">
-                        <div class="mining-machine">
-                        <div class="bitcoin-logo"></div>
-                        </div>
-                        <p class="deposit-info">Your deposit is active. Mining in progress...</p>
-                        <div class="loading-bar-container">
-                        <div class="loading-bar"></div>
-                        </div>
-                    </div>
-                    <button className='close-btn' onClick={this.toggleDetails}>
-                        Close
-                    </button>
-                    </div>
-                </div>
-                )}
-
-                <section className='dashboard__section_box__3'>
-                    <div className="dash__box__1">
-                        <i class="fas fa-coins fa-3x"></i>
-                        <div className="dashText"> 
-                            <h5>TOTAL INVESTMENT</h5>
-                            <h5> $ {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
-                        </div>
-                        {showInvestButton && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>}
-                    
-                    </div>
-                    <div className="dash__box__1">
-                        <i class="fas fa-comments-dollar fa-3x"></i>
-                        <div className="dashText">
-                            <h5>ACCOUNT BALANCE</h5>
-                            <h5 className='balanceMe'> $ {this.state.accountBalance}.00</h5>
-                        </div>
-                      <a className='btn_balanceMe'  href={`/dashboard/withdraw/${this.state.user_id}`}>  <h2 >WITHDRAW</h2></a>
-                    </div>
-                </section>
-                <section className='welcome__user'>
-                    <div className="welcomeText">
-                        <h4>Welcome {this.state.user_Name}!</h4>
-                        <h4>IP Address : {this.state.ip_address}</h4>
-                    </div>
-                </section>
-                <section className='progress_bar'>
-                    
-                </section>
-                <section className='about__all'>
-                    <div className="all__about_-box__1">
-                        <h3>DEPOSIT HISTORY</h3>
-                        <div className="all__box">
-                            <p>Active Deposit :</p>
-                            <p className='activetStatus'>$ {this.state.user_balance.activetDeposit}.00</p>
-                        </div>
-                        <div className="all__box">
-                            <p>Total Deposit :</p>
-                            <p>$ {this.state.totalDeposit.map(user => user.depositAmount)}.00</p>
-                        </div>
-                        <div className="all__box">
-                            <p>Last Deposit :</p>
-                            <p>$ {this.state.totalDeposit.map(user => user.depositAmountlast)}.00</p>
-                        </div>
-                    </div>
-                    <div className="all__about_-box__1">
-                        <h3>WITHDRAW HISTORY</h3>
-                        <div className="all__box">
-                            <p>Pending Withdraw :</p>
-                            <p>$0.00</p>
-                        </div>
-                        <div className="all__box">
-                            <p>Total Withdraw :</p>
-                            <p>$ {this.state.withdrawTotal.map(user => user.WithdrawAmount)}.00</p>
-                        </div>
-                        <div className="all__box">
-                            <p>Last Withdraw :</p>   
-                            <p>$ {this.state.withdrawTotal.map(user => user.WithdrawAmountlast)}.00</p>
-                        </div>
-                    </div>
-                </section>
-                <section className='reffer__link'>
-                    <div className="refferNow">
-                        <div className="reff__box_1">
-                             <i class="fas fa-users fa-10x"></i>
-                        </div>
-                        <div className="reff__box_2">
-                            <h2>Personal <span>Referral</span> Link:</h2>
-                            <p className='reffLink'>https://capitalgain/?ref={this.state.user_Name}</p>
-                            <p className='btn btn-warning btn-referral'> Your Referral Reward: <span>${this.state.user_profile_display.refferReward}.00</span><br/>
-                            {this.state.user_profile_display.refferReward > 2 ? (
-                            <button className="btn-referral-cashout" onClick={()=>{
-                                window.location =`/withdraw-refferReward`
-                            }} >Cashout</button>
-                            ) : null}
-                             </p>
-                        </div>
-                    </div>
-                </section>
+    return (
+      <div className="account-router">
+        {activeDeposit === 0 ? (
+          <section className="invest-ui">
+            <div className="no-deposit-card">
+              <h1>No Active Deposits</h1>
+              <p>You currently don't have any active deposits. Start earning by making your first deposit today!</p>
+              <a href="/dashboard/deposit" className="deposit-button">
+                Make a Deposit
+              </a>
             </div>
-         );
-    }
+          </section>
+        ) : (
+          <section className="active-deposit-card">
+            <h1>Active Deposit new: ${activeDeposit}.00</h1>
+            <button onClick={this.toggleDetails}>View Details</button>
+          </section>
+        )}
+
+        {showDetails && userDeposit && (
+          <div className="popout-card">
+            <h2>Mining Plan Details</h2>
+            <p>Plan: {userDeposit.fixedDepositAmount}</p>
+            <p>Miner: Premium Miner</p>
+            <p>Deposit Amount: ${activeDeposit}.00</p>
+            <p>Deposit Date: {formattedDate}</p>
+            <p>Status: Active</p>
+            <button onClick={this.toggleDetails}>Close</button>
+          </div>
+        )}
+
+        <section className="dashboard-section">
+          <div className="dashboard-box">
+            <h5>Total Investment</h5>
+            <h5>${totalDeposits}.00</h5>
+          </div>
+          <div className="dashboard-box">
+            <h5>Account Balance</h5>
+            <h5>${userBalance}.00</h5>
+          </div>
+        </section>
+      </div>
+    );
+  }
 }
- 
+
 export default AccountRouter;

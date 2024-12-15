@@ -19,7 +19,11 @@ const io = require('socket.io')(server, {
 dotEnv.config() 
 
 
-mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true },()=>{
+mongoose.connect(process.env.MONGODB_URI,
+    { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 30000, },()=>{
     console.log('DataBase Connented Successful')
 })
 const PORT = process.env.PORT || 8000

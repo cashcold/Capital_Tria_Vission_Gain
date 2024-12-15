@@ -37,34 +37,42 @@ class Login extends Component {
         }
     }
     
-    onSubmit = (event)=>{
-
+    onSubmit = (event) => {
         const userLogin = {
             user_Name: this.state.user_Name,
             password: this.state.password
-        }
-        if(!userLogin.user_Name){
-            toast.warning('Enter User Name ')
+        };
+        if (!userLogin.user_Name) {
+            toast.warning('Enter User Name');
             return false;
         }
-        if(!userLogin.password){
-            toast.warning('Enter Password')
-             return false;
+        if (!userLogin.password) {
+            toast.warning('Enter Password');
+            return false;
         }
-        event.preventDefault()
-        axios.post( "/users/login",userLogin).then(res => { 
-            sessionStorage.setItem('x-access-token',JSON.stringify(res.data))
-            return res.data;
-        }).then(res => {toast.success("Login Successful !", setTimeout(()=>{
-            toast.success("LOADING ACCOUNT") 
-        },4000),{
-            
-            });}).then(res => window.location="/dashboard" ).catch(err => {toast.error(err.response.data, {
-            position: toast.POSITION.TOP_RIGHT
-         });
-        });
-        
-    }
+        event.preventDefault();
+        axios.post("http://localhost:8000/users/login", userLogin)
+            .then(res => {
+                sessionStorage.setItem('x-access-token', JSON.stringify(res.data));
+                return res.data;
+            })
+            .then(() => {
+                toast.success("Login Successful!");
+                setTimeout(() => {
+                    toast.success("LOADING ACCOUNT");
+                }, 4000);
+            })
+            .then(() => {
+                window.location = "/dashboard";
+            })
+            .catch(err => {
+                const errorMessage = err.response?.data || "An unexpected error occurred.";
+                toast.error(errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+            });
+    };
+    
     componentDidMount(){
         
     }
