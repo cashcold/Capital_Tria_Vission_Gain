@@ -24,33 +24,96 @@ import FAQSETUP from './Components/FAQ/faqsSetup';
 import WatchNotificationMain from './Components/WatchNotifcation/watchNotification';
 import WithdrawRefferReward from './Components/WithdrawRefferReward/WithdrawRefferReward';
 
+import axios from 'axios';
+
 class MainApp extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            url: ''
-         }
+        this.state = {
+            url: '',
+            isDateTimeValid: true,
+            errorMessage: '',
+            showSettingsLink: false
+        };
     }
-    componentDidMount(){
-      
-        const RefreshToken = sessionStorage.getItem('RefreshToken')
-        if(RefreshToken){
-            sessionStorage.removeItem('x-access-token')
-            sessionStorage.setItem('x-access-token',RefreshToken)
+
+    componentDidMount() {
+        this.validateDateTime();
+
+        const RefreshToken = sessionStorage.getItem('RefreshToken');
+        if (RefreshToken) {
+            sessionStorage.removeItem('x-access-token');
+            sessionStorage.setItem('x-access-token', RefreshToken);
         }
-       
-    } 
-    render() { 
-        return ( 
+    }
+
+    validateDateTime = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/users/api/server-time');
+            const serverTime = new Date(response.data.serverTime);
+            const clientTime = new Date();
+
+            const timeDifference = Math.abs(serverTime - clientTime) / 1000; // in seconds
+            const allowedDifference = 300; // 5 minutes
+
+            if (timeDifference > allowedDifference) {
+                this.setState({
+                    isDateTimeValid: false,
+                    errorMessage: `Access Denied: Your system date and time are incorrect. Please adjust them to access the website.`,
+                    showSettingsLink: true
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching server time:', error);
+            this.setState({
+                isDateTimeValid: false,
+                errorMessage: `
+                    Access Denied: Your system date and time appear to be incorrect. 
+                    To use this website, please update your device's date and time settings to the correct values. 
+                    Once updated, refresh the page to continue.
+
+                    On most devices, you can find the date and time settings under "System Settings" or "Control Panel." 
+                    For convenience, you can click the button below to view instructions on how to update your device's date and time.
+
+                    Thank you for your understanding and cooperation!
+                `,
+                showSettingsLink: true
+            });
+        }
+    };
+
+    render() {
+        const { isDateTimeValid, errorMessage, showSettingsLink } = this.state;
+
+        if (!isDateTimeValid) {
+            return (
+                <div style={{ textAlign: 'center', marginTop: '50px', color: 'red' }}>
+                    <h1>Access Denied</h1>
+                    <p>{errorMessage}</p>
+                    {showSettingsLink && (
+                        <a
+                            href="https://www.timeanddate.com/time/settime.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: 'none', color: '#007BFF', marginTop: '10px', display: 'inline-block' }}
+                        >
+                            Click here for instructions to set your date and time
+                        </a>
+                    )}
+                </div>
+            );
+        }
+
+        return (
             <Router>
                 <div className='mainApp animate__animated animate__zoomIn animate__slowerss'>
-                <div  className='google__id' id="google_translate_element"></div>
+                    <div className='google__id' id="google_translate_element"></div>
                     <div className='container_!'>
-                        <Other__NavBar/>
-                        <Navbar/>
+                        <Other__NavBar />
+                        <Navbar />
                         <div className='router'>
-                           <Switch>
-                              <Route path='/' exact component={Home}/> 
+                            <Switch>
+                            <Route path='/' exact component={Home}/> 
                               <Route path='/about-us' exact component={AboutMain}/> 
                               <Route path='/faq' exact component={FAQSMAIN}/> 
                               <Route path='/faqs' exact component={FAQSETUP}/> 
@@ -65,14 +128,14 @@ class MainApp extends Component {
                               <Route path='/forgotpassword' exact component={ForgotPassword}/> 
                               <Route path='/activitPassword/:token' exact component={ActivitPassword}/> 
                               <Route path='/user_admin_watch_notification' exact component={WatchNotificationMain}/> 
-                          </Switch>
+                            </Switch>
                         </div>
-                       <FooterMain/>
+                        <FooterMain />
                     </div>
                 </div>
             </Router>
-         );
+        );
     }
 }
- 
+
 export default MainApp;
