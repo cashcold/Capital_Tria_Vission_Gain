@@ -57,7 +57,6 @@ io.on('connection', socket => {
 
    
   });
-  
 app.use('/users',userRouter)
 
 

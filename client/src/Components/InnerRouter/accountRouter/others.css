@@ -1,0 +1,708 @@
+.account__router{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 8em 0;
+    background-position: 20%;
+    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
+                  url("../../../images/digital-world-map-hologram-blue-background.jpg");
+                  min-height: 100vh;
+}
+
+.btn_balanceMe{
+    display: none;
+}
+
+
+/* Base Styles */
+.div.invest_ui_ux_btn {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    /* background: #121212;  */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Container and Card */
+  .div.invest_ui_ux_btn .no-deposit-container {
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .div.invest_ui_ux_btn .no-deposit-card {
+    background: linear-gradient(135deg, #1e1e2f, #27293d);
+    border-radius: 15px;
+    padding: 40px 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid #2a2b3c;
+    animation: bounce 2s infinite;
+    transform-origin: center;
+  }
+  
+  /* Icon Animation */
+  .div.invest_ui_ux_btn .icon-wrapper {
+    animation: spin 3s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .div.invest_ui_ux_btn .no-deposit-icon {
+    width: 100px;
+    height: auto;
+  }
+  
+  /* Headings */
+  .div.invest_ui_ux_btn h1 {
+    font-size: 1.8rem;
+    margin: 0 0 15px;
+    color: #00d4ff;
+    animation: fadeSlide 2s ease-out;
+  }
+  
+  /* Paragraph */
+  .div.invest_ui_ux_btn p {
+    font-size: 1rem;
+    margin: 0 0 20px;
+    color: #c3c3c3;
+    animation: fadeSlide 2s ease-out;
+  }
+  
+  /* Button */
+  .div.invest_ui_ux_btn .deposit-button {
+    background: #00d4ff;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    animation: pulse 1.5s infinite;
+  }
+  
+  .div.invest_ui_ux_btn .deposit-button:hover {
+    background: #007fa6;
+    color: #ffffff;
+    transform: scale(1.1);
+  }
+  
+/* General Body Styling */
+.dashboard_CheckDeposit {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Dashboard Container */
+.dashboard_CheckDeposit {
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Header Section */
+.header .title {
+  font-size: 2rem;
+  animation: title-fade 2s infinite alternate;
+}
+
+/* Active Deposit Section */
+.active-deposit {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 15px;
+  background: linear-gradient(45deg, #ff6b6b, #fbc531, #6a89cc, #78e08f);
+  background-size: 400%;
+  animation: gradient-rotation 6s linear infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.deposit-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.status-icon {
+  font-size: 2rem;
+  animation: icon-spin 3s linear infinite;
+}
+
+.status-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes gradient-rotation {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+@keyframes icon-spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes title-fade {
+  from {
+      opacity: 0.6;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.main-container {
+  perspective: 800px;
+  padding: 20px; /* Ensure spacing on smaller screens */
+}
+
+/* .card {
+  width: 300px;
+  max-width: 90%; 
+  padding: 20px;
+  background: linear-gradient(145deg, #111, #333);
+  border-radius: 15px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8), inset 0px 0px 15px #00ffcc;
+  transform: translateY(0);
+  animation: card-move 3s infinite ease-in-out;
+  transition: transform 0.3s ease-in-out;
+} */
+.card {
+  width: 300px;
+  max-width: 90%; /* Adjust width for smaller screens */
+  padding: 20px;
+  background: linear-gradient(145deg, #111, #333);
+  border-radius: 15px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8), inset 0px 0px 15px #00ffcc;
+  transform: translateY(0);
+  animation: card-move 3s infinite ease-in-out, box-shadow-rotate 5s infinite linear;
+  transition: transform 0.3s ease-in-out;
+}
+
+@keyframes box-shadow-rotate {
+  0% {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8), inset 0px 0px 15px #00ffcc;
+  }
+  25% {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8), inset 0px 0px 15px #ff0055;
+  }
+  50% {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8), inset 0px 0px 15px #ffcc00;
+  }
+  75% {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8), inset 0px 0px 15px #00a3ff;
+  }
+  100% {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8), inset 0px 0px 15px #00ffcc;
+  }
+}
+
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.robot-head {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  background: linear-gradient(145deg, #222, #444);
+  border: 3px solid #00ffcc;
+  border-radius: 50%;
+  box-shadow: 0px 10px 20px rgba(0, 255, 255, 0.5), inset 0px 0px 15px #111;
+}
+
+.robot-head::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 30px;
+  background: #00ffcc;
+  border-radius: 10px;
+  animation: antenna-blink 1s infinite alternate;
+}
+
+.eye {
+  position: absolute;
+  top: 30%;
+  width: 20px;
+  height: 20px;
+  background: #ff0055;
+  border-radius: 50%;
+  animation: eye-glow 1.5s infinite alternate;
+}
+
+.left-eye {
+  left: 25%;
+}
+
+.right-eye {
+  right: 25%;
+}
+
+.info {
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #00ffcc;
+  text-shadow: 0px 0px 5px #00ffcc;
+}
+
+.amount {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: #ff0055;
+  text-shadow: 0px 0px 5px #ff0055;
+}
+
+.status {
+  font-size: 1rem;
+  color: #888;
+}
+
+.view-details-btn {
+  padding: 10px 20px;
+  background: linear-gradient(145deg, #00ffcc, #00a3ff);
+  color: #000;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  box-shadow: 0px 5px 15px rgba(0, 255, 255, 0.4);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.view-details-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(145deg, #00a3ff, #00ffcc);
+}
+
+.eye {
+  position: absolute;
+  top: 30%;
+  width: 20px;
+  height: 20px;
+  background: #ff0055;
+  border-radius: 50%;
+  animation: eye-glow 1.5s infinite alternate, eye-blink 5s infinite;
+}
+
+.left-eye {
+  left: 25%;
+}
+
+.right-eye {
+  right: 25%;
+}
+
+/* Keyframe for blinking */
+@keyframes eye-blink {
+  0%, 90% {
+    transform: scaleY(1); /* Normal open state */
+  }
+  92%, 98% {
+    transform: scaleY(0.1); /* Blink (close state) */
+  }
+  100% {
+    transform: scaleY(1); /* Return to open state */
+  }
+}
+
+.status_active{
+  color: green;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+
+
+.account__router .popout-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 400px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease-out;
+  z-index: 1000;
+}
+
+.account__router .card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.account__router .card-content h2 {
+  margin-bottom: 10px;
+  color: #0dd535;
+}
+
+.account__router .card-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.account__router .card-content p  span{
+  color: #0dd535;
+}
+
+.account__router .close-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #f44336;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.account__router .close-btn:hover {
+  background: #d32f2f;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.bitcoin-mining-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5em 0em;
+  padding: 0 20px; /* Adds some padding for smaller screens */
+}
+
+.mining-machine {
+  position: relative;
+  width: 80px; /* Smaller size for mobile view */
+  height: 80px;
+  margin-bottom: 20px;
+  border: 4px solid #f7931a;
+  border-radius: 50%;
+  animation: rotate 2s linear infinite;
+}
+
+.bitcoin-logo {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f7931a;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 3px #f7931a;
+}
+
+.bitcoin-logo::before {
+  content: "₿";
+  position: absolute;
+  font-size: 1.5rem; /* Adjusted for smaller viewports */
+  color: #fff;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.deposit-info {
+  font-size: 1rem; /* Adjusted for smaller viewports */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 3D Loading Bar */
+.loading-bar-container {
+  position: relative;
+  width: 90%; /* Use percentage for responsiveness */
+  max-width: 300px; /* Limit the width on larger screens */
+  height: 15px; /* Adjusted height for smaller viewports */
+  background: linear-gradient(145deg, #1c1c1c, #383838);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 2px 2px 5px #000, inset -2px -2px 5px #383838;
+}
+
+.loading-bar {
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f7931a, #ffc107, #f7931a);
+  box-shadow: 0 0 10px #f7931a;
+  animation: load 3s infinite;
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+
+
+
+
+
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .div.invest_ui_ux_btn {
+      flex-direction: column;
+      height: auto;
+      padding: 20px;
+    }
+  
+    .div.invest_ui_ux_btn .no-deposit-card {
+      padding: 20px;
+      width: 100%;
+      max-width: 98%;
+    }
+  
+    .div.invest_ui_ux_btn .no-deposit-icon {
+      width: 80px;
+    }
+  
+    .div.invest_ui_ux_btn h1 {
+      font-size: 1.5rem;
+    }
+  
+    .div.invest_ui_ux_btn p {
+      font-size: 0.9rem;
+    }
+  
+    .div.invest_ui_ux_btn .deposit-button {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+    }
+
+    .card {
+      padding: 15px;
+      width: 100%;
+      max-width: 300%; /* Use more width on smaller devices */
+    }
+    
+    
+  
+    .robot-head {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .title {
+      font-size: 1.2rem;
+    }
+  
+    .amount {
+      font-size: 1rem;
+    }
+  
+    .view-details-btn {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+
+    .mining-machine {
+      width: 70px;
+      height: 70px;
+    }
+  
+    .bitcoin-logo::before {
+      font-size: 1.2rem;
+    }
+  
+    .deposit-info {
+      font-size: 0.9rem;
+    }
+  
+    .loading-bar-container {
+      height: 12px;
+    }
+  }
+  
+  @keyframes antenna-blink {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes eye-glow {
+    0% {
+      box-shadow: 0px 0px 10px rgba(255, 0, 85, 0.5);
+    }
+    100% {
+      box-shadow: 0px 0px 20px rgba(255, 0, 85, 0.8);
+    }
+  }
+  
+  @keyframes card-move {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+
+  .miningCard{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    /* background: linear-gradient(135deg, #0d0d0d, #1a1a1a); */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+
+  @media screen and (max-width: 768px){
+    .div.invest_ui_ux_btn .no-deposit-card {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .div.invest_ui_ux_btn h1 {
+    font-size: 1.2rem;
+  }
+
+  .div.invest_ui_ux_btn p {
+    font-size: 0.8rem;
+  }
+
+  .div.invest_ui_ux_btn .deposit-button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #00d4ff;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00d4ff;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #00d4ff;
+  }
+}
+  
