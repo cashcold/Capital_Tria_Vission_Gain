@@ -88,7 +88,7 @@ class MainApp extends Component {
             Please update your device's date and time settings to the correct values.
             Once updated, refresh the page to continue.
     
-            Thank you for your understanding and cooperation!
+            Thank you for your understanding and cooperation...!
           `,
           showSettingsLink: true,
         });
