@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css'
+import moment from 'moment';
 import {BrowserRouter as Router, Switch, Route, useParams, useRouteMatch} from 'react-router-dom'
 import Navbar from './Components/Navbar/navbar';
 import './App.css'
@@ -24,6 +25,7 @@ import FAQSETUP from './Components/FAQ/faqsSetup';
 import WatchNotificationMain from './Components/WatchNotifcation/watchNotification';
 import WithdrawRefferReward from './Components/WithdrawRefferReward/WithdrawRefferReward';
 
+
 import axios from 'axios';
 
 class MainApp extends Component {
@@ -46,41 +48,55 @@ class MainApp extends Component {
             sessionStorage.setItem('x-access-token', RefreshToken);
         }
     }
-
+    
     validateDateTime = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/users/api/server-time');
-            const serverTime = new Date(response.data.serverTime);
-            const clientTime = new Date();
-
-            const timeDifference = Math.abs(serverTime - clientTime) / 1000; // in seconds
-            const allowedDifference = 300; // 5 minutes
-
-            if (timeDifference > allowedDifference) {
-                this.setState({
-                    isDateTimeValid: false,
-                    errorMessage: `Access Denied: Your system date and time are incorrect. Please adjust them to access the website.`,
-                    showSettingsLink: true
-                });
-            }
-        } catch (error) {
-            console.error('Error fetching server time:', error);
-            this.setState({
-                isDateTimeValid: false,
-                errorMessage: `
-                    Access Denied: Your system date and time appear to be incorrect. 
-                    To use this website, please update your device's date and time settings to the correct values. 
-                    Once updated, refresh the page to continue.
-
-                    On most devices, you can find the date and time settings under "System Settings" or "Control Panel." 
-                    For convenience, you can click the button below to view instructions on how to update your device's date and time.
-
-                    Thank you for your understanding and cooperation!
-                `,
-                showSettingsLink: true
-            });
+      try {
+        // Fetch server time
+        const response = await axios.get('http://localhost:8000/users/api/server-time');
+        
+        // Convert server time string to Date object
+        const serverTimeString = response.data.serverTime;
+        const serverTime = new Date(serverTimeString.replace(' ', 'T') + 'Z'); // Add 'Z' to mark it as UTC time
+    
+        // Get client time in Ghana local time (UTC+0)
+        const clientTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Accra' }));
+    
+        // Calculate time difference in seconds
+        const timeDifference = Math.abs(serverTime - clientTime) / 1000;
+        const allowedDifference = 300; // 5 minutes
+    
+        // Validate time difference
+        if (timeDifference > allowedDifference) {
+          this.setState({
+            isDateTimeValid: false,
+            errorMessage: 'Your system date and time are incorrect. Please adjust them to access the website.',
+            showSettingsLink: true,
+          });
+        } else {
+          this.setState({
+            isDateTimeValid: true,
+            errorMessage: '',
+            showSettingsLink: false,
+          });
         }
+      } catch (error) {
+        console.error('Error fetching server time:', error);
+        this.setState({
+          isDateTimeValid: false,
+          errorMessage: `
+            Access Denied: Your system date and time appear to be incorrect.
+            Please update your device's date and time settings to the correct values.
+            Once updated, refresh the page to continue.
+    
+            Thank you for your understanding and cooperation!
+          `,
+          showSettingsLink: true,
+        });
+      }
     };
+    
+    
+    
 
     render() {
         const { isDateTimeValid, errorMessage, showSettingsLink } = this.state;

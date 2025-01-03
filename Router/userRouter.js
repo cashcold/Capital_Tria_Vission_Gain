@@ -301,6 +301,17 @@ Router.post('/checkdate',async(req,res)=>{
     
 })
 
+Router.get('/api/server-time', (req, res) => {
+    const moment = require('moment-timezone');
+
+    // Get server time in Ghana's time zone (Africa/Accra)
+    const serverTime = moment.tz('Africa/Accra').format('YYYY-MM-DD HH:mm:ss');
+
+    console.log(`Server time: ${serverTime}`);
+    res.json({ serverTime });
+});
+
+  
 Router.post('/user_profile_display',async(req,res)=>{
    
     user_id = req.body.id
@@ -314,6 +325,9 @@ Router.post('/user_profile_display',async(req,res)=>{
     
     
 })
+
+
+
 
 
 Router.post('/user_deposit_display', async (req, res) => {
