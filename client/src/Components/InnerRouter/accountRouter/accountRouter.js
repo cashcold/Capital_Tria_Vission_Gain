@@ -183,7 +183,7 @@ class AccountRouter extends Component {
             }
             // if(activetDeposit__amount){
             //     if(activetDeposit__amount > 199){
-            //       if(today_date > date_7days && this.state.showDetails !== false){
+            //       if(today_date > date_7days){
             //             document.querySelector('.activetStatus').innerHTML = "$0.00"
             //             document.querySelector('.balanceMe').innerHTML = "$ "+activetDeposit__amount+".00"
             //             document.querySelector('.btn_balanceMe').style.display = 'block'

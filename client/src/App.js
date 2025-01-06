@@ -33,92 +33,100 @@ class MainApp extends Component {
         super(props);
         this.state = {
             url: '',
-            isDateTimeValid: true,
-            errorMessage: '',
-            showSettingsLink: false
+            liveTime: null,
+            timeMismatch: null,
+            loading: true, // Added a loading state to control rendering
         };
     }
 
-    componentDidMount() {
-        this.validateDateTime();
+    
+    
+    async componentDidMount() {
+        console.log('componentDidMount is called');
 
         const RefreshToken = sessionStorage.getItem('RefreshToken');
         if (RefreshToken) {
             sessionStorage.removeItem('x-access-token');
             sessionStorage.setItem('x-access-token', RefreshToken);
         }
+
+
+        try {
+            const response = await axios.get('https://api.timezonedb.com/v2.1/get-time-zone', {
+                params: {
+                    key: 'AV9V19IQBEX1',
+                    format: 'json',
+                    by: 'zone',
+                    zone: 'Africa/Accra', // Use the correct timezone for Accra, Ghana
+                },
+            });
+        
+            if (response.data.status === 'FAILED') {
+                throw new Error(response.data.message || 'Failed to fetch time data');
+            }
+        
+            const liveTime = new Date(response.data.formatted);
+            this.compareTime(liveTime);
+        } catch (error) {
+            console.error('Error fetching live time:', error.message);
+            this.compareTime(new Date()); // Fallback to local system time
+        }
+        
+          
+          
     }
     
-    validateDateTime = async () => {
-      try {
-        // Fetch server time
-        const response = await axios.get('http://localhost:8000/users/api/server-time');
+
+    compareTime(liveTime) {
+        // Convert both times to UTC for accurate comparison
+        const userTime = moment.utc(); // Use moment.utc() directly for current time
+        const liveMoment = moment.utc(liveTime); // Use moment.utc() to parse the liveTime
+
         
-        // Convert server time string to Date object
-        const serverTimeString = response.data.serverTime;
-        const serverTime = new Date(serverTimeString.replace(' ', 'T') + 'Z'); // Add 'Z' to mark it as UTC time
     
-        // Get client time in Ghana local time (UTC+0)
-        const clientTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Accra' }));
+        // Calculate the time difference in minutes
+        const timeDifference = Math.abs(liveMoment.diff(userTime, 'minutes'));
     
-        // Calculate time difference in seconds
-        const timeDifference = Math.abs(serverTime - clientTime) / 1000;
-        const allowedDifference = 300; // 5 minutes
-    
-        // Validate time difference
-        if (timeDifference > allowedDifference) {
-          this.setState({
-            isDateTimeValid: false,
-            errorMessage: 'Your system date and time are incorrect. Please adjust them to access the website.',
-            showSettingsLink: true,
-          });
-        } else {
-          this.setState({
-            isDateTimeValid: true,
-            errorMessage: '',
-            showSettingsLink: false,
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching server time:', error);
+        // Update the state and clear session if there's a time mismatch
         this.setState({
-          isDateTimeValid: false,
-          errorMessage: `
-            Access Denied: Your system date and time appear to be incorrect.
-            Please update your device's date and time settings to the correct values.
-            Once updated, refresh the page to continue.
-    
-            Thank you for your understanding and cooperation...!
-          `,
-          showSettingsLink: true,
+            timeMismatch: timeDifference > 5,
+            loading: false,
         });
-      }
-    };
+    
+        if (timeDifference > 5) {
+            sessionStorage.clear();
+        }
+    }
+    
+    
+    
+
     
     
     
 
     render() {
-        const { isDateTimeValid, errorMessage, showSettingsLink } = this.state;
+        
+    // Show a loading screen while checking time
+    if (this.state.loading) {
+        return (
+          <div className="loading-screen">
+            <h2>Checking Time...</h2>
+          </div>
+        );
+      }
+  
+      // Block access if time mismatch
+      if (this.state.timeMismatch) {
+        return (
+          <div className="time-error">
+            <h2>Time Error</h2>
+            <p>Your device time is more than 5 minutes off. Please adjust your system time to access this website.</p>
+          </div>
+        );
+      }
+  
 
-        if (!isDateTimeValid) {
-            return (
-                <div style={{ textAlign: 'center', marginTop: '50px', color: 'red' }}>
-                    <h1>Access Denied</h1>
-                    <p>{errorMessage}</p>
-                    {showSettingsLink && (
-                        <a
-                            href="https://www.timeanddate.com/time/settime.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ textDecoration: 'none', color: '#007BFF', marginTop: '10px', display: 'inline-block' }}
-                        >
-                            Click here for instructions to set your date and time
-                        </a>
-                    )}
-                </div>
-            );
-        }
 
         return (
             <Router>
