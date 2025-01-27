@@ -37,10 +37,32 @@ class AccountRouter extends Component {
         this.setState({[input]: event.target.value})
     }
 
-    componentDidMount(){
-        // user_balance.activetDeposit
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.user_balance.activetDeposit !== this.state.user_balance.activetDeposit) {
+          if (this.state.user_balance.activetDeposit > 0) {
+            console.log("Deposit Amount updated to:", this.state.user_balance.activetDeposit);
+            this.setState({ showDetails: true });
+          } else {
+            this.setState({ showDetails: false });
+          }
+        }
+      }
+      
 
-        
+    componentDidMount(){
+    //     const { user_balance } = this.state;
+    //  // Log the value of user_balance.activetDeposit for debugging
+    // console.log("Deposit Amount:", user_balance?.activetDeposit);
+
+    // // Check if user_balance.activetDeposit exists and is greater than 0
+    // if (user_balance && user_balance.activetDeposit > 0) {
+    //     console.log("Auto-opening popup as Deposit Amount is greater than 0.");
+    //     this.setState({ showDetails: true });
+    // } else {
+    //     console.log("Popup will remain closed as Deposit Amount is 0 or undefined.");
+    //     this.setState({ showDetails: false });
+    // }
+
 
         const token = sessionStorage.getItem('x-access-token')
         const decoded = jwt_decode(token)
@@ -102,8 +124,8 @@ class AccountRouter extends Component {
 
 
 
-        console.log(this.state.user_profile_display.refferReward
-        )
+        // console.log(this.state.user_profile_display.refferReward
+        // )
 
         const showInvestButton = this.state.user_balance.activetDeposit === 0;
 
