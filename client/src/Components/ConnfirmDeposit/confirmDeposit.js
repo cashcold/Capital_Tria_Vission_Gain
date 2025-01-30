@@ -75,7 +75,7 @@ class ConfirmDeposit extends Component {
 
         const CalculatorEngine = ()=>{
         if( depositAmountCheck <= 59){
-           const Percentage = depositAmountCheck * 9.5/100
+           const Percentage = depositAmountCheck * 10/100
             const checkPercent = Percentage
 
             document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent
