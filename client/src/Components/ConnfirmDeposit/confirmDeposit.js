@@ -30,111 +30,78 @@ class ConfirmDeposit extends Component {
        
     }
 
-    componentDidMount(){
-        
-        
-
-
-        const depositAmountCheck = sessionStorage.getItem('depositAmount')
-        if(Number(depositAmountCheck) <= 59){
-          const uCheck =   document.querySelector('.planNow').innerHTML = "24 HOURS"
-          setTimeout(()=>{
-              this.setState({
-              fixedDepositAmount: uCheck
-          })
-          },900)
+    componentDidMount() {
+        const depositAmountCheck = Number(sessionStorage.getItem('depositAmount')) || 0;
+    
+        if (depositAmountCheck <= 59) {
+            const uCheck = document.querySelector('.planNow').innerHTML = "24 HOURS";
+            setTimeout(() => {
+                this.setState({ fixedDepositAmount: uCheck });
+            }, 900);
+        } else if (depositAmountCheck >= 60 && depositAmountCheck <= 119) {
+            const uCheck = document.querySelector('.planNow').innerHTML = "3 DAYS";
+            setTimeout(() => {
+                this.setState({ fixedDepositAmount: uCheck });
+            }, 900);
+        } else if (depositAmountCheck >= 120 && depositAmountCheck <= 199) {
+            const uCheck = document.querySelector('.planNow').innerHTML = "5 DAYS";
+            setTimeout(() => {
+                this.setState({ fixedDepositAmount: uCheck });
+            }, 900);
+        } else if (depositAmountCheck >= 200) {
+            const uCheck = document.querySelector('.planNow').innerHTML = "7 DAYS";
+            setTimeout(() => {
+                this.setState({ fixedDepositAmount: uCheck });
+            }, 900);
         }
-        if(Number(depositAmountCheck) >= 60){
-            const uCheck =   document.querySelector('.planNow').innerHTML = "3 DAYS"
-            setTimeout(()=>{
-                this.setState({
-                fixedDepositAmount: uCheck
-            })
-            },900)
-        }
-        if(Number(depositAmountCheck) > 119){
-            const uCheck =   document.querySelector('.planNow').innerHTML = "5 DAYS"
-            setTimeout(()=>{
-                this.setState({
-                fixedDepositAmount: uCheck
-            })
-            },900)
-        }
-        if(Number(depositAmountCheck) > 199){
-            const uCheck =   document.querySelector('.planNow').innerHTML = "7 DAYS"
-            setTimeout(()=>{
-                this.setState({
-                fixedDepositAmount: uCheck
-            })
-            },900)
-        }
-
-
-        
-        // const depositAmountCheck = sessionStorage.getItem('depositAmount')
-
-        const CalculatorEngine = ()=>{
-        if( depositAmountCheck <= 59){
-           const Percentage = depositAmountCheck * 10/100
-            const checkPercent = Percentage
-
-            document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent
-          }else if( depositAmountCheck  >= 60){
-              const Percentage =  depositAmountCheck  * 15/100
-              const checkPercent = Percentage
- 
-             document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent 
-
-          }
-          else if(depositAmountCheck > 119){
-              const Percentage = depositAmountCheck * 20/100
-              const checkPercent = Percentage
-
-              document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent
-
-          }
-          
-          else if(depositAmountCheck <=199){
-              const Percentage = depositAmountCheck * 25/100
-              const checkPercent = Percentage
- 
-             document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent 
-
-          }
-          
-     }
-     CalculatorEngine()
-      
-        
-        
-        const user_id =  sessionStorage.getItem('user_id')
-        const user_Name =  sessionStorage.getItem('user_Name')
-        const full_Name = sessionStorage.getItem('full_Name')
-        const planNow  = sessionStorage.getItem('planNow')
-        const bitcoin  = sessionStorage.getItem('bitcoin')
-        const email  = sessionStorage.getItem('email')
-        const depositAmount = sessionStorage.getItem('depositAmount')
-        const activetDeposit = sessionStorage.getItem('activetDeposit')
-        const walletAddress = sessionStorage.getItem('walletAddress')
-        const date = new Date().toString()
-
+    
+        // Function to calculate percentage based on deposit amount
+        const CalculatorEngine = () => {
+            const totalMoneyElement = document.querySelector('.toatalAllMoney');
+            if (!totalMoneyElement) return; // Ensure the element exists
+    
+            let checkPercent = 0;
+    
+            if (depositAmountCheck > 199) {
+                checkPercent = depositAmountCheck * 25/100;
+            } else if (depositAmountCheck > 119) {
+                checkPercent = depositAmountCheck * 20/100;
+            } else if (depositAmountCheck >= 60) {
+                checkPercent = depositAmountCheck * 15/100;
+            } else {
+                checkPercent = depositAmountCheck * 10/100;
+            }
+    
+            totalMoneyElement.innerHTML = `$${checkPercent.toFixed(2)}`;
+        };
+    
+        // Execute the function
+        CalculatorEngine();
+    
+        const user_id = sessionStorage.getItem('user_id');
+        const user_Name = sessionStorage.getItem('user_Name');
+        const full_Name = sessionStorage.getItem('full_Name');
+        const planNow = sessionStorage.getItem('planNow');
+        const bitcoin = sessionStorage.getItem('bitcoin');
+        const email = sessionStorage.getItem('email');
+        const depositAmount = sessionStorage.getItem('depositAmount');
+        const activetDeposit = sessionStorage.getItem('activetDeposit');
+        const walletAddress = sessionStorage.getItem('walletAddress');
+        const date = new Date().toString();
+    
         this.setState({
             user_id,
             user_Name,
             full_Name,
             planNow,
             depositAmount,
-            walletAddress,
+            walletAddress: bitcoin, // Fix this assignment
             email,
             date,
-            walletAddress: bitcoin,
-            activetDeposit
-
-
-        })
-        
+            activetDeposit,
+        });
     }
-
+    
    
 
    onSubmit = ()=>{

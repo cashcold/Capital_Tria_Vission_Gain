@@ -74,7 +74,7 @@ class Home extends Component {
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                document.querySelector('.percent_check').innerHTML = Percentage
-               document.querySelector('.planNowType').innerHTML = "PLAN IIII"
+               document.querySelector('.planNowType').innerHTML = "PLAN IV"
                 }
  
             }

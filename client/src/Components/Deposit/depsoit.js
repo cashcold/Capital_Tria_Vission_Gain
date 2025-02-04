@@ -119,14 +119,14 @@ class DepositMain extends Component {
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
-                document.querySelector('.planNowType').innerHTML = "PLAN IIII"
+                document.querySelector('.planNowType').innerHTML = "PLAN IV"
                  }
   
              }
             if( this.state.amountCalculate){
                  if( this.state.amountCalculate > 300){
                 document.querySelector('.totalAmount').innerHTML = "Please Max Investment is 300$ "
-                document.querySelector('.percent_check').innerHTML = 'Not Avalibale'
+                document.querySelector('.percent_check').innerHTML = 'Not Available'
                 document.querySelector('.planNowType').innerHTML = ""
                  }
   
