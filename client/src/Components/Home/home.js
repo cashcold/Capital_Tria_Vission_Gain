@@ -50,7 +50,7 @@ class Home extends Component {
             }
            if( this.state.amountCalculate){
                 if( this.state.amountCalculate >= 60 ){
-                const Percentage = this.state.amountCalculate * 29/100
+                const Percentage = this.state.amountCalculate * 15/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                document.querySelector('.percent_check').innerHTML = Percentage
@@ -60,7 +60,7 @@ class Home extends Component {
             }
            if( this.state.amountCalculate){
                 if( this.state.amountCalculate > 119){
-                const Percentage = this.state.amountCalculate * 49.5/100
+                const Percentage = this.state.amountCalculate * 20/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                document.querySelector('.percent_check').innerHTML = Percentage
@@ -70,7 +70,7 @@ class Home extends Component {
             }
            if( this.state.amountCalculate){
                 if( this.state.amountCalculate > 199){
-                const Percentage = this.state.amountCalculate * 70/100
+                const Percentage = this.state.amountCalculate * 25/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                document.querySelector('.percent_check').innerHTML = Percentage
@@ -165,7 +165,7 @@ class Home extends Component {
                        <div className="box_box__1">
                            <h1>PLAN II</h1>
                            <div className="innerPlan innerPlanother">
-                               <h1 className='percentRate'>29</h1>
+                               <h1 className='percentRate'>15</h1>
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>3 DAYS</h3>
@@ -196,7 +196,7 @@ class Home extends Component {
                        <div className="box_box__1">
                            <h1>PLAN III</h1>
                            <div className="innerPlan innerPlanother">
-                               <h1 className='percentRate'>49.5</h1>
+                               <h1 className='percentRate'>20</h1>
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>5 DAYS</h3>
@@ -228,7 +228,7 @@ class Home extends Component {
                        <div className="box_box__1">
                            <h1>PLAN IV</h1>
                            <div className="innerPlan innerPlanother">
-                               <h1 className='percentRate'>70</h1>
+                               <h1 className='percentRate'>25</h1>
                                <h3>%</h3>
                            </div>
                            <h3 className='planType'>7 DAYS</h3>

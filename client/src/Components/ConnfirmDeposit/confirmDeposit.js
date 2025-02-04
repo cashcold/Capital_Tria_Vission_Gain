@@ -80,14 +80,14 @@ class ConfirmDeposit extends Component {
 
             document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent
           }else if( depositAmountCheck  >= 60){
-              const Percentage =  depositAmountCheck  * 29/100
+              const Percentage =  depositAmountCheck  * 15/100
               const checkPercent = Percentage
  
              document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent 
 
           }
           else if(depositAmountCheck > 119){
-              const Percentage = depositAmountCheck * 49.5/100
+              const Percentage = depositAmountCheck * 20/100
               const checkPercent = Percentage
 
               document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent
@@ -95,7 +95,7 @@ class ConfirmDeposit extends Component {
           }
           
           else if(depositAmountCheck <=199){
-              const Percentage = depositAmountCheck * 45/100
+              const Percentage = depositAmountCheck * 25/100
               const checkPercent = Percentage
  
              document.querySelector('.toatalAllMoney').innerHTML ="$"+checkPercent 

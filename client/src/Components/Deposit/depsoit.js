@@ -95,7 +95,7 @@ class DepositMain extends Component {
              }
             if( this.state.amountCalculate){
                  if( this.state.amountCalculate >= 60 ){
-                 const Percentage = this.state.amountCalculate * 29/100
+                 const Percentage = this.state.amountCalculate * 15/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
@@ -105,7 +105,7 @@ class DepositMain extends Component {
              }
             if( this.state.amountCalculate){
                  if( this.state.amountCalculate > 119){
-                 const Percentage = this.state.amountCalculate * 49.5/100
+                 const Percentage = this.state.amountCalculate * 20/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
@@ -115,7 +115,7 @@ class DepositMain extends Component {
              }
             if( this.state.amountCalculate){
                  if( this.state.amountCalculate > 199){
-                 const Percentage = this.state.amountCalculate * 70/100
+                 const Percentage = this.state.amountCalculate * 25/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
@@ -188,7 +188,7 @@ class DepositMain extends Component {
                                         <div className="depositInfo__innerbox__1">
                                             <h4>3 DAYS</h4>
                                             <h4>$60.00 - $119.00	</h4>
-                                            <h4>29</h4>
+                                            <h4>15</h4>
                                         </div>
                                     </div>
                              </div>
@@ -215,7 +215,7 @@ class DepositMain extends Component {
                                         <div className="depositInfo__innerbox__1">
                                             <h4>5 DAYS</h4>
                                             <h4>$120.00 - $199.00	</h4>
-                                            <h4>49.5</h4>
+                                            <h4>20</h4>
                                         </div>
                                     </div>
                              </div>
@@ -242,7 +242,7 @@ class DepositMain extends Component {
                                         <div className="depositInfo__innerbox__1">
                                             <h4>7 DAYS</h4>
                                             <h4>$200.00 - $300.00	</h4>
-                                            <h4>70</h4>
+                                            <h4>25</h4>
                                         </div>
                                     </div>
                              </div>
