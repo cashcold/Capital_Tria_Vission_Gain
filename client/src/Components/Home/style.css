@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 .main__home{
     padding: 10em 0;
     background-position: 20%;
@@ -316,6 +318,87 @@ img{
   
   }
 
+  .recent-users-container {
+    background: linear-gradient(135deg, #0a0a0a, #1b1b1b);
+    color: #00ffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    font-family: "Orbitron", sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .recent-users-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.15), transparent);
+    opacity: 0.3;
+    z-index: -1;
+  }
+  
+  .recent-users-container h1 {
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    mask-image: linear-gradient(to right, rgba(0, 255, 255, 1), rgba(255, 0, 255, 1));
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 255, 255, 1), rgba(255, 0, 255, 1));
+  }
+  
+  .recent-users-container ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .recent-users-container .user-card {
+    background: rgba(10, 10, 10, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  
+  .recent-users-container .user-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+  }
+  
+  .recent-users-container .user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #00ffff;
+    margin-right: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .recent-users-container .user-card:hover .user-avatar img {
+    transform: rotate(360deg);
+  }
+  
+  .recent-users-container .user-info h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 18px;
+  }
+  
+  .recent-users-container .user-info p {
+    margin: 5px 0 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+  }
+  
+
 
 
 
@@ -472,4 +555,19 @@ img{
       animation: move-bg 10s linear infinite;
       filter: brightness(0.5);
     }
+
+    .recent-users-container ul {
+        grid-template-columns: 1fr;
+      }
+
+      .recent-users-container .user-card {
+        background: rgba(10, 10, 10, 0.9);
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+        display: block;
+        align-items: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+        backdrop-filter: blur(10px);
+      }
 }

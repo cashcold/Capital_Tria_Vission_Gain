@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style.css'
 import axios from 'axios'
 import {Card,Button} from 'react-bootstrap'
+import { motion } from "framer-motion";
 
 
 class Home extends Component {
@@ -10,6 +11,7 @@ class Home extends Component {
         this.state = { 
             amountCalculate: '',
             recent_info_both: [],
+            users: [],
             user_now: ''
          }
 
@@ -21,7 +23,18 @@ class Home extends Component {
         
     }
 
+    fetchRecentUsers = async () => {
+        try {
+          const response = await axios.get("http://localhost:8000/users/recent-users"); // Adjust API URL
+          this.setState({ users: response.data });
+        } catch (error) {
+          console.error("Error fetching users:", error);
+        }
+      };
+
     componentDidMount(){
+
+        this.fetchRecentUsers();
 
         axios.get(`https://randomuser.me/api/?results=9`)
         .then((data)=>{
@@ -359,7 +372,7 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
-                
+
                
                 <section className='reffer__main'>
                     <div className="reffer__me__now">
@@ -373,6 +386,42 @@ class Home extends Component {
                             <p>For each Invest of plans, one of your referrals makes, you'll gain an instant 5% commission. This alone can help you build a constant cash-flow.</p>
                         </div>
                     </div>
+                </section>
+                
+                <section class="displayRecentRegisterUser">
+                <div className="recent-users-container">
+                <motion.h2
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="title"
+                >
+                🚀 Recent Users Registered
+                </motion.h2>
+                
+                <motion.ul
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                >
+                {this.state.users.map((user, index) => (
+                    <motion.li
+                        key={index}
+                        className="recent-users-container user-card"
+                        whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px #0ff" }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <div className="recent-users-container user-avatar">
+                        <img src={`https://robohash.org/${user.user_Name}`} alt="Avatar" />
+                        </div>
+                        <div className="recent-users-container user-info">
+                        <h3>User: {user.user_Name}</h3>
+                        <p>Joined: {new Date(user.createdAt).toLocaleString()}</p>
+                        </div>
+                    </motion.li>
+                    ))}
+                </motion.ul>
+            </div>
                 </section>
             </div>
          );

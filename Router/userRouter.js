@@ -192,6 +192,15 @@ Router.post('/forgotpassword', async (req,res,next)=>{
    })
 })
 
+Router.get("/recent-users", async (req, res) => {
+    try {
+      const users = await User.find().sort({ createdAt: -1 }).limit(20);
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: "Server error" });
+    }
+  });
+
 Router.post('/withdrawInfo',async(req,res)=>{
    
     user_id = req.body.id
