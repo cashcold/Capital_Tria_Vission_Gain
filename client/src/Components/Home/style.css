@@ -320,11 +320,10 @@ img{
 
   .recent-users-container {
     background: linear-gradient(135deg, #0a0a0a, #1b1b1b);
-    color: #00ffff;
+    /* color: #00ffff; */
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-    font-family: "Orbitron", sans-serif;
     position: relative;
     overflow: hidden;
   }
@@ -338,16 +337,11 @@ img{
     z-index: -1;
   }
   
-  .recent-users-container h1 {
-    text-align: center;
-    font-size: 24px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
-    background: linear-gradient(90deg, #00ffff, #ff00ff);
-    mask-image: linear-gradient(to right, rgba(0, 255, 255, 1), rgba(255, 0, 255, 1));
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 255, 255, 1), rgba(255, 0, 255, 1));
-  }
+  /* .recent-users-container h1 {
+
+    color: #B9244C;
+   
+  } */
   
   .recent-users-container ul {
     list-style: none;
@@ -378,8 +372,11 @@ img{
     height: 50px;
     border-radius: 50%;
     border: 2px solid #00ffff;
-    margin-right: 15px;
+    margin: 15px;
     transition: transform 0.3s ease-in-out;
+  }
+  .user-info img{
+    margin: 1.5em 0em;
   }
   
   .recent-users-container .user-card:hover .user-avatar img {
@@ -398,6 +395,21 @@ img{
     font-size: 14px;
   }
   
+
+  .recent-users-container .user-info p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+  }
+  
+  .bitcoinColour{
+    color: yellow;
+  }
+  .dateColor{
+    color: red;
+  }
+  .newUserColour{
+    color: green;
+  }
 
 
 

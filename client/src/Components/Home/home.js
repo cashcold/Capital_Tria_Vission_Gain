@@ -12,7 +12,9 @@ class Home extends Component {
             amountCalculate: '',
             recent_info_both: [],
             users: [],
-            user_now: ''
+            user_now: '',
+            deposits: [],
+            withdrawals: []
          }
 
         this.handleChange = this.handleChange.bind(this)
@@ -42,6 +44,21 @@ class Home extends Component {
                 recent_info_both: data.data.results
             })
         })
+
+        axios.get('http://localhost:8000/users/last/withdrawals') // Adjust the API endpoint as needed
+      .then(response => {
+        this.setState({ withdrawals: response.data });
+      })
+      .catch(error => {
+        console.error('Error fetching withdrawals:', error);
+      });
+        
+
+        axios.get('http://localhost:8000/users/last-deposits')
+        .then(response => {
+          this.setState({ deposits: response.data });
+        })
+        .catch(error => console.error('Error fetching deposits:', error));
 
         const urlSearchParams = new URLSearchParams(window.location.search);
         for(var pair of urlSearchParams.entries()) {
@@ -279,6 +296,7 @@ class Home extends Component {
                  <section className='calculateMe'>
                      <div className="calcualteNow__box_1">
                         <img src={require('../../images/b72895618be95619a15bd4a0befdf826.png')}/>
+                       
                      </div>
                      <div className="calcualteNow__box_2">
                          <h2>CALCULATE <br/><span className='profit'>PROFIT</span></h2>
@@ -373,21 +391,6 @@ class Home extends Component {
                     </div>
                 </section>
 
-               
-                <section className='reffer__main'>
-                    <div className="reffer__me__now">
-                        <i class="fas fa-people-arrows fa-8x"></i>
-                        <div className="reff__box">
-                            <h1><span>5%</span></h1>
-                            <h4>REFERRAL COMMISSION</h4>
-                        </div>
-                        <div className="refferText">
-                            <p>You've got the opportunity to invite your friends, family, or other groups to enjoy our Invest plans and benefit from our lucrative affiliate program.</p>
-                            <p>For each Invest of plans, one of your referrals makes, you'll gain an instant 5% commission. This alone can help you build a constant cash-flow.</p>
-                        </div>
-                    </div>
-                </section>
-                
                 <section class="displayRecentRegisterUser">
                 <div className="recent-users-container">
                 <motion.h2
@@ -411,18 +414,81 @@ class Home extends Component {
                         whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px #0ff" }}
                         transition={{ duration: 0.3 }}
                     >
-                        <div className="recent-users-container user-avatar">
-                        <img src={`https://robohash.org/${user.user_Name}`} alt="Avatar" />
-                        </div>
+                       
                         <div className="recent-users-container user-info">
-                        <h3>User: {user.user_Name}</h3>
-                        <p>Joined: {new Date(user.createdAt).toLocaleString()}</p>
+                        <img src={`https://robohash.org/${user.user_Name}`} alt="Avatar" />
+                        <h3><span class="newUserColour">New</span> User: {user.user_Name}</h3>
+                        <p><span class="dateColor">Joined</span>Date: {new Date(user.createdAt).toLocaleString()}</p>
                         </div>
                     </motion.li>
                     ))}
                 </motion.ul>
             </div>
                 </section>
+                <section className='reffer__main'>
+                    <div className="reffer__me__now">
+                        <i class="fas fa-people-arrows fa-8x"></i>
+                        <div className="reff__box">
+                            <h1><span>5%</span></h1>
+                            <h4>REFERRAL COMMISSION</h4>
+                        </div>
+                        <div className="refferText">
+                            <p>You've got the opportunity to invite your friends, family, or other groups to enjoy our Invest plans and benefit from our lucrative affiliate program.</p>
+                            <p>For each Invest of plans, one of your referrals makes, you'll gain an instant 5% commission. This alone can help you build a constant cash-flow.</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="recentDepost">
+                            <div className="recent-users-container">
+                    <h1 className="recent-users-container title">Recent Deposits</h1>
+                    <ul className="recent-users-container ul">
+                    {this.state.deposits.map((deposit, index) => (
+                        <motion.li
+                        key={index}
+                        className="recent-users-container user-card"
+                        whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px #0ff" }}
+                        transition={{ duration: 0.3 }}
+                        >
+                       
+                        <div className="recent-users-container user-info">
+                            <img src={`https://robohash.org/${deposit.user}`} alt="User Avatar" />
+                            <h3>{deposit.user_Name}</h3>
+                            <p>Amount: ${deposit.depositAmount}</p>
+                            <p>Method: <span class="bitcoinColour">Bitcoin</span> </p>
+                            <p><span class="dateColor">Deposit</span> Date: {new Date(deposit.createdAt).toLocaleString()}</p>
+                        </div>
+                        </motion.li>
+                    ))}
+                    </ul>
+                </div>
+                </section>
+                <section class="lastWithdrawls">
+                     <div className="recent-users-container">
+                      <img src={require('../../AllInOne/bticoin/de0912f4-bd56-4e69-9c60-ca69755ea08d.webp')}/>
+                        <h1 className="title">Recent Withdrawals</h1>
+                        <ul>
+                        {this.state.withdrawals.map((withdrawal, index) => (
+                            <motion.li
+                            key={index}
+                            className="user-card"
+                            whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px #ff0" }}
+                            transition={{ duration: 0.3 }}
+                            >
+                            
+                            <div className="user-info">
+                                <img src={`https://robohash.org/${withdrawal.user_Name}`} alt="Avatar" />
+                                <h3>{withdrawal.user_Name}</h3>
+                                <p><span class="newUserColour">Amount </span> Withdraw: ${withdrawal.activetDeposit
+                                }</p>
+                                <p><span class="dateColor">Withdraw</span> Date: {new Date(withdrawal.createdAt).toLocaleString()}</p>
+                            </div>
+                            </motion.li>
+                        ))}
+                        </ul>
+                    </div>
+                </section>
+                
+                
             </div>
          );
     }

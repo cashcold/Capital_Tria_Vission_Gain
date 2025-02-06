@@ -201,6 +201,26 @@ Router.get("/recent-users", async (req, res) => {
     }
   });
 
+Router.get('/last-deposits', async (req, res) => {
+  try {
+      const deposits = await UserDeposit.find().sort({ createdAt: -1 }).limit(20);
+      res.json(deposits);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server Error' });
+  }
+});
+
+Router.get('/last/withdrawals', async (req, res) => {
+  try {
+      const withdrawals = await WithdrawDeposit.find().sort({ createdAt: -1 }).limit(20);
+      res.json(withdrawals);
+  } catch (error) {
+      console.error('Error fetching withdrawals:', error);
+      res.status(500).json({ message: 'Server Error' });
+  }
+});
+
 Router.post('/withdrawInfo',async(req,res)=>{
    
     user_id = req.body.id
