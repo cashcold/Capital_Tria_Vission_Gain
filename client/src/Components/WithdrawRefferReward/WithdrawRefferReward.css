@@ -119,6 +119,12 @@
     background-color: #6c757d;
     cursor: not-allowed;
   }
+
+  .with__inner__box_dash{
+    margin: 0.5em 0em;
+  }
+
+
   
 
 /* Responsive Design */

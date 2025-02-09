@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import {addDays,addMinutes} from "date-fns"
@@ -11,9 +13,11 @@ class AccountRouter extends Component {
         this.state = { 
             user_profile_display: '',
             user_deposit_display: '',
+            totalReferralReward: 0,
             full_Name: '',
             user_Name: '',
             ip_address: '',
+            ip: "Loading...",
             bitcoin: '',
             user_id: [],
             email: '',
@@ -50,18 +54,19 @@ class AccountRouter extends Component {
       
 
     componentDidMount(){
-    //     const { user_balance } = this.state;
-    //  // Log the value of user_balance.activetDeposit for debugging
-    // console.log("Deposit Amount:", user_balance?.activetDeposit);
 
-    // // Check if user_balance.activetDeposit exists and is greater than 0
-    // if (user_balance && user_balance.activetDeposit > 0) {
-    //     console.log("Auto-opening popup as Deposit Amount is greater than 0.");
-    //     this.setState({ showDetails: true });
-    // } else {
-    //     console.log("Popup will remain closed as Deposit Amount is 0 or undefined.");
-    //     this.setState({ showDetails: false });
-    // }
+     axios
+      .get("https://api64.ipify.org?format=json")
+      .then((response) => {
+        this.setState({ ip: response.data.ip });
+      })
+      .catch((error) => {
+        console.error("Error fetching IP:", error);
+        this.setState({ ip: "Failed to load IP" });
+      });
+
+       
+   
 
 
         const token = sessionStorage.getItem('x-access-token')
@@ -87,6 +92,16 @@ class AccountRouter extends Component {
          })
 
          const id = decoded.user_id
+
+          // Fetch total referral reward
+        axios.get(`/users/totalRefferReward/${decoded.user_id}`)
+        .then(response => {
+          this.setState({ totalReferralReward: response.data.totalReward });
+        })
+        .catch(error => {
+          console.error("Error fetching total referral reward:", error);
+          toast.error("Failed to fetch total referral reward.");
+        });
 
          axios.post('/users/user_profile_display',{id}).then(data => this.setState({
             user_profile_display: data.data
@@ -325,7 +340,7 @@ class AccountRouter extends Component {
                 <section className='welcome__user'>
                     <div className="welcomeText">
                         <h4>Welcome {this.state.user_Name}!</h4>
-                        <h4>IP Address : {this.state.ip_address}</h4>
+                        <h4>IP Address : {this.state.ip}</h4>
                     </div>
                 </section>
                 <section className='progress_bar'>
@@ -377,7 +392,12 @@ class AccountRouter extends Component {
                                 window.location =`/withdraw-refferReward`
                             }} >Cashout</button>
                             ) : null}
+                            <div className="with__inner__box_dash">
+                                <p>Total Referral Rewards:</p>
+                                <p>${this.state.totalReferralReward || '0'}.00</p>
+                                </div>
                              </p>
+                             
                         </div>
                     </div>
                 </section>
