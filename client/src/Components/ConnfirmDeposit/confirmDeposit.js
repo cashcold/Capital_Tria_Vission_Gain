@@ -22,12 +22,22 @@ class ConfirmDeposit extends Component {
             full_Name: '',
             email: '',
             amount: '',
-            date: ''
+            date: '',
+            paymentMade: false,
+            isSubmitting: false
+            
+
+            
+
         }
         this.onSubmit = this.onSubmit.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
+        this.handlePaymentCheck = this.handlePaymentCheck.bind(this)
 
        
+    }
+
+    handlePaymentCheck = () => {
+        this.setState({ paymentMade: true });
     }
 
     componentDidMount() {
@@ -105,6 +115,9 @@ class ConfirmDeposit extends Component {
    
 
    onSubmit = ()=>{
+    this.setState({ isSubmitting: true });
+
+
         const NewDeposit = {
         user_id: this.state.user_id,
         email: this.state.email,
@@ -132,6 +145,7 @@ class ConfirmDeposit extends Component {
 
     render() { 
         const Amount_to_send = this.state.depositAmount * 0.000025
+        const { paymentMade, isSubmitting } = this.state;
         return(
             <div className='confirm'>
                 <div className='confirmDepositNow'>
@@ -186,10 +200,38 @@ class ConfirmDeposit extends Component {
                     </div>
                     <img className='blockchainQbar_pic' src={require('../../images/blockchainQbar-code.png')}/>
                 </div>
-               
+
+                <div className='confirm'>
                 <div className='btnConfirm'>
+                    <button 
+                        className='btn btn-primary' 
+                        onClick={this.handlePaymentCheck}
+                        disabled={paymentMade}
+                    >
+                        {paymentMade ? <div className="spinner"></div> : "I HAVE PAID"}
+                    </button>
+                </div>
+                <p style={{ color: 'red', fontWeight: 'bold' }}>
+                    ⚠️ Warning: Do not click the "Confirm Payment" button without making a deposit!  
+                    If you confirm payment without actually depositing, your account will be frozen or blocked after multiple attempts.  
+                    Please ensure you have completed the payment before confirming.
+                </p>
+
+                <div className='btnConfirm'>
+                <button 
+                className='btn btn-success' 
+                onClick={this.onSubmit}
+                disabled={!paymentMade || isSubmitting}
+            >
+                {isSubmitting ? <div className="spinner"></div> : "CONFIRM , PAYMENT ✅"}
+            </button>
+
+                </div>
+            </div>
+               
+                {/* <div className='btnConfirm'>
                      <button className='btn btn-success' onClick={this.onSubmit}>I PAID CONFIRM</button>
-                 </div>
+                 </div> */}
             </div>
 
         )

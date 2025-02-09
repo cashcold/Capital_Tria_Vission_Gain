@@ -225,7 +225,10 @@ class AccountRouter extends Component {
 
        const { showDetails, user_balance } = this.state;
 
-       const formattedDate = moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a'); 
+       const formattedDate = this.state.user_deposit_display 
+        ? moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+        : "No date available";
+
 
         return ( 
             <div className='account__router'>
