@@ -465,7 +465,7 @@ class Home extends Component {
                 <section class="lastWithdrawls">
                      <div className="recent-users-container">
                       <img src={require('../../AllInOne/bticoin/de0912f4-bd56-4e69-9c60-ca69755ea08d.webp')}/>
-                        <h1 className="title">Recent Withdrawals</h1>
+                        <h1 className="title titleRecentWithdrawals">Recent Withdrawals</h1>
                         <ul>
                         {this.state.withdrawals.map((withdrawal, index) => (
                             <motion.li
