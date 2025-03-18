@@ -16,68 +16,136 @@ dotEnv.config()
 
 const Router = express.Router()
 
-Router.post('/register/', async(req,res)=>{
+Router.post("/register/", async (req, res) => {
+  try {
+      // Check if the user already exists
+      const user = await User.findOne({ email: req.body.email });
+      if (user) return res.status(400).send("Email already exists");
 
-    
-    User.findOne({reffer : req.params})
-    // reffer program
+      // Hash the password
+      const salt = await bcrypt.genSalt(10);
+      const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-    const user = await User.findOne({email: req.body.email})
-    if(user) return res.status(400).send('Email already Exist')
+      // Create a new user instance
+      const saveUser = new User({
+          full_Name: req.body.full_Name,
+          user_Name: req.body.user_Name,
+          password: hashPassword,
+          email: req.body.email,
+          bitcoin: req.body.bitcoin,
+          ip_address: req.body.ip_address,
+          accountBalance: Number(req.body.accountBalance),
+          reffer: req.body.reffer,
+          refferReward: req.body.refferReward,
+          question: req.body.question,
+          question__ans: req.body.question__ans,
+          activetDeposit: Number(req.body.activetDeposit),
+          date: req.body.date
+      });
 
+      // Referral program logic
+      if (req.body.reffer) {
+          const referrer = await User.findOne({ user_Name: req.body.reffer });
+          if (referrer) {
+              referrer.refferReward += 10; // Adjust reward amount
+              await referrer.save();
+          }
+      }
 
-    const salt = await bcrypt.genSalt(10)
-    const hashPassword = await bcrypt.hash(req.body.password, salt)
-    const userEmail= req.body.email
-    const user_Name= req.body.user_Name
+      // Save user to database
+      await saveUser.save();
 
-    const saveUser = new User({
-        full_Name: req.body.full_Name,
-        user_Name: req.body.user_Name,
-        password: hashPassword,
-        email: req.body.email,
-        bitcoin: req.body.bitcoin,
-        ip_address: req.body.ip_address,
-        accountBalance: Number(req.body.accountBalance),
-        reffer: req.body.reffer,
-        refferReward: req.body. refferReward,
-        question: req.body.question,
-        question__ans: req.body.question__ans,
-        activetDeposit: Number(req.body.activetDeposit), 
-        date: req.body.date
-    })
+      // Configure Nodemailer for your email hosting
+      const transporter = nodemailer.createTransport({
+          host: "mail.capgainco.com",
+          port: 465, // Use 587 if TLS is needed
+          secure: true, // True for SSL, false for TLS
+          auth: {
+              user: "support@capgainco.com",
+              pass: process.env.SMTP_PASS, // Store in environment variables
+          },
+          tls: {
+              rejectUnauthorized: false, // Disable SSL/TLS verification
+          },
+      });
 
-       // Referral program logic
-       if (req.body.reffer) {
-        // Find the referrer by their referral code (could be the user_Name, email, or custom code)
-        const referrer = await User.findOne({ user_Name: req.body.reffer });
-        if (referrer) {
-            // Add reward to referrer's account balance (e.g., 10 units as a reward)
-            referrer.refferReward += 10; // You can adjust this amount
-            await referrer.save();
-        }
-    }
+      // Email options
+      const mailOptions = {
+          from: '"Capital Gain Support" <support@capgainco.com>',
+          to: req.body.email,
+          subject: `Welcome to Capital Gain, ${req.body.user_Name}!`,
+          html: `
+              <!DOCTYPE html>
+              <html>
+              <head>
+                  <style>
+                      body {
+                          font-family: Arial, sans-serif;
+                          margin: 0;
+                          padding: 0;
+                          background-color: #f4f4f4;
+                      }
+                      .container {
+                          width: 100%;
+                          max-width: 600px;
+                          margin: 0 auto;
+                          background-color: #ffffff;
+                          padding: 20px;
+                          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                      }
+                      .header {
+                          text-align: center;
+                          padding: 10px 0;
+                          background-color: #007bff;
+                          color: #ffffff;
+                      }
+                      .content {
+                          padding: 20px;
+                      }
+                      .footer {
+                          text-align: center;
+                          padding: 10px 0;
+                          background-color: #007bff;
+                          color: #ffffff;
+                      }
+                  </style>
+              </head>
+              <body>
+                  <div class="container">
+                      <div class="header">
+                          <h1>Welcome to Capital Gain!</h1>
+                      </div>
+                      <div class="content">
+                          <p>Hello ${req.body.full_Name},</p>
+                          <p>Thank you for registering with Capital Gain! Your account has been successfully created.</p>
+                          <p>We look forward to helping you grow your wealth through smart bitcoin investments.</p>
+                          <p>Visit our website: <a href="https://capgainco.com">capgainco.com</a></p>
+                          <p>Best Regards,<br>Capital Gain Team</p>
+                      </div>
+                      <div class="footer">
+                          <p>&copy; 2025 Capital Gain Co. All rights reserved.</p>
+                      </div>
+                  </div>
+              </body>
+              </html>
+          `,
+      };
 
-    var mailgun = require('mailgun-js')({apiKey: process.env.API_key, domain: process.env.API_baseURL});
-    var data = {
-        from: 'Capital Gain Co. <capitalgain_support@gmail.com>',
-        to: `${userEmail}`,
-        subject: `Welcome!! ${user_Name}`,
-        text: `
-        <h3>Thank you for making Capital Gain your first choice.>br/> we are hoping for a good relation with you in the future.<br/> It’s a Great Support for us.We at Capital Gain Co. genuinely appreciate your business,<br/> and we’re grateful for the trust you’ve placed in us</h3>
-        `
-      
-    };
-    mailgun.messages().send(data, function (error, body) {
-        console.log(body);
-    });
-  
-    console.log(saveUser)
-    await saveUser.save()
-    res.send("user save")
+      // Send email
+      transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+              console.error("Email sending failed:", error);
+              return res.status(500).send("User registered but email not sent.");
+          }
+          console.log("Email sent:", info.response);
+      });
 
-})
-
+      res.send("User registered and welcome email sent successfully.");
+  } catch (error) {
+      console.error("Error:", error);
+      res.status(500).send("An error occurred.");
+  }
+});
 
 
     
@@ -117,56 +185,78 @@ Router.post('/login', async(req,res)=>{
 
 
 
-Router.post('/forgotpassword', async (req,res,next)=>{  
+
+Router.post("/forgotpassword", async (req, res) => {
     const userEmail = req.body.email;
+
     async.waterfall([
-       (done)=>{
-         crypto.randomBytes(20,(err,buffer)=>{
-             let token = buffer.toString('hex');
-             done(err, token);
-         })
-         
-       },
-       (token, done)=>{
-         User.findOne({email: req.body.email},(err,user)=>{
-             if(!user){
-                 return res.status(400).send('Email Not Found')
-             }
-             user.restartLinkPassword =  token;
-             user.save((err)=>{
-                 done(err, token, user)
-             })
-         })
-       },
-       (token,user,done)=>{
-        var mailgun = require('mailgun-js')({apiKey: process.env.API_key, domain: process.env.API_baseURL});
-        
-        var data = {
-            from: 'Capital Gain Co <capitalgain_support@gmail.com>',
-            to: userEmail,
-            subject: 'Password Reset',
-            html: `
-            <div class="person">
-            <h2>Please Follow the link to restart your password through the link below</h2>
-            <p>Click on The link to Restart Your Password Now</p>\n
-            </div>
-            <a href='${process.env.forgotPasswordLink}/${token}'>${process.env.forgotPasswordLink}/${token}</a>
-            `
-        };
-         mailgun.messages().send(data, function (error, body) {
-             if(error){
-                 return res.status(400).send(error.message)
-             }
-            return res.status(200).send('Link sent to Email Address')
-       });
- 
-       },
-       
-    ])
- 
-     
- })
-  
+        (done) => {
+            crypto.randomBytes(20, (err, buffer) => {
+                if (err) return done(err);
+                let token = buffer.toString("hex");
+                done(null, token);
+            });
+        },
+        (token, done) => {
+            User.findOne({ email: userEmail }, async (err, user) => {
+                if (err) return done(err); // Pass error to async.waterfall
+                if (!user) {
+                    return res.status(400).json({ message: "Email not found." });
+                }
+
+                // Debug: Check if user is found
+                console.log("User found:", user);
+
+                // Ensure restartLinkPassword exists in schema
+                user.restartLinkPassword = token;
+
+                try {
+                    await user.save();
+                    console.log("Reset token saved:", user.restartLinkPassword);
+                    done(null, token, user);
+                } catch (saveError) {
+                    done(saveError); // Pass save error to async.waterfall
+                }
+            });
+        },
+        (token, user, done) => {
+            const transporter = nodemailer.createTransport({
+                host: "mail.capgainco.com",
+                port: 465,
+                secure: true,
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS,
+                },
+                tls: { rejectUnauthorized: false },
+            });
+
+            const mailOptions = {
+                from: '"Capital Gain Support" <support@capgainco.com>',
+                to: userEmail,
+                subject: "Password Reset Request",
+                html: `
+                    <p>Hello ${user.full_Name},</p>
+                    <p>Click the link below to reset your password:</p>
+                    <a href="${process.env.forgotPasswordLink}/${token}">${process.env.forgotPasswordLink}/${token}</a>
+                `,
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) return done(error); // Pass error to async.waterfall
+                console.log("Email sent:", info.response);
+                done(null, "Password reset link sent to your email.");
+            });
+        }
+    ], (err, result) => {
+        if (err) {
+            console.error("Forgot password error:", err);
+            return res.status(500).json({ message: "Database error.", error: err.message });
+        }
+        res.status(200).json({ message: result });
+    });
+});
+
 
 
  Router.post('/activtypassword/:token', async(req,res)=>{
