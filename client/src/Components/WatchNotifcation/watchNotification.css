@@ -7,3 +7,55 @@
 .New_Deposit_main span{
     color: red;
 }
+
+.watch_notifi_main{
+    width: 100%;
+    min-height: 100vh;
+    background-color: black;
+    color: white;
+    padding: 12em 0em;
+}
+
+.displayBothTrans{
+    margin: 2em 0em;
+    display: flex;
+    justify-content: center;
+    gap: 7em;
+
+}
+
+.card {
+    background-color: black;
+    color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 5px;
+}
+
+.bitcoinColour {
+    color: #f7931a;
+}
+
+.dateColor {
+    color: #555;
+}
+
+.displayBothTrans h2{
+    margin: 2em 0em;
+}

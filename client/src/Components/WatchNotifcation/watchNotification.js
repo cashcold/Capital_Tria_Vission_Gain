@@ -9,8 +9,11 @@ class WatchNotificationMain extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            live_deposit: '' 
-        };
+            live_deposit: '',
+            bitcoinDeposits: [],
+            bitcoinWithdrawals: []
+            
+        }; 
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -23,24 +26,33 @@ class WatchNotificationMain extends Component {
     playSound = (soundFile) => {
         const audio = new Audio(`/tones/${soundFile}`);
         audio.play()
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-                    .then(() => console.log('Sound played successfully.'))
+        .then(() => console.log('Sound played successfully.'))
             .catch((error) => console.error('Error playing sound:', error));
     };
 
+    fetchBitcoinDeposits = () => {
+        axios.get('http://localhost:8000/users/last-deposits')
+            .then(response => {
+                this.setState({ bitcoinDeposits: response.data });
+            })
+            .catch(error => console.error('Error fetching bitcoinBuy:', error));
+    };
+
+    fetchBitcoinWithdrawals = () => {
+        axios.get('http://localhost:8000/users/last/withdrawals')
+            .then(response => {
+                this.setState({ bitcoinWithdrawals: response.data });
+            })
+            .catch(error => console.error('Error fetching bitcoinSell:', error));
+    };
+
     componentDidMount() {
+
+        this.interval = setInterval(this.fetchBitcoinDeposits, 3000);
+        this.interval = setInterval(this.fetchBitcoinWithdrawals, 3000);
+
+
+
         const socket = io('http://localhost:8000', {
             reconnection: true,
             reconnectionAttempts: 10,
@@ -106,7 +118,36 @@ class WatchNotificationMain extends Component {
             <div className='watch_notifi_main'>
                 <ToastContainer />
                 <section className="watch_not">
-                    <h1>WE ARE ABOUT TO WATCH THE NOTIFICATION!!!</h1>
+                    <h1>WATCH THE NOTIFICATION!!!</h1>
+
+                    <section className="displayBothTrans">
+                        <section className="displayNewBitcoinSell">
+                            <h2>Recent Bitcoin Withdrawlas</h2>
+                            {this.state.bitcoinWithdrawals.map((bitcoinSell, index) => (
+                                <div key={index} className="card">
+                                    <div className="card-body">
+                                        <h3 className="card-title">{bitcoinSell.user_Name}</h3>
+                                        <p className="card-text">Amount: ${bitcoinSell.activetDeposit} </p>
+                                        <p className="card-text">Method: <span className="bitcoinColour">Bitcoin</span></p>
+                                        <p className="card-text"><span className="dateColor">Deposit</span> Date: {new Date(bitcoinSell.date).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </section>
+                        <section className="displayNewBitcoinBuy">
+                            <h2>Recent Bitcoin Deposits</h2>
+                            {this.state.bitcoinDeposits.map((bitcoinBuy, index) => (
+                                <div key={index} className="card">
+                                    <div className="card-body">
+                                        <h3 className="card-title">{bitcoinBuy.user_Name}</h3>
+                                        <p className="card-text">Amount: ${bitcoinBuy.depositAmount} </p>
+                                        <p className="card-text">Method: <span className="bitcoinColour">Bitcoin</span></p>
+                                        <p className="card-text"><span className="">Deposit</span> Date: {new Date(bitcoinBuy.date).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </section>
+                    </section>
                 </section>
                 <section>
                     <ul id="deposit_message"></ul>
