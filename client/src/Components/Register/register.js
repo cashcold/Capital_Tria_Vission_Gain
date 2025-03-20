@@ -89,8 +89,8 @@ class RegisterUser extends Component {
             toast.warn('User Name must be at lest 5')
             return false
         }
-        if(SaveNewUser.password.length < 6){
-            toast.warn('password must be at lest 6')
+        if(SaveNewUser.password.length < 10){
+            toast.warn('password must be at lest 10')
             return false
         }
         if(SaveNewUser.password !== SaveNewUser.comfirm_password){

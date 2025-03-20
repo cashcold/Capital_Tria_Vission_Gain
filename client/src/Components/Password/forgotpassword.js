@@ -24,13 +24,18 @@ class ForgotPassword extends Component {
             email: this.state.restartLinkPassword
         }
         if(!saveRestartLinkPassword.email){
-            return(toast.warning("Enter Email",{position: 'top-center'}))
+            return(toast.warning("Enter Email",{position: 'top-center'})) 
            
         }   
 
-        axios.post ("http://localhost:8000/users/forgotpassword",saveRestartLinkPassword)
-        .then(res => (toast.success("Link have sent to email address")))
-        .catch(err => (toast.error(err.response.data)))
+        axios.post("http://localhost:8000/users/forgotpassword", saveRestartLinkPassword)
+    .then(res => {
+        toast.success("Link has been sent to your email. If you don't see it in your inbox, check your spam folder and mark it as 'Not Spam'.", { autoClose: 9000 });
+        setTimeout(() => {
+            window.location = "/login";
+        }, 5000); 
+    })
+    .catch(err => toast.error(err.response.data, { autoClose: 5000 }));
 
     }
  
