@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "start": "NODE_OPTIONS=--openssl-legacy-provider node server.js",
+  "start": "NODE_OPTIONS=--openssl-legacy-provider && node server.js",
   "server": "nodemon server.js",
   "client": "npm start --prefix client",
   "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "build": "cd client && npm install && npm run build",
+  "build": "cd client && npm install && NODE_OPTIONS=--openssl-legacy-provider npm run build",
   "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build"
 }
+
 ,
   "engines": {
     "node": "20.x",
