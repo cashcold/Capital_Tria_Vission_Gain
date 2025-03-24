@@ -28,7 +28,7 @@ class ForgotPassword extends Component {
            
         }   
 
-        axios.post("/forgotpassword", saveRestartLinkPassword)
+        axios.post("/users/forgotpassword", saveRestartLinkPassword)
     .then(res => {
         toast.success("Link has been sent to your email. If you don't see it in your inbox, check your spam folder and mark it as 'Not Spam'.", { autoClose: 9000 });
         setTimeout(() => {

@@ -56,11 +56,12 @@ io.on('connection', socket => {
        socket.broadcast.emit('Withdraw',Withdraw)
    })
 
+ });
 
-   
-  });
+ app.use('/users',userRouter)
+ app.use(express.static(path.join(__dirname, "client")));
 
-  app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     const filePath = path.resolve(__dirname, './client/build', 'index.html');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -74,14 +75,15 @@ res.send(data);
 
     });
 });
-app.use('/users',userRouter)
 
 
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static("client/build"))
-    app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
+
+app.use(express.static("client/build"));
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static("client/build"));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
 }
 
 
