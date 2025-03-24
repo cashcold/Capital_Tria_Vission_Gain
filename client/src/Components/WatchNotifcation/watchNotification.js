@@ -31,7 +31,7 @@ class WatchNotificationMain extends Component {
     };
 
     fetchBitcoinDeposits = () => {
-        axios.get('http://localhost:8000/users/last-deposits')
+        axios.get('/users/last-deposits')
             .then(response => {
                 this.setState({ bitcoinDeposits: response.data });
             })
@@ -39,7 +39,7 @@ class WatchNotificationMain extends Component {
     };
 
     fetchBitcoinWithdrawals = () => {
-        axios.get('http://localhost:8000/users/last/withdrawals')
+        axios.get('/users/last/withdrawals')
             .then(response => {
                 this.setState({ bitcoinWithdrawals: response.data });
             })
@@ -53,7 +53,7 @@ class WatchNotificationMain extends Component {
 
 
 
-        const socket = io('http://localhost:8000', {
+        const socket = io('/', {
             reconnection: true,
             reconnectionAttempts: 10,
             reconnectionDelay: 500

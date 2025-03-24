@@ -48,7 +48,7 @@ class WithdrawRefferReward extends Component {
   handleWithdraw = () => {
     const { user_id } = this.state;
 
-    axios.post('http://localhost:8000/users/withdrawReferralReward', { userId: user_id })
+    axios.post('/users/withdrawReferralReward', { userId: user_id })
       .then(response => {
         toast.success(response.data.message);
 

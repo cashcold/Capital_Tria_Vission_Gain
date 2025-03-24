@@ -385,7 +385,7 @@ class AccountRouter extends Component {
                         </div>
                         <div className="reff__box_2">
                             <h2>Personal <span>Referral</span> Link:</h2>
-                            <p className='reffLink'>https://capitalgain/?ref={this.state.user_Name}</p>
+                            <p className='reffLink'>https://capgainco.com/?ref={this.state.user_Name}</p>
                             <p className='btn btn-warning btn-referral'> Your Referral Reward: <span>${this.state.user_profile_display.refferReward}.00</span><br/>
                             {this.state.user_profile_display.refferReward > 2 ? (
                             <button className="btn-referral-cashout" onClick={()=>{

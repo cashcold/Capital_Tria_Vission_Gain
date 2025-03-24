@@ -131,7 +131,7 @@ class ConfirmDeposit extends Component {
 
        }
        
-       let socket = io('http://localhost:8000')
+       let socket = io('/')
 
        socket.emit('NewDeposit', NewDeposit)
 

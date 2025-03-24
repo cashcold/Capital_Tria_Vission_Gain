@@ -51,7 +51,7 @@ class Login extends Component {
             return false;
         }
         event.preventDefault();
-        axios.post("http://localhost:8000/users/login", userLogin)
+        axios.post("/users/login", userLogin)
             .then(res => {
                 sessionStorage.setItem('x-access-token', JSON.stringify(res.data));
                 return res.data;

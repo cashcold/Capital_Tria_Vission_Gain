@@ -5,13 +5,14 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userRouter = require('./Router/userRouter')
 const path = require('path')
+const fs = require('fs');
 const cron = require("node-cron")
 const shell = require("shelljs")
 const app = express()
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { 
     cors: {
-        origin: "http://localhost:3000", // Restrict to your frontend
+        origin: "https://capgainco.com", // Restrict to your frontend
         methods: ["GET", "POST"]
     }
 });
@@ -35,7 +36,8 @@ const PORT = process.env.PORT || 8000
 
 
 app.use(cors({
-    origin: "http://localhost:3000" // Allow requests from the frontend
+    origin: "https://capgainco.com",
+    methods: ["GET", "POST"],
 }));
 app.use(bodyParser.json())
 
@@ -57,6 +59,21 @@ io.on('connection', socket => {
 
    
   });
+
+  app.get('/', (req, res) => {
+    const filePath = path.resolve(__dirname, './client/build', 'index.html');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return console.log(err);
+        }
+
+        data = data.replace(/\$OG_TITLE/g, 'We Help Everyone Live Better Through Bitcoin')
+           .replace(/\$OG_DESCRIPTION/g, "Join our Bitcoin mining project and secure your financial future. We make crypto mining simple, profitable, and accessible for everyone.")
+           .replace(/\$OG_IMAGE/g, 'https://images.unsplash.com/photo-1658225282648-b199eb2a4830?q=80&w=1438&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+res.send(data);
+
+    });
+});
 app.use('/users',userRouter)
 
 

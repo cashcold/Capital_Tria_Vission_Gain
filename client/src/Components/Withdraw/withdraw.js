@@ -56,7 +56,7 @@ class WithdrawMain extends Component {
             activetDeposit: this.state.activetDeposit__amount,
             
         }
-        let socket = io('http://localhost:8000')
+        let socket = io('/')
 
         socket.emit('Withdraw', Withdraw)
         const id  = this.props.match.params.id
