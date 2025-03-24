@@ -35,7 +35,7 @@ class MainApp extends Component {
             url: '',
             liveTime: null,
             timeMismatch: null,
-            loading: true, // Added a loading state to control rendering
+            loading: true, // Added a loading state to control rendering for users
         };
     }
 
