@@ -1,26 +1,29 @@
 export const tourData = [
     {
       id: 1,
-      title: "What is Capital Gain Management Co. ?", 
-      about: "Capital Gain Management Co. is an online bitcoin mining investment platform who was appointed representative of Capital Gain Management Co. 58 Union Terrace, UNITED KINGDOM,  E15 6NY",
+      title: "What is capgainco. ?", 
+      about: `Capital Gain Management Co. is an online bitcoin mining investment platform who was appointed representative of Capital Gain Management Co. 📍 Address: Capital Gain Co, HQ
+      📞 Support: +1 234 567 890
+      ✉️ Email: support@capgainco.com
+      🌐 Website: www.capgainco.com`,
      
     },
     {
       id: 2,
       title: "How can I invest with Capital Gain Management Co. ?",
-      about: "To make a investment you must first become a member of https://Capital Gain Management Co. . Once you are signed up, you can make your first deposit. All deposits must be made through the Members Area. You can login using the member username and password you receive when signup.",
+      about: "To make a investment you must first become a member of https://capgainco.com , Once you are signed up, you can make your first deposit. All deposits must be made through the Members Area. You can login using the member username and password you receive when signup.",
      
     },
     {
       id: 3,
       title: "How do I open my Capital Gain Management Co. Account?",
-      about: "It's quite easy and convenient. Follow this link https://Capital Gain Management Co. , fill in the registration form and then press 'Register'.",
+      about: "It's quite easy and convenient. Follow this link https://capgainco.com , fill in the registration form and then press 'Register'.",
      
     },
     {
       id: 4,
       title: "I wish to invest with Capital Gain Management Co. but I don't have an any ecurrency account. What should I do?",
-      about: "You can open a free Bitcoin account here: www.blockchain.info",
+      about: "You can open a free Bitcoin account here: https://play.google.com/store/apps/details?id=piuk.blockchain.android&referrer=utm_source%3Dgoogle%26utm_medium%3Dorganic%26utm_term%3Dblockchain&pcampaignid=APPU_1_vvvWZ5vvK8W8hbIP94SV8Q8&pli=1",
      
     },
     {

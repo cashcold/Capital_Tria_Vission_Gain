@@ -42,24 +42,23 @@ class ContactMain extends Component {
                                 <div className='supportInfo'>
                                     <h1> <i class="fas fa-envelope-square fa-3x"></i></h1>
                                     <h4>OUR <span>E-MAIL</span></h4>
-                                    <p>capitalgainhelp@gmail.com</p>
+                                    <p>  ✉️ Email: support@capgainco.com</p>
                                 </div>
                             </div>
                             <div className='bothMenu bothMenuCount2' >
                                 <div className='supportInfo'>
                                     <h1><i class="fas fa-phone fa-3x"></i></h1>
                                     <h4>PHONE <span>NUMBER</span> </h4>
-                                    <p>+447529952796</p>
-                                    <p>+447459184400</p>
+                                    <p>📞 Support: +1 234 567 890</p>
+                                    <p>📞 Support: +447459184400</p>
                                 </div>
                             </div>
                             <div className='bothMenu bothMenuCount3'>
                                 <div className='supportInfo'>
                                 <h1><i class="fas fa-address-card fa-3x"></i></h1>
                                     <h4>ADDRESS <span>INFO</span></h4>
-                                    <p>State:  58 Union Terrace</p>
-                                    <p>City: LONDON</p>
-                                    <p> UNITED KINGDOM, E15 6NY</p>
+                                    <p>📍 Address: Capital Gain Co, HQ
+                                🌐 Website: www.capgainco.com</p>
                                 </div>
                             </div>  
                         </div>

@@ -10,12 +10,7 @@ const cron = require("node-cron")
 const shell = require("shelljs")
 const app = express()
 const server = require('http').createServer(app);
-const io = require('socket.io')(server, { 
-    cors: {
-        origin: "https://capgainco.com", // Restrict to your frontend
-        methods: ["GET", "POST"]
-    }
-});
+
 
 dotEnv.config() 
 
@@ -34,11 +29,32 @@ const PORT = process.env.PORT || 8000
 //     console.log('TIME WORKING')
 // })
 
+const allowedOrigins = [
+    "https://capgainco.com", 
+    "http://localhost:3000" // Allow local development
+];
+
+
 
 app.use(cors({
-    origin: "https://capgainco.com",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: ["GET", "POST"],
+    credentials: true // If using cookies
 }));
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: allowedOrigins, // Allow both production & local
+        methods: ["GET", "POST"]
+    }
+});
+
 app.use(bodyParser.json())
 
 io.on('connection', socket => {

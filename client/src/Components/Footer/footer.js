@@ -14,21 +14,24 @@ class FooterMain extends Component {
                             <h1>LINKS</h1>
                             <div className="quick__lick">
                                 <ul>
-                                    <li><a href=''>HOME</a></li>
-                                    <li><a href=''>ABOUT US</a></li>
-                                    <li><a href=''>FAQ</a></li>
+                                    <li><a href='/'>HOME</a></li>
+                                    <li><a href='/about-us'>ABOUT US</a></li>
+                                    <li><a href='/faqs'>FAQ</a></li>
                                 </ul>
                                 <ul>
-                                    <li><a href=''>SUPPORT</a></li>
-                                    <li><a href=''>TERMS & CONDITIONS</a></li>
-                                    <li><a href=''>AFFILIATES</a></li>
+                                    <li><a href='/contact-us'>SUPPORT</a></li>
+                                    <li><a href='/faqs'>TERMS & CONDITIONS</a></li>
+                                   
                                 </ul>
                             </div>
                         </div>
                         <div className="foot__box3">
                             <h1>CONTACTS:</h1>
-                            <p><i class="fas fa-envelope-square"></i>capitalgainhelp@gmail.comm</p>
-                            <p><i class="fas fa-map-marker-alt"></i>58 Union Terrace,<br/> LONDON, UNITED KINGDOM, E15 6NY</p>
+                            <p>📍 Address: Capital Gain Co, HQ
+                            📞 Support: +1 234 567 890
+                            📞 Support: +447459184400
+                            ✉️ Email: support@capgainco.com
+                            🌐 Website: www.capgainco.com</p>
                         </div>
                         
                         <div className="foot__box1">
