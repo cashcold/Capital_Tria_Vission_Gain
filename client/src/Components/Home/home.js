@@ -27,7 +27,7 @@ class Home extends Component {
 
     fetchRecentUsers = async () => {
         try {
-          const response = await axios.get("http://localhost:8000/users/recent-users"); // Adjust API URL
+          const response = await axios.get("/users/recent-users"); // Adjust API URL
           this.setState({ users: response.data });
         } catch (error) {
           console.error("Error fetching users:", error);
@@ -45,7 +45,7 @@ class Home extends Component {
             })
         })
 
-        axios.get('http://localhost:8000/users/last/withdrawals') // Adjust the API endpoint as needed
+        axios.get('/users/last/withdrawals') // Adjust the API endpoint as needed
       .then(response => {
         this.setState({ withdrawals: response.data });
       })
@@ -54,7 +54,7 @@ class Home extends Component {
       });
         
 
-        axios.get('http://localhost:8000/users/last-deposits')
+        axios.get('/users/last-deposits')
         .then(response => {
           this.setState({ deposits: response.data });
         })
