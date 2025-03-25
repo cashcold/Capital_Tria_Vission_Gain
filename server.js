@@ -38,16 +38,17 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
+        console.log("Request Origin:", origin); // Debugging
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
+            console.log("Blocked by CORS:", origin); // Debugging
             callback(new Error("Not allowed by CORS"));
         }
     },
     methods: ["GET", "POST"],
     credentials: true
 }));
-
 app.use(bodyParser.json())
 
 io.on('connection', socket => {
