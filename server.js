@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 8000
 
 const allowedOrigins = [
     "https://capgainco.com", 
-    "http://localhost:3000" // Allow local development
+    "/" // Allow local development
 ];
 
 
