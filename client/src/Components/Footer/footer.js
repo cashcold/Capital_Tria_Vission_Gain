@@ -11,7 +11,7 @@ class FooterMain extends Component {
                 <section className='footer__class'>
                     <div className="footer">
                         <div className="foot__box2">
-                            <h1>LINKS</h1>
+                            <h1> FAST LINKS</h1>
                             <div className="quick__lick">
                                 <ul>
                                     <li><a href='/'>HOME</a></li>

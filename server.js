@@ -12,10 +12,20 @@ const app = express()
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { 
     cors: {
-        origin: ["http://localhost:3000", "https://capgainco.com"], // Allow both local and production
-        methods: ["GET", "POST"]
+        origin: function (origin, callback) {
+            const allowedOrigins = ["http://localhost:3000", "https://capgainco.com"];
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                console.error("Socket.io CORS BLOCKED:", origin);
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        methods: ["GET", "POST"],
+        credentials: true // Ensures cookies and authentication tokens are allowed
     }
 });
+
 
 dotEnv.config() 
 
@@ -31,23 +41,23 @@ mongoose.connect(process.env.MONGODB_URI,
 const PORT = process.env.PORT || 8000
 
 // Allow multiple origins for CORS
+
 const allowedOrigins = [
-    "http://localhost:3000",  
-    "https://capgainco.com"
+    "https://capgainco.com", // Your frontend URL
+    "https://www.capgainco.com"
 ];
 
 app.use(cors({
     origin: function (origin, callback) {
-        console.log("Request Origin:", origin); // Debugging
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            console.log("Blocked by CORS:", origin); // Debugging
             callback(new Error("Not allowed by CORS"));
         }
     },
-    methods: ["GET", "POST"],
-    credentials: true
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Allow cookies and auth headers
+    allowedHeaders: ["Content-Type", "Authorization"] // Allow necessary headers
 }));
 app.use(bodyParser.json())
 
