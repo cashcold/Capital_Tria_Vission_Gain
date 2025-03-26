@@ -135,19 +135,19 @@ class Home extends Component {
                                  <i class="fas fa-user fa-3x flowAnimate"></i>
                                  <hr className='flowAnimate'/>
                                  <p className='flowAnimate'>Open a Free Account</p>
-                                 <a href='#' className='btn-home flowAnimate'>Sign-up</a>
+                                 <a href='/register' className='btn-home flowAnimate'>Sign-up</a>
                             </div>
                             <div className="flow__box__2 flow__boxMe flowAnimate">
                                  <i class="fas fa-user fa-3x flowAnimate"></i>
                                  <hr className='flowAnimate'/>
                                  <p className='flowAnimate'>Choose a Mining Plan and<br/> Deposit</p>
-                                 <a href='#' className='btn-home flowAnimate'>Deposit</a>
+                                 <a href='/login' className='btn-home flowAnimate'>Deposit</a>
                             </div>
                             <div className="flow__box__3 flow__boxMe flowAnimate">
                             <i class="fas fa-user fa-3x flowAnimate"></i>
                                  <hr className='flowAnimate'/>
                                  <p className='flowAnimate'>Withdraw Your Profits</p>
-                                 <a href='#' className='btn-home flowAnimate'>Withdraw</a>
+                                 <a href='/login' className='btn-home flowAnimate'>Withdraw</a>
                             </div>
                             </div>
                         </div>

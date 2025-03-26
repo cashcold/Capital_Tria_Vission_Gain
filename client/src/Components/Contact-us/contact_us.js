@@ -49,7 +49,6 @@ class ContactMain extends Component {
                                 <div className='supportInfo'>
                                     <h1><i class="fas fa-phone fa-3x"></i></h1>
                                     <h4>PHONE <span>NUMBER</span> </h4>
-                                    <p>📞 Support: +1 234 567 890</p>
                                     <p>📞 Support: +447459184400</p>
                                 </div>
                             </div>
@@ -57,8 +56,8 @@ class ContactMain extends Component {
                                 <div className='supportInfo'>
                                 <h1><i class="fas fa-address-card fa-3x"></i></h1>
                                     <h4>ADDRESS <span>INFO</span></h4>
-                                    <p>📍 Address: Capital Gain Co, HQ
-                                🌐 Website: www.capgainco.com</p>
+                                    <p>📍 Address: Capital Gain Co, HQ</p>
+                                    <p>🌐 Website: www.capgainco.com</p>
                                 </div>
                             </div>  
                         </div>

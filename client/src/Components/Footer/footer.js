@@ -11,7 +11,7 @@ class FooterMain extends Component {
                 <section className='footer__class'>
                     <div className="footer">
                         <div className="foot__box2">
-                            <h1> FAST LINKS</h1>
+                            <h1> LINKS</h1>
                             <div className="quick__lick">
                                 <ul>
                                     <li><a href='/'>HOME</a></li>
@@ -27,11 +27,11 @@ class FooterMain extends Component {
                         </div>
                         <div className="foot__box3">
                             <h1>CONTACTS:</h1>
-                            <p>📍 Address: Capital Gain Co, HQ
-                            📞 Support: +1 234 567 890
-                            📞 Support: +447459184400
-                            ✉️ Email: support@capgainco.com
-                            🌐 Website: www.capgainco.com</p>
+                            <p>📍 Address: Capital Gain Co, HQ</p>
+                          
+                            <p>📞 Support: +447459184400</p>
+                            <p>✉️ Email: support@capgainco.com</p>
+                            <p>🌐 Website: www.capgainco.com</p>
                         </div>
                         
                         <div className="foot__box1">
