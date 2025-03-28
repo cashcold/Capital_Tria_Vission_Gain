@@ -12,17 +12,8 @@ const app = express()
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { 
     cors: {
-        origin: function (origin, callback) {
-            const allowedOrigins = ["http://localhost:3000", "https://capgainco.com"];
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                console.error("Socket.io CORS BLOCKED:", origin);
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        methods: ["GET", "POST"],
-        credentials: true // Ensures cookies and authentication tokens are allowed
+        origin: "/", // Restrict to your frontend
+        methods: ["GET", "POST"]
     }
 });
 
@@ -42,23 +33,12 @@ const PORT = process.env.PORT || 8000
 
 // Allow multiple origins for CORS
 
-const allowedOrigins = [
-    "https://capgainco.com", // Your frontend URL
-    "https://www.capgainco.com"
-];
-
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
+    origin: "https://capgainco.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Allow cookies and auth headers
-    allowedHeaders: ["Content-Type", "Authorization"] // Allow necessary headers
+    credentials: true,
 }));
+
 app.use(bodyParser.json())
 
 io.on('connection', socket => {
@@ -88,6 +68,35 @@ app.get('/', (req, res) => {
         data = data.replace(/\$OG_TITLE/g, 'We Help Everyone Live Better Through Bitcoin')
            .replace(/\$OG_DESCRIPTION/g, "Join our Bitcoin mining project and secure your financial future. We make crypto mining simple, profitable, and accessible for everyone.")
            .replace(/\$OG_IMAGE/g, 'https://images.unsplash.com/photo-1658225282648-b199eb2a4830?q=80&w=1438&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+        res.send(data);
+    });
+});
+
+app.get('/dashboard/edit', (req, res) => {
+    const filePath = path.resolve(__dirname, './client/build', 'index.html');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return console.log(err);
+        }
+
+        const { Song_overview, Song_title, Song_img } = req.query;
+        data = data.replace(/\$OG_TITLE/g, 'edit')
+                   .replace(/\$OG_DESCRIPTION/g, 'edit profile')
+                   .replace(/\$OG_IMAGE/g, 'image');
+        res.send(data);
+    });
+});
+app.get('/edit', (req, res) => {
+    const filePath = path.resolve(__dirname, './client/build', 'index.html');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return console.log(err);
+        }
+
+        const { Song_overview, Song_title, Song_img } = req.query;
+        data = data.replace(/\$OG_TITLE/g, 'edit')
+                   .replace(/\$OG_DESCRIPTION/g, 'edit profile')
+                   .replace(/\$OG_IMAGE/g, 'image');
         res.send(data);
     });
 });
