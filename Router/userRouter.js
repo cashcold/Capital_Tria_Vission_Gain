@@ -379,6 +379,15 @@ Router.get('/last/withdrawals', async (req, res) => {
       res.status(500).json({ message: 'Server Error' });
   }
 });
+Router.get('/last/refferReward', async (req, res) => {
+  try {
+      const withdrawals = await ReferralReward.find().sort({ createdAt: -1 }).limit(20);
+      res.json(withdrawals);
+  } catch (error) {
+      console.error('Error fetching withdrawals:', error);
+      res.status(500).json({ message: 'Server Error' });
+  }
+});
 
 Router.post('/withdrawInfo',async(req,res)=>{
    

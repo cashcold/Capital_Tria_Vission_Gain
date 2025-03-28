@@ -53,6 +53,9 @@ io.on('connection', socket => {
    socket.on('Withdraw', Withdraw => {
        socket.broadcast.emit('Withdraw', Withdraw)
    })
+   socket.on('refferReward', refferReward => {
+       socket.broadcast.emit('refferReward', refferReward)
+   })
 });
 
 app.use('/users', userRouter)

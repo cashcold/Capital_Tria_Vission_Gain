@@ -11,7 +11,8 @@ class WatchNotificationMain extends Component {
         this.state = {
             live_deposit: '',
             bitcoinDeposits: [],
-            bitcoinWithdrawals: []
+            bitcoinWithdrawals: [],
+            bitcoinRefferReward: [],
             
         }; 
         this.handleChange = this.handleChange.bind(this);
@@ -45,11 +46,19 @@ class WatchNotificationMain extends Component {
             })
             .catch(error => console.error('Error fetching bitcoinSell:', error));
     };
+    bitcoinRefferReward = () => {
+        axios.get('/users/last/refferReward')
+            .then(response => {
+                this.setState({ bitcoinRefferReward: response.data });
+            })
+            .catch(error => console.error('Error fetching bitcoinRefferReward:', error));
+    };
 
     componentDidMount() {
 
         this.interval = setInterval(this.fetchBitcoinDeposits, 3000);
         this.interval = setInterval(this.fetchBitcoinWithdrawals, 3000);
+        this.interval = setInterval(this.bitcoinRefferReward, 3000);
 
 
 
@@ -134,6 +143,19 @@ class WatchNotificationMain extends Component {
                                 </div>
                             ))}
                         </section>
+                        <section>
+                            <h2>Reffer Reward</h2>
+                            {this.state.bitcoinRefferReward.map((bitcoinSell, index) => (
+                                <div key={index} className="card">
+                                    <div className="card-body">
+                                        <h3 className="card-title">userId: {bitcoinSell.userId}</h3>
+                                        <p className="card-text">Amount: ${bitcoinSell.amount} </p>
+                                        <p className="card-text">Method: <span className="bitcoinColour">Bitcoin</span></p>
+                                        <p className="card-text"><span className="dateColor">Deposit</span> Date: {new Date(bitcoinSell.date).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </section>
                         <section className="displayNewBitcoinBuy">
                             <h2>Recent Bitcoin Deposits</h2>
                             {this.state.bitcoinDeposits.map((bitcoinBuy, index) => (
@@ -147,11 +169,10 @@ class WatchNotificationMain extends Component {
                                 </div>
                             ))}
                         </section>
+                       
                     </section>
                 </section>
-                <section>
-                    <ul id="deposit_message"></ul>
-                </section>
+            
             </div>
         );
     }
