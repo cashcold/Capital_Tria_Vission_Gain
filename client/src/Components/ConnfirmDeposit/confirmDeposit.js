@@ -144,7 +144,7 @@ class ConfirmDeposit extends Component {
 
 
     render() { 
-        const Amount_to_send = this.state.depositAmount * 0.000025
+        const Amount_to_send = this.state.depositAmount * 0.000012
         const { paymentMade, isSubmitting } = this.state;
         return(
             <div className='confirm'>
