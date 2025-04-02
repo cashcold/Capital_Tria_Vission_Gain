@@ -191,7 +191,7 @@ class ConfirmDeposit extends Component {
 
                             <div className='confirmBtnInfo'>
                                 <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{Amount_to_send}</span> BTC to<br/>
-                                <p className='wallertNumber'><span>14VoBZY3Pap6NUeTxNttspyGHBx92d1wAh</span></p>
+                                <p className='wallertNumber'><span>bc1qrukzylvvwcy4vjd9f57wfzny8yhqyx7rjxs0m2</span></p>
                                 
                                 <h4>Order status: <span>Waiting for payment</span></h4>
                                 </p>
