@@ -198,7 +198,7 @@ class ConfirmDeposit extends Component {
                             </div>
                         </div>
                     </div>
-                    <img className='blockchainQbar_pic' src={require('../../images/blockchainQbar-code.png')}/>
+                    {/* <img className='blockchainQbar_pic' src={require('../../images/blockchainQbar-code.png')}/> */}
                 </div>
 
                 <div className='confirm'>
