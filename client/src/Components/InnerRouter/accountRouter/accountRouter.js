@@ -267,6 +267,7 @@ class AccountRouter extends Component {
 
                     )
                 }
+                
                 {
                     CheckDeposit > 0 && (
                         <section className="miningCard">
@@ -317,6 +318,29 @@ class AccountRouter extends Component {
                     </div>
                 </div>
                 )}
+                {
+                    CheckDeposit > 1 && (
+                        <section className="automining">
+                            <div className="auto-mode-box">
+                        <div className="glow-title">Auto Mining Mode Activated</div>
+                        <div className="auto-info">
+                            When you make a withdrawal, your profit is instantly sent to your wallet,<br />
+                            and your mining plan is automatically reactivated.<br /><br />
+                            This smart Auto Mode helps us avoid repeated blockchain network fees<br />
+                            and keeps your mining seamless and uninterrupted.<br />
+                            All need to reupdate your deposit plan and everything updates automatically!
+                        </div>
+
+                        {/* Floating Coins */}
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" className="moving-coin" style={{ animationDelay: "0s" }} />
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" className="moving-coin" style={{ animationDelay: "5s", width: "30px" }} />
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" className="moving-coin" style={{ animationDelay: "10s", width: "50px" }} />
+                        </div>
+
+                        </section>
+
+                    )
+                }
 
                 <section className='dashboard__section_box__3'>
                     <div className="dash__box__1">

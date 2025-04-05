@@ -83,7 +83,7 @@ class Navbar extends Component {
                                 <div className='toggle'></div>
                             </div>
                      </div>
-                     </nav>s
+                     </nav>
                      
                </section>
             </div>

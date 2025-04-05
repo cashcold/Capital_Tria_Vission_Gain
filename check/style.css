@@ -1,63 +1,57 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: black;
-  color: white;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-  text-align: center;
+  background: #0d0d0d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 40px;
 }
 
-.container {
-  font-size: 2rem;
+.auto-mode-box {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #1f1f1f, #111);
+  padding: 30px 40px;
+  border-radius: 20px;
+  border: 1px solid #00ffcc44;
+  box-shadow: 0 0 25px #00ffcc15;
+  overflow: hidden;
+}
+
+.glow-title {
+  font-size: 1.8rem;
   font-weight: bold;
+  color: #00ffcc;
+  text-align: center;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  animation: glowPulse 2.5s infinite ease-in-out;
 }
 
-/* Typing effect */
-.typing-text {
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0;
-  border-right: 2px solid white;
-  animation: typing 4s steps(30, end) forwards, blinkCursor 0.8s infinite;
+@keyframes glowPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.03); }
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+.auto-info {
+  margin-top: 20px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-align: center;
+  color: #d3fdf7;
 }
 
-@keyframes blinkCursor {
-  50% { border-color: transparent; }
+.moving-coin {
+  position: absolute;
+  width: 40px;
+  animation: floatCoin 15s linear infinite;
+  pointer-events: none;
+  opacity: 0.15;
 }
 
-/* Fading effect */
-.fade-text {
-  opacity: 0;
-  animation: fadeIn 4s ease-in forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Shake effect */
-.shake-text {
-  display: inline-block;
-  transition: transform 0.2s ease-in-out;
-}
-
-.shake-text:hover {
-  animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(5px); }
+@keyframes floatCoin {
+  0% { top: -20px; left: -40px; transform: rotate(0deg); }
+  25% { top: 10%; left: 100%; transform: rotate(90deg); }
+  50% { top: 50%; left: 50%; transform: rotate(180deg); }
+  75% { top: 90%; left: -30px; transform: rotate(270deg); }
+  100% { top: -20px; left: -40px; transform: rotate(360deg); }
 }
