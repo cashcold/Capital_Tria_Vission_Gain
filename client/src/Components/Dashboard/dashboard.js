@@ -14,6 +14,7 @@ import WithdrawalTransaction from '../Transacttion/withdrawalTransaction';
 import DepositTransaction from '../Transacttion/depositTransaction';
 import EarningTransaction from '../Transacttion/earningTransaction';
 import ConfirmDeposit from '../ConnfirmDeposit/confirmDeposit';
+import MomoDeposit from '../ConnfirmDeposit/MomoDeposit';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -110,6 +111,7 @@ class Dashboard extends Component {
           <Route path='/dashboard/withdraw/:id' exact component={WithdrawMain} />
           <Route path='/dashboard/deposit' exact component={DepositMain} />
           <Route path='/dashboard/confirm_deposit' exact component={ConfirmDeposit} />
+          <Route path='/dashboard/MomoDeposit' exact component={MomoDeposit} />
           <Route path='/dashboard/transaction/total_transaction' exact component={TotalTransaction} />
           <Route path='/dashboard/transaction/total_withdrawal' exact component={WithdrawalTransaction} />
           <Route path='/dashboard/transaction/total_deposit' exact component={DepositTransaction} />

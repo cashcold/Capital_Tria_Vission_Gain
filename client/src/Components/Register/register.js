@@ -164,7 +164,7 @@ class RegisterUser extends Component {
                                         <td><input  className='' name='email'  onChange={this.handleChange('email')}/></td>
                                     </tr>
                                        <tr>
-                                           <td><label>Your Bitcoin Account:</label></td>
+                                           <td><label>Bitcoin Wallet or Momo Number:</label></td>
                                         <td><input  className='' name='bitcoin'  onChange={this.handleChange('bitcoin')}/></td>
                                     </tr>
                                 

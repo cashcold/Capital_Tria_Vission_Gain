@@ -72,11 +72,47 @@ class DepositMain extends Component {
             return false
         }
         if(!DepositForm.checkWallet){
-            toast.warn('Select Bitcoin')
+            toast.warn('Select Deposit Method')
             return false
         }
         setTimeout(()=>{
             window.location='/dashboard/confirm_deposit'
+        },600)
+    }
+    onSubmitMomo = (event)=>{
+        event.preventDefault()
+        
+        sessionStorage.setItem('planNow', this.state.planNow)
+         sessionStorage.setItem('depositAmount', this.state.depositAmount)
+        sessionStorage.setItem('deposit_date', this.state.deposit_date)
+
+        const DepositForm = {
+            user_id: this.state.user_id,
+            user_Name: this.state.user_Name,
+            full_Name: this.state.full_Name,
+            planNow: this.state.planNow,
+            depositAmount: this.state.depositAmount,
+            activetDeposit: this.state.depositAmount,
+            walletAddress: this.state.walletAddress,
+            date: this.state.date,
+            checkWallet: this.state.checkWallet,
+
+        }
+
+        if(!DepositForm.planNow){
+            toast.warn('Select Plan')
+            return false
+        }
+        if(!DepositForm.depositAmount){
+            toast.warn('Amount to Spend')
+            return false
+        }
+        if(!DepositForm.checkWallet){
+            toast.warn('Select Deposit Method')
+            return false
+        }
+        setTimeout(()=>{
+            window.location='/dashboard/MomoDeposit'
         },600)
     }
 
@@ -285,9 +321,11 @@ class DepositMain extends Component {
                         </div>
                         <div className="bit__btn">
                              <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> Bitcoin</span></h5>
+                             <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> Momo Number</span></h5>
                         </div>
                         <div className="bit__btn ">
-                             <h5 className='bit__btn_2'><a href='' onClick={this.onSubmit}>SPEND</a></h5>
+                             <h5 className='bit__btn_2'><a href='' onClick={this.onSubmit}>Pay with Bitcoin</a></h5>
+                             <h5 className='bit__btn_2'><a href='' onClick={this.onSubmitMomo}>Pay with Momo Number</a></h5>
                         </div>
                     </div>
                 </section>
