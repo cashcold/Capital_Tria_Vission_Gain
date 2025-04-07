@@ -120,48 +120,48 @@ class DepositMain extends Component {
     render() { 
         const CalculatorEngine = ()=>{
             if( this.state.amountCalculate){
-                 if( this.state.amountCalculate <= 59){
+                 if( this.state.amountCalculate <= 599){
                  const Percentage = this.state.amountCalculate * 10/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "$"+ totoalCheck
-                document.querySelector('.percent_check').innerHTML = Percentage +" %"
+                document.querySelector('.totalAmount').innerHTML = "GHC"+ totoalCheck
+                document.querySelector('.percent_check').innerHTML = Percentage +" GHC"
                 document.querySelector('.planNowType').innerHTML = "PLAN I"
                  }
   
              }
             if( this.state.amountCalculate){
-                 if( this.state.amountCalculate >= 60 ){
+                 if( this.state.amountCalculate >= 600 ){
                  const Percentage = this.state.amountCalculate * 15/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
+                document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
                 document.querySelector('.planNowType').innerHTML = "PLAN II"
                  }
   
              }
             if( this.state.amountCalculate){
-                 if( this.state.amountCalculate > 119){
+                 if( this.state.amountCalculate > 800){
                  const Percentage = this.state.amountCalculate * 20/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
+                document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
                 document.querySelector('.planNowType').innerHTML = "PLAN III"
                  }
   
              }
             if( this.state.amountCalculate){
-                 if( this.state.amountCalculate > 199){
+                 if( this.state.amountCalculate > 1000){
                  const Percentage = this.state.amountCalculate * 25/100
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
+                document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
                 document.querySelector('.planNowType').innerHTML = "PLAN IV"
                  }
   
              }
             if( this.state.amountCalculate){
-                 if( this.state.amountCalculate > 300){
-                document.querySelector('.totalAmount').innerHTML = "Please Max Investment is 300$ "
+                 if( this.state.amountCalculate > 1201){
+                document.querySelector('.totalAmount').innerHTML = "Please Max Investment is GHC1201 "
                 document.querySelector('.percent_check').innerHTML = 'Not Available'
                 document.querySelector('.planNowType').innerHTML = ""
                  }
@@ -195,7 +195,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>24HRS</h4>
-                                            <h4>$5.00 - $59.00	</h4>
+                                            <h4>GHC50.00 - GHC599.00	</h4>
                                             <h4>10</h4>
                                         </div>
                                     </div>
@@ -223,7 +223,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>3 DAYS</h4>
-                                            <h4>$60.00 - $119.00	</h4>
+                                            <h4>GHC600.00 - GHC799.00	</h4>
                                             <h4>15</h4>
                                         </div>
                                     </div>
@@ -250,7 +250,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>5 DAYS</h4>
-                                            <h4>$120.00 - $199.00	</h4>
+                                            <h4>GHC800.00 - GHC999.00	</h4>
                                             <h4>20</h4>
                                         </div>
                                     </div>
@@ -277,7 +277,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>7 DAYS</h4>
-                                            <h4>$200.00 - $300.00	</h4>
+                                            <h4>GHC1000.00 - GHC1200.00	</h4>
                                             <h4>25</h4>
                                         </div>
                                     </div>
@@ -302,22 +302,22 @@ class DepositMain extends Component {
                      </div>
                      <div className="calcualteNow__box_5">
                          <p><span>DAILY EARNING</span></p>
-                         <p className='totalAmount'>$0</p>
+                         <p className='totalAmount'>GHC0</p>
                      </div>
                      <div className="calcualteNow__box_6">
                          <p><span>DAILY PROFIT</span></p>
-                         <p className='percent_check'>%</p>
+                         <p className='percent_check'>GHC</p>
                      </div>
                  </section>
                 <section className='other__deposit__info'>
                     <div className="other_deposit_box_1">
                         <div className="other__inner_box">
-                            <h5>Your account balance ($):</h5>
-                            <h5 className='innerH5'>$0.00</h5>
+                            <h5>Your account balance (GHC):</h5>
+                            <h5 className='innerH5'>GHC0.00</h5>
                         </div>
                         <div className="other__inner_box_2">
-                            <h5>Amount to Spend ($):</h5>
-                            <h5 className='innerH5'><input name='depositAmount' onChange={this.handleChange('depositAmount')} placeholder='e.g $20'/></h5>
+                            <h5>Amount to Spend (GHC):</h5>
+                            <h5 className='innerH5'><input name='depositAmount' onChange={this.handleChange('depositAmount')} placeholder='e.g GHC50'/></h5>
                         </div>
                         <div className="bit__btn">
                              <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> Bitcoin</span></h5>

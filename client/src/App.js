@@ -133,6 +133,19 @@ class MainApp extends Component {
                 <div className='mainApp animate__animated animate__zoomIn animate__slowerss'>
                     <div className='google__id' id="google_translate_element"></div>
                     <div className='container_!'>
+                        <section className="MethodMomo">
+                            <section className="monoPAYMENT">
+                                <h1 className="animated-text">📱 Momo Payment Now Accepted!</h1>
+                                    <p className="blinking-text">
+                                    We are now accepting <strong>Mobile Money (Momo)</strong> for all investors in Ghana.
+                                    <br />Wherever you are, it's now simple and easy to invest with your mobile money.
+                                    <br />Invest with any amount from <strong>GHS 50</strong> and above!
+                                    </p>
+                                    <div className="image-box">
+                                    <img src={require('./images/mobile-money.jpg')} className=''/> 
+                                    </div>
+                            </section>
+                        </section>
                         <Other__NavBar />
                         <Navbar />
                         <div className='router'>

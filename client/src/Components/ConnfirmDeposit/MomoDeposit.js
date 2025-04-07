@@ -48,17 +48,17 @@ class MomoDeposit extends Component {
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 60 && depositAmountCheck <= 119) {
+        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
             const uCheck = document.querySelector('.planNow').innerHTML = "3 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 120 && depositAmountCheck <= 199) {
+        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
             const uCheck = document.querySelector('.planNow').innerHTML = "5 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 200) {
+        } else if (depositAmountCheck >= 1000) {
             const uCheck = document.querySelector('.planNow').innerHTML = "7 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
@@ -72,11 +72,11 @@ class MomoDeposit extends Component {
     
             let checkPercent = 0;
     
-            if (depositAmountCheck > 199) {
+            if (depositAmountCheck > 1000) {
                 checkPercent = depositAmountCheck * 25/100;
-            } else if (depositAmountCheck > 119) {
+            } else if (depositAmountCheck > 800) {
                 checkPercent = depositAmountCheck * 20/100;
-            } else if (depositAmountCheck >= 60) {
+            } else if (depositAmountCheck >= 600) {
                 checkPercent = depositAmountCheck * 15/100;
             } else {
                 checkPercent = depositAmountCheck * 10/100;
@@ -136,9 +136,9 @@ class MomoDeposit extends Component {
        socket.emit('NewDeposit', NewDeposit)
 
        
-       axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Blockchain confirmation')}).then(res => setTimeout(()=>{
+       axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Mobile Money confirmation,After deposit payment have been received, Your Dashboard will auto credit in minute')}).then(res => setTimeout(()=>{
             window.location='/dashboard'
-       },1100))
+       },1200))
 
    }
 
@@ -154,6 +154,7 @@ class MomoDeposit extends Component {
                     <ToastContainer/>
                 </div>
                 <div className='confirmLine'>
+                <img src={require('../../images/mobile-money.jpg')} className=''/> 
                     <div className='lastConfirm'>
                         <div className="insideLastConfirm">
                             <div className='planInfo'>
@@ -198,7 +199,7 @@ class MomoDeposit extends Component {
                             </div>
                         </div>
                     </div>
-                    <img className='blockchainQbar_pic' src='https://images.unsplash.com/photo-1658225282648-b199eb2a4830?q=80&w=1438&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'/>
+                    
                 </div>
 
                 <div className='confirm'>

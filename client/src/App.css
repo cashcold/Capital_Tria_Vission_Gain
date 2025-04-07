@@ -77,6 +77,74 @@ h2,h3,h4,h5{
 }
 
 
+/* Title animation (glowing) */
+.animated-text {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+    animation: glow 1.5s infinite alternate, bounce 2s ease-in-out infinite;
+  }
+  
+  @keyframes glow {
+    0% {
+      text-shadow: 0 0 10px #4c6b65, 0 0 20px #4c726a, 0 0 30px #5c857c;
+    }
+    100% {
+      text-shadow: 0 0 20px #539c8e, 0 0 40px #59887f, 0 0 50px #86b6ac;
+    }
+  }
+  
+  @keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+  }
+  
+ 
+  /* Image Box Styles */
+  .image-box {
+    margin-top: 25px;
+  }
+  
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #2e3836;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .image-box img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #00ffcc;
+  }
+.monoPAYMENT{
+    text-align: center;
+    padding: 30px;
+    border: 2px solid #00ffcc;
+    border-radius: 20px;
+    box-shadow: 0 0 30px #00ffcc;
+    background: rgba(255, 255, 255, 0.05);
+    width: 90%;
+    max-width: 650px;
+    animation: fadeIn 1s ease-in-out;
+}  
+
+.MethodMomo{
+    margin: 0;
+    padding: 0;
+    background: #0f0f0f;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    flex-direction: column;
+    color: white;
+}
+
+
 @media screen and (max-width: 768px){
     .mainApp{
        

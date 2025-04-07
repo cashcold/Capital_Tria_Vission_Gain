@@ -69,48 +69,48 @@ class Home extends Component {
     render() { 
         const CalculatorEngine = ()=>{
            if( this.state.amountCalculate){
-                if( this.state.amountCalculate <= 59){
+                if( this.state.amountCalculate <= 599){
                 const Percentage = this.state.amountCalculate * 10/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-               document.querySelector('.totalAmount').innerHTML = "$"+ totoalCheck
-               document.querySelector('.percent_check').innerHTML = Percentage +" %"
+               document.querySelector('.totalAmount').innerHTML = "GHC"+ totoalCheck
+               document.querySelector('.percent_check').innerHTML = Percentage +" GHC"
                document.querySelector('.planNowType').innerHTML = "PLAN I"
                 }
  
             }
            if( this.state.amountCalculate){
-                if( this.state.amountCalculate >= 60 ){
+                if( this.state.amountCalculate >= 600 ){
                 const Percentage = this.state.amountCalculate * 15/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-               document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
-               document.querySelector('.percent_check').innerHTML = Percentage
+               document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
+               document.querySelector('.percent_check').innerHTML = Percentage +" GHC"
                document.querySelector('.planNowType').innerHTML = "PLAN II"
                 }
  
             }
            if( this.state.amountCalculate){
-                if( this.state.amountCalculate > 119){
+                if( this.state.amountCalculate > 800){
                 const Percentage = this.state.amountCalculate * 20/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-               document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
-               document.querySelector('.percent_check').innerHTML = Percentage
+               document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
+               document.querySelector('.percent_check').innerHTML = Percentage +" GHC"
                document.querySelector('.planNowType').innerHTML = "PLAN III"
                 }
  
             }
            if( this.state.amountCalculate){
-                if( this.state.amountCalculate > 199){
+                if( this.state.amountCalculate > 1000){
                 const Percentage = this.state.amountCalculate * 25/100
                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-               document.querySelector('.totalAmount').innerHTML = "$"+totoalCheck
-               document.querySelector('.percent_check').innerHTML = Percentage
+               document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
+               document.querySelector('.percent_check').innerHTML = Percentage +" GHC"
                document.querySelector('.planNowType').innerHTML = "PLAN IV"
                 }
  
             }
            if( this.state.amountCalculate){
-                if( this.state.amountCalculate > 300){
-               document.querySelector('.totalAmount').innerHTML = "Please Max Investment is 300$ "
+                if( this.state.amountCalculate > 1201){
+               document.querySelector('.totalAmount').innerHTML = "Please Max Investment is 1201GHC "
                document.querySelector('.percent_check').innerHTML = 'Not Avalibale'
                document.querySelector('.planNowType').innerHTML = ""
                 }
@@ -151,10 +151,11 @@ class Home extends Component {
                             </div>
                             </div>
                         </div>
-                        <div className="home__box__2">
-                        {/* <img src={require('../../images/farm-2852024_1920.jpg')} className='home__box__2_image'/>  */}
-                        </div>
+                        
                 </section>
+                {/* <div className="">
+                        <img src={require('../../images/mobile-money.jpg')} className=''/> 
+                        </div> */}
                 <section className='about__investmentt__plan  '>
                     <div className="header__text">
                         <h2>OUR <span>MINING MACHINES  </span> PLANS</h2>
@@ -177,12 +178,12 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>$10</p>
+                                  <p className='typeAmountSpan'>GHC 50</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Max: </p>
-                                  <p className='typeAmountSpan'>$59</p>
+                                  <p className='typeAmountSpan'>GHC 599</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
@@ -208,12 +209,12 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>$60</p>
+                                  <p className='typeAmountSpan'>GHC 600</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Max: </p>
-                                  <p className='typeAmountSpan'>$119</p>
+                                  <p className='typeAmountSpan'>GHC 799</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
@@ -240,12 +241,12 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>$120</p>
+                                  <p className='typeAmountSpan'>GHC 800</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Max: </p>
-                                  <p className='typeAmountSpan'>$199</p>
+                                  <p className='typeAmountSpan'>GHC 999</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
@@ -273,12 +274,12 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>$200</p>
+                                  <p className='typeAmountSpan'>GHC 1000</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Max: </p>
-                                  <p className='typeAmountSpan'>$300</p>
+                                  <p className='typeAmountSpan'>GHC 1200</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
@@ -311,11 +312,11 @@ class Home extends Component {
                      </div>
                      <div className="calcualteNow__box_5">
                          <p><span>DAILY EARNING</span></p>
-                         <p className='totalAmount'>$0</p>
+                         <p className='totalAmount'>GHC 0</p>
                      </div>
                      <div className="calcualteNow__box_6">
                          <p><span>DAILY PROFIT</span></p>
-                         <p className='percent_check'>%</p>
+                         <p className='percent_check'>GHC</p>
                      </div>
                  </section>
                     </div>
