@@ -43,7 +43,7 @@ class MomoDeposit extends Component {
     componentDidMount() {
         const depositAmountCheck = Number(sessionStorage.getItem('depositAmount')) || 0;
     
-        if (depositAmountCheck <= 59) {
+        if (depositAmountCheck <= 599) {
             const uCheck = document.querySelector('.planNow').innerHTML = "24 HOURS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });

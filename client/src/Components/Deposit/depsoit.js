@@ -195,7 +195,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>24HRS</h4>
-                                            <h4>GHC50.00 - GHC599.00	</h4>
+                                            <h4>GHC50 - GHC599	</h4>
                                             <h4>10</h4>
                                         </div>
                                     </div>
@@ -223,7 +223,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>3 DAYS</h4>
-                                            <h4>GHC600.00 - GHC799.00	</h4>
+                                            <h4>GHC600 - GHC799	</h4>
                                             <h4>15</h4>
                                         </div>
                                     </div>
@@ -250,7 +250,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>5 DAYS</h4>
-                                            <h4>GHC800.00 - GHC999.00	</h4>
+                                            <h4>GHC800 - GHC999	</h4>
                                             <h4>20</h4>
                                         </div>
                                     </div>
@@ -277,7 +277,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>7 DAYS</h4>
-                                            <h4>GHC1000.00 - GHC1200.00	</h4>
+                                            <h4>GHC1000 - GHC1200	</h4>
                                             <h4>25</h4>
                                         </div>
                                     </div>
