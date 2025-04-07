@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { BrowserRouter as Router, Switch, Route, useParams, useRouteMatch, Link } from 'react-router-dom';
@@ -21,7 +23,8 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       user_id: '',
-      user_balance: ''
+      user_balance: '',
+      redirectToHome: false,
     };
     this.LogoutNow = this.LogoutNow.bind(this);
   }
@@ -32,6 +35,29 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+
+
+    try {
+      const token = sessionStorage.getItem('x-access-token');
+
+      if (!token) {
+        throw new Error('Token missing or null');
+      }
+
+      const decoded = jwt_decode(token);
+      const currentTime = Date.now() / 1000;
+
+      if (decoded.exp && decoded.exp < currentTime) {
+        throw new Error('Token expired');
+      }
+
+      // Token is valid – continue
+    } catch (err) {
+      console.warn('Token error:', err.message);
+      sessionStorage.clear();
+      this.setState({ redirectToHome: true });
+    }
+
 
     const token = sessionStorage.getItem('x-access-token')
     const decoded = jwt_decode(token)
@@ -66,6 +92,10 @@ class Dashboard extends Component {
   }
 
   render() {
+
+    if (this.state.redirectToHome) {
+      window.location.href = '/'; 
+    }
 
     const { user_balance } = this.state
 
