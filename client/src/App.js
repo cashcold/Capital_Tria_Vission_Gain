@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import jwt_decode from 'jwt-decode'
+import { Redirect } from 'react-router-dom';
 import './App.css'
 import moment from 'moment';
 import {BrowserRouter as Router, Switch, Route, useParams, useRouteMatch} from 'react-router-dom'
@@ -35,6 +37,7 @@ class MainApp extends Component {
             url: '',
             liveTime: null,
             timeMismatch: null,
+            redirectToHome: false,
             loading: true, // Added a loading state to control rendering for users
         };
     }
@@ -42,7 +45,7 @@ class MainApp extends Component {
     
     
     async componentDidMount() {
-        console.log('componentDidMount is called');
+
 
         const RefreshToken = sessionStorage.getItem('RefreshToken');
         if (RefreshToken) {

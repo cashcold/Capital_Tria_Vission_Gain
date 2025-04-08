@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from 'jwt-decode'
@@ -68,30 +68,39 @@ class AccountRouter extends Component {
       });
 
        
-      try {
-        const token = sessionStorage.getItem('x-access-token');
+   
+        try {
+              const token = sessionStorage.getItem('x-access-token');
+        
+              if (!token) {
+                throw new Error('Token missing or null');
+              }
+        
+              const decoded = jwt_decode(token);
+              const currentTime = Date.now() / 1000;
+        
+              if (decoded.exp && decoded.exp < currentTime) {
+                throw new Error('Token expired');
+              }
+        
+              // Token is valid – continue
+            } catch (err) {
+              console.warn('Token error:', err.message);
+              sessionStorage.clear();
+              this.setState({ redirectToHome: true });
+            }
+        
 
-        if (!token) {
-            throw new Error('Token missing or null');
-        }
-
-        const decoded = jwt_decode(token); // Decode the token
-        const currentTime = Date.now() / 1000; // Current time in seconds
-
-        if (decoded.exp && decoded.exp < currentTime) {
-            throw new Error('Token expired');
-        }
-
-        // Token is valid – set state and sessionStorage
-        sessionStorage.setItem('user_id', decoded.user_id);
-        sessionStorage.setItem('email', decoded.email);
-        sessionStorage.setItem('full_Name', decoded.full_Name);
-        sessionStorage.setItem('user_Name', decoded.user_Name);
-        sessionStorage.setItem('accountBalance', decoded.accountBalance);
-        sessionStorage.setItem('bitcoin', decoded.bitcoin);
-        sessionStorage.setItem('register_date', decoded.date);
-        sessionStorage.setItem('ip_address', decoded.ip_address);
-
+        const token = sessionStorage.getItem('x-access-token')
+        const decoded = jwt_decode(token)
+         JSON.stringify( sessionStorage.setItem('user_id',decoded.user_id))
+         JSON.stringify( sessionStorage.setItem('email',decoded.email))
+         JSON.stringify( sessionStorage.setItem('full_Name',decoded.full_Name))
+         JSON.stringify( sessionStorage.setItem('user_Name',decoded.user_Name))
+         JSON.stringify( sessionStorage.setItem('accountBalance',decoded.accountBalance))
+         JSON.stringify( sessionStorage.setItem('bitcoin',decoded.bitcoin))
+         JSON.stringify( sessionStorage.setItem(' register_date',decoded.date))
+         JSON.stringify( sessionStorage.setItem('ip_address',decoded.ip_address))
         this.setState({
             user_id: decoded.user_id,
             full_Name: decoded.full_Name,
@@ -101,50 +110,42 @@ class AccountRouter extends Component {
             accountBalance: decoded.accountBalance,
             activetDeposit: decoded.activetDeposit,
             ip_address: decoded.ip_address,
-            register_date: decoded.date,
+            register_date: decoded.date
+         })
+
+         const id = decoded.user_id
+
+          // Fetch total referral reward
+        axios.get(`/users/totalRefferReward/${decoded.user_id}`)
+        .then(response => {
+          this.setState({ totalReferralReward: response.data.totalReward });
+        })
+        .catch(error => {
+          console.error("Error fetching total referral reward:", error);
+          toast.error("Failed to fetch total referral reward.");
         });
 
-
-           const id = decoded.user_id
-        
-                  // Fetch total referral reward
-                axios.get(`/users/totalRefferReward/${decoded.user_id}`)
-                .then(response => {
-                  this.setState({ totalReferralReward: response.data.totalReward });
-                })
-                .catch(error => {
-                  console.error("Error fetching total referral reward:", error);
-                  toast.error("Failed to fetch total referral reward.");
-                });
-        
-                 axios.post('/users/user_profile_display',{id}).then(data => this.setState({
-                    user_profile_display: data.data
-                 }))
-                 axios.post('/users/user_deposit_display',{id}).then(data => this.setState({
-                    user_deposit_display: data.data.deposit
-                 }))
-                 axios.post('/users/depositInfo',{id}).then(data => this.setState({
-                    totalDeposit: data.data
-                 }))
-                  axios.post('/users/withdrawInfo',{id}).then(data => this.setState({
-                    withdrawTotal: data.data
-                 }))
-                  
-                 axios.post('/users/user_balance',{id}).then(data => this.setState({
-                   user_balance: data.data
-                   
-                }))
-                // axios.post('/users/checkdate',{id}).then(data => console.log(data.lastDate))
-                axios.post('/users/checkdate',{id}).then(data => this.setState({
-                    timestamp: data.data.map(user => user.lastDate)
-                 }))
-                 
-
-    } catch (err) {
-        console.warn('Token error:', err.message);
-        sessionStorage.clear(); // Clear sessionStorage if the token is invalid
-        this.setState({ redirectToHome: true }); // Redirect to home
-    }
+         axios.post('/users/user_profile_display',{id}).then(data => this.setState({
+            user_profile_display: data.data
+         }))
+         axios.post('/users/user_deposit_display',{id}).then(data => this.setState({
+            user_deposit_display: data.data.deposit
+         }))
+         axios.post('/users/depositInfo',{id}).then(data => this.setState({
+            totalDeposit: data.data
+         }))
+          axios.post('/users/withdrawInfo',{id}).then(data => this.setState({
+            withdrawTotal: data.data
+         }))
+          
+         axios.post('/users/user_balance',{id}).then(data => this.setState({
+           user_balance: data.data
+           
+        }))
+        // axios.post('/users/checkdate',{id}).then(data => console.log(data.lastDate))
+        axios.post('/users/checkdate',{id}).then(data => this.setState({
+            timestamp: data.data.map(user => user.lastDate)
+         }))
          
 
     }

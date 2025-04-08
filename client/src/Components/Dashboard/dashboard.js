@@ -50,30 +50,25 @@ class Dashboard extends Component {
         throw new Error('Token expired');
       }
 
+
+       const id = decoded.user_id
+
+      
+     axios.post('/users/user_balance',{id}).then(data => this.setState({
+       user_balance: data.data.activetDeposit
+      }))
+
+      JSON.stringify( sessionStorage.setItem('user_id',decoded.user_id))
+      this.setState({
+          user_id: decoded.user_id,
+       })
+
       // Token is valid – continue
     } catch (err) {
       console.warn('Token error:', err.message);
       sessionStorage.clear();
       this.setState({ redirectToHome: true });
     }
-
-
-    const token = sessionStorage.getItem('x-access-token')
-    const decoded = jwt_decode(token)
-     JSON.stringify( sessionStorage.setItem('user_id',decoded.user_id))
-    this.setState({
-        user_id: decoded.user_id,
-     })
-
-     const id = decoded.user_id
-
-      
-     axios.post('/users/user_balance',{id}).then(data => this.setState({
-       user_balance: data.data.activetDeposit
-
-       
-    }))
-
 
     const user_id = sessionStorage.getItem('user_id');
 
@@ -90,7 +85,7 @@ class Dashboard extends Component {
     }, 1000);
   }
 
-  render() {
+  render() {  
 
     if (this.state.redirectToHome) {
       return <Redirect to="/" />;
@@ -107,7 +102,7 @@ class Dashboard extends Component {
           <DropdownButton className='dashboard_bot_drop' id='dropdown-item-button' title='MY DASHBOARD'>
             <Dropdown.Item href='/dashboard/account'>ACCOUNT</Dropdown.Item>
             {user_balance <= 1 && <Dropdown.Item href='/dashboard/deposit'>DEPOSIT</Dropdown.Item>}
-            <Dropdown.Item href='/dashboard/transaction/total_transaction'>TRANSACTION</Dropdown.Item>
+            {/* <Dropdown.Item href='/dashboard/transaction/total_transaction'>TRANSACTION</Dropdown.Item> */}
             <Dropdown.Item href='/dashboard/edit'>EDIT</Dropdown.Item>
             <Dropdown.Item href='/' onClick={this.LogoutNow}>
               SIGN-OUT
@@ -122,7 +117,7 @@ class Dashboard extends Component {
             <li>  {user_balance <= 1 && <li><a href='/dashboard/deposit'>DEPOSIT</a></li>}</li>
 
             <li>
-              <a href='/dashboard/transaction/total_transaction'>TRANSACTION</a>
+              {/* <a href='/dashboard/transaction/total_transaction'>TRANSACTION</a> */}
             </li>
             <li>
               <a href={`/dashboard/edit`}>EDIT</a>

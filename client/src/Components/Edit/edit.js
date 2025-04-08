@@ -91,7 +91,6 @@ class EditMain extends Component {
     });
     }
     render() { 
-        console.log(this.state.user_profile_display)
         const {full_Name,bitcoin,email} = this.state.user_profile_display
         return ( 
             <div className='edit__main'>
@@ -150,7 +149,7 @@ class EditMain extends Component {
                     </div>
                     <div className="edit__box__1_main">
                         <div className="edit__inner__box__1">
-                            <h5>Your Bitcoin acc no:</h5>
+                            <h5>Your Bitcoin or Momo Number:</h5>
                         </div>
                         <div className="edit__inner__box__2">
                             <h5><input name='bitcoin' onChange={this.handleChange('bitcoin')} placeholder={bitcoin} /></h5>
