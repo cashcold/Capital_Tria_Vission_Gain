@@ -22,25 +22,27 @@
 img{
     width: 100%;
 }
-.home__box__2{
-    background-image: url('../../images/farm-2852024_1920.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* height: 500px; */
-    width: 100%;
-  animation: move-bg 10s linear infinite;
-  filter: brightness(0.5);
+.home__box__2 {
+  background-image: url('../../images/farm-2852024_1920.jpg');
+  background-size: 150%; /* zoomed in a bit to allow movement */
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px; /* Optional: Add height if the section appears invisible */
+  animation: move-bg 20s linear infinite;
+  filter: brightness(0.6);
+  padding: 0em 2em;
+  transition: all 0.5s ease-in-out;
 }
-@keyframes move-bg {
-    from {
-      background-position: 100% 0;
-    }
-    to {
-      background-position: 0 100%;
-    }
-  }
 
+@keyframes move-bg {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
 
 
 .home__box__2{

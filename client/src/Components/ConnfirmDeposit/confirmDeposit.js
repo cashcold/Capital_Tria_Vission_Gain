@@ -43,22 +43,22 @@ class ConfirmDeposit extends Component {
     componentDidMount() {
         const depositAmountCheck = Number(sessionStorage.getItem('depositAmount')) || 0;
     
-        if (depositAmountCheck <= 59) {
+        if (depositAmountCheck <= 599) {
             const uCheck = document.querySelector('.planNow').innerHTML = "24 HOURS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 60 && depositAmountCheck <= 119) {
+        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 119) {
             const uCheck = document.querySelector('.planNow').innerHTML = "3 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 120 && depositAmountCheck <= 199) {
+        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 199) {
             const uCheck = document.querySelector('.planNow').innerHTML = "5 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 200) {
+        } else if (depositAmountCheck >= 1000) {
             const uCheck = document.querySelector('.planNow').innerHTML = "7 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
@@ -144,7 +144,7 @@ class ConfirmDeposit extends Component {
 
 
     render() { 
-        const Amount_to_send = this.state.depositAmount * 0.000012
+        const Amount_to_send = this.state.depositAmount * 15
         const { paymentMade, isSubmitting } = this.state;
         return(
             <div className='confirm'>
@@ -192,7 +192,7 @@ class ConfirmDeposit extends Component {
                             </div>
 
                             <div className='confirmBtnInfo'>
-                                <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{Amount_to_send}</span> BTC to<br/>
+                                <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{Amount_to_send}</span> $USD to<br/>
                                 <p className='wallertNumber'><span>bc1qrukzylvvwcy4vjd9f57wfzny8yhqyx7rjxs0m2</span></p>
                                 
                                 <h4>Order status: <span>Waiting for payment</span></h4>

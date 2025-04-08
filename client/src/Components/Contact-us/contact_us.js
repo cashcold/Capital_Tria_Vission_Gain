@@ -43,13 +43,14 @@ class ContactMain extends Component {
                                     <h1> <i class="fas fa-envelope-square fa-3x"></i></h1>
                                     <h4>OUR <span>E-MAIL</span></h4>
                                     <p>  ✉️ Email: support@capgainco.com</p>
+                                    <p>  ✉️ Email: info@capgainco.com</p>
                                 </div>
                             </div>
                             <div className='bothMenu bothMenuCount2' >
                                 <div className='supportInfo'>
                                     <h1><i class="fas fa-phone fa-3x"></i></h1>
                                     <h4>PHONE <span>NUMBER</span> </h4>
-                                    <p>📞 Support: +447459184400</p>
+                                    <p>📞 Support: +233241407522</p>
                                 </div>
                             </div>
                             <div className='bothMenu bothMenuCount3'>
@@ -57,6 +58,8 @@ class ContactMain extends Component {
                                 <h1><i class="fas fa-address-card fa-3x"></i></h1>
                                     <h4>ADDRESS <span>INFO</span></h4>
                                     <p>📍 Address: Capital Gain Co, HQ</p>
+                                    <p>WITH</p>
+                                    <p>📍 Address: BTC SHARK TRADE, GHANA</p>
                                     <p>🌐 Website: www.capgainco.com</p>
                                 </div>
                             </div>  

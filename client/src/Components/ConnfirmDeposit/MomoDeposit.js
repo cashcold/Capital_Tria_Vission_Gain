@@ -192,7 +192,7 @@ class MomoDeposit extends Component {
 
                             <div className='confirmBtnInfo'>
                                 <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{Amount_to_send}</span> GHC to  Momo Number<br/>
-                                <p className='wallertNumber'><span>0268253787</span><br/>Frank Ainoo </p>
+                                <p className='wallertNumber'><span>0203808479</span><br/>Ainoo Frank  </p>
                                 
                                 <h4>Order status: <span>Waiting for payment</span></h4>
                                 </p>

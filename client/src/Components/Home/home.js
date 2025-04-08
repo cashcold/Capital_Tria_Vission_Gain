@@ -151,11 +151,11 @@ class Home extends Component {
                             </div>
                             </div>
                         </div>
+                        <div className="home_box_2">
+                         </div>
                         
                 </section>
-                {/* <div className="">
-                        <img src={require('../../images/mobile-money.jpg')} className=''/> 
-                        </div> */}
+              
                 <section className='about__investmentt__plan  '>
                     <div className="header__text">
                         <h2>OUR <span>MINING MACHINES  </span> PLANS</h2>
@@ -494,8 +494,8 @@ class Home extends Component {
                         <div className="recent-users-container user-info">
                             <img src={`https://robohash.org/${deposit.user}`} alt="User Avatar" />
                             <h3>{deposit.user_Name}</h3>
-                            <p>Amount: ${deposit.depositAmount}</p>
-                            <p>Method: <span class="bitcoinColour">Bitcoin</span> </p>
+                            <p>Amount: GHC{deposit.depositAmount}</p>
+                            <p>Method: <span class="bitcoinColour">MOMO</span> </p>
                             <p><span class="dateColor">Deposit</span> Date: {new Date(deposit.createdAt).toLocaleString()}</p>
                         </div>
                         </motion.li>
@@ -505,7 +505,7 @@ class Home extends Component {
                 </section>
                 <section class="lastWithdrawls">
                      <div className="recent-users-container">
-                      <img src={require('../../AllInOne/bticoin/de0912f4-bd56-4e69-9c60-ca69755ea08d.webp')}/>
+                      {/* <img src={require('../../AllInOne/bticoin/de0912f4-bd56-4e69-9c60-ca69755ea08d.webp')}/> */}
                         <h1 className="title titleRecentWithdrawals">Recent Withdrawals</h1>
                         <ul>
                         {this.state.withdrawals.map((withdrawal, index) => (
@@ -519,7 +519,7 @@ class Home extends Component {
                             <div className="user-info">
                                 <img src={`https://robohash.org/${withdrawal.user_Name}`} alt="Avatar" />
                                 <h3>{withdrawal.user_Name}</h3>
-                                <p><span class="newUserColour">Amount </span> Withdraw: ${withdrawal.activetDeposit
+                                <p><span class="newUserColour">Amount </span> Withdraw: GHC{withdrawal.activetDeposit
                                 }</p>
                                 <p><span class="dateColor">Withdraw</span> Date: {new Date(withdrawal.createdAt).toLocaleString()}</p>
                             </div>
