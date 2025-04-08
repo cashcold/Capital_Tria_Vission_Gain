@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { BrowserRouter as Router, Switch, Route, useParams, useRouteMatch, Link } from 'react-router-dom';
@@ -94,9 +93,10 @@ class Dashboard extends Component {
   render() {
 
     if (this.state.redirectToHome) {
-      window.location.href = '/'; 
-    }
+      return <Redirect to="/" />;
 
+    }
+    
     const { user_balance } = this.state
 
 
