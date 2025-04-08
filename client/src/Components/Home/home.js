@@ -169,7 +169,7 @@ class Home extends Component {
                                <h1 className='percentRate'>10</h1>
                                <h3>%</h3>
                            </div>
-                           <h3 className='planType'>DAILY FOREVER</h3>
+                           <h3 className='planType'>24HRS DAILY FOREVER</h3>
                            <p>Antminer S9i/j 14.5T 16nm BTC Bitcoin Miner SHA256 Include APW3++ 1600W PSU</p>
                            <div className='icon'>
                                 <i class="fas fa-star"></i>
@@ -321,6 +321,46 @@ class Home extends Component {
                  </section>
                     </div>
                 </section>
+                <section className="welcome-section">
+                
+      <div className="welcome-container">
+       
+        <h1>Welcome to <span>Capital Gain Management Co.</span></h1>
+        <p className="tagline">The Future, Our Mission</p>
+        <p>
+          At <strong>Capital Gain Management Co.</strong>, we’re more than just an investment platform — we are <strong>a legacy in motion</strong>.
+        </p>
+        <p>
+          We believe in building a future not just for today, but for <strong>generations to come</strong>. Our mission is deeply rooted in purpose: to create an opportunity where everyone — regardless of background or status — can be part of a project that blesses lives, <strong>puts daily bread on the table</strong>, and unlocks doors to financial freedom.
+        </p>
+        <p>This isn’t just about money. It’s about <strong>impact, growth, and generational success</strong>.</p>
+
+        <div className="promise-box">
+          <h2>🔐 Our Promise:</h2>
+          <ul>
+            <li>To build a <strong>secure, trusted, and lasting investment platform</strong></li>
+            <li>To empower individuals to grow, no matter where they’re starting from</li>
+            <li>To make this platform a <strong>blessing for families, communities, and future generations</strong></li>
+            <li>To grow with you, and for you</li>
+          </ul>
+        </div>
+
+        <p>
+          With <strong>Capital Gain Management Co.</strong>, you're not just investing in a project — you're becoming part of a <strong>global vision</strong> to create wealth, opportunity, and sustainability for years to come.
+        </p>
+
+        <blockquote className="quote">
+          🚀 <strong>Your investment today is a seed for tomorrow’s harvest.</strong>
+        </blockquote>
+
+        <p className="final-note">Join us, and let’s build a future that <strong>outlives us all</strong>.</p>
+      </div>
+    </section>
+    <img
+          src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FCapital%20Gain%20Management%20Co..jpg?alt=media&token=0d468756-ba8a-4084-b2cd-00cbf957f9ab" // Replace with your actual image path
+          alt="Capital Gain Management Co."
+          className=""
+        />
                 <section className='about__us__main'>
                     <div className="about__box_1">
                         <h1>ABOUT <span>OUR COMPANY</span></h1>

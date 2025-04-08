@@ -416,6 +416,104 @@ img{
   }
 
 
+  .welcome-section {
+    background-color: #0d0d0d;
+    color: #f5f5f5;
+    padding: 60px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .welcome-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .company-image {
+    width: 150px;
+    height: auto;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  }
+  
+  .welcome-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #00ffab;
+  }
+  
+  .welcome-section h1 span {
+    color: #ffffff;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+    color: #bbbbbb;
+    margin-bottom: 30px;
+    font-style: italic;
+  }
+  
+  .welcome-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  strong {
+    color: #00ffaa;
+  }
+  
+  .promise-box {
+    background-color: #1a1a1a;
+    border-left: 4px solid #00ffab;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  .promise-box h2 {
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .promise-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .promise-box ul li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .promise-box ul li::before {
+    content: '✔';
+    color: #00ffaa;
+    position: absolute;
+    left: 0;
+  }
+  
+  .quote {
+    font-size: 1.2rem;
+    margin-top: 30px;
+    color: #00ffaa;
+    font-weight: bold;
+    background-color: #121212;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #00ffaa;
+  }
+  
+  .final-note {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #cccccc;
+  }
+  
+
 
 
 

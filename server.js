@@ -68,10 +68,10 @@ app.get('/', (req, res) => {
             return console.log(err);
         }
 
-        data = data.replace(/\$OG_TITLE/g, 'We Help Everyone Live Better Through Bitcoin')
-           .replace(/\$OG_DESCRIPTION/g, "Join our Bitcoin mining project and secure your financial future. We make crypto mining simple, profitable, and accessible for everyone.")
-           .replace(/\$OG_IMAGE/g, 'https://images.unsplash.com/photo-1658225282648-b199eb2a4830?q=80&w=1438&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
-        res.send(data);
+        data = data.replace(/\$OG_TITLE/g, 'We Help Everyone Live Better Through Momo')
+           .replace(/\$OG_DESCRIPTION/g, "Join our Mobile Money (Momo) investment project and secure your financial future. We make investing simple, flexible, and accessible for everyone.")
+           .replace(/\$OG_IMAGE/g, 'https://bitcoin4uonline.com/static/media/mobile-money.10e06826.jpg'); 
+res.send(data);
     });
 });
 
