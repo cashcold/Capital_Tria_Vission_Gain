@@ -554,7 +554,7 @@ class Home extends Component {
                     That's why we now <strong>accept Mobile Money from all networks in Ghana!</strong> 🇬🇭
                     </p>
                     <p>
-                    Simply make your investment Deopiste payment through Mobile Money to  company name in Ghana BTC SHARK TRADE:
+                    Investment deposit payment are made through Mobile Money to  company name in Ghana BTC SHARK TRADE:
                     </p>
                     <p className="btc-highlight">➡️ <strong>BTC SHARK TRADE</strong></p>
                     <p>
