@@ -72,11 +72,11 @@ class ConfirmDeposit extends Component {
     
             let checkPercent = 0;
     
-            if (depositAmountCheck > 199) {
+            if (depositAmountCheck > 1000) {
                 checkPercent = depositAmountCheck * 25/100;
-            } else if (depositAmountCheck > 119) {
+            } else if (depositAmountCheck > 800) {
                 checkPercent = depositAmountCheck * 20/100;
-            } else if (depositAmountCheck >= 60) {
+            } else if (depositAmountCheck >= 600) {
                 checkPercent = depositAmountCheck * 15/100;
             } else {
                 checkPercent = depositAmountCheck * 10/100;
@@ -144,7 +144,7 @@ class ConfirmDeposit extends Component {
 
 
     render() { 
-        const Amount_to_send = this.state.depositAmount * 15.50
+        const Amount_to_send = this.state.depositAmount * 0.0645
         const { paymentMade, isSubmitting } = this.state;
         return(
             <div className='confirm'>
