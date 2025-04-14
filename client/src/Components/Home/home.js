@@ -125,6 +125,8 @@ class Home extends Component {
             
             <div className='main__home'>
                 <section className='home__main__box__1'>
+                     <div className="home__box__2">
+                         </div>
                         <div className="home__box__1">
                             <div className='home__h1'>
                                 <h1 className='home__box__h1'>Capital Gain Management Co.</h1>
@@ -151,8 +153,7 @@ class Home extends Component {
                             </div>
                             </div>
                         </div>
-                        <div className="home_box_2">
-                         </div>
+                       
                         
                 </section>
                 <section class="co_ing">
@@ -505,7 +506,7 @@ class Home extends Component {
                             <img src={`https://robohash.org/${deposit.user}`} alt="User Avatar" />
                             <h3>{deposit.user_Name}</h3>
                             <p>Amount: GHC{deposit.depositAmount}</p>
-                            <p>Method: <span class="bitcoinColour">MOMO</span> </p>
+                            {/* <p>Method: <span class="bitcoinColour">MOMO</span> </p> */}
                             <p><span class="dateColor">Deposit</span> Date: {new Date(deposit.createdAt).toLocaleString()}</p>
                         </div>
                         </motion.li>

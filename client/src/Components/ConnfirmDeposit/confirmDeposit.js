@@ -48,12 +48,12 @@ class ConfirmDeposit extends Component {
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 119) {
+        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
             const uCheck = document.querySelector('.planNow').innerHTML = "3 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 199) {
+        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
             const uCheck = document.querySelector('.planNow').innerHTML = "5 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
@@ -144,7 +144,7 @@ class ConfirmDeposit extends Component {
 
 
     render() { 
-        const Amount_to_send = this.state.depositAmount * 15
+        const Amount_to_send = this.state.depositAmount * 15.50
         const { paymentMade, isSubmitting } = this.state;
         return(
             <div className='confirm'>
