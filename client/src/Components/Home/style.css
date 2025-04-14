@@ -516,6 +516,49 @@ img{
   }
   
 
+  .btc-footer-notice {
+    background-color: #111;
+    color: #eee;
+    padding: 30px 20px;
+    border-top: 2px solid #00cc66;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .btc-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .btc-footer-notice h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #00ff99;
+  }
+  .btc-footer-notice p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+  .btc-highlight {
+    font-size: 1.2rem;
+    color: #00ff99;
+  }
+  .btc-note {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #fff;
+  }
+  .btc-certificate {
+    margin-top: 20px;
+  }
+  .btc-certificate img {
+    max-width: 300px;
+    width: 100%;
+    border: 2px solid #00ff99;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  
+
 
 
 

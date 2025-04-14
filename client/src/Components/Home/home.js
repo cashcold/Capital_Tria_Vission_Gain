@@ -155,6 +155,9 @@ class Home extends Component {
                          </div>
                         
                 </section>
+                <section class="co_ing">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FTHE%20CRYTO%20MINING%20POWERHOUSE.jpg?alt=media&token=97841213-86fb-48c0-aef8-f8df4833c900" alt="Capgainco " />
+                </section>
               
                 <section className='about__investmentt__plan  '>
                     <div className="header__text">
@@ -321,6 +324,7 @@ class Home extends Component {
                  </section>
                     </div>
                 </section>
+                
                 <section className="welcome-section">
                 
       <div className="welcome-container">
@@ -431,6 +435,9 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
+                <section class="co_ing">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FMANAGEMENT%20CO.jpg?alt=media&token=d3e8d635-e62a-49db-8e38-55ce8ce65af9" alt="Capgainco " />
+                </section>
 
                 <section class="displayRecentRegisterUser">
                 <div className="recent-users-container">
@@ -479,6 +486,9 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
+                <section class="co_ing">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FUntitled%20design%20(2).jpg?alt=media&token=88b1471a-973d-4b48-9eeb-f9090be9cb0b " />
+                </section>
                 <section class="recentDepost">
                             <div className="recent-users-container">
                     <h1 className="recent-users-container title">Recent Deposits</h1>
@@ -502,6 +512,9 @@ class Home extends Component {
                     ))}
                     </ul>
                 </div>
+                </section>
+                <section class="co_ing">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FYour%20paragraph%20text.jpg?alt=media&token=cb2a1896-a5f4-4437-b4c5-f8782ef0cb5b" alt="Capgainco " />
                 </section>
                 <section class="lastWithdrawls">
                      <div className="recent-users-container">
@@ -527,6 +540,39 @@ class Home extends Component {
                         ))}
                         </ul>
                     </div>
+                </section>
+                <section class="btc_shark_trade_cert">
+                <div className="btc-footer-notice">
+                <div className="btc-container">
+                    <h3>📢 Attention Ghanaian Investors!</h3>
+                    <p>
+                    We're making it easier for you to join our <strong>Bitcoin Mining Project</strong>.
+                    Many of our Ghanaian users find it difficult to download and use wallets like Blockchain,
+                    Coinbase, Exduos, etc.
+                    </p>
+                    <p>
+                    That's why we now <strong>accept Mobile Money from all networks in Ghana!</strong> 🇬🇭
+                    </p>
+                    <p>
+                    Simply make your investment Deopiste payment through Mobile Money to  company name in Ghana BTC SHARK TRADE:
+                    </p>
+                    <p className="btc-highlight">➡️ <strong>BTC SHARK TRADE</strong></p>
+                    <p>
+                    <em>Registered under the Office of the Registrar of Companies, Republic of Ghana.</em>
+                    </p>
+                    <p className="btc-note">✅ Fast &nbsp; ✅ Safe &nbsp; ✅ Fully Verified</p>
+
+                    {/* Optional Certificate Image */}
+                    <div className="btc-certificate">
+                    <p><strong>Business Certificate:</strong></p>
+                    <img
+                        src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2Fbtc_sbark_trade_cert.jpg?alt=media&token=57bbd3d2-81db-4242-8d02-8f8fd63226d1" // Update the path to your actual image location
+                        alt="BTC SHARK TRADE Certificate"
+                    />
+                    </div>
+                </div>
+                </div>
+                
                 </section>
                 
                 
