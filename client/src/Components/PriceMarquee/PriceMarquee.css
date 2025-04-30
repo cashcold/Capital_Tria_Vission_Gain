@@ -1,0 +1,10 @@
+.price-marquee {
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #111111;
+  padding: 10px;
+  white-space: nowrap;
+  font-weight: bold;
+  border-top: 2px solid gold;
+  border-bottom: 2px solid gold;
+}

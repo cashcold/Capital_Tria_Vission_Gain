@@ -26,9 +26,10 @@ import ActivitPassword from './Components/Password/activePassword';
 import FAQSETUP from './Components/FAQ/faqsSetup';
 import WatchNotificationMain from './Components/WatchNotifcation/watchNotification';
 import WithdrawRefferReward from './Components/WithdrawRefferReward/WithdrawRefferReward';
-
-
 import axios from 'axios';
+import ExchangeMarquee from './Components/ExchangeMarquee/ExchangeMarquee';
+import PriceMarquee from './Components/PriceMarquee/PriceMarquee';
+
 
 class MainApp extends Component {
     constructor(props) {
@@ -149,7 +150,9 @@ class MainApp extends Component {
                                     </div>
                             </section>
                         </section>
+                        <ExchangeMarquee/>
                         <Other__NavBar />
+                        <PriceMarquee />
                         <Navbar />
                         <div className='router'>
                             <Switch>

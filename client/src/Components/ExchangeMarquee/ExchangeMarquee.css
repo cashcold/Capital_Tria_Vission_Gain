@@ -1,0 +1,43 @@
+/* Marquee Container */
+.exchange-marquee-container {
+  background-color: #000;
+  color: #0f0;
+  padding: 1.5em 0em;
+  font-size: 16px;
+  font-family: monospace;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Marquee Text */
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 430s linear infinite; /* Adjust speed here */
+  animation-play-state: running; /* Default state */
+  cursor: pointer; /* Indicate interactivity */
+}
+
+/* Keyframes for Marquee Animation */
+@keyframes marquee {
+  from {
+      transform: translateX(100%);
+  }
+  to {
+      transform: translateX(-100%);
+  }
+}
+
+/* Loading and Error Styles */
+.loading {
+  background: #000;
+  color: #fff;
+  padding: 5px;
+}
+
+.error {
+  background: #000;
+  color: red;
+  padding: 5px;
+}
