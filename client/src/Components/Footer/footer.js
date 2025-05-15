@@ -32,6 +32,7 @@ class FooterMain extends Component {
                             <p>📍 Address: BTC SHARK TRADE, GHANA</p>
                           
                             <p>📞 Support: +233241407522</p>
+                            <p>📞 Support: +233268253787</p>
                             <p>✉️ Email: support@capgainco.com</p>
                             <p> ✉️ Email: info@capgainco.com</p>
                             <p>🌐 Website: www.capgainco.com</p>

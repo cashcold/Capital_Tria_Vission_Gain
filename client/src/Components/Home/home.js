@@ -3,6 +3,7 @@ import './style.css'
 import axios from 'axios'
 import {Card,Button} from 'react-bootstrap'
 import { motion } from "framer-motion";
+import TradingViewWidget from '../TradingViewWidget/TradingViewWidget';
 
 
 class Home extends Component {
@@ -574,6 +575,10 @@ class Home extends Component {
                 </div>
                 </div>
                 
+                </section>
+                <section className="tradingView" >
+                <TradingViewWidget />
+
                 </section>
                 
                 
