@@ -140,12 +140,19 @@ class AccountRouter extends Component {
                  }))
                  
 
-    } catch (err) {
-        console.warn('Token error:', err.message);
-        sessionStorage.clear(); // Clear sessionStorage if the token is invalid
-        this.setState({ redirectToHome: true }); // Redirect to home
-    }
+        } catch (err) {
+            console.warn('Token error:', err.message);
+            sessionStorage.clear(); // Clear sessionStorage if the token is invalid
+            this.setState({ redirectToHome: true }); // Redirect to home
+        }
          
+      // Trigger the animations after component mounts
+    const button = document.querySelector('.cashout-btn');
+    const ring = document.querySelector('.gradient-ring');
+
+        if (button) button.classList.add('animate-in');
+        if (ring) ring.classList.add('spin-gradient');
+    
 
     }
     
@@ -346,11 +353,11 @@ class AccountRouter extends Component {
                     CheckDeposit > 1 && (
                         <section className="automining">
                             <div className="auto-mode-box">
-                        <div className="glow-title">Auto Mining Mode Activated</div>
+                        <div className="glow-title">Auto Mining Mode not Activated</div>
                         <div className="auto-info">
                             When you make a withdrawal, your profit is instantly sent to your wallet,<br />
                             and your mining plan is automatically reactivated.<br /><br />
-                            This smart Auto Mode helps us avoid repeated blockchain network fees<br />
+                            This smart Auto Mode helps us avoid repeated network fees<br />
                             and keeps your mining seamless and uninterrupted.<br />
                             All need to reupdate your deposit plan and everything updates automatically!
                         </div>
@@ -381,8 +388,17 @@ class AccountRouter extends Component {
                         <div className="dashText">
                             <h5>ACCOUNT BALANCE</h5>
                             <h5 className='balanceMe'> GHC {this.state.accountBalance}.00</h5>
+                            <a className="btn_balanceMe"  href={`/dashboard/withdraw/${this.state.user_id}`}>
+                            <div className="btn-wrapper">
+                                    <button className="cashout-btn" >
+                                    💸 Cash Out
+                                    <span className="spinner"></span>
+                                    </button>
+                                    <div className="gradient-ring"></div>
+                                </div> 
+                        </a>
                         </div>
-                      <a className='btn_balanceMe'  href={`/dashboard/withdraw/${this.state.user_id}`}>  <h2 >WITHDRAW</h2></a>
+                        
                     </div>
                 </section>
                 <section className='welcome__user'>
@@ -435,7 +451,7 @@ class AccountRouter extends Component {
                             <h2>Personal <span>Referral</span> Link:</h2>
                             <p className='reffLink'>https://capgainco.com/?ref={this.state.user_Name}</p>
                             <p className='btn btn-warning btn-referral'> Your Referral Reward: <span>GHC{this.state.user_profile_display.refferReward}.00</span><br/>
-                            {this.state.user_profile_display.refferReward > 2 ? (
+                            {this.state.user_profile_display.refferReward > 5 ? (
                             <button className="btn-referral-cashout" onClick={()=>{
                                 window.location =`/withdraw-refferReward`
                             }} >Cashout</button>
