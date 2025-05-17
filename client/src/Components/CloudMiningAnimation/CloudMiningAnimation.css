@@ -1,0 +1,138 @@
+.mining-animation-container {
+  background-color: #0d0d0d;
+  color: #00ffcc;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,255,204,0.2);
+  max-width: 700px;
+  margin: 40px auto;
+  border: 1px solid #00ffcc44;
+  animation: fadeIn 1.5s ease-in;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.console {
+  background-color: #000;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #00ffcc33;
+  margin-top: 20px;
+  height: 160px;
+  overflow-y: auto;
+}
+
+.dots {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.logs .log-line {
+  font-size: 0.95rem;
+  margin-bottom: 3px;
+  color: #aaffff;
+}
+
+.meters-section {
+  margin-top: 25px;
+}
+
+.hash-meter {
+  margin-bottom: 20px;
+}
+
+.hash-meter label {
+  font-size: 1rem;
+}
+
+.meter-bar {
+  background: #111;
+  border: 1px solid #00ffcc33;
+  height: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.meter-fill {
+  background: linear-gradient(to right, #00ffcc, #00ffaa);
+  height: 100%;
+  transition: width 0.4s ease-in-out;
+}
+
+.hash-rate-display {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #aaffcc;
+}
+
+.fake-speed-meters {
+  display: grid;
+  gap: 10px;
+}
+
+.speed-meter label {
+  font-size: 0.9rem;
+  color: #99ffcc;
+}
+
+.gauge-bar {
+  height: 10px;
+  border-radius: 5px;
+  background: #00ffcc66;
+  margin-top: 3px;
+  animation: pulse 2s infinite alternate;
+}
+
+.online-users-count {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #00ff90;
+  text-shadow: 0 0 4px #00ff90;
+  font-weight: bold;
+  background: rgba(0, 255, 144, 0.1);
+  padding: 6px 16px;
+  border-radius: 12px;
+  border: 1px solid #00ff90;
+  display: inline-block;
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #00ffcc66;
+  }
+  100% {
+    background-color: #00ffcc;
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 5px #00ff90;
+  }
+  50% {
+    box-shadow: 0 0 20px #00ff90;
+  }
+  100% {
+    box-shadow: 0 0 5px #00ff90;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

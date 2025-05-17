@@ -1,0 +1,59 @@
+/* GlobalMiningActivity.css */
+
+.blinkingDotcontainer .container {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00ffcc;
+  background-color: #111;
+  padding: 12px 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+.blinkingDot {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background-color: #00ffcc;
+  margin-right: 15px;
+  animation: blink 1.5s infinite;
+}
+
+.blinkingDotcontainer .text {
+  flex: 1;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px){
+    
+.blinkingDotcontainer .container {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #00ffcc;
+  background-color: #111;
+  padding: 10px 16px;
+  border-radius: 5px;
+  max-width: 600px;
+  margin: 17px auto;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+
+}

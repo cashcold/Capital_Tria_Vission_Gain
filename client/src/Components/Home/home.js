@@ -4,6 +4,10 @@ import axios from 'axios'
 import {Card,Button} from 'react-bootstrap'
 import { motion } from "framer-motion";
 import TradingViewWidget from '../TradingViewWidget/TradingViewWidget';
+import BusinessModel from '../BusinessModel/BusinessModel';
+import CloudMiningAnimation from '../CloudMiningAnimation/CloudMiningAnimation';
+import GlobalMiningActivity from '../GlobalMiningActivity/GlobalMiningActivity';
+import ActivitiesList from '../Activities/ActivitiesList';
 
 
 class Home extends Component {
@@ -132,6 +136,7 @@ class Home extends Component {
                             <div className='home__h1'>
                                 <h1 className='home__box__h1'>Capital Gain Management Co.</h1>
                                 <h3 className='home__box__h3'>Earn up to 10% Daily, Easily with 3 STEPS</h3>
+                                 <GlobalMiningActivity/>
                             </div>
                          <div className="home__flow__box">
                             <div className="flow__box__1 flow__boxMe flowAnimate">
@@ -157,6 +162,9 @@ class Home extends Component {
                        
                         
                 </section>
+                <CloudMiningAnimation/>
+                <BusinessModel/>
+                
                 <section class="co_ing">
                     <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FTHE%20CRYTO%20MINING%20POWERHOUSE.jpg?alt=media&token=97841213-86fb-48c0-aef8-f8df4833c900" alt="Capgainco " />
                 </section>
