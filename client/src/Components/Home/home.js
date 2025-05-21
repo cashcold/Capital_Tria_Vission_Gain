@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import TradingViewWidget from '../TradingViewWidget/TradingViewWidget';
 import BusinessModel from '../BusinessModel/BusinessModel';
 import CloudMiningAnimation from '../CloudMiningAnimation/CloudMiningAnimation';
+import GoogleTranslate from '../GoogleTranslate/GoogleTranslate';
+import MomoTrust from '../MomoTrust/MomoTrust';
 import GlobalMiningActivity from '../GlobalMiningActivity/GlobalMiningActivity';
 import ActivitiesList from '../Activities/ActivitiesList';
 
@@ -551,39 +553,10 @@ class Home extends Component {
                         </ul>
                     </div>
                 </section>
-                <section class="btc_shark_trade_cert">
-                <div className="btc-footer-notice">
-                <div className="btc-container">
-                    <h3>📢 Attention Ghanaian Investors!</h3>
-                    <p>
-                    We're making it easier for you to join our <strong>Bitcoin Mining Project</strong>.
-                    Many of our Ghanaian users find it difficult to download and use wallets like Blockchain,
-                    Coinbase, Exduos, etc.
-                    </p>
-                    <p>
-                    That's why we now <strong>accept Mobile Money from all networks in Ghana!</strong> 🇬🇭
-                    </p>
-                    <p>
-                    Investment deposit payment are made through Mobile Money to  company name in Ghana BTC SHARK TRADE:
-                    </p>
-                    <p className="btc-highlight">➡️ <strong>BTC SHARK TRADE</strong></p>
-                    <p>
-                    <em>Registered under the Office of the Registrar of Companies, Republic of Ghana.</em>
-                    </p>
-                    <p className="btc-note">✅ Fast &nbsp; ✅ Safe &nbsp; ✅ Fully Verified</p>
-
-                    {/* Optional Certificate Image */}
-                    <div className="btc-certificate">
-                    <p><strong>Business Certificate:</strong></p>
-                    <img
-                        src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2Fbtc_sbark_trade_cert.jpg?alt=media&token=57bbd3d2-81db-4242-8d02-8f8fd63226d1" // Update the path to your actual image location
-                        alt="BTC SHARK TRADE Certificate"
-                    />
-                    </div>
-                </div>
-                </div>
-                
+                <section class="btc_shark_trade_MomoTrust">
+                    <MomoTrust/>
                 </section>
+               
                 <section className="tradingView" >
                 <TradingViewWidget />
 

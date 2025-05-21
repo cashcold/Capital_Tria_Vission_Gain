@@ -1,0 +1,198 @@
+/* MomoTrust.css */
+.momo-container {
+  max-width: 950px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #000; /* Black background */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff; /* White text */
+  transition: background-color 0.3s ease;
+}
+
+.headline {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #00ffcc; /* Mint green headline */
+  text-align: center;
+  animation-duration: 1.2s;
+  animation-fill-mode: forwards;
+}
+
+.intro, .highlight, .section {
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
+.list {
+  list-style-type: none;
+  padding-left: 1.2rem;
+}
+
+.list li {
+  margin-bottom: 0.6rem;
+  position: relative;
+  padding-left: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.list li::before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+  color: #00cc66; /* Green checkmark */
+}
+
+.contact-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.contact-list li {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.contact-list a {
+  color: #4fc3f7; /* Light blue link */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+  color: #1eaaf1;
+}
+
+.closing-note {
+  font-weight: 700;
+  color: #80ffbf; /* Light green closing note */
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.15rem;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation-name: slideIn;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+
+.animate-slide-up {
+  animation-name: slideIn;
+  animation-duration: 1.2s;
+  animation-timing-function: ease-out;
+}
+
+.animate-fade-in {
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in;
+}
+
+.confetti-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.float-circle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #00ffcc, #008080);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: floatUp 10s linear infinite;
+}
+
+.float-circle:nth-child(odd) {
+  background: radial-gradient(circle, #ff6ec4, #7873f5);
+}
+
+.float-circle:nth-child(even) {
+  background: radial-gradient(circle, #ffc93c, #ff6f61);
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh) scale(0.8);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Random positioning and delay */
+.float-circle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.float-circle:nth-child(2) { left: 20%; animation-delay: 2s; }
+.float-circle:nth-child(3) { left: 30%; animation-delay: 4s; }
+.float-circle:nth-child(4) { left: 40%; animation-delay: 1s; }
+.float-circle:nth-child(5) { left: 50%; animation-delay: 3s; }
+.float-circle:nth-child(6) { left: 60%; animation-delay: 5s; }
+.float-circle:nth-child(7) { left: 70%; animation-delay: 6s; }
+.float-circle:nth-child(8) { left: 80%; animation-delay: 2.5s; }
+.float-circle:nth-child(9) { left: 90%; animation-delay: 4.5s; }
+.float-circle:nth-child(10) { left: 25%; animation-delay: 1.8s; }
+/* Continue if more than 10 */
+
+
+
+
+/* Responsive - Mobile */
+@media (max-width: 600px) {
+  .momo-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .headline {
+    font-size: 1.5rem;
+  }
+
+  .intro, .highlight, .section {
+    font-size: 1rem;
+  }
+
+  .list li {
+    font-size: 0.95rem;
+  }
+
+  .closing-note {
+    font-size: 1rem;
+  }
+}

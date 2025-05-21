@@ -77,7 +77,7 @@ class CloudMiningAnimation extends Component {
 
     return (
       <div className="mining-animation-container">
-        <h2 className="title">⛏ Cloud Mining in Action</h2>
+        <h2 className="title">⛏ Bitcoin Cloud Mining in Action</h2>
 
         <div className="online-users-count">
           🟢 {onlineUsers} Users Currently Mining

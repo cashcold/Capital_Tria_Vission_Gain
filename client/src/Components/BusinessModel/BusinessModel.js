@@ -6,7 +6,7 @@ class BusinessModel extends Component {
   render() {
     return (
       <div className="business-model-container">
-        <h1 className="title">Cloud Mining Business Model</h1>
+        <h1 className="title">Bitcoin Cloud Mining Business Model</h1>
         <h2 className="company-name">Capital Gain Management Co.</h2>
 
         <section className="section">
@@ -17,7 +17,7 @@ class BusinessModel extends Component {
         </section>
 
         <section className="section">
-          <h3>⚙️ How Our Cloud Mining System Works</h3>
+          <h3>⚙️ How Our Bitcoin Cloud Mining System Works</h3>
           <ul>
             <li><strong>Mining Infrastructure:</strong> High-performance mining hardware hosted in energy-efficient data centers, mining BTC and more.</li>
             <li><strong>User Hashrate Allocation:</strong> Users buy GH/s or TH/s, and profits are distributed based on their share.</li>
