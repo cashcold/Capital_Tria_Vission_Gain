@@ -7,7 +7,7 @@ class TradingViewWidget extends Component {
     script.async = true;
     script.innerHTML = JSON.stringify({
       width: "100%",
-      height: "500", // fixed to a proper pixel value
+      height: "400", // fixed to a proper pixel value
       defaultColumn: "overview",
       screener_type: "crypto_mkt",
       displayCurrency: "USD",

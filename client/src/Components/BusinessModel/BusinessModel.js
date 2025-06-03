@@ -71,7 +71,7 @@ class BusinessModel extends Component {
             <li>📈 Live Mining Stats</li>
             <li>🛡 Secure Wallet Withdrawals</li>
             <li>🤝 Referral Income Program</li>
-            <li>🔔 Daily Payouts</li>
+            <li>🔔 Daily Payouts Instant</li>
           </ul>
         </section>
 

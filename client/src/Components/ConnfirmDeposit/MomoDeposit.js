@@ -85,7 +85,7 @@ class MomoDeposit extends Component {
             totalMoneyElement.innerHTML = `GHC${checkPercent.toFixed(2)}`;
         };
     
-        // Execute the function
+        // Execute the function 
         CalculatorEngine();
     
         const user_id = sessionStorage.getItem('user_id');

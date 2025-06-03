@@ -143,7 +143,7 @@ class MainApp extends Component {
                                     <p className="blinking-text">
                                     We are now accepting <strong>Mobile Money (Momo)</strong> and  <strong>Bank Transfer</strong> for all investors in Ghana.
                                     <br />Wherever you are, it's now simple and easy to invest with your mobile money.
-                                    <br />Invest with any amount from <strong>GHS 50</strong> and above!
+                                    <br />Invest with any amount from GHS 50 and above! <strong>Example of Daily User Earnings, User Deposit GHS 50 and get GHC 55 in 24hrs mining plan with 10% profit</strong>. Deposit and Withdrawals payment are made through Mobile Money and Bank Transfers 
                                     </p>
                                     <div className="image-box">
                                     <img src={require('./images/mobile-money.jpg')} className=''/> 

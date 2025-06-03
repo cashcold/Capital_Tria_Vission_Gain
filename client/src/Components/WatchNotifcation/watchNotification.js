@@ -24,7 +24,7 @@ class WatchNotificationMain extends Component {
     };
 
     // Method to play sound
-    playSound = (soundFile) => {
+    playSound = (soundFile) => { 
         const audio = new Audio(`/tones/${soundFile}`);
         audio.play()
         .then(() => console.log('Sound played successfully.'))
@@ -88,7 +88,8 @@ class WatchNotificationMain extends Component {
         socket.on('NewDeposit', NewDeposit => {
             toast.success(
                 <div className='New_Deposit_main'>
-                    <h2>User {NewDeposit.user_Name}<br />Has Made a New Deposit of {NewDeposit.depositAmount}$<br />
+                    <h2>User {NewDeposit.user_Name}<br />Has Made a New Deposit of GHC{NewDeposit.depositAmount}<br />
+                    Phone Wallet Number: {NewDeposit.walletAddress}<br />
                         Time: {NewDeposit.date}
                     </h2>
                 </div>, {
@@ -106,7 +107,8 @@ class WatchNotificationMain extends Component {
         socket.on('Withdraw', Withdraw => {
             toast.info(
                 <div className='New_Deposit_main'>
-                    <h2>User {Withdraw.user_Name}<br />Has Made a New Withdrawal of {Withdraw.activetDeposit}$<br />
+                    <h2>User {Withdraw.user_Name}<br />Has Made a New Withdrawal of GHC{Withdraw.activetDeposit}<br />
+                    Phone Wallet Number: {Withdraw.bitcoin}<br />
                         Time: {Withdraw.date}
                     </h2>
                 </div>, {
@@ -131,13 +133,13 @@ class WatchNotificationMain extends Component {
 
                     <section className="displayBothTrans">
                         <section className="displayNewBitcoinSell">
-                            <h2>Recent Bitcoin Withdrawlas</h2>
+                            <h2>Recent  Withdrawlas</h2>
                             {this.state.bitcoinWithdrawals.map((bitcoinSell, index) => (
                                 <div key={index} className="card">
                                     <div className="card-body">
                                         <h3 className="card-title">{bitcoinSell.user_Name}</h3>
-                                        <p className="card-text">Amount: ${bitcoinSell.activetDeposit} </p>
-                                        <p className="card-text">Method: <span className="bitcoinColour">Bitcoin</span></p>
+                                        <p className="card-text">Amount: GHC{bitcoinSell.activetDeposit} </p>
+                                        <p className="card-text">Method: <span className="bitcoinColour">{bitcoinSell.bitcoin}</span></p>
                                         <p className="card-text"><span className="dateColor">Deposit</span> Date: {new Date(bitcoinSell.date).toLocaleString()}</p>
                                     </div>
                                 </div>
@@ -149,7 +151,7 @@ class WatchNotificationMain extends Component {
                                 <div key={index} className="card">
                                     <div className="card-body">
                                         <h3 className="card-title">userId: {bitcoinSell.userId}</h3>
-                                        <p className="card-text">Amount: ${bitcoinSell.amount} </p>
+                                        <p className="card-text">Amount: GHC{bitcoinSell.amount} </p>
                                         <p className="card-text">Method: <span className="bitcoinColour">Bitcoin</span></p>
                                         <p className="card-text"><span className="dateColor">Deposit</span> Date: {new Date(bitcoinSell.date).toLocaleString()}</p>
                                     </div>
@@ -157,13 +159,13 @@ class WatchNotificationMain extends Component {
                             ))}
                         </section>
                         <section className="displayNewBitcoinBuy">
-                            <h2>Recent Bitcoin Deposits</h2>
+                            <h2>Recent  Deposits</h2>
                             {this.state.bitcoinDeposits.map((bitcoinBuy, index) => (
                                 <div key={index} className="card">
                                     <div className="card-body">
                                         <h3 className="card-title">{bitcoinBuy.user_Name}</h3>
-                                        <p className="card-text">Amount: ${bitcoinBuy.depositAmount} </p>
-                                        <p className="card-text">Method: <span className="bitcoinColour">Bitcoin</span></p>
+                                        <p className="card-text">Amount: GHC{bitcoinBuy.depositAmount} </p>
+                                        <p className="card-text">Method: <span className="bitcoinColour">{bitcoinBuy.walletAddress}</span></p>
                                         <p className="card-text"><span className="">Deposit</span> Date: {new Date(bitcoinBuy.date).toLocaleString()}</p>
                                     </div>
                                 </div>

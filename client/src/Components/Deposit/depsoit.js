@@ -125,7 +125,7 @@ class DepositMain extends Component {
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "GHC"+ totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage +" GHC"
-                document.querySelector('.planNowType').innerHTML = "PLAN I"
+                document.querySelector('.planNowType').innerHTML = "PLAN I 24HRS"
                  }
   
              }
@@ -135,7 +135,7 @@ class DepositMain extends Component {
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
-                document.querySelector('.planNowType').innerHTML = "PLAN II"
+                document.querySelector('.planNowType').innerHTML = "PLAN II 3DAYS"
                  }
   
              }
@@ -145,7 +145,7 @@ class DepositMain extends Component {
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
-                document.querySelector('.planNowType').innerHTML = "PLAN III"
+                document.querySelector('.planNowType').innerHTML = "PLAN III 5DAYS"
                  }
   
              }
@@ -155,7 +155,7 @@ class DepositMain extends Component {
                  const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
                 document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
                 document.querySelector('.percent_check').innerHTML = Percentage
-                document.querySelector('.planNowType').innerHTML = "PLAN IV"
+                document.querySelector('.planNowType').innerHTML = "PLAN IV 7DAYS"
                  }
   
              }
