@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {addDays,addMinutes} from "date-fns"
+import CurrencyConverter from '../CurrencyConverter/CurrencyConverter';
 class Other__NavBar extends Component {
     constructor(props) {
         super(props);
@@ -89,6 +90,7 @@ class Other__NavBar extends Component {
                                 <p><img src={require('../../images/download.png')} className='other__i__4'/> ${this.state.DOGEApi}</p>
                             </div>
                         </section>
+                        <CurrencyConverter/>
                     </div>
                 </section>
             </div>

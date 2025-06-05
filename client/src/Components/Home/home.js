@@ -372,6 +372,9 @@ class Home extends Component {
         <p className="final-note">Join us, and let’s build a future that <strong>outlives us all</strong>.</p>
       </div>
     </section>
+    <section class="btc_shark_trade_MomoTrust">
+        <MomoTrust/>
+    </section>
     <img
           src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FCapital%20Gain%20Management%20Co..jpg?alt=media&token=0d468756-ba8a-4084-b2cd-00cbf957f9ab" // Replace with your actual image path
           alt="Capital Gain Management Co."
@@ -553,9 +556,7 @@ class Home extends Component {
                         </ul>
                     </div>
                 </section>
-                <section class="btc_shark_trade_MomoTrust">
-                    <MomoTrust/>
-                </section>
+                
                
                 <section className="tradingView" >
                 <TradingViewWidget />
