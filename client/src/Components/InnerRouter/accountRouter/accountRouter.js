@@ -46,7 +46,7 @@ class AccountRouter extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevState.user_balance.activetDeposit !== this.state.user_balance.activetDeposit) {
           if (this.state.user_balance.activetDeposit > 0) {
-            console.log("Deposit Amount updated to:", this.state.user_balance.activetDeposit);
+         
             this.setState({ showDetails: true });
           } else {
             this.setState({ showDetails: false });

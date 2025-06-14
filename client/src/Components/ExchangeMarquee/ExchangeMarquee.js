@@ -76,7 +76,6 @@ class ExchangeMarquee extends Component {
       .map(([currency, rate]) => {
         const countryCode = currencyToCountry[currency] || currency.slice(0, 2);
         const flag = this.getFlagEmoji(countryCode);
-        console.log(`Currency: ${currency}, Country Code: ${countryCode}, Flag: ${flag}`);
         return `${flag} 1 USD = ${rate.toFixed(2)} ${currency}`;
       })
       .join('  |  ');
