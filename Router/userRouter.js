@@ -389,38 +389,63 @@ Router.get('/last/refferReward', async (req, res) => {
   }
 });
 
-Router.post('/withdrawInfo',async(req,res)=>{
-   
-    user_id = req.body.id
-    const user = await WithdrawDeposit.findOne({user_id: req.body.id})
+Router.post('/withdrawInfo', async (req, res) => {
+  try {
+    const user_id = req.body.id;
 
-    if(user){
-        const currentDeposit = await WithdrawDeposit.aggregate([
-            { $match : { user_id : user_id } },
-            {$group: {_id: "$user_id", WithdrawAmount: { $sum: "$activetDeposit" },WithdrawAmountlast: { $last: "$activetDeposit" }}  },
-            
-        ])
-    res.send(currentDeposit)
-    }
-    
-    
-})
-Router.post('/depositInfo',async(req,res)=>{
-   
-    const user_id = req.body.id
-    const user = await UserDeposit.findOne({user_id: req.body.id})
+    const user = await WithdrawDeposit.findOne({ user_id: user_id });
 
-    if(user){
-        const currentDeposit = await UserDeposit.aggregate([
-            { $match : { user_id : user_id } },
-            {$group: {_id: "$user_id", depositAmount: { $sum: "$depositAmount" },depositAmountlast: { $last: "$depositAmount" }}  },
-            
-        ])
-    res.send(currentDeposit)
+    if (user) {
+      const currentDeposit = await WithdrawDeposit.aggregate([
+        { $match: { user_id: user_id } },
+        {
+          $group: {
+            _id: "$user_id",
+            WithdrawAmount: { $sum: "$activetDeposit" },
+            WithdrawAmountlast: { $last: "$activetDeposit" }
+          }
+        },
+      ]);
+      res.send(currentDeposit);
+    } else {
+      // ✅ Always respond if no record found
+      res.send([]); // or res.status(404).send({ message: "No withdrawals found" });
     }
-    
-    
-})
+
+  } catch (err) {
+    console.error("Error in /withdrawInfo:", err);
+    res.status(500).send("Server error");
+  }
+});
+
+Router.post('/depositInfo', async (req, res) => {
+  try {
+    const user_id = req.body.id;
+
+    const user = await UserDeposit.findOne({ user_id: user_id });
+
+    if (user) {
+      const currentDeposit = await UserDeposit.aggregate([
+        { $match: { user_id: user_id } },
+        {
+          $group: {
+            _id: "$user_id",
+            depositAmount: { $sum: "$depositAmount" },
+            depositAmountlast: { $last: "$depositAmount" }
+          }
+        },
+      ]);
+      res.send(currentDeposit);
+    } else {
+      // ✅ always send something
+      res.send([]); // or res.status(404).send({ message: "No deposit found" });
+    }
+
+  } catch (err) {
+    console.error("Error in /depositInfo:", err);
+    res.status(500).send("Server error");
+  }
+});
 
 
 Router.post('/total_transaction_history',async(req,res)=>{
@@ -481,23 +506,34 @@ Router.post('/transaction_withdrawInfo_query',async(req,res)=>{
 })
 
 
+Router.post('/checkdate', async (req, res) => {
+  try {
+    const user_id = req.body.id;
 
-Router.post('/checkdate',async(req,res)=>{   
-   
-    user_id = req.body.id
-    const user = await UserDeposit.findOne({user_id: req.body.id})
+    const user = await UserDeposit.findOne({ user_id: user_id });
 
-    if(user){
-        const currentDeposit = await UserDeposit.aggregate([
-            { $match : { user_id : user_id } },
-            {$group: {_id: "$user_id",lastDate : { $last: "$createdAt" }}  },
-            
-        ])
-    res.json(currentDeposit)
+    if (user) {
+      const currentDeposit = await UserDeposit.aggregate([
+        { $match: { user_id: user_id } },
+        {
+          $group: {
+            _id: "$user_id",
+            lastDate: { $last: "$createdAt" }
+          }
+        },
+      ]);
+      res.json(currentDeposit);
+    } else {
+      // ✅ Always send a response if no record found
+      res.json([]); // or res.status(404).json({ message: "No deposit records found" });
     }
-    
-    
-})
+
+  } catch (err) {
+    console.error("Error in /checkdate:", err);
+    res.status(500).send("Server error");
+  }
+});
+
 
 
 

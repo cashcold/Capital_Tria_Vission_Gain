@@ -51,7 +51,7 @@ class ContactMain extends Component {
                                     <h1><i class="fas fa-phone fa-3x"></i></h1>
                                     <h4>PHONE <span>NUMBER</span> </h4>
                                     <p>📞 Support:  +233 203 808 479</p>
-                                    <p>📞 Support: +233 268 253 787</p>
+                                    <p>📞 Support:  +233 268 253 787</p>
                                 </div>
                             </div>
                             <div className='bothMenu bothMenuCount3'>
