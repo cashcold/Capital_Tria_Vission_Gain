@@ -1,49 +1,64 @@
 export const tourData = [
     {
-      id: 1,
-      title: "What is capgainco. ?", 
-      about: `Capital Gain Management Co. is an online bitcoin mining investment platform who was appointed representative of Capital Gain Management Co. 📍 Address: Capital Gain Co, HQ
-      📞 Support: +1 234 567 890
-      ✉️ Email: support@capgainco.com
-      🌐 Website: www.capgainco.com`,
-     
-    },
-    {
-      id: 2,
-      title: "How can I invest with Capital Gain Management Co. ?",
-      about: "To make a investment you must first become a member of https://capgainco.com , Once you are signed up, you can make your first deposit. All deposits must be made through the Members Area. You can login using the member username and password you receive when signup.",
-     
-    },
+  id: 1,
+  title: "What is Capital Gain Management Co.?",
+        about: `Capital Gain Management Co. is a trusted online Bitcoin mining and diversified investment platform dedicated to empowering individuals to earn safe and sustainable daily income. We combine high-performance Bitcoin mining with smart investments in multiple sectors such as fish farming, poultry farming, livestock farming, mushroom farming, greenhouse vegetable farming, and more.
+
+      Our mission is to provide everyone — from first-time investors to seasoned professionals — with easy access to daily profits, instant withdrawals, and a secure, transparent system that will continue to benefit generations to come.
+
+      📍 Address: Capital Gain Co, HQ  
+      and
+      📍 Address: BTC SHARK TRADE, GHANA  
+      📞 Support: +233 203 808 479  
+      📞 Support: +233 268 253 787  
+      ✉️ Email: support@capgainco.com  
+      ✉️ Email: info@capgainco.com  
+      🌐 Website: www.capgainco.com`
+      }
+      ,{
+        id: 2,
+        title: "How can I invest with Capital Gain Management Co.?",
+        about: `Investing with Capital Gain Management Co. is simple, secure, and designed for everyone — whether you’re a beginner or an experienced investor.
+
+      ✨ **Step 1:** Visit our official website: [https://capgainco.com](https://capgainco.com)  
+      ✨ **Step 2:** Click on **Sign Up** and create your free account by filling out your details.  
+      ✨ **Step 3:** Once you log in to your personal dashboard, choose an investment plan that suits your budget and goals.  
+      ✨ **Step 4:** Make your first deposit easily through **Mobile Money (MoMo)**, **Bank Transfer**, or **Bitcoin** — whichever works best for you.  
+      ✨ **Step 5:** Relax and watch your daily profits grow automatically. You can withdraw your earnings instantly at any time.
+
+      💡 **Tip:** Our friendly support team is always ready to help you at every step. Join thousands of happy investors today and start earning passive income daily with full peace of mind!`
+      }
+      ,
     {
       id: 3,
       title: "How do I open my Capital Gain Management Co. Account?",
       about: "It's quite easy and convenient. Follow this link https://capgainco.com , fill in the registration form and then press 'Register'.",
      
     },
-    {
+      {
       id: 4,
-      title: "I wish to invest with Capital Gain Management Co. but I don't have an any ecurrency account. What should I do?",
-      about: "You can open a free Bitcoin account here: https://play.google.com/store/apps/details?id=piuk.blockchain.android&referrer=utm_source%3Dgoogle%26utm_medium%3Dorganic%26utm_term%3Dblockchain&pcampaignid=APPU_1_vvvWZ5vvK8W8hbIP94SV8Q8&pli=1",
-     
-    },
-    {
+      title: "I wish to invest with Capital Gain Management Co. but I don't have any e-currency or Bitcoin account. What should I do?",
+      about: "No worries! With Capital Gain Management Co., you can easily start investing even if you don’t have a crypto wallet. We accept deposits through Mobile Money (MoMo), direct Bank Transfer, and Bitcoin. If you still prefer to get a Bitcoin wallet for future use, you can open a free and secure wallet using trusted apps like Blockchain Wallet: https://play.google.com/store/apps/details?id=piuk.blockchain.android. Our support team is always ready to guide you step-by-step if you need any help setting up your payment method.",
+    }
+    ,
+      {
       id: 5,
       title: "How long does it take for my deposit to be added to my account?",
-      about: "Your account will be updated as fast, as you deposit. For Bitcoin deposits you should send actual amount to shown Bitcoin wallet, because Bitcoin network is not instant so your deposit time can take from a 15 minutes up to 24 hour",
-     
-    },
-    {
+      about: "Your deposit will be processed and reflected in your account as quickly as possible. For Mobile Money (MoMo) and Bank Transfer payments, your balance is usually updated within a few minutes. For Bitcoin deposits, please ensure you send the exact amount to the provided Bitcoin wallet address. Due to the nature of the Bitcoin network, it may take anywhere from 5 minutes  for the transaction to be confirmed and credited to your account. If you experience any delay, our support team is always ready to assist you.",
+    }
+    ,
+      {
       id: 6,
       title: "How can I withdraw funds?",
-      about: "Login to your account using your username and password and check the Withdraw section.",
-     
-    },
-    {
+      about: "Withdrawing your funds is simple and secure. Log in to your Capital Gain Management Co. account using your username and password, then navigate to the 'Withdraw' section in your dashboard. Choose your preferred withdrawal method — Mobile Money (MoMo), Bank Transfer, or Bitcoin — and follow the easy instructions. Your withdrawal request will be processed promptly and you’ll receive instant confirmation. For any assistance, our support team is always ready to help you.",
+    }
+    ,
+      {
       id: 7,
-      title: "After I make a withdrawal request, when will the funds be available on my ecurrency account?",
-      about: "Funds are usually available instantly.",
-     
-    },
+      title: "After I make a withdrawal request, when will the funds be available?",
+      about: "Once you submit a withdrawal request through your Capital Gain Management Co. account, your funds are processed immediately. In most cases, withdrawals are completed instantly and appear in your Mobile Money (MoMo), Bank account, or Bitcoin wallet within a few minutes. However, depending on your chosen payment method and network traffic, it may take up to 30 minutes. Our secure system ensures fast and reliable payouts every time.",
+    }
+    ,
     {
       id: 8,
       title: "How can I change my e-mail address or password?",
@@ -89,8 +104,7 @@ export const tourData = [
     {
       id: 15,
       title: "Can I lose money?",
-      about: "There is a risk involved with investing in all high yield investment programs. However, there are a few simple ways that can help you to reduce the risk of losing more than you can afford to. First, align your investments with your financial goals, in other words, keep the money you may need for the short-term out of more aggressive investments, reserving those investment funds for the money you intend to raise over the long-term. It's very important for you to know that we are real traders and that we invest members' funds on major investments.",
-     
+      about: "No, you will not lose money with Capital Gain Management Co. Unlike risky high-yield investment programs, our platform is backed by real, sustainable Bitcoin mining operations and diversified income streams. We also invest in different profitable projects aside from Bitcoin mining, including fish farm mining, chicken farm mining, pig farm mining, snail farm mining, goat farm mining, mushroom farm mining, and vegetable greenhouse farming. This diversified approach guarantees steady daily profits for our members while building a lasting financial system that serves you today and secures wealth for generations to come. We ensure that every member earns daily returns safely, with full transparency and zero hidden risks."
     },
    
    
