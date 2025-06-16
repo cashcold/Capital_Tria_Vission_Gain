@@ -236,6 +236,11 @@ class CurrencyConverter extends Component {
     const { rates, loading, error, darkMode, showAll, allRates } = this.state;
     const themeClass = darkMode ? 'dark-mode' : 'light-mode';
 
+      const top5 = [
+      this.currencies.find(c => c.code === 'GHS'),
+      ...this.currencies.filter(c => c.code !== 'GHS').slice(0, 4)
+    ];
+
     return (
       <div className={`currency-container ${themeClass}`}>
         <button className="theme-toggle-btn" onClick={this.toggleTheme}>
@@ -247,12 +252,12 @@ class CurrencyConverter extends Component {
         {!loading && !error && (
           <>
            <ul className="currency-list">
-              {this.currencies.slice(0, 5).map(({ code, label }) => (
-                <li key={code} className="currency-item">
-                  <strong>{label}</strong> = {rates[code]?.toFixed(2)} GHS
-                </li>
-              ))}
-            </ul>
+            {top5.map(({ code, label }) => (
+              <li key={code} className="currency-item">
+                <strong>{label}</strong> = {rates[code]?.toFixed(2)} GHS
+              </li>
+            ))}
+          </ul>
             <button className="view-all-btn" onClick={this.handleShowAll}>
               View All Currencies
             </button>
