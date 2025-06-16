@@ -147,11 +147,11 @@ class AccountRouter extends Component {
         }
          
       // Trigger the animations after component mounts
-    const button = document.querySelector('.cashout-btn');
-    const ring = document.querySelector('.gradient-ring');
+    // const button = document.querySelector('.cashout-btn');
+    // const ring = document.querySelector('.gradient-ring');
 
-        if (button) button.classList.add('animate-in');
-        if (ring) ring.classList.add('spin-gradient');
+    // if (button) button.classList.add('animate-in');
+    // if (ring) ring.classList.add('spin-gradient');
     
 
     }
@@ -389,13 +389,13 @@ class AccountRouter extends Component {
                             <h5>ACCOUNT BALANCE</h5>
                             <h5 className='balanceMe'> GHC {this.state.accountBalance}.00</h5>
                             <a className="btn_balanceMe"  href={`/dashboard/withdraw/${this.state.user_id}`}>
-                            <div className="btn-wrapper">
+                            {/* <div className="btn-wrapper">
                                     <button className="cashout-btn" >
                                     💸 Cash Out
                                     <span className="spinner"></span>
                                     </button>
                                     <div className="gradient-ring"></div>
-                                </div> 
+                                </div>  */}
                         </a>
                         </div>
                         
