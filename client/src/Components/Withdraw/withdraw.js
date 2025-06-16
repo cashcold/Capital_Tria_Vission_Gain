@@ -37,7 +37,7 @@ class WithdrawMain extends Component {
     WithdrawNowFound = ()=>{
         this.setState({depositAmount: Number(0)})
         setTimeout(()=>
-        {toast.success(`Payment Will Sent to Your Bitcoin Wallert`)},800)
+        {toast.success(`Payment will be sent to your account`)},800)
 
         // sessionStorage.removeItem('token')
         
