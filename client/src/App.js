@@ -29,6 +29,7 @@ import WithdrawRefferReward from './Components/WithdrawRefferReward/WithdrawReff
 import axios from 'axios';
 import ExchangeMarquee from './Components/ExchangeMarquee/ExchangeMarquee';
 import PriceMarquee from './Components/PriceMarquee/PriceMarquee';
+import PopoutExample from './Components/PopoutExample/PopoutExample';
 
 
 class MainApp extends Component {
@@ -135,6 +136,7 @@ class MainApp extends Component {
         return (
             <Router>
                 <div className='mainApp animate__animated animate__zoomIn animate__slowerss'>
+                    <PopoutExample />
                     {/* <div className='google__id' id="google_translate_element"></div> */}
                     <div className='container_!'>
                         <section className="MethodMomo">
