@@ -381,12 +381,17 @@ class Home extends Component {
           className=""
         />
                 <section className='about__us__main'>
-                    <div className="about__box_1">
-                        <h1>ABOUT <span>OUR COMPANY</span></h1>
-                        <p>Capital Gain Management Co. is at heart a bitcoin Mining company. However, we are opportunistic and are looking at other cryptocurrency resource opportunities that present a favorable upside.</p>
-                        <p>The Company is well financed and management has a wealth of experience in all aspects of mineral exploration and development. Capital Gain Management Co. is also a place to invest and earn profits with stable percent.</p>
-                        <a href='/about-us' classname='btn btn__read_more'>READ MORE</a>
+                   <div className="about__box_1">
+                    <h1>ABOUT <span>OUR COMPANY</span></h1>
+                    <p>
+                        Capital Gain Management Co. is an international Bitcoin mining and diversified farm mining company. We combine secure cryptocurrency mining with real-world agricultural projects like fish, poultry, goat, snail, rabbit, and pig farming to provide stable, daily profits for our investors.
+                    </p>
+                    <p>
+                        We are well-financed, professionally managed, and committed to transparent, secure, and reliable profit-sharing. Investors can easily deposit and withdraw using Mobile Money (MoMo), Bank Transfers, or Bitcoin. With strong local support in Ghana and a vision to serve future generations, Capital Gain Management Co. is your trusted partner for building sustainable wealth.
+                    </p>
+                    <a href="/about-us" className="btn btn__read_more">READ MORE</a>
                     </div>
+
                     <div className="about__box_2">
                         <img src={require('../../images/bitcoin-3396302.jpg')} />
                     </div>
@@ -399,54 +404,68 @@ class Home extends Component {
                             <i class="fas fa-registered fa-4x" ></i>
                             </div>
                             <div className="Advanteage__inner__box__2">
-                                <h3>REAL COMPANY</h3>
-                                <p>Our company is legally with the proper authority.</p>
+                            <h3>REGISTERED & TRUSTED</h3>
+                            <p>Capital Gain Management Co. is fully registered and legally licensed under the proper authorities. We operate transparently and comply with all local and international investment regulations to keep your funds safe and secure.</p>
                             </div>
+
                         </div>
                         <div className="advanteage__box__1 advan__box">
                             <div className="Advanteage__inner__box__1">
                             <i class="fas fa-shield-alt fa-4x"></i>
                             </div>
-                            <div className="Advanteage__inner__box__2">
-                                <h3>DDOS PROTECTION</h3>
-                                <p>Our company install DDoS Protection to mitigate all types of DDoS attacks.</p>
+                           <div className="Advanteage__inner__box__2">
+                            <h3>ADVANCED DDoS PROTECTION</h3>
+                            <p>Our platform is safeguarded with industry-leading DDoS protection systems to prevent and mitigate all types of attacks, ensuring your data and transactions remain secure and uninterrupted 24/7.</p>
                             </div>
+
                         </div>
                         <div className="advanteage__box__1 advan__box">
                             <div className="Advanteage__inner__box__1">
                             <i class="fas fa-hand-holding-usd fa-4x"></i>
                             </div>
-                            <div className="Advanteage__inner__box__2">
-                                <h3>FAST AND SECURE WITHDRAWALS</h3>
-                                <p>Withdrawal requests process instantlyy without any delay. You can make as many requests as you want everyday.</p>
+                           <div className="Advanteage__inner__box__2">
+                            <h3>FAST & SECURE WITHDRAWALS</h3>
+                            <p>
+                                Withdrawal requests are processed instantly without delays. Enjoy unlimited daily withdrawals through <strong>Mobile Money (MoMo)</strong>, <strong>Bank Transfer</strong>, and <strong>Bitcoin</strong> — giving you quick and reliable access to your funds anytime.
+                            </p>
                             </div>
+
                         </div>
                         <div className="advanteage__box__1 advan__box">
                             <div className="Advanteage__inner__box__1">
                             <i class="fas fa-users fa-4x"></i>
                             </div>
                             <div className="Advanteage__inner__box__2">
-                                <h3>EXPERIENCED MANAGEMENT TEAM</h3>
-                                <p>Our company is legally registered in the United Kingdom with the proper authority.</p>
+                            <h3>EXPERIENCED MANAGEMENT TEAM</h3>
+                            <p>
+                                Our company is legally registered and operated by a highly experienced team with deep expertise in cryptocurrency mining and diversified investment management.
+                            </p>
                             </div>
+
                         </div>
                         <div className="advanteage__box__1 advan__box">
                             <div className="Advanteage__inner__box__1">
                             <i class="fas fa-key fa-4x"></i>
                             </div>
                             <div className="Advanteage__inner__box__2">
-                                <h3>DOMAIN REGISTRATIONY</h3>
-                                <p>Our domain is registered for four (4) years with domain name lock to prevent malicious and hacker activities.</p>
+                            <h3>DOMAIN REGISTRATION</h3>
+                            <p>
+                                Our domain is securely registered with domain lock enabled to prevent unauthorized changes, ensuring maximum protection against malicious and hacker activities.
+                            </p>
                             </div>
+
                         </div>
                         <div className="advanteage__box__1 advan__box">
                             <div className="Advanteage__inner__box__1">
                             <i class="fas fa-phone fa-4x"></i>
                             </div>
                             <div className="Advanteage__inner__box__2">
-                                <h3>24/7 CUSTOMER SUPPORT</h3>
-                                <p>Taking care of our customers is important at axcellus.cc. So we've made 24/7 online support.</p>
+                            <h3>24/7 CUSTOMER SUPPORT</h3>
+                            <p>
+                                At capgainco.com, taking care of our customers is our top priority. That’s why we offer reliable 24/7 online support to assist you anytime you need help.
+                            </p>
                             </div>
+
                         </div>
                     </div>
                 </section>

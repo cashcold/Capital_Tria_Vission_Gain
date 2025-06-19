@@ -15,12 +15,12 @@
 }
 
 .popout {
-  background-color: #fff;
+  background-color: black;
   padding: 30px;
   border-radius: 10px;
   text-align: center;
   max-width: 400px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(80, 255, 21, 1.8);
 }
 
 .popout-image {
@@ -33,7 +33,7 @@
   margin-top: 20px;
   padding: 10px 20px;
   cursor: pointer;
-  background: #007BFF;
+  background: red;
   color: white;
   border: none;
   border-radius: 5px;
