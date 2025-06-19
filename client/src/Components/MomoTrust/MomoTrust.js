@@ -92,6 +92,7 @@ class MomoTrust extends Component {
           <div className="section contact-section animate-slide-up">
             <h3>📞 Need Help? Talk to Our Ghana Support Team ➡️ <strong>BTC SHARK TRADE</strong></h3>
             <p>We're not just online. We're here for you — personally and directly:</p>
+            <p>We speak Twi, Fante, Ewe & Ga — your local support!</p>
             <ul className="contact-list">
               <li>📱 <strong>Support Lines:</strong></li>
               <li>• 020 380 8479</li>

@@ -159,13 +159,13 @@ class TestimonialsSection extends Component {
                 <div className="testimonial__card" key={item.id}>
                 <img src={item.image} alt={item.name} className="testimonial__avatar" />
                 <div className="testimonial__line">
-                    <span className="label">NAME:</span> <span className="value">{item.name}</span>
+                    <span className="label">Name:</span> <span className="value">{item.name}</span>
                 </div>
                 <div className="testimonial__line">
-                    <span className="label">COUNTRY:</span> <span className="value">{item.location}</span>
+                    <span className="label">Country:</span> <span className="value">{item.location}</span>
                 </div>
                 <div className="testimonial__line">
-                    <span className="label">COMMENT:</span> <span className="value">"{item.comment}"</span>
+                    <span className="label">Comment:</span> <span className="value">"{item.comment}"</span>
                 </div>
                 </div>
             ))}
