@@ -10,6 +10,7 @@ import GoogleTranslate from '../GoogleTranslate/GoogleTranslate';
 import MomoTrust from '../MomoTrust/MomoTrust';
 import GlobalMiningActivity from '../GlobalMiningActivity/GlobalMiningActivity';
 import ActivitiesList from '../Activities/ActivitiesList';
+import TestimonialsSection from '../TestimonialsSection/TestimonialsSection';
 
 
 class Home extends Component {
@@ -580,6 +581,9 @@ class Home extends Component {
                 <section className="tradingView" >
                 <TradingViewWidget />
 
+                </section>
+                <section class="TestimonialsSection">
+                    <TestimonialsSection/>
                 </section>
                 
                 
