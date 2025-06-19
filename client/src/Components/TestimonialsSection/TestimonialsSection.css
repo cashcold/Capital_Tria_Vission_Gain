@@ -61,3 +61,20 @@
   color: #00b894; /* ✅ nice highlight green to match avatar border */
   margin-bottom: 10px;
 }
+
+.testimonial__line {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.testimonial__line .label {
+  font-weight: bold;
+  color: #0984e3; /* Label color - bright blue */
+  margin-right: 5px;
+}
+
+.testimonial__line .value {
+  color: #2d3436; /* Darker text for values */
+  font-weight: 500;
+}
+

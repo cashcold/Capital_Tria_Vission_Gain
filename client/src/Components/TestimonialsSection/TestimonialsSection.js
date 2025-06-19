@@ -154,16 +154,23 @@ class TestimonialsSection extends Component {
     return (
       <div className="testimonials">
         <h1>What Our Members Say</h1>
-       <div className="testimonials__grid">
+                <div className="testimonials__grid">
             {this.state.testimonials.map(item => (
                 <div className="testimonial__card" key={item.id}>
                 <img src={item.image} alt={item.name} className="testimonial__avatar" />
-                <div className="testimonial__name">{item.name}</div>
-                <div className="testimonial__location">{item.location}</div> {/* ✅ NEW country/location line */}
-                <div className="testimonial__comment">"{item.comment}"</div>
+                <div className="testimonial__line">
+                    <span className="label">NAME:</span> <span className="value">{item.name}</span>
+                </div>
+                <div className="testimonial__line">
+                    <span className="label">COUNTRY:</span> <span className="value">{item.location}</span>
+                </div>
+                <div className="testimonial__line">
+                    <span className="label">COMMENT:</span> <span className="value">"{item.comment}"</span>
+                </div>
                 </div>
             ))}
-         </div>
+            </div>
+
 
         </div>
 
