@@ -55,3 +55,9 @@
   line-height: 1.6;
   color: #636e72;
 }
+
+.testimonial__location {
+  font-size: 0.9rem;
+  color: #00b894; /* ✅ nice highlight green to match avatar border */
+  margin-bottom: 10px;
+}
