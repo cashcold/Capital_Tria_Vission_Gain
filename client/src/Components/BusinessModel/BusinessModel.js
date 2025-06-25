@@ -14,13 +14,17 @@ class BusinessModel extends Component {
           <p>
             Capital Gain Management Co. is a next-generation crypto cloud mining company designed to help anyone earn passive income daily by investing in mining power without the cost, noise, or complexity of physical mining equipment.
           </p>
+          <p>Capital Gain Management Co. is an international Bitcoin cloud mining and diversified farm investment company. We combine secure, high-performance cryptocurrency mining with real-world agricultural ventures to provide stable daily profits for all investors.
+
+          Our agricultural projects include fish farming, poultry (chickens, ducks, guinea fowl), goat farming, snail farming, rabbit farming, pig farming, sheep and cattle farming, bee keeping for honey production, and a variety of crops such as vegetables (peppers, tomatoes, okra), plantain, maize, cassava, and mushrooms.
+            By blending technology with practical agriculture, we ensure multiple streams of revenue and reduce risk for our community. This means you can earn daily — with trust, transparency, and real-world sustainability behind every payout.</p>
         </section>
 
         <section className="section">
           <h3>⚙️ How Our Bitcoin Cloud Mining System Works</h3>
           <ul>
             <li><strong>Mining Infrastructure:</strong> High-performance mining hardware hosted in energy-efficient data centers, mining BTC and more.</li>
-            <li><strong>User Hashrate Allocation:</strong> Users buy GH/s or TH/s, and profits are distributed based on their share.</li>
+            <li><strong>User Hashrate Allocation:</strong> Users buy GH/s or TH/s, and profits are distributed based on their Plan.</li>
             <li><strong>Real-Time Mining:</strong> 24/7 mining, automated tracking based on network difficulty and coin prices.</li>
             <li><strong>Profit Distribution:</strong> Daily payouts are made in full according to the selected mining plan.</li>
 
