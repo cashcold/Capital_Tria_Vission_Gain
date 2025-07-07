@@ -11,6 +11,7 @@ import MomoTrust from '../MomoTrust/MomoTrust';
 import GlobalMiningActivity from '../GlobalMiningActivity/GlobalMiningActivity';
 import ActivitiesList from '../Activities/ActivitiesList';
 import TestimonialsSection from '../TestimonialsSection/TestimonialsSection';
+import PoultryFarmVideo from '../PoultryFarmVideo/PoultryFarmVideo';
 
 
 class Home extends Component {
@@ -385,18 +386,38 @@ class Home extends Component {
                    <div className="about__box_1">
                     <h1>ABOUT <span>OUR COMPANY</span></h1>
                     <p>
-                        Capital Gain Management Co. is an international Bitcoin mining and diversified farm mining company. We combine secure cryptocurrency mining with real-world agricultural projects like fish, poultry, goat, snail, rabbit, and pig farming to provide stable, daily profits for our investors.
-                    </p>
+                        <strong>Capital Gain Management Co.</strong> is a global leader in <strong>Bitcoin cloud mining</strong> combined with <strong>real-world diversified agriculture</strong>. We deliver <strong>stable daily profits</strong> to our investors by merging secure crypto operations with high-demand farm ventures.
+                        <br /><br />
+                        Our Farm Divisions include:  
+                        🐟 <strong>Fish Farming</strong>,  
+                        🐔 <strong>Poultry Farming</strong> (chickens, ducks, guinea fowls),  
+                        🐐 <strong>Goat Farming</strong>,  
+                        🐌 <strong>Snail Farming</strong>,  
+                        🐇 <strong>Rabbit Farming</strong>,  
+                        🐖 <strong>Pig Farming</strong>,  
+                        🐑 <strong>Sheep Farming</strong>,  
+                        🐄 <strong>Cattle Farming</strong>,  
+                        🍯 <strong>Bee Keeping</strong> (honey production),  
+                        🥬 <strong>Vegetable Cultivation</strong> (pepper, tomatoes, okra),  
+                        🍌 <strong>Plantain & Maize Farming</strong>,  
+                        🌱 <strong>Cassava Farming</strong>,  
+                        🍄 <strong>Mushroom Farming</strong>.
+                        <br /><br />
+                        By investing with Capital Gain Management Co., you support sustainable agriculture while earning from both <strong>digital and physical asset-backed streams</strong>.
+                      </p>
                     <p>
-                        We are well-financed, professionally managed, and committed to transparent, secure, and reliable profit-sharing. Investors can easily deposit and withdraw using Mobile Money (MoMo), Bank Transfers, or Bitcoin. With strong local support in Ghana and a vision to serve future generations, Capital Gain Management Co. is your trusted partner for building sustainable wealth.
+                        We are well-financed, professionally managed, and committed to transparent, secure, and reliable profit-sharing. Investors can easily deposit and withdraw using Bitcoin, Mobile Money (MoMo), Bank Transfers. With strong local support in Ghana and a vision to serve future generations, Capital Gain Management Co. is your trusted partner for building sustainable wealth.
                     </p>
                     <a href="/about-us" className="btn btn__read_more">READ MORE</a>
                     </div>
 
-                    <div className="about__box_2">
+                    {/* <div className="about__box_2">
                         <img src={require('../../images/bitcoin-3396302.jpg')} />
-                    </div>
+                    </div> */}
                 </section>
+              <section className='poultryFarmMain'>
+                <PoultryFarmVideo/>
+              </section>
                 <section className='advanteage'>
                     <h1>OUR <span>ADVANTEAGE</span></h1>
                     <div className="advant__box__1">
