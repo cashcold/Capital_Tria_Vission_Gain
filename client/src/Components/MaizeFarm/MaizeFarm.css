@@ -1,0 +1,57 @@
+/* MaizeFarm.css */
+.maize-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #000; /* Black background */
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.maize-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #00ffcc;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.maize-video {
+  width: 100%;
+  max-height: 500px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.maize-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ccc;
+  animation: slideIn 1.4s ease forwards;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .maize-title {
+    font-size: 1.4rem;
+  }
+
+  .maize-description {
+    font-size: 1rem;
+  }
+}

@@ -13,6 +13,7 @@ import ActivitiesList from '../Activities/ActivitiesList';
 import TestimonialsSection from '../TestimonialsSection/TestimonialsSection';
 import PoultryFarmVideo from '../PoultryFarmVideo/PoultryFarmVideo';
 import GoatFarmVideo from '../GoatFarmVideo/GoatFarmVideo';
+import MaizeFarm from '../MaizeFarm/MaizeFarm';
 
 
 
@@ -549,6 +550,9 @@ class Home extends Component {
                 </section>
                 <section class="co_ing">
                     <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FUntitled%20design%20(2).jpg?alt=media&token=88b1471a-973d-4b48-9eeb-f9090be9cb0b " />
+                </section>
+                <section class="MaizeFarm">
+                <MaizeFarm/>
                 </section>
                 <section class="recentDepost">
                             <div className="recent-users-container">
