@@ -12,6 +12,8 @@ import GlobalMiningActivity from '../GlobalMiningActivity/GlobalMiningActivity';
 import ActivitiesList from '../Activities/ActivitiesList';
 import TestimonialsSection from '../TestimonialsSection/TestimonialsSection';
 import PoultryFarmVideo from '../PoultryFarmVideo/PoultryFarmVideo';
+import GoatFarmVideo from '../GoatFarmVideo/GoatFarmVideo';
+
 
 
 class Home extends Component {
@@ -494,7 +496,10 @@ class Home extends Component {
                 <section class="co_ing">
                     <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FMANAGEMENT%20CO.jpg?alt=media&token=d3e8d635-e62a-49db-8e38-55ce8ce65af9" alt="Capgainco " />
                 </section>
-
+                
+                 <section class="goatFarmVideo">
+                    <GoatFarmVideo/>
+                 </section>
                 <section class="displayRecentRegisterUser">
                 <div className="recent-users-container">
                 <motion.h2
