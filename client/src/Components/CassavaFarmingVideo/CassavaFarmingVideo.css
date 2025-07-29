@@ -1,4 +1,4 @@
-.pigfarm-container {
+.cassava-video-container {
   background-color: #000;
   color: #fff;
   padding: 2rem 1rem;
@@ -8,14 +8,14 @@
   margin: auto;
 }
 
-.pigfarm-title {
+.cassava-heading {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #ffcc00;
+  color: #6fcf97; /* Cassava green accent */
   animation: fadeIn 1s ease-in-out;
 }
 
-.pigfarm-description {
+.cassava-description {
   color: #ccc;
   font-size: 1rem;
   line-height: 1.6;
@@ -24,13 +24,13 @@
   animation: fadeIn 1.2s ease-in;
 }
 
-.pigfarm-video-wrapper {
+.cassava-video-wrapper {
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+  box-shadow: 0 0 15px rgba(111, 207, 151, 0.3);
 }
 
-.pigfarm-video {
+.cassava-video {
   width: 100%;
   height: auto;
   display: block;
@@ -50,11 +50,11 @@
 
 /* ✅ Responsive adjustments */
 @media screen and (max-width: 600px) {
-  .pigfarm-title {
+  .cassava-heading {
     font-size: 1.5rem;
   }
 
-  .pigfarm-description {
+  .cassava-description {
     font-size: 0.95rem;
     padding: 0 1rem;
   }

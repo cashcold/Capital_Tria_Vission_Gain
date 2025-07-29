@@ -15,6 +15,7 @@ import PoultryFarmVideo from '../PoultryFarmVideo/PoultryFarmVideo';
 import GoatFarmVideo from '../GoatFarmVideo/GoatFarmVideo';
 import MaizeFarm from '../MaizeFarm/MaizeFarm';
 import PigFarm from '../PigFarm/PigFarm';
+import CassavaFarmingVideo from '../CassavaFarmingVideo/CassavaFarmingVideo';
 
 
 
@@ -614,14 +615,15 @@ class Home extends Component {
                 <PigFarm/>
                </section>
                 <section className="tradingView" >
-                <TradingViewWidget />
-
+                  <TradingViewWidget />
                 </section>
                 <section class="TestimonialsSection">
                     <TestimonialsSection/>
                 </section>
-                
-                
+                <section class="cassavaFarmMain">
+                    <CassavaFarmingVideo/>
+                </section>
+                   
             </div>
          );
     }
