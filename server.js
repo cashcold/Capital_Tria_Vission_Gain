@@ -68,8 +68,8 @@ app.get('/', (req, res) => {
             return console.log(err);
         }
 
-        data = data.replace(/\$OG_TITLE/g, 'We Help Everyone Live Better Through Momo')
-           .replace(/\$OG_DESCRIPTION/g, "Join our Mobile Money (Momo) investment project and secure your financial future. We make investing simple, flexible, and accessible for everyone.")
+        data = data.replace(/\$OG_TITLE/g, 'Earn Daily Profit with Capital Gain Management Co.')
+           .replace(/\$OG_DESCRIPTION/g, "Invest easily through Mobile Money (MoMo) or your Bank and earn daily profits backed by Bitcoin cloud mining and real-world farming projects — fish, poultry, goat, and more. Trusted. Transparent. Global.")
            .replace(/\$OG_IMAGE/g, 'https://bitcoin4uonline.com/static/media/mobile-money.10e06826.jpg'); 
 res.send(data);
     });
