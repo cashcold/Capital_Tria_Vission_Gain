@@ -40,14 +40,16 @@ class MainApp extends Component {
             liveTime: null,
             timeMismatch: null,
             redirectToHome: false,
-            loading: true, // Added a loading state to control rendering for users
+            loading: true,
+            token: null,
         };
     }
 
     
     
     async componentDidMount() {
-
+        const token = sessionStorage.getItem('x-access-token');
+        this.setState({ token });
 
         const RefreshToken = sessionStorage.getItem('RefreshToken');
         if (RefreshToken) {
@@ -136,7 +138,7 @@ class MainApp extends Component {
         return (
             <Router>
                 <div className='mainApp animate__animated animate__zoomIn animate__slowerss'>
-                    <PopoutExample />
+                    {!this.state.token && <PopoutExample />}
                     {/* <div className='google__id' id="google_translate_element"></div> */}
                     <div className='container_!'>
                         <section className="MethodMomo">
