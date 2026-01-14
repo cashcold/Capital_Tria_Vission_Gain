@@ -324,7 +324,8 @@ class DepositMain extends Component {
                              <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> Momo Number</span></h5>
                         </div>
                         <div className="bit__btn ">
-                             <h5 className='bit__btn_2'><a href='' onClick={this.onSubmit}>Pay with Bitcoin</a></h5>
+                             <h5 className='bit__btn_2'><a href='#' >Pay with Bitcoin</a></h5>
+                             {/* <h5 className='bit__btn_2'><a href='' onClick={this.onSubmit}>Pay with Bitcoin</a></h5> */}
                              <h5 className='bit__btn_2'><a href='' onClick={this.onSubmitMomo}>Pay with Momo Number</a></h5>
                         </div>
                     </div>

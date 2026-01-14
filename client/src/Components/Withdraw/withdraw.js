@@ -129,13 +129,13 @@ class WithdrawMain extends Component {
                                 <h4 className='style__h4'>Account Balance:</h4>
                             </div>
                             <div className="with__inner__box_1">
-                                <h4>${this.state.activetDeposit__amount}.00</h4>
+                                <h4>GHC{this.state.activetDeposit__amount}.00</h4>
                             </div>
                             <div className="with__inner__box_1">
                                 <h4 className='style__h4'>Pending Withdrawals:</h4>
                             </div>
                             <div className="with__inner__box_1">
-                                <h4>$0.00</h4>
+                                <h4>GHC0.00</h4>
                             </div>
                       </div>
                     </section>
@@ -155,11 +155,11 @@ class WithdrawMain extends Component {
                             <h4><i class="fab fa-bitcoin"></i>Bitcoin</h4>
                         </div>
                         <div className="method__box">
-                            <h4 className=''>${this.state.activetDeposit__amount}.00</h4><br/>
+                            <h4 className=''>GHC{this.state.activetDeposit__amount}.00</h4><br/>
                             <a href='#' className='btn btn-success withdrawBtn ' onClick={this.WithdrawNowFound}>WITHDRAW BALANCE</a>
                         </div>
                         <div className="method__box">
-                            <h4  className='btn btn-danger'>$0.00</h4>
+                            <h4  className='btn btn-danger'>GHC0.00</h4>
                         </div>
                     </section>
                     <section className='wallet'>
