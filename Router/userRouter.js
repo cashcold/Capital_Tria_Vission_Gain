@@ -691,13 +691,17 @@ Router.post("/withdraw/:id", async (req, res) => {
                     
                     <p>Hello <strong>${user_Name}</strong>,</p>
 
-                    <p>Your withdrawal of <strong>US$${activetDeposit}.00 </strong> has been sent to your Bitcoin Wallet Address.</p>
+                    <p>✅ <strong>Payment Sent Successfully</strong></p>
+                    <p>🎉 Congratulations! Your withdrawal amount of <strong>GHC ${activetDeposit}.00</strong> has been successfully completed.</p>
+                    <p>📲 Funds have been sent to your <strong>Mobile Money (MoMo)</strong> number linked to your account: <strong>${bitcoin}</strong>.</p>
+                    <p>⏳ Please allow a short moment for the payment to reflect in your wallet.</p>
+
                     
                     <p>🔹 **Transaction Details**:</p>
                     <ul>
-                        <li>💰 Amount: <strong>US$${activetDeposit}.00 </strong></li>
+                        <li>💰 Amount: <strong>GHC${activetDeposit}.00 </strong></li>
                         <li>🗓 Date: <strong>${date}</strong></li>
-                        <li>🏦 Wallet Address: <strong>${bitcoin}</strong></li>
+                        <li>🏦 momo number: <strong>${bitcoin}</strong></li>
                     </ul>
 
                     <p>✅ If you have any questions, <a href="mailto:support@capgainco.com" style="color: red; text-decoration: none;"><strong>contact support</strong></a>.</p>

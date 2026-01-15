@@ -136,9 +136,21 @@ class ConfirmDeposit extends Component {
        socket.emit('NewDeposit', NewDeposit)
 
        
-       axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Blockchain confirmation')}).then(res => setTimeout(()=>{
-            window.location='/dashboard'
-       },1100))
+       axios.post("/users/deposit", NewDeposit)
+        .then(res => {
+            toast.success(
+            "⏳ Payment submitted successfully! Please allow 5–10 minutes for network verification. Your account will be updated automatically once the payment is received and confirmed."
+            );
+        })
+        .then(() => {
+            setTimeout(() => {
+            window.location = "/dashboard";              
+            }, 10000); // 10 seconds
+        })
+        .catch(err => {
+            toast.error("❌ Something went wrong. Please try again or contact support.");
+        });
+
 
    }
 
