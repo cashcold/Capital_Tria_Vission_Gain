@@ -171,3 +171,75 @@
        margin-bottom: 4em;
     }
 }
+
+/* Responsive and layout improvements for the confirmation block */
+.confirmBtnInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    color: #eaf3ff;
+    width: 100%;
+    max-width: 820px;
+    box-sizing: border-box;
+}
+
+.confirmBtnInfo p{ 
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: #e6eef8;
+}
+
+.confirmBtnInfo .outAmount1{
+    display: inline-block;
+    background: rgba(255,255,255,0.04);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.confirmBtnInfo .wallertNumber{
+    display: inline-block;
+    background: rgba(0,0,0,0.15);
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.confirmBtnInfo h4{ 
+    margin: 6px 0 0 0;
+    font-size: 1rem;
+    color: #ffd166;
+}
+
+/* Ensure buttons are full-width on small screens */
+.btnConfirm{ width: 100%; }
+.btnConfirm button{ min-width: 220px; }
+
+@media screen and (max-width: 1024px){
+    .confirmLine{ grid-gap: 4em; }
+    .confirmBtnInfo{ max-width: 640px; }
+}
+
+@media screen and (max-width: 768px){
+    .confirmBtnInfo{ align-items: stretch; padding: 14px; }
+    .confirmBtnInfo p{ font-size: 0.95rem; }
+    .confirmDepositNow h1{ font-size: 18px; }
+    .wallertNumber{ font-size: 0.95rem; margin: 10px 0; }
+    .btnConfirm button{ width: 100%; font-size: 16px; padding: 12px; }
+}
+
+@media screen and (max-width: 420px){
+    .confirm{ padding: 2em 0; }
+    .confirmBtnInfo{ padding: 12px; gap: 8px; }
+    .confirmBtnInfo p{ font-size: 0.92rem; }
+    .planInfo p{ font-size: 0.9rem; }
+    .btnConfirm button{ font-size: 15px; padding: 10px; border-radius: 8px; }
+}

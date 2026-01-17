@@ -190,13 +190,40 @@ class MomoDeposit extends Component {
                                 <p><span className='outAmount'></span></p>
                             </div>
 
-                            <div className='confirmBtnInfo'>
-                                <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{Amount_to_send}</span> GHC to  Momo Number<br/>
-                                <p className='wallertNumber'><span>0203808479</span><br/>Ainoo Frank  </p>
-                                
-                                <h4>Order status: <span>Waiting for payment</span></h4>
+                           <div className="confirmBtnInfo">
+                                <p>
+                                    🆔 Kindly use your User Name 
+                                    <span> {this.state.user_Name}</span> 
+                                    as the <strong>Reference ID / Description</strong> when making the payment.
                                 </p>
-                            </div>
+
+                                <p>
+                                    💰 Please send exactly 
+                                    <span className="outAmount1"> {Amount_to_send} </span> GHC via Mobile Money.
+                                </p>
+
+                                <p>
+                                    📱 <strong>Primary Payment (Vodafone MoMo)</strong><br />
+                                    🔴 <span className="wallertNumber">0203808479</span><br />
+                                    👤 Account Name: <strong>Ainoo Frank</strong>
+                                </p>
+
+                                <p>
+                                    📱 <strong>Alternative Payment (AirtelTigo MoMo)</strong><br />
+                                    🔵 <span className="wallertNumber">0268253787</span><br />
+                                    👤 Account Name: <strong>Ainoo Frank</strong>
+                                </p>
+
+                                <p>
+                                    👉 Please <strong>try the Vodafone MoMo number first</strong>.  
+                                    If it does not go through, kindly use the <strong>AirtelTigo MoMo number</strong>.
+                                </p>
+
+                                <h4>
+                                    ⏳ Order Status: <span>Waiting for payment</span>
+                                </h4>
+                                </div>
+
                         </div>
                     </div>
                     
