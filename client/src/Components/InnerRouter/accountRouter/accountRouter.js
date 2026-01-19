@@ -4,9 +4,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import {addDays,addMinutes} from "date-fns"
+import {addDays,addMinutes,subMinutes} from "date-fns"
 import moment from 'moment';
 import './style.css'
+import DepositModal from '../../DepositModal.js/DepositModal';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -35,6 +36,7 @@ class AccountRouter extends Component {
             redirectToHome: false,
             Refedate: '',
             showDetails: false, // State for popout card visibility
+       
          }
 
          this.handleChange = this.handleChange.bind(this)
@@ -275,6 +277,23 @@ class AccountRouter extends Component {
         ? moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a')
         : "No date available";
 
+       // Logic for showing DepositModal: if timestamp date is within 5 minutes from now
+       const now = new Date();
+       const fiveMinutesAgo = subMinutes(now, 5);
+
+       const timestampDate =
+         Array.isArray(this.state.timestamp) && this.state.timestamp.length > 0
+           ? new Date(this.state.timestamp[this.state.timestamp.length - 1])
+           : this.state.timestamp
+             ? new Date(this.state.timestamp)
+             : null;
+
+       const showDepositModal =
+         timestampDate &&
+         !isNaN(timestampDate.getTime()) &&
+         timestampDate >= fiveMinutesAgo &&
+         timestampDate <= now;
+
 
         return ( 
             <div className='account__router'>
@@ -372,7 +391,11 @@ class AccountRouter extends Component {
 
                     )
                 }
-
+                {showDepositModal && (
+                <section>
+                    <DepositModal/>
+                </section>
+                )}
                 <section className='dashboard__section_box__3'>
                     <div className="dash__box__1">
                         <i class="fas fa-coins fa-3x"></i>

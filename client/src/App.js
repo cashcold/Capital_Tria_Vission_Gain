@@ -16,6 +16,7 @@ import RegisterUser from './Components/Register/register';
 import Dashboard from './Components/Dashboard/dashboard';
 import Login from './Components/Login/login';
 import DepositMain from './Components/Deposit/depsoit';
+// import DepositModal from './Components/DepositModal/DepositModal';
 import EditMain from './Components/Edit/edit';
 import WithdrawMain from './Components/Withdraw/withdraw';
 import EditMainRouter from './Components/InnerRouter/editRouter/edit';
@@ -30,6 +31,7 @@ import axios from 'axios';
 import ExchangeMarquee from './Components/ExchangeMarquee/ExchangeMarquee';
 import PriceMarquee from './Components/PriceMarquee/PriceMarquee';
 import PopoutExample from './Components/PopoutExample/PopoutExample';
+import DepositModal from './Components/DepositModal.js/DepositModal';
 
 
 class MainApp extends Component {
@@ -158,7 +160,7 @@ class MainApp extends Component {
                         <Other__NavBar />
                         {/* <PriceMarquee /> */}
                         <Navbar />
-                        <div className='router'>
+                        <div className='router'> 
                             <Switch>
                             <Route path='/' exact component={Home}/> 
                               <Route path='/about-us' exact component={AboutMain}/> 
@@ -168,6 +170,7 @@ class MainApp extends Component {
                               <Route path='/login' exact component={Login}/> 
                               <Route path='/register' exact component={RegisterUser}/> 
                               <Route path='/deposit' exact component={DepositMain}/> 
+                              <Route path='/depositmodal' exact component={DepositModal}/> 
                               <Route path='/edit' exact component={EditMain}/> 
                               <Route path='/withdraw' exact component={WithdrawMain}/>
                               <Route path='/withdraw-refferReward' exact component={WithdrawRefferReward}/>
@@ -179,6 +182,7 @@ class MainApp extends Component {
                         </div>
                         <FooterMain />
                     </div>
+                    
                 </div>
             </Router>
         );
