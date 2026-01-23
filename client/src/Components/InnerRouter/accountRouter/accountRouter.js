@@ -8,6 +8,7 @@ import {addDays,addMinutes,subMinutes} from "date-fns"
 import moment from 'moment';
 import './style.css'
 import DepositModal from '../../DepositModal.js/DepositModal';
+import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal..js';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -277,25 +278,47 @@ class AccountRouter extends Component {
         ? moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a')
         : "No date available";
 
-       // Logic for showing DepositModal: if timestamp date is within 5 minutes from now
-       const now = new Date();
-       const fiveMinutesAgo = subMinutes(now, 5);
+             // Logic for showing DepositModal: if timestamp date is within 5 minutes from now
+             const now = new Date();
+             const fiveMinutesAgo = subMinutes(now, 5);
 
-       const timestampDate =
-         Array.isArray(this.state.timestamp) && this.state.timestamp.length > 0
-           ? new Date(this.state.timestamp[this.state.timestamp.length - 1])
-           : this.state.timestamp
-             ? new Date(this.state.timestamp)
-             : null;
+             const timestampDate =
+                 Array.isArray(this.state.timestamp) && this.state.timestamp.length > 0
+                     ? new Date(this.state.timestamp[this.state.timestamp.length - 1])
+                     : this.state.timestamp
+                         ? new Date(this.state.timestamp)
+                         : null;
 
-       const showDepositModal =
-         timestampDate &&
-         !isNaN(timestampDate.getTime()) &&
-         timestampDate >= fiveMinutesAgo &&
-         timestampDate <= now;
+             const showDepositModal =
+                 timestampDate &&
+                 !isNaN(timestampDate.getTime()) &&
+                 timestampDate >= fiveMinutesAgo &&
+                 timestampDate <= now;
+
+            // Logic for showing WithdrawNoticeModal: check last withdraw record timestamp (robustly)
+            const lastWithdraw =
+                Array.isArray(this.state.withdrawTotal) && this.state.withdrawTotal.length > 0
+                    ? this.state.withdrawTotal[this.state.withdrawTotal.length - 1]
+                    : null;
+
+            // try common timestamp fields on the withdraw record
+            const withdrawTimestampRaw = lastWithdraw
+                ? (lastWithdraw.date || lastWithdraw.createdAt || lastWithdraw.withdraw_date || lastWithdraw.lastDate || lastWithdraw.timestamp)
+                : null;
+
+            const withdrawTimestampDate = withdrawTimestampRaw ? new Date(withdrawTimestampRaw) : null;
+
+            const showWithdrawModal =
+                withdrawTimestampDate &&
+                !isNaN(withdrawTimestampDate.getTime()) &&
+                withdrawTimestampDate >= fiveMinutesAgo &&
+                withdrawTimestampDate <= now;
+
+            const lastWithdrawAmount = lastWithdraw ? (lastWithdraw.WithdrawAmountlast || lastWithdraw.WithdrawAmount || lastWithdraw.amount) : null;
 
 
-        return ( 
+            // debug: show withdraw detection values in console
+                return ( 
             <div className='account__router'>
                 {
                     CheckDeposit === 0 && (
@@ -394,6 +417,15 @@ class AccountRouter extends Component {
                 {showDepositModal && (
                 <section>
                     <DepositModal/>
+                </section>
+                )}
+                {showWithdrawModal && (
+                <section>
+                    <WithdrawNoticeModal
+                        amount={lastWithdrawAmount}
+                        phone={this.state.bitcoin || (this.state.user_profile_display && this.state.user_profile_display.bitcoin)}
+                        date={withdrawTimestampRaw || (lastWithdraw && lastWithdraw.createdAt)}
+                    />
                 </section>
                 )}
                 <section className='dashboard__section_box__3'>

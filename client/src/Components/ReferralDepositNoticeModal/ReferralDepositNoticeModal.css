@@ -1,0 +1,493 @@
+/* Overlay */
+.rdnOverlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.62);
+  backdrop-filter: blur(7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 18px;
+}
+
+/* Card */
+.rdnCard{
+  width: min(820px, 96%);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #0b1220;
+  color: #e9eefc;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 30px 90px rgba(0,0,0,.7);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* Pop animation */
+.pop{ animation: popIn .35s ease; }
+@keyframes popIn{
+  from{ transform: translateY(14px) scale(.93); opacity: 0; }
+  to{ transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Top */
+.rdnTop{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: linear-gradient(90deg, rgba(255,204,0,.22), rgba(230,0,0,.18), rgba(0,102,204,.18));
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.rdnIcon{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  font-size: 20px;
+}
+
+.rdnHeadText{ flex: 1; }
+.rdnTitle{ margin: 0; font-size: 17px; font-weight: 800; }
+.rdnSub{ margin: 4px 0 0; font-size: 13px; color: rgba(233,238,252,.72); }
+
+.rdnPill{
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+/* Body */
+.rdnBody{ padding: 16px; }
+
+.rdnNotice{
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,204,0,.09);
+  border: 1px solid rgba(255,204,0,.22);
+  margin-bottom: 12px;
+}
+
+.rdnNoticeIcon{
+  width: 36px;
+  height: 36px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,204,0,.18);
+  border: 1px solid rgba(255,204,0,.28);
+}
+
+.rdnNoticeTitle{
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.rdnNoticeDesc{
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(233,238,252,.85);
+}
+
+.rdnTextBlock p{
+  margin: 10px 2px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(233,238,252,.86);
+}
+
+.rdnEmphasis{
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(59,130,246,.12);
+  border: 1px solid rgba(59,130,246,.22);
+}
+
+/* Deposit rule box */
+.rdnDepositRule{
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(230,0,0,.08);
+  border: 1px solid rgba(230,0,0,.20);
+}
+
+.rdnDepositRuleTop{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.rdnDot{
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(230,0,0,.18);
+  border: 1px solid rgba(230,0,0,.25);
+}
+
+.rdnDepositRuleTitle{
+  font-weight: 900;
+}
+
+.rdnDepositRuleText{
+  margin: 6px 2px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(233,238,252,.86);
+}
+
+/* Steps */
+.rdnSteps{
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+}
+
+.rdnStepsTitle{
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.rdnStep{
+  display: flex;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: rgba(233,238,252,.88);
+}
+
+.rdnStepIcon{
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(34,197,94,.14);
+  border: 1px solid rgba(34,197,94,.22);
+}
+
+/* Link box */
+.rdnLinkBox{
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(0,102,204,.10);
+  border: 1px solid rgba(0,102,204,.22);
+}
+
+.rdnLinkTop{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.rdnLinkIcon{
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(0,102,204,.18);
+  border: 1px solid rgba(0,102,204,.25);
+}
+
+.rdnLinkTitle{ font-weight: 900; }
+
+.rdnLinkRow{
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.rdnLinkText{
+  flex: 1;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.25);
+  border: 1px solid rgba(255,255,255,.10);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rdnCopyBtn{
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.08);
+  color: #e9eefc;
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.rdnCopyBtn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(0,0,0,.35);
+}
+
+.rdnHint{
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(233,238,252,.70);
+}
+
+/* Footer button */
+.rdnFooter{
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rdnCountdown {
+  font-size: 12px;
+  color: rgba(255,204,0,.8);
+  font-weight: 600;
+  animation: pulse-text 1s infinite;
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.rdnCloseBtn{
+  padding: 12px 34px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 900;
+  color: #111;
+  background: linear-gradient(90deg, #ffcc00, #e60000, #0066cc);
+  box-shadow: 0 0 40px rgba(255,204,0,.35);
+  animation: pulse 1.9s infinite;
+}
+
+.rdnCloseBtn:hover{
+  transform: scale(1.04);
+  box-shadow: 0 0 60px rgba(255,204,0,.55);
+}
+
+@keyframes pulse{
+  0%{ box-shadow: 0 0 0 0 rgba(255,204,0,.55); }
+  70%{ box-shadow: 0 0 0 16px rgba(255,204,0,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(255,204,0,0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rdnOverlay {
+    padding: 10px;
+  }
+
+  .rdnCard {
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+  }
+
+  .rdnTop {
+    padding: 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .rdnIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .rdnTitle {
+    font-size: 15px;
+  }
+
+  .rdnSub {
+    font-size: 12px;
+  }
+
+  .rdnPill {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .rdnBody {
+    padding: 12px;
+  }
+
+  .rdnNotice {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .rdnNoticeIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .rdnNoticeDesc {
+    font-size: 13px;
+  }
+
+  .rdnTextBlock p {
+    font-size: 13px;
+  }
+
+  .rdnEmphasis {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .rdnDepositRule {
+    padding: 10px;
+  }
+
+  .rdnDepositRuleText {
+    font-size: 13px;
+  }
+
+  .rdnSteps {
+    padding: 10px;
+  }
+
+  .rdnStepsTitle {
+    font-size: 14px;
+  }
+
+  .rdnStep {
+    flex-direction: column;
+    text-align: center;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .rdnStepIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .rdnLinkBox {
+    padding: 10px;
+  }
+
+  .rdnLinkRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rdnLinkText {
+    font-size: 12px;
+    padding: 10px;
+    white-space: normal;
+    word-break: break-all;
+  }
+
+  .rdnCopyBtn {
+    padding: 10px 12px;
+    font-size: 14px;
+    align-self: stretch;
+  }
+
+  .rdnHint {
+    font-size: 11px;
+  }
+
+  .rdnCloseBtn {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rdnOverlay {
+    padding: 5px;
+  }
+
+  .rdnCard {
+    width: 100%;
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .rdnTop {
+    padding: 10px;
+  }
+
+  .rdnBody {
+    padding: 10px;
+  }
+
+  .rdnTitle {
+    font-size: 14px;
+  }
+
+  .rdnSub {
+    font-size: 11px;
+  }
+
+  .rdnNotice {
+    padding: 10px;
+  }
+
+  .rdnTextBlock p {
+    font-size: 12px;
+  }
+
+  .rdnDepositRule {
+    padding: 8px;
+  }
+
+  .rdnSteps {
+    padding: 8px;
+  }
+
+  .rdnStep {
+    padding: 6px;
+  }
+
+  .rdnLinkBox {
+    padding: 8px;
+  }
+
+  .rdnLinkText {
+    font-size: 11px;
+    padding: 8px;
+  }
+
+  .rdnCopyBtn {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .rdnCloseBtn {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+}

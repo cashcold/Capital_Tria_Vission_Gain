@@ -32,6 +32,8 @@ import ExchangeMarquee from './Components/ExchangeMarquee/ExchangeMarquee';
 import PriceMarquee from './Components/PriceMarquee/PriceMarquee';
 import PopoutExample from './Components/PopoutExample/PopoutExample';
 import DepositModal from './Components/DepositModal.js/DepositModal';
+import WithdrawNoticeModal from './Components/WithdrawNoticeModal/WithdrawNoticeModal.';
+import ReferralDepositNoticeModal from './Components/ReferralDepositNoticeModal/ReferralDepositNoticeModal';
 
 
 class MainApp extends Component {
@@ -161,6 +163,7 @@ class MainApp extends Component {
                         {/* <PriceMarquee /> */}
                         <Navbar />
                         <div className='router'> 
+
                             <Switch>
                             <Route path='/' exact component={Home}/> 
                               <Route path='/about-us' exact component={AboutMain}/> 
@@ -173,6 +176,8 @@ class MainApp extends Component {
                               <Route path='/depositmodal' exact component={DepositModal}/> 
                               <Route path='/edit' exact component={EditMain}/> 
                               <Route path='/withdraw' exact component={WithdrawMain}/>
+                              <Route path='/WithdrawNoticeModal' exact component={WithdrawNoticeModal}/>
+                              <Route path='/ReferralDepositNoticeModal' exact component={ReferralDepositNoticeModal}/>
                               <Route path='/withdraw-refferReward' exact component={WithdrawRefferReward}/>
                               <Route path='/dashboard' render={(props)=> <Dashboard {...props} />} />
                               <Route path='/forgotpassword' exact component={ForgotPassword}/> 

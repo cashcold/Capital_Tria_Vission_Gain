@@ -152,7 +152,7 @@ class WithdrawMain extends Component {
                     </section>
                     <section className='width__method'>
                         <div className="method__box">
-                            <h4><i class="fab fa-bitcoin"></i>Bitcoin</h4>
+                            <h4><i class="fa fa-money" ></i>momo number</h4>
                         </div>
                         <div className="method__box">
                             <h4 className=''>GHC{this.state.activetDeposit__amount}.00</h4><br/>

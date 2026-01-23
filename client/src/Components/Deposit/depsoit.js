@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
+import ReferralDepositNoticeModal from '../ReferralDepositNoticeModal/ReferralDepositNoticeModal';
 
 
 class DepositMain extends Component {
@@ -20,18 +21,32 @@ class DepositMain extends Component {
             email: '',
             amount: '',
             deposit_date: '',
-            date: ''
+            date: '',
+            showReferralNotice: true, 
         }
 
           this.handleChange = this.handleChange.bind(this)
           this.onSubmit = this.onSubmit.bind(this)
+          this.closeReferralNotice = this.closeReferralNotice.bind(this);
+
     }
 
     handleChange = input => (event)=>{
         this.setState({[input]: event.target.value})
     }
 
+    closeReferralNotice = () => {
+    this.setState({ showReferralNotice: false });
+    };
+
+
     componentDidMount(){
+
+        const user_Name = sessionStorage.getItem('user_Name');
+         this.setState({
+            user_Name: user_Name,
+        });
+
         const deposit_date = new Date().toString()
         this.setState({
             deposit_date
@@ -174,6 +189,12 @@ class DepositMain extends Component {
         return ( 
             <div className='depositMain'>
                 <ToastContainer/>
+                <ReferralDepositNoticeModal
+                show={this.state.showReferralNotice}
+                onClose={this.closeReferralNotice}
+                referralLink={`https://capgainco.com/?ref=${this.state.user_Name || "YOUR_USERNAME"}`}
+                />
+
                 <h1 className='newDeposit'>NEW <span>DEPOSIT</span></h1>
                 <div className="allSection">
                 <section className='deposit__box__1'>
