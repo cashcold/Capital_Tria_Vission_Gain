@@ -5,7 +5,7 @@ class ReferralDepositNoticeModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countdown: 20
+      countdown: 35
     };
   }
 

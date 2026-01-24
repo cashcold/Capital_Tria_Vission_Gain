@@ -209,3 +209,263 @@
     box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
   }
 }
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .wnCard {
+    width: 95%;
+    max-width: 600px;
+    border-radius: 18px;
+  }
+
+  .wnTop {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .wnIcon {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .wnTitle {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .wnSub {
+    font-size: 12px;
+  }
+
+  .wnPill {
+    font-size: 11px;
+    padding: 5px 10px;
+    white-space: nowrap;
+  }
+
+  .wnBody {
+    padding: 12px;
+  }
+
+  .wnRow {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .wnDot {
+    width: 30px;
+    height: 30px;
+  }
+
+  .wnLabel {
+    font-size: 11px;
+  }
+
+  .wnValue {
+    font-size: 13px;
+  }
+
+  .wnInfo {
+    font-size: 13px;
+    margin: 12px 0;
+  }
+
+  .wnFooter {
+    margin-top: 14px;
+    gap: 12px;
+  }
+
+  .wnRingWrap {
+    width: 80px;
+    height: 80px;
+  }
+
+  .wnRing {
+    width: 80px;
+    height: 80px;
+    viewBox: "0 0 80 80";
+  }
+
+  .wnRingBg,
+  .wnRingFg {
+    cx: 40;
+    cy: 40;
+    r: 36;
+  }
+
+  .wnRingNum {
+    font-size: 16px;
+  }
+
+  .wnRingSub {
+    font-size: 10px;
+  }
+
+  .wnCloseBtn {
+    padding: 10px 26px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wnOverlay {
+    padding: 8px;
+  }
+
+  .wnCard {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 14px;
+  }
+
+  .wnTop {
+    padding: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .wnIcon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .wnTitle {
+    font-size: 13px;
+  }
+
+  .wnSub {
+    font-size: 11px;
+  }
+
+  .wnPill {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .wnBody {
+    padding: 10px;
+  }
+
+  .wnRow {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .wnDot {
+    width: 28px;
+    height: 28px;
+  }
+
+  .wnLabel {
+    font-size: 10px;
+  }
+
+  .wnValue {
+    font-size: 12px;
+  }
+
+  .wnInfo {
+    font-size: 12px;
+    margin: 10px 0;
+  }
+
+  .wnFooter {
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .wnRingWrap {
+    width: 70px;
+    height: 70px;
+  }
+
+  .wnRing {
+    width: 70px;
+    height: 70px;
+    viewBox: "0 0 70 70";
+  }
+
+  .wnRingBg,
+  .wnRingFg {
+    cx: 35;
+    cy: 35;
+    r: 32;
+  }
+
+  .wnRingNum {
+    font-size: 14px;
+  }
+
+  .wnRingSub {
+    font-size: 9px;
+  }
+
+  .wnCloseBtn {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .wnCard {
+    width: 100%;
+    max-width: none;
+  }
+
+  .wnTop {
+    flex-wrap: wrap;
+    padding: 8px;
+  }
+
+  .wnTitle {
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .wnSub {
+    font-size: 10px;
+    width: 100%;
+  }
+
+  .wnBody {
+    padding: 8px;
+  }
+
+  .wnInfo {
+    font-size: 11px;
+  }
+
+  .wnRingWrap {
+    width: 60px;
+    height: 60px;
+  }
+
+  .wnRing {
+    width: 60px;
+    height: 60px;
+    viewBox: "0 0 60 60";
+  }
+
+  .wnRingBg,
+  .wnRingFg {
+    cx: 30;
+    cy: 30;
+    r: 26;
+  }
+
+  .wnRingNum {
+    font-size: 12px;
+  }
+
+  .wnRingSub {
+    font-size: 8px;
+  }
+
+  .wnCloseBtn {
+    padding: 6px 16px;
+    font-size: 11px;
+  }
+}

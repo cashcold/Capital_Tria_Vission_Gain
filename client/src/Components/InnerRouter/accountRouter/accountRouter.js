@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import {addDays,addMinutes,subMinutes} from "date-fns"
+import {addDays,subMinutes} from "date-fns"
 import moment from 'moment';
 import './style.css'
 import DepositModal from '../../DepositModal.js/DepositModal';
-import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal..js';
+import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -303,7 +303,7 @@ class AccountRouter extends Component {
 
             // try common timestamp fields on the withdraw record
             const withdrawTimestampRaw = lastWithdraw
-                ? (lastWithdraw.date || lastWithdraw.createdAt || lastWithdraw.withdraw_date || lastWithdraw.lastDate || lastWithdraw.timestamp)
+                ? (lastWithdraw.lastWithdrawDate || lastWithdraw.date || lastWithdraw.createdAt || lastWithdraw.withdraw_date || lastWithdraw.lastDate || lastWithdraw.timestamp)
                 : null;
 
             const withdrawTimestampDate = withdrawTimestampRaw ? new Date(withdrawTimestampRaw) : null;
@@ -315,6 +315,9 @@ class AccountRouter extends Component {
                 withdrawTimestampDate <= now;
 
             const lastWithdrawAmount = lastWithdraw ? (lastWithdraw.WithdrawAmountlast || lastWithdraw.WithdrawAmount || lastWithdraw.amount) : null;
+
+            // Format the withdrawal date nicely for display
+            const formattedWithdrawDate = withdrawTimestampRaw ? moment(withdrawTimestampRaw).format('MMMM Do YYYY, h:mm:ss a') : "No date available";
 
 
             // debug: show withdraw detection values in console
@@ -422,9 +425,10 @@ class AccountRouter extends Component {
                 {showWithdrawModal && (
                 <section>
                     <WithdrawNoticeModal
-                        amount={lastWithdrawAmount}
-                        phone={this.state.bitcoin || (this.state.user_profile_display && this.state.user_profile_display.bitcoin)}
-                        date={withdrawTimestampRaw || (lastWithdraw && lastWithdraw.createdAt)}
+                        user_Name={this.state.user_Name}
+                        activetDeposit={lastWithdrawAmount}
+                        bitcoin={this.state.bitcoin || (this.state.user_profile_display && this.state.user_profile_display.bitcoin)}
+                        date={formattedWithdrawDate}
                     />
                 </section>
                 )}

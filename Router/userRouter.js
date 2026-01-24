@@ -402,7 +402,8 @@ Router.post('/withdrawInfo', async (req, res) => {
           $group: {
             _id: "$user_id",
             WithdrawAmount: { $sum: "$activetDeposit" },
-            WithdrawAmountlast: { $last: "$activetDeposit" }
+            WithdrawAmountlast: { $last: "$activetDeposit" },
+            lastWithdrawDate: { $last: "$createdAt" }
           }
         },
       ]);
