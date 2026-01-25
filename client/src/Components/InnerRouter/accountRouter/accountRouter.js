@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import {addDays,subMinutes} from "date-fns"
-import moment from 'moment';
+import moment from 'moment';   
 import './style.css'
 import DepositModal from '../../DepositModal.js/DepositModal';
 import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.';

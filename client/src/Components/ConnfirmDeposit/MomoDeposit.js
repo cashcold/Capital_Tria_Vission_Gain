@@ -88,7 +88,7 @@ class MomoDeposit extends Component {
         // Execute the function 
         CalculatorEngine();
     
-        const user_id = sessionStorage.getItem('user_id');
+        const user_id = sessionStorage.getItem('user_id'); 
         const user_Name = sessionStorage.getItem('user_Name');
         const full_Name = sessionStorage.getItem('full_Name');
         const planNow = sessionStorage.getItem('planNow');

@@ -1,123 +1,135 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./WithdrawNoticeModal.css";
 
-const WithdrawNoticeModal = ({ user_Name, activetDeposit, bitcoin, date }) => {
-  const [visible, setVisible] = useState(true);
-  const [countdown, setCountdown] = useState(30);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          goDashboard();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const goDashboard = () => {
-    setVisible(false);
-    window.location = "/dashboard";
+class WithdrawNoticeModal extends React.Component {
+  state = {
+    visible: true,
+    countdown: 30,
   };
 
-  if (!visible) return null;
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState(
+        (prev) => ({ countdown: prev.countdown - 1 }),
+        () => {
+          if (this.state.countdown <= 0) {
+            this.goDashboard();
+          }
+        }
+      );
+    }, 1000);
+  }
 
-  // ✅ ring now matches 30 seconds
-  const total = 30;
-  const progress = (total - countdown) / total;
-  const circumference = 2 * Math.PI * 44;
-  const offset = circumference - progress * circumference;
+  closeModal = () => {
+    clearInterval(this.timer);
+    this.setState({ visible: false });
+  };
 
-  return (
-    <div className="wnOverlay">
-      <div className="wnCard pop">
-        {/* HEADER */}
-        <div className="wnTop">
-          <div className="wnIcon">✅</div>
-          <div className="wnText">
-            <h3 className="wnTitle">Withdrawal Submitted</h3>
-            <p className="wnSub">
-              Payments are released instantly from our system.
-            </p>
+  goDashboard = () => {
+    clearInterval(this.timer);
+    this.setState({ visible: false });
+  };
+
+  render() {
+    if (!this.state.visible) return null;
+
+    const { countdown } = this.state;
+
+    // ✅ ring now matches 30 seconds
+    const total = 30;
+    const progress = (total - countdown) / total;
+    const circumference = 2 * Math.PI * 44;
+    const offset = circumference - progress * circumference;
+
+    // props from parent
+    const { user_Name, activetDeposit, bitcoin, date } = this.props;
+
+    return (
+      <div className="wnOverlay">
+        <div className="wnCard pop">
+          {/* HEADER */}
+          <div className="wnTop">
+            <div className="wnIcon">✅</div>
+            <div className="wnText">
+              <h3 className="wnTitle">Withdrawal Submitted</h3>
+              <p className="wnSub">
+                Payments are released instantly from our system.
+              </p>
+            </div>
+            <span className="wnPill">📲 MoMo</span>
           </div>
-          <span className="wnPill">📲 MoMo</span>
-        </div>
 
-        {/* BODY MESSAGE */}
-        <div className="wnBody">
-          <p>Hello <strong>{user_Name}</strong>,</p>
+          {/* BODY MESSAGE */}
+          <div className="wnBody">
 
-          <p>✅ <strong>Payment Sent Successfully</strong></p>
-          <p>
-            🎉 Congratulations! Your withdrawal amount of{" "}
-            <strong>GHC {activetDeposit}.00</strong> has been successfully completed.
-          </p>
+            <p>Hello <strong>{user_Name}</strong>,</p>
 
-          <p>
-            📲 Funds have been sent to your <strong>Mobile Money (MoMo)</strong>{" "}
-            number linked to your account: <strong>{bitcoin}</strong>.
-          </p>
+            <p>✅ <strong>Payment Sent Successfully</strong></p>
+            <p>
+              🎉 Congratulations! Your withdrawal amount of{" "}
+              <strong>GHC {activetDeposit}.00</strong> has been successfully completed.
+            </p>
 
-          <p>⏳ Please allow a short moment for the payment to reflect in your wallet.</p>
+            <p>
+              📲 Funds have been sent to your <strong>Mobile Money (MoMo)</strong>{" "}
+              number linked to your account: <strong>{bitcoin}</strong>.
+            </p>
 
-          <p><strong>🔹 Transaction Details:</strong></p>
-          <ul>
-            <li>💰 Amount: <strong>GHC {activetDeposit}.00</strong></li>
-            <li>🗓 Date: <strong>{date}</strong></li>
-            <li>🏦 MoMo Number: <strong>{bitcoin}</strong></li>
-          </ul>
+            <p>⏳ Please allow a short moment for the payment to reflect in your wallet.</p>
 
-          <p>
-            ✅ If you have any questions,{" "}
-            <a
-              href="mailto:support@capgainco.com"
-              style={{ color: "red", textDecoration: "none" }}
-            >
-              <strong>contact support</strong>
-            </a>.
-          </p>
+            <p><strong>🔹 Transaction Details:</strong></p>
+            <ul>
+              <li>💰 Amount: <strong>GHC {activetDeposit}.00</strong></li>
+              <li>🗓 Date: <strong>{date}</strong></li>
+              <li>🏦 MoMo Number: <strong>{bitcoin}</strong></li>
+            </ul>
 
-          <p>Best regards,</p>
-          <p style={{ fontWeight: "bold" }}>💼 Capital Gain Payments Team</p>
+            <p>
+              ✅ If you have any questions,{" "}
+              <a
+                href="mailto:support@capgainco.com"
+                style={{ color: "red", textDecoration: "none" }}
+              >
+                <strong>contact support</strong>
+              </a>.
+            </p>
 
-          {/* PROGRESS RING */}
-          <div className="wnFooter">
-            <div className="wnRingWrap">
-              <svg className="wnRing" width="96" height="96" viewBox="0 0 96 96">
-                <circle className="wnRingBg" cx="48" cy="48" r="44" />
-                <circle
-                  className="wnRingFg"
-                  cx="48"
-                  cy="48"
-                  r="44"
-                  style={{
-                    strokeDasharray: circumference,
-                    strokeDashoffset: offset,
-                  }}
-                />
-              </svg>
+            <p>Best regards,</p>
+            <p style={{ fontWeight: "bold" }}>💼 Capital Gain Payments Team</p>
 
-              <div className="wnRingText">
-                <div className="wnRingNum">{countdown}s</div>
-                <div className="wnRingSub">Redirecting</div>
+            {/* PROGRESS RING */}
+            <div className="wnFooter">
+              <div className="wnRingWrap">
+                <svg className="wnRing" width="96" height="96" viewBox="0 0 96 96">
+                  <circle className="wnRingBg" cx="48" cy="48" r="44" />
+                  <circle
+                    className="wnRingFg"
+                    cx="48"
+                    cy="48"
+                    r="44"
+                    style={{
+                      strokeDasharray: circumference,
+                      strokeDashoffset: offset,
+                    }}
+                  />
+                </svg>
+
+                <div className="wnRingText">
+                  <div className="wnRingNum">{countdown}s</div>
+                  <div className="wnRingSub">Redirecting</div>
+                </div>
               </div>
+
+              <button className="wnCloseBtn" onClick={this.closeModal}>
+                Okay, I Understand — Go to Dashboard
+              </button>
             </div>
 
-            <button className="wnCloseBtn" onClick={goDashboard}>
-              Okay, I Understand — Go to Dashboard
-            </button>
-            <div className="wnCountdown">
-              Auto-redirecting in {countdown}s
-            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default WithdrawNoticeModal;

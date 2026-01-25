@@ -93,7 +93,7 @@ class DepositMain extends Component {
         setTimeout(()=>{
             window.location='/dashboard/confirm_deposit'
         },600)
-    }
+    } 
     onSubmitMomo = (event)=>{
         event.preventDefault()
         
