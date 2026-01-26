@@ -61,20 +61,20 @@ class RegisterUser extends Component {
     onSubmit = (event)=>{
         event.preventDefault() 
         const SaveNewUser = {
-            full_Name: this.state.full_Name,
-            user_Name: this.state.user_Name,
+            full_Name: this.state.full_Name.trim(),
+            user_Name: this.state.user_Name.replace(/\s/g, ''),
             password: this.state.password,
             comfirm_password: this.state.comfirm_password,
-            email: this.state.email,
-            bitcoin: this.state.bitcoin,
+            email: this.state.email.replace(/\s/g, ''),
+            bitcoin: this.state.bitcoin.trim(),
             ip_address: this.state.ip_address,
             accountBalance: this.state.accountBalance,
              activetDeposit: this.state.activetDeposit,
             reffer: this.state.reffer,
             refferReward: this.state.refferReward,
             restartLinkPassword: this.state.restartLinkPassword,
-            question: this.state.question,
-            question__ans: this.state.question__ans,
+            question: this.state.question.trim(),
+            question__ans: this.state.question__ans.trim(),
             checkBox: this.state.checkBox,
             date: this.state.date
             
@@ -82,15 +82,15 @@ class RegisterUser extends Component {
 
         
         if(SaveNewUser.full_Name.length < 6){
-            toast.warn('Full Name  must be at lest 6')
+            toast.warn('Full Name must be at least 6 characters')
             return false
         }
         if(SaveNewUser.user_Name.length < 5){
-            toast.warn('User Name must be at lest 5')
+            toast.warn('User Name must be at least 5 characters')
             return false
         }
         if(SaveNewUser.password.length < 10){
-            toast.warn('password must be at lest 10')
+            toast.warn('Password must be at least 10 characters')
             return false
         }
         if(SaveNewUser.password !== SaveNewUser.comfirm_password){
@@ -99,7 +99,7 @@ class RegisterUser extends Component {
         }
 
         if(!SaveNewUser.full_Name || !SaveNewUser.user_Name || !SaveNewUser.password || !SaveNewUser.email){
-        toast.error('Please Fill All Field')
+        toast.error('Please fill all fields')
         return false;
         }
         if(!SaveNewUser.bitcoin){
@@ -112,7 +112,7 @@ class RegisterUser extends Component {
             return false
         }
         if(SaveNewUser.question.length < 1){
-            toast.warn('Please Create Qustion')
+            toast.warn('Please Create Question')
             return false
         }
         if(SaveNewUser.question__ans.length < 1){
