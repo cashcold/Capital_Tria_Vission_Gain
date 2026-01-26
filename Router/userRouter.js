@@ -606,6 +606,7 @@ Router.post('/deposit', async(req,res)=>{
         full_Name: req.body.full_Name,
         fixedDepositAmount: (req.body.fixedDepositAmount),
         depositAmount: Number(req.body.depositAmount),
+        checkPercent: Number(req.body.checkPercent),
         walletAddress: req.body.walletAddress,
         email: req.body.email,
         deposit_date: req.body.deposit_date,

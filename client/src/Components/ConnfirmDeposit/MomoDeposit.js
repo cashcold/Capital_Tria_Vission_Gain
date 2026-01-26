@@ -24,7 +24,8 @@ class MomoDeposit extends Component {
             amount: '',
             date: '',
             paymentMade: false,
-            isSubmitting: false
+            isSubmitting: false,
+            checkPercent: 0
             
 
             
@@ -82,6 +83,7 @@ class MomoDeposit extends Component {
                 checkPercent = depositAmountCheck * 10/100;
             }
     
+            this.setState({ checkPercent });
             totalMoneyElement.innerHTML = `GHC${checkPercent.toFixed(2)}`;
         };
     
@@ -126,8 +128,8 @@ class MomoDeposit extends Component {
         fixedDepositAmount: this.state.fixedDepositAmount,
         depositAmount: Number(this.state.depositAmount), 
         walletAddress: this.state.walletAddress,
-        deposit_date: this.state.deposit_date,
-        date: this.state.date
+        date: this.state.date,
+        checkPercent: this.state.checkPercent
 
        }
        

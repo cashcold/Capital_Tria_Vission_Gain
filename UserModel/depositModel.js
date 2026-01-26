@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
+    checkPercent: {
+        
+        type: Number,
+        require: true,
+    },
   
     walletAddress: {
         type: String,

@@ -376,6 +376,8 @@ class AccountRouter extends Component {
                         <span>Plan </span>: {this.state.user_deposit_display.fixedDepositAmount} <br />
                         <span>Miner</span>: Premium Miner <br />
                        <span>Deposit Amount</span>: GHC{user_balance.activetDeposit}.00 <br />
+                        <span>Mining Profit</span>: GHC{this.state.user_deposit_display.checkPercent}.00 <br />
+                       <span>Total Return</span>: GHC{Number(user_balance.activetDeposit) + Number(this.state.user_deposit_display.checkPercent)}.00 <br />
                        <span>Deposit Date</span>: {formattedDate} <br />
                        <span className='Status'> Status</span>: Active
                     </p>
