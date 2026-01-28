@@ -429,6 +429,7 @@ class AccountRouter extends Component {
                     <WithdrawNoticeModal
                         user_Name={this.state.user_Name}
                         activetDeposit={lastWithdrawAmount}
+                        checkPercent={this.state.user_deposit_display.checkPercent}
                         bitcoin={this.state.bitcoin || (this.state.user_profile_display && this.state.user_profile_display.bitcoin)}
                         date={formattedWithdrawDate}
                     />

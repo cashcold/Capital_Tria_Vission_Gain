@@ -42,7 +42,7 @@ class WithdrawNoticeModal extends React.Component {
     const offset = circumference - progress * circumference;
 
     // props from parent
-    const { user_Name, activetDeposit, bitcoin, date } = this.props;
+    const { user_Name, activetDeposit,checkPercent, bitcoin, date } = this.props;
 
     return (
       <div className="wnOverlay">
@@ -67,7 +67,7 @@ class WithdrawNoticeModal extends React.Component {
             <p>✅ <strong>Payment Sent Successfully</strong></p>
             <p>
               🎉 Congratulations! Your withdrawal amount of{" "}
-              <strong>GHC {activetDeposit}.00</strong> has been successfully completed.
+              <strong>GHC {Number(activetDeposit) + Number(checkPercent)}.00</strong> has been successfully completed.
             </p>
 
             <p>
@@ -79,8 +79,10 @@ class WithdrawNoticeModal extends React.Component {
 
             <p><strong>🔹 Transaction Details:</strong></p>
             <ul>
-              <li>💰 Amount: <strong>GHC {activetDeposit}.00</strong></li>
-              <li>🗓 Date: <strong>{date}</strong></li>
+              <li>💰 Deposit Amount: <strong>GHC {activetDeposit}.00</strong></li>
+              <li>� Mining Profit: <strong>GHC {checkPercent}.00</strong></li>
+              <li>💵 Total Return: <strong>GHC {Number(activetDeposit) + Number(checkPercent)}.00</strong></li>
+              <li>�🗓 Date: <strong>{date}</strong></li>
               <li>🏦 MoMo Number: <strong>{bitcoin}</strong></li>
             </ul>
 
