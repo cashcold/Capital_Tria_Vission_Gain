@@ -39,7 +39,7 @@ class ReferralDepositNoticeModal extends React.Component {
         }
         return { countdown: newCountdown };
       });
-    }, 1000);
+    }, 500);
   }
 
   clearTimer = () => {
@@ -76,7 +76,7 @@ class ReferralDepositNoticeModal extends React.Component {
               <div className="rdnNoticeText">
                 <div className="rdnNoticeTitle">Important Notice</div>
                 <div className="rdnNoticeDesc">
-                  Before you can deposit <strong>100 GHC or more</strong>, you must complete
+                  Before you can deposit <strong>50 GHC or more</strong>, you must complete
                   the required number of referrals using your referral link.
                 </div>
               </div>
@@ -89,7 +89,7 @@ class ReferralDepositNoticeModal extends React.Component {
 
               <p className="rdnEmphasis">
                 👉 You must complete the required referrals before you can invest{" "}
-                <strong>100 GHC and above</strong>.
+                <strong>50 GHC and above</strong>.
               </p>
             </div>
 
@@ -100,12 +100,12 @@ class ReferralDepositNoticeModal extends React.Component {
               </div>
 
               <p className="rdnDepositRuleText">
-                On <strong>capgainco.com</strong>, only <strong>100 GHC</strong> is required for activation
+                On <strong>capgainco.com</strong>, only <strong>50 GHC</strong> is required for activation
                 of this plan.
               </p>
 
               <p className="rdnDepositRuleText">
-                👉 If you send more than <strong>100 GHC</strong>, the extra amount will be sent back to
+                👉 If you send more than <strong>50 GHC</strong>, the extra amount will be sent back to
                 your account.
               </p>
             </div>
@@ -131,7 +131,7 @@ class ReferralDepositNoticeModal extends React.Component {
               <div className="rdnStep">
                 <span className="rdnStepIcon">4️⃣</span>
                 <span>
-                  Once done, you will be allowed to deposit <strong>100 GHC and above</strong>
+                  Once done, you will be allowed to deposit <strong>50 GHC and above</strong>
                 </span>
               </div>
             </div>
