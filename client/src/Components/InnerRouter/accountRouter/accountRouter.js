@@ -325,7 +325,7 @@ class AccountRouter extends Component {
                 return ( 
             <div className='account__router'>
                 {
-                    CheckDeposit === 0 && (
+                    CheckDeposit === 0 && !showDepositModal && (
                         <section className="div invest_ui_ux_btn">
                         <div class="no-deposit-container">
                         <div class="no-deposit-card">
@@ -420,7 +420,7 @@ class AccountRouter extends Component {
 
                     )
                 }
-                {c && (
+                {showDepositModal && (
                 <section>
                     <DepositModal/>
                   
@@ -444,7 +444,7 @@ class AccountRouter extends Component {
                             <h5>TOTAL INVESTMENT</h5>
                             <h5> GHC {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
                         </div>
-                        {showInvestButton && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>}
+                        {showInvestButton && !showDepositModal && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>}
                     
                     </div>
                     <div className="dash__box__1">
