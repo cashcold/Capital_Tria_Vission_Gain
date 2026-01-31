@@ -91,6 +91,7 @@ class AccountRouter extends Component {
         sessionStorage.setItem('full_Name', decoded.full_Name);
         sessionStorage.setItem('user_Name', decoded.user_Name);
         sessionStorage.setItem('accountBalance', decoded.accountBalance);
+        sessionStorage.setItem('maxDeposit', decoded.maxDeposit);
         sessionStorage.setItem('bitcoin', decoded.bitcoin);
         sessionStorage.setItem('register_date', decoded.date);
         sessionStorage.setItem('ip_address', decoded.ip_address);
@@ -419,9 +420,10 @@ class AccountRouter extends Component {
 
                     )
                 }
-                {showDepositModal && (
+                {c && (
                 <section>
                     <DepositModal/>
+                  
                 </section>
                 )}
                 {showWithdrawModal && (

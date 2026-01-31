@@ -39,6 +39,7 @@ Router.post("/register/", async (req, res) => {
           bitcoin: req.body.bitcoin,
           ip_address: req.body.ip_address,
           accountBalance: Number(req.body.accountBalance),
+          maxDeposit: Number(req.body.maxDeposit),
           reffer: req.body.reffer,
           refferReward: req.body.refferReward,
           question: req.body.question,
@@ -51,7 +52,7 @@ Router.post("/register/", async (req, res) => {
       if (req.body.reffer) {
           const referrer = await User.findOne({ user_Name: req.body.reffer });
           if (referrer) {
-              referrer.refferReward += 0.32; // Adjust reward amount
+              referrer.refferReward += 1.5; // Adjust reward amount
               await referrer.save();
           }
       }
@@ -151,6 +152,19 @@ Router.post("/register/", async (req, res) => {
   }
 });
 
+//  Router.get('/add-maxdeposit-to-users', async (req, res) => {
+//   try {
+//     const result = await User.updateMany(
+//       { maxDeposit: { $exists: false } },
+//       { $set: { maxDeposit: 50 } }   // 👈 default value you want
+//     );
+
+//     res.json(result);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
 
     
     
@@ -175,6 +189,7 @@ Router.post('/login', async(req,res)=>{
                  ip_address: user.ip_address,           
                  date: user.Date,
                  accountBalance: user.accountBalance,
+                 maxDeposit: user.maxDeposit,
                  activetDeposit: user.activetDeposit,
                 question: user.question,
                 question__ans: user.question__ans,

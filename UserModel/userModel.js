@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema({
     accountBalance: {
         type: Number,
     },
+    maxDeposit: {
+        type: Number,
+    },
     refferReward: {
         type: Number,
     },
