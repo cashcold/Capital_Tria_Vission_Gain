@@ -97,7 +97,7 @@ class MomoTrust extends Component {
               <li>📱 <strong>Support Lines:</strong></li>
               <li>• 020 380 8479</li>
               <li>• 026 825 3787</li>
-              <li>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/0203808479" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></li>
+              <li>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/0268253787" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></li>
               <li>✉️ <strong>Email:</strong> <a href="mailto:btcsharktrade@gmail.com">btcsharktrade@gmail.com</a></li>
             </ul>
             <p className="closing-note">

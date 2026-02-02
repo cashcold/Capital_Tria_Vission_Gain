@@ -34,6 +34,7 @@ import PopoutExample from './Components/PopoutExample/PopoutExample';
 import DepositModal from './Components/DepositModal.js/DepositModal';
 import WithdrawNoticeModal from './Components/WithdrawNoticeModal/WithdrawNoticeModal.';
 import ReferralDepositNoticeModal from './Components/ReferralDepositNoticeModal/ReferralDepositNoticeModal';
+import ReferralPerformance from './Components/ReferralPerformance/ReferralPerformance';
 
 
 class MainApp extends Component {
@@ -183,6 +184,7 @@ class MainApp extends Component {
                               <Route path='/forgotpassword' exact component={ForgotPassword}/> 
                               <Route path='/activitPassword/:token' exact component={ActivitPassword}/> 
                               <Route path='/user_admin_watch_notification' exact component={WatchNotificationMain}/> 
+                              <Route path='/ReferralPerformance' exact component={ReferralPerformance}/> 
                             </Switch>
                         </div>
                         <FooterMain />

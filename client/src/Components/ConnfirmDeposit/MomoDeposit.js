@@ -195,8 +195,8 @@ class MomoDeposit extends Component {
                            <div className="confirmBtnInfo">
                                 <p>
                                     🆔 Kindly use your User Name 
-                                    <span> {this.state.user_Name}</span> 
-                                    as the <strong>Reference ID / Description</strong> when making the payment.
+                                    <span> {this.state.user_Name}</span>  
+                                     as the <strong> Reference ID / Description</strong> when making the payment.
                                 </p>
 
                                 <p>
@@ -204,21 +204,23 @@ class MomoDeposit extends Component {
                                     <span className="outAmount1"> {Amount_to_send} </span> GHC via Mobile Money.
                                 </p>
 
-                                <p>
-                                    📱 <strong>Primary Payment (Vodafone MoMo)</strong><br />
-                                    🔴 <span className="wallertNumber">0203808479</span><br />
-                                    👤 Account Name: <strong>Ainoo Frank</strong>
-                                </p>
-
-                                <p>
-                                    📱 <strong>Alternative Payment (AirtelTigo MoMo)</strong><br />
+                                 <p>
+                                    📱 <strong>Primary Payment  (AirtelTigo MoMo)</strong><br />
                                     🔵 <span className="wallertNumber">0268253787</span><br />
                                     👤 Account Name: <strong>Ainoo Frank</strong>
                                 </p>
 
                                 <p>
-                                    👉 Please <strong>try the Vodafone MoMo number first</strong>.  
-                                    If it does not go through, kindly use the <strong>AirtelTigo MoMo number</strong>.
+                                    📱 <strong>Alternative Payment (Vodafone MoMo)</strong><br />
+                                    🔴 <span className="wallertNumber">0203808479</span><br />
+                                    👤 Account Name: <strong>Ainoo Frank</strong>
+                                </p>
+
+                               
+
+                                <p>
+                                    👉 Please <strong>try the AirtelTigo MoMo number first</strong>.  
+                                    If it does not go through, kindly use the <strong>Vodafone MoMo number</strong>.
                                 </p>
 
                                 <h4>
@@ -226,7 +228,7 @@ class MomoDeposit extends Component {
                                 </h4>
                                 </div>
 
-                        </div>
+                           </div>
                     </div>
                     
                 </div>

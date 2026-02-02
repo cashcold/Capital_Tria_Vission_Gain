@@ -940,6 +940,86 @@ client.messages
 
 
 
+Router.get("/admin/referral-performance", async (req, res) => {
+  try {
+    // 1) Get all users
+    const users = await User.find({}, "user_Name full_Name reffer").lean();
+
+    // 2) Get all deposits (sum deposits per username)
+    const deposits = await UserDeposit.find({}, "user_Name depositAmount").lean();
+
+    const depositMap = {}; // { user_Name: totalDepositAmount }
+    for (const d of deposits) {
+      const uname = (d.user_Name || "").trim();
+      if (!uname) continue;
+
+      const amount = Number(d.depositAmount) || 0;
+      depositMap[uname] = (depositMap[uname] || 0) + amount;
+    }
+
+    // 3) Build referrals map: referrer -> array of referred users
+    const referralMap = {}; // { referrerUserName: [userObj, ...] }
+    for (const u of users) {
+      const ref = (u.reffer || "").trim();
+      if (!ref) continue;
+
+      if (!referralMap[ref]) referralMap[ref] = [];
+      referralMap[ref].push(u);
+    }
+
+    // 4) Build performance for each user
+    const performance = users.map(u => {
+      const referredUsers = referralMap[u.user_Name] || [];
+
+      let referralDeposits = 0;
+      let totalDepositFromReferrals = 0;
+
+      const referrals = referredUsers
+        .map(r => {
+          const totalDeposit = depositMap[r.user_Name] || 0;
+          const hasDeposit = totalDeposit > 0;
+
+          if (hasDeposit) {
+            referralDeposits += 1;
+            totalDepositFromReferrals += totalDeposit;
+          }
+
+          return {
+            user_Name: r.user_Name,
+            full_Name: r.full_Name,
+            hasDeposit,
+            totalDeposit
+          };
+        })
+        // Optional: inside each referrer, show top depositing referrals first
+        .sort((a, b) => b.totalDeposit - a.totalDeposit);
+
+      return {
+        user_Name: u.user_Name,
+        full_Name: u.full_Name,
+        referralCount: referredUsers.length,
+        referralDeposits,
+        totalDepositFromReferrals,
+        referrals
+      };
+    });
+
+    // 5) SORT: Top referrers first (highest referralCount)
+    // If tie, sort by totalDepositFromReferrals
+    performance.sort((a, b) => {
+      if (b.referralCount !== a.referralCount) return b.referralCount - a.referralCount;
+      return b.totalDepositFromReferrals - a.totalDepositFromReferrals;
+    });
+
+    res.json({
+      totalUsers: users.length,
+      performance
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 
 
