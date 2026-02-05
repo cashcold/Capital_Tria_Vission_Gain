@@ -112,17 +112,7 @@
   overflow:hidden;
 }
 
-.maxInvestReal::before{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:18px;
-  padding:1px;
-  background: linear-gradient(120deg,#00ffb4,#4d79ff,#00ffb4);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-}
+
 
 .statusDot{
   width:12px;

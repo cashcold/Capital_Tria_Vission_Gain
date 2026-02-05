@@ -12,15 +12,11 @@ const jwt = require('jsonwebtoken')
 const async = require('async')
 const nodemailer = require("nodemailer");
 const crypto = require('crypto')
-const twilio = require("twilio");
+// const twilio = require("twilio");
 
 
 dotEnv.config()
 
-const client = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
 
 const Router = express.Router()
 
@@ -897,55 +893,55 @@ res.send(Refres_profile_hToken)
 
 
 
- Router.post('/sendmessage',(req,res)=>{
+//  Router.post('/sendmessage',(req,res)=>{
    
    
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const client = require('twilio')(accountSid, authToken);
 
-client.messages
-  .create({
-     body: 'Please i have sent you $548, Check your Account ',
-     from: '+19472105301',
-     to: '+233235674386'
-   })
-  .then(message => console.log(message.sid));
+// client.messages
+//   .create({
+//      body: 'Please i have sent you $548, Check your Account ',
+//      from: '+19472105301',
+//      to: '+233235674386'
+//    })
+//   .then(message => console.log(message.sid));
 
-    res.send('Message Sent')
- })
- Router.post('/sendmail', async (req,res)=>{
+//     res.send('Message Sent')
+//  })
+//  Router.post('/sendmail', async (req,res)=>{
    
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "smtp-relay.sendinblue.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user:'payitforwardinvestment50@gmail.com', // generated ethereal user
-      pass:'VyGh7NbW93jvFTOH', // generated ethereal password
-    },
-  });
+//   // create reusable transporter object using the default SMTP transport
+//   let transporter = nodemailer.createTransport({
+//     host: "smtp-relay.sendinblue.com",
+//     port: 587,
+//     secure: false, // true for 465, false for other ports
+//     auth: {
+//       user:'payitforwardinvestment50@gmail.com', // generated ethereal user
+//       pass:'VyGh7NbW93jvFTOH', // generated ethereal password
+//     },
+//   });
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    to: "payitforwardinvestment50@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Checking new api</b>", // html body
-  });
+//   // send mail with defined transport object
+//   let info = await transporter.sendMail({
+//     from: '"Fred Foo 👻" <foo@example.com>', // sender address
+//     to: "payitforwardinvestment50@gmail.com", // list of receivers
+//     subject: "Hello ✔", // Subject line
+//     text: "Hello world?", // plain text body
+//     html: "<b>Checking new api</b>", // html body
+//   });
 
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+//   console.log("Message sent: %s", info.messageId);
+//   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+//   // Preview only available when sending through an Ethereal account
+//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+//   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
 
-    res.send('Message Sent')
- })
+//     res.send('Message Sent')
+//  })
 
 
 
