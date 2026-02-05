@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './style.css'
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
@@ -11,6 +12,7 @@ class DepositMain extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            user_profile_display: '',
             user_id: '',
             planNow: '',
             depositAmount: '',
@@ -41,6 +43,21 @@ class DepositMain extends Component {
 
 
     componentDidMount(){
+         const token = sessionStorage.getItem('x-access-token');
+            
+              if (!token) {
+                  throw new Error('Token missing or null');
+              }
+        
+              const decoded = jwt_decode(token); // Decode the token
+              const currentTime = Date.now() / 1000; // Current time in seconds
+        
+              if (decoded.exp && decoded.exp < currentTime) {
+                  throw new Error('Token expired');
+              }
+            const id = decoded.user_id
+            axios.post('/users/user_profile_display',{id})
+            .then(data => this.setState({user_profile_display: data.data}))
 
         const user_Name = sessionStorage.getItem('user_Name');
          this.setState({
@@ -196,6 +213,18 @@ class DepositMain extends Component {
                 />
 
                 <h1 className='newDeposit'>NEW <span>DEPOSIT</span></h1>
+                <div className="maxInvestReal">
+                <div className="statusDot"></div>
+                <div className="content">
+                    <p className="title">Mining Limit Protection</p>
+                    <p className="desc">
+                    Your Maximum Mining Invest is
+                    <span className="amount"> {this.state.user_profile_display.maxDeposit} GHC</span>
+                    </p>
+                </div>
+                <div className="badge">SECURED</div>
+                </div>
+
                 <div className="allSection">
                 <section className='deposit__box__1'>
                     <div className="deposit__1">

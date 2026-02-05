@@ -1,10 +1,13 @@
 import React from "react";
 import "./ReferralDepositNoticeModal.css";
+import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 
 class ReferralDepositNoticeModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user_profile_display: '',
       maxDeposit: '',
       countdown: 35
     };
@@ -16,6 +19,24 @@ class ReferralDepositNoticeModal extends React.Component {
     const maxDeposit = sessionStorage.getItem('maxDeposit');
 
     this.setState({maxDeposit});
+
+     const token = sessionStorage.getItem('x-access-token');
+    
+      if (!token) {
+          throw new Error('Token missing or null');
+      }
+
+      const decoded = jwt_decode(token); // Decode the token
+      const currentTime = Date.now() / 1000; // Current time in seconds
+
+      if (decoded.exp && decoded.exp < currentTime) {
+          throw new Error('Token expired');
+      }
+    const id = decoded.user_id
+    axios.post('/users/user_profile_display',{id})
+    .then(data => this.setState({user_profile_display: data.data}))
+
+
   }
 
   componentDidUpdate(prevProps) {
@@ -73,6 +94,7 @@ class ReferralDepositNoticeModal extends React.Component {
 
             <span className="rdnPill">📲 CapGainCo</span>
           </div>
+          
 
           {/* Body */}
           <div className="rdnBody">
@@ -81,8 +103,7 @@ class ReferralDepositNoticeModal extends React.Component {
               <div className="rdnNoticeText">
                 <div className="rdnNoticeTitle">Important Notice</div>
                 <div className="rdnNoticeDesc">
-                  Before you can deposit <strong>{this.state.maxDeposit} GHC or more</strong>, you must complete
-                  the required number of referrals using your referral link.
+                  Before you can deposit <strong>{this.state.user_profile_display.maxDeposit} GHC</strong>, you must complete the required number of referrals using your referral link.
                 </div>
               </div>
             </div>
@@ -94,7 +115,7 @@ class ReferralDepositNoticeModal extends React.Component {
 
               <p className="rdnEmphasis">
                 👉 You must complete the required referrals before you can invest{" "}
-                <strong>{this.state.maxDeposit} GHC and above</strong>.
+                <strong>{this.state.user_profile_display.maxDeposit} GHC and above</strong>.
               </p>
             </div>
 
@@ -105,12 +126,12 @@ class ReferralDepositNoticeModal extends React.Component {
               </div>
 
               <p className="rdnDepositRuleText">
-                On <strong>capgainco.com</strong>, only <strong>{this.state.maxDeposit} GHC</strong> is required for activation
+                On <strong>capgainco.com</strong>, only <strong>{this.state.user_profile_display.maxDeposit} GHC</strong> is required for activation
                 of this plan.
               </p>
 
               <p className="rdnDepositRuleText">
-                👉 If you send more than <strong>{this.state.maxDeposit} GHC</strong>, the extra amount will be sent back to
+                👉 If you send more than <strong>{this.state.user_profile_display.maxDeposit} GHC</strong>, the extra amount will be sent back to
                 your account.
               </p>
             </div>
@@ -136,7 +157,7 @@ class ReferralDepositNoticeModal extends React.Component {
               <div className="rdnStep">
                 <span className="rdnStepIcon">4️⃣</span>
                 <span>
-                  Once done, you will be allowed to deposit <strong>{this.state.maxDeposit} GHC and above</strong>
+                  Once done, you will be allowed to deposit <strong>{this.state.user_profile_display.maxDeposit} GHC and above</strong>
                 </span>
               </div>
             </div>

@@ -1,3 +1,4 @@
+
 const express = require('express')
 const Total_TransactionModel = require('../UserModel/total_transactionModel')
 const UserDeposit = require('../UserModel/depositModel')
@@ -11,8 +12,15 @@ const jwt = require('jsonwebtoken')
 const async = require('async')
 const nodemailer = require("nodemailer");
 const crypto = require('crypto')
+const twilio = require("twilio");
+
 
 dotEnv.config()
+
+const client = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
 
 const Router = express.Router()
 
@@ -610,6 +618,7 @@ Router.post('/user_balance',async(req,res)=>{
     
     
 })
+
 
 
 
