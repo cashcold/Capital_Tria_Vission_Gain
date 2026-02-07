@@ -214,17 +214,54 @@ class DepositMain extends Component {
 
                 <h1 className='newDeposit'>NEW <span>DEPOSIT</span></h1>
                 <div className="maxInvestReal">
-                <div className="statusDot"></div>
-                <div className="content">
-                    <p className="title">Mining Limit Protection</p>
-                    <p className="desc">
-                    Your Maximum Mining Invest is
-                    <span className="amount"> {this.state.user_profile_display.maxDeposit} GHC</span>
-                    </p>
+                    <div className="statusDot"></div>
+                    <div className="content">
+                        <p className="title">Mining Limit Protection</p>
+                        <p className="desc">
+                        Your Maximum Mining Invest is
+                        <span className="amount"> {this.state.user_profile_display.maxDeposit} GHC</span>
+                        </p>
+                    </div>
+                    <div className="badge">SECURED</div>
                 </div>
-                <div className="badge">SECURED</div>
-                </div>
+                <div className="infoBlock">
+                <p>
+                    At <b>CapGainCo</b>, we believe in growing together as a community.
+                    Before you can  <b>extended to access higher deposit</b> or  activate <b>Auto Mining</b>, you are required to
+                    invite and refer a specific number of people to join our platform
+                    through your referral link.
+                </p>
 
+                <p className="whyTitle">This helps us to:</p>
+                <ul>
+                    <li>🤝 Expand the learning community</li>
+                    <li>🌍 Reach more people interested in digital mining education</li>
+                    <li>🚀 Reward active members who support the platform’s growth</li>
+                </ul>
+
+                <p className="whyTitle">✅ What You Need To Do</p>
+                <ul>
+                    <li>1️⃣ Share your unique referral link with friends and family</li>
+                    <li>2️⃣ Let them register on capgainco.com through your link</li>
+                    <li>3️⃣ Complete the required number of referrals</li>
+                    <li>4️⃣ Your <b>Auto Mining</b> feature will be unlocked automatically and your deposit amount
+                        <span className="highlightText"> limit will be extended to access higher </span>
+                        deposit plans.</li>
+
+                </ul>
+
+                <p className="whyTitle">🎁 Why This Matters</p>
+                <p>
+                    We designed this system to reward members who actively contribute to
+                    the growth of the CapGainCo community. The more you share, the faster
+                    you unlock powerful features like <b>Auto Mining</b> and mining
+                     <b>Deposit extended.</b>
+                </p>
+
+                <p className="finalNote">
+                    No hidden steps. No confusion.
+                </p>
+                </div>
                 <div className="allSection">
                 <section className='deposit__box__1'>
                     <div className="deposit__1">
@@ -245,7 +282,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>24HRS</h4>
-                                            <h4>GHC50 - GHC599	</h4>
+                                            <h4>GHC10 - GHC599	</h4>
                                             <h4>10</h4>
                                         </div>
                                     </div>

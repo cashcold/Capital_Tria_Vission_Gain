@@ -166,6 +166,63 @@
 }
 
 
+.infoBlock{
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(233,238,247,.88);
+  max-width: 680px;
+  width: 90%;
+  padding: 20px 25px;
+  background: rgba(15, 20, 28, 0.8);
+  border: 1px solid rgba(0, 255, 180, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.infoBlock p{
+  margin: 10px 0;
+}
+
+.whyTitle{
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #00ffb4;
+  letter-spacing: .3px;
+}
+
+.infoBlock ul{
+  padding-left: 20px;
+  margin: 8px 0 12px 0;
+}
+
+.infoBlock li{
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+/* makes long sentence wrap beautifully */
+.infoBlock li,
+.infoBlock p{
+  word-break: break-word;
+}
+
+.finalNote{
+  margin-top: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.highlightText{
+  color:#00ffb4;
+  font-weight:800;
+  text-shadow:0 0 12px rgba(0,255,180,.6);
+}
+
 
 
 @media screen and (max-width: 768px){
@@ -219,4 +276,13 @@
     grid-template-columns:repeat(2,1fr);
     grid-gap: 3em;
 }
+.infoBlock{
+    max-width: 100%;
+    width: 95%;
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 16px 18px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

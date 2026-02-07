@@ -103,7 +103,7 @@ class ReferralDepositNoticeModal extends React.Component {
               <div className="rdnNoticeText">
                 <div className="rdnNoticeTitle">Important Notice</div>
                 <div className="rdnNoticeDesc">
-                  Before you can deposit <strong>{this.state.user_profile_display.maxDeposit} GHC</strong>, you must complete the required number of referrals using your referral link.
+                  Before you can deposit <strong>{this.state.user_profile_display.maxDeposit} GHC</strong> and above, you must complete the required number of referrals using your referral link.
                 </div>
               </div>
             </div>
