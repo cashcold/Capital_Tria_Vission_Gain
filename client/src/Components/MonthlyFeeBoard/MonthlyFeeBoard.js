@@ -134,7 +134,10 @@ class MonthlyFeeBoard extends Component {
                   <span>Total Withdrawn</span>
                 </div>
                 <div className="mfCardValue">GHC {this.fmtMoney(totalWithdrawn)}</div>
-                <div className="mfCardHint">Monthly withdrawal volume</div>
+                <div className="mfCardHint">
+                Monthly withdrawal for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
+              </div>
+
               </div>
 
               <div className="mfCard">
@@ -143,7 +146,10 @@ class MonthlyFeeBoard extends Component {
                   <span>Mining Profit  (10%)</span>
                 </div>
                 <div className="mfCardValue">GHC {this.fmtMoney(miningCost10)}</div>
-                <div className="mfCardHint">Mining Profit for the month</div>
+                <div className="mfCardHint">
+                  Mining Profit for the month of {active ? `${this.monthName(active.month)} ${active.year}` : ""}
+                </div>
+
               </div>
 
               <div className="mfCard mfCardHighlight">
