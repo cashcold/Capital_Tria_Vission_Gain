@@ -97,8 +97,8 @@ class MonthlyFeeBoard extends Component {
           <div className="mfRuleItem">
             <i className="fas fa-coins"></i>
             <span>You Pay:</span>
-            <b>15% of the 10%</b>
-            <em>(= 1.5% total)</em>
+            <b>
+            <em>1.5% percent of total withdrawn amount</em></b>
           </div>
 
           <div className="mfRuleRight">
@@ -130,24 +130,19 @@ class MonthlyFeeBoard extends Component {
             <div className="mfCards">
               <div className="mfCard">
                 <div className="mfCardTop">
-                  <i className="fas fa-wallet"></i>
-                  <span>Total Withdrawn</span>
+                  <div className="mfCardHint">
+                    Monthly withdrawal for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
+                </div>
                 </div>
                 <div className="mfCardValue">GHC {this.fmtMoney(totalWithdrawn)}</div>
-                <div className="mfCardHint">
-                Monthly withdrawal for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
-              </div>
-
-              </div>
+               </div>
 
               <div className="mfCard">
                 <div className="mfCardTop">
-                  <i className="fas fa-industry"></i>
-                  <span>Mining Profit  (10%)</span>
+                   Mining Profit for the month of {active ? `${this.monthName(active.month)} ${active.year}` : ""}
                 </div>
                 <div className="mfCardValue">GHC {this.fmtMoney(miningCost10)}</div>
                 <div className="mfCardHint">
-                  Mining Profit for the month of {active ? `${this.monthName(active.month)} ${active.year}` : ""}
                 </div>
 
               </div>
@@ -159,7 +154,7 @@ class MonthlyFeeBoard extends Component {
                 </div>
                 <div className="mfCardValue">GHC {this.fmtMoney(payableFee)}</div>
                 <div className="mfCardHint">
-                  15% of mining profit (1.5% total)
+                  1.5% percent of total withdrawn amount.(1.5% total month)
                 </div>
               </div>
             </div>
@@ -186,7 +181,7 @@ class MonthlyFeeBoard extends Component {
                       <th>Month</th>
                       <th>Total Withdrawn</th>
                       <th>Mining Profit (10%)</th>
-                      <th>Payable (15% of 10%)</th>
+                      <th>Payable ((1.5% total of month cashout))</th>
                       <th>Status</th>
                     </tr>
                   </thead>
@@ -259,17 +254,23 @@ class MonthlyFeeBoard extends Component {
               </div>
 
               {/* Notice */}
-              {active && !active.paid && (
-                <div className="mfNotice">
-                  <i className="fas fa-info-circle"></i>
-                  <div>
-                    <b>Action Required</b>
-                    <p>
-                      Your current month fee is <b>UNPAID</b>. Please complete payment to keep mining withdrawals active.
-                    </p>
+             {active && !active.paid && (
+                  <div className="mfNotice">
+                    <i className="fas fa-info-circle"></i>
+                    <div>
+                      <b>Action Required</b>
+                      <p>
+                        Your current month service fee is <b>UNPAID</b>.
+                        <br /><br />
+                        After the end of every month, you are given <b>3 days grace period</b> to complete this payment.
+                        <br /><br />
+                        ⚠️ If the fee is not settled within these 3 days, it will be automatically deducted
+                        from your next mining activation deposit.
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+
             </div>
           </>
         )}
