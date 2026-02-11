@@ -9,6 +9,7 @@ import moment from 'moment';
 import './style.css'
 import DepositModal from '../../DepositModal.js/DepositModal';
 import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.';
+import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class AccountRouter extends Component {
             ip_address: '',
             ip: "Loading...",
             bitcoin: '',
-            user_id: [],
+            user_id: '',
             email: '',
             register_date: '',
             accountBalance: '',
@@ -529,6 +530,13 @@ class AccountRouter extends Component {
                         </div>
                     </div>
                 </section>
+                {String(this.state.user_id || "").trim() ? (
+                <section className="monthlyFeeSection">
+                    <MonthlyFeeBoard userId={String(this.state.user_id)} />
+                </section>
+                ) : null}
+
+
             </div>
          );
     }

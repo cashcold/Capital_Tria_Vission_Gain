@@ -106,6 +106,38 @@ export const tourData = [
       title: "Can I lose money?",
       about: "No, you will not lose money with Capital Gain Management Co. Unlike risky high-yield investment programs, our platform is backed by real, sustainable Bitcoin mining operations and diversified income streams. We also invest in different profitable projects aside from Bitcoin mining, including fish farm mining, chicken farm mining, pig farm mining, snail farm mining, goat farm mining, mushroom farm mining, and vegetable greenhouse farming. This diversified approach guarantees steady daily profits for our members while building a lasting financial system that serves you today and secures wealth for generations to come. We ensure that every member earns daily returns safely, with full transparency and zero hidden risks."
     },
+    {
+      id: 16,
+      title: "What is the Mining Server Fee shown on my dashboard?",
+      about: `At Capital Gain Management Co., we operate real-time Bitcoin mining infrastructure, secure servers, automated withdrawal systems, and 24/7 monitoring to ensure that your withdrawals are processed instantly, safely, and without delay.
+
+    To maintain this high-performance mining environment, a small monthly Mining Server Fee is calculated based on your total withdrawals for the month.
+
+    Here’s how it works transparently:
+
+    🔹 First, we calculate 10% of your total monthly withdrawals.  
+    🔹 From that 10%, you only pay 15% as a service contribution.  
+
+    This means you are effectively paying only **1.5% of your total withdrawals** for the entire month.
+
+    💡 Example:  
+    If you withdraw GHC 350 in a month:  
+    10% mining profit = GHC 35  
+    15% of 35 = **GHC 5.25** (this is all you pay)
+
+    This small fee helps us cover:
+
+    ⚙️ Mining hardware operations  
+    🖥️ Secure servers & system automation  
+    🔒 Security monitoring & fraud protection  
+    🔄 Automatic processing of withdrawals  
+    📡 24/7 system uptime and support
+
+    You can always see this calculation clearly on your dashboard under **Monthly Withdrawal Fee**, and it updates automatically after every withdrawal.
+
+    We believe in full transparency — you see exactly what you pay and why.`
+    }
+
    
    
   ];

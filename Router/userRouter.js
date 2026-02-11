@@ -12,13 +12,21 @@ const jwt = require('jsonwebtoken')
 const async = require('async')
 const nodemailer = require("nodemailer");
 const crypto = require('crypto')
-// const twilio = require("twilio");
+const MonthlyFee = require('../UserModel/MonthlyFeeSchema')
 
+// const twilio = require("twilio");
+ 
 
 dotEnv.config()
 
 
 const Router = express.Router()
+
+const toNumberSafe = (v) => {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+};
+
 
 Router.post("/register/", async (req, res) => {
   try {
@@ -646,19 +654,17 @@ Router.post("/updateAccountBalance/:id", async (req, res) => {
     res.send('Balance update');
 });
 
+// ✅ WITHDRAW ROUTE (UPDATED WITH MONTHLY FEE AUTO UPDATE)
 Router.post("/withdraw/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) return res.status(404).json({ error: "User not found" });
 
-        // Update active deposit if zero_balance is provided
         if (req.body.zero_accountBalance) user.activetDeposit = req.body.zero_accountBalance;
         await user.save();
 
-        // Extract request body values
         const { email, user_Name, full_Name, type, accountBalance, activetDeposit, zero_accountBalance, date, bitcoin, user_id } = req.body;
 
-        // Save withdrawal details
         const WithdrawNow = new WithdrawDeposit({
             user_id,
             user_Name,
@@ -671,17 +677,74 @@ Router.post("/withdraw/:id", async (req, res) => {
             date,
             bitcoin
         });
+
         await WithdrawNow.save();
 
-        // Generate Refresh Token
+        // ✅ ✅ ✅ AUTO UPDATE MONTHLY FEE AFTER WITHDRAWAL ✅ ✅ ✅
+        try {
+          const now = new Date();
+          const year = now.getUTCFullYear();
+          const month = now.getUTCMonth() + 1;
+
+          const start = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
+          const end = new Date(Date.UTC(year, month, 1, 0, 0, 0));
+
+          const agg = await WithdrawDeposit.aggregate([
+            {
+              $match: {
+                type: "Withdrawal",
+                user_id: user_id,
+                createdAt: { $gte: start, $lt: end },
+              },
+            },
+            {
+              $group: {
+                _id: "$user_id",
+                totalWithdrawn: {
+                  $sum: {
+                    $convert: { input: "$activetDeposit", to: "double", onError: 0, onNull: 0 }
+                  }
+                }
+              }
+            }
+          ]);
+
+          const total = toNumberSafe(agg?.[0]?.totalWithdrawn || 0);
+
+          const miningCost10 = +((total * 0.10).toFixed(2));
+          const payableFee = +((miningCost10 * 0.15).toFixed(2)); // 15% of 10%
+
+          await MonthlyFee.updateOne(
+            { user_id: user_id, year, month },
+            {
+              $set: {
+                user_id: user_id,
+                year,
+                month,
+                user_Name: user_Name || "",
+                full_Name: full_Name || "",
+                email: email || "",
+                bitcoin: bitcoin || "",
+
+                totalWithdrawn: total,
+                miningCost10,
+                payableFee,
+              },
+              $setOnInsert: { paid: false, paidDate: null },
+            },
+            { upsert: true }
+          );
+        } catch (e) {
+          console.log("Auto monthly fee update failed:", e.message);
+        }
+
+        // Refresh token
         const payload = {
             user_id: user._id,
             full_Name: user.full_Name,
             user_Name: user.user_Name,
             email: user.email,
             bitcoin: user.bitcoin,
-            bitcoinCash: user.bitcoinCash,
-            ethereum: user.ethereum,
             ip_address: user.ip_address,
             date: user.date,
             accountBalance: user.accountBalance,
@@ -690,19 +753,18 @@ Router.post("/withdraw/:id", async (req, res) => {
         const RefreshToken = jwt.sign(payload, process.env.RefreshToken);
         res.header("RefreshToken", RefreshToken);
 
-        // **Setup Email Transporter**
+        // Email
         const transporter = nodemailer.createTransport({
             host: "mail.capgainco.com",
             port: 465,
             secure: true,
             auth: {
-                user: process.env.SMTP_USER,  // SMTP user
-                pass: process.env.SMTP_PASS,  // SMTP password
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
             },
             tls: { rejectUnauthorized: false },
         });
 
-        // **Prepare Email Options**
         const mailOptions = {
             from: '"💰 Capital Gain Payments" <support@capgainco.com>',
             to: email,
@@ -710,31 +772,17 @@ Router.post("/withdraw/:id", async (req, res) => {
             html: `
                 <div style="font-family: Arial, sans-serif; color: #333;">
                     <h2 style="color: #2D89FF;">💸 Payment Sent!</h2>
-                    
                     <p>Hello <strong>${user_Name}</strong>,</p>
-
-                    <p>✅ <strong>Payment Sent Successfully</strong></p>
-                    <p>🎉 Congratulations! Your withdrawal amount of <strong>GHC ${activetDeposit}.00</strong> has been successfully completed.</p>
-                    <p>📲 Funds have been sent to your <strong>Mobile Money (MoMo)</strong> number linked to your account: <strong>${bitcoin}</strong>.</p>
-                    <p>⏳ Please allow a short moment for the payment to reflect in your wallet.</p>
-
-                    
-                    <p>🔹 **Transaction Details**:</p>
+                    <p>✅ Withdrawal amount of <strong>GHC ${activetDeposit}.00</strong> has been processed.</p>
                     <ul>
-                        <li>💰 Amount: <strong>GHC${activetDeposit}.00 </strong></li>
+                        <li>💰 Amount: <strong>GHC ${activetDeposit}.00</strong></li>
                         <li>🗓 Date: <strong>${date}</strong></li>
-                        <li>🏦 momo number: <strong>${bitcoin}</strong></li>
+                        <li>📲 MoMo: <strong>${bitcoin}</strong></li>
                     </ul>
-
-                    <p>✅ If you have any questions, <a href="mailto:support@capgainco.com" style="color: red; text-decoration: none;"><strong>contact support</strong></a>.</p>
-
-                    <p>Best regards,</p>
-                    <p style="font-weight: bold;">💼 Capital Gain Payments Team</p>
                 </div>
             `,
         };
 
-        // **Send Email**
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error("Email Error: ", error);
@@ -749,6 +797,147 @@ Router.post("/withdraw/:id", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+
+// Router.post("/withdraw/:id", async (req, res) => {
+//     try {
+//         const user = await User.findById(req.params.id);
+//         if (!user) return res.status(404).json({ error: "User not found" });
+
+//         // Update active deposit if zero_balance is provided
+//         if (req.body.zero_accountBalance) user.activetDeposit = req.body.zero_accountBalance;
+//         await user.save();
+
+//         // Extract request body values
+//         const { email, user_Name, full_Name, type, accountBalance, activetDeposit, zero_accountBalance, date, bitcoin, user_id } = req.body;
+
+//         // Save withdrawal details
+//         const WithdrawNow = new WithdrawDeposit({
+//             user_id,
+//             user_Name,
+//             full_Name,
+//             type,
+//             accountBalance,
+//             activetDeposit,
+//             zero_accountBalance,
+//             email,
+//             date,
+//             bitcoin
+//         });
+//         await WithdrawNow.save();
+
+//         // Generate Refresh Token
+//         const payload = {
+//             user_id: user._id,
+//             full_Name: user.full_Name,
+//             user_Name: user.user_Name,
+//             email: user.email,
+//             bitcoin: user.bitcoin,
+//             bitcoinCash: user.bitcoinCash,
+//             ethereum: user.ethereum,
+//             ip_address: user.ip_address,
+//             date: user.date,
+//             accountBalance: user.accountBalance,
+//             activetDeposit: user.activetDeposit
+//         };
+//         const RefreshToken = jwt.sign(payload, process.env.RefreshToken);
+//         res.header("RefreshToken", RefreshToken);
+
+//         // **Setup Email Transporter**
+//         const transporter = nodemailer.createTransport({
+//             host: "mail.capgainco.com",
+//             port: 465,
+//             secure: true,
+//             auth: {
+//                 user: process.env.SMTP_USER,  // SMTP user
+//                 pass: process.env.SMTP_PASS,  // SMTP password
+//             },
+//             tls: { rejectUnauthorized: false },
+//         });
+
+//         // **Prepare Email Options**
+//         const mailOptions = {
+//             from: '"💰 Capital Gain Payments" <support@capgainco.com>',
+//             to: email,
+//             subject: "🚀 Payment Confirmation",
+//             html: `
+//                 <div style="font-family: Arial, sans-serif; color: #333;">
+//                     <h2 style="color: #2D89FF;">💸 Payment Sent!</h2>
+                    
+//                     <p>Hello <strong>${user_Name}</strong>,</p>
+
+//                     <p>✅ <strong>Payment Sent Successfully</strong></p>
+//                     <p>🎉 Congratulations! Your withdrawal amount of <strong>GHC ${activetDeposit}.00</strong> has been successfully completed.</p>
+//                     <p>📲 Funds have been sent to your <strong>Mobile Money (MoMo)</strong> number linked to your account: <strong>${bitcoin}</strong>.</p>
+//                     <p>⏳ Please allow a short moment for the payment to reflect in your wallet.</p>
+
+                    
+//                     <p>🔹 **Transaction Details**:</p>
+//                     <ul>
+//                         <li>💰 Amount: <strong>GHC${activetDeposit}.00 </strong></li>
+//                         <li>🗓 Date: <strong>${date}</strong></li>
+//                         <li>🏦 momo number: <strong>${bitcoin}</strong></li>
+//                     </ul>
+
+//                     <p>✅ If you have any questions, <a href="mailto:support@capgainco.com" style="color: red; text-decoration: none;"><strong>contact support</strong></a>.</p>
+
+//                     <p>Best regards,</p>
+//                     <p style="font-weight: bold;">💼 Capital Gain Payments Team</p>
+//                 </div>
+//             `,
+//         };
+
+//         // **Send Email**
+//         transporter.sendMail(mailOptions, (error, info) => {
+//             if (error) {
+//                 console.error("Email Error: ", error);
+//                 return res.status(500).json({ error: "Email sending failed" });
+//             }
+//             console.log("Email Sent: ", info.response);
+//             res.json({ message: "Withdrawal processed successfully", RefreshToken });
+//         });
+
+//     } catch (error) {
+//         console.error("Withdrawal Error: ", error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// });
+
+Router.get("/monthlyfee/my/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const fees = await MonthlyFee.find({ user_id: userId })
+      .sort({ year: -1, month: -1 });
+
+    res.json(fees);
+  } catch (err) {
+    console.log("monthlyfee/my error:", err);
+    res.status(500).json({ msg: "Error fetching monthly fees", error: String(err) });
+  }
+});
+
+
+// ✅ mark as paid (admin)
+Router.post("/monthlyfee/mark-paid", async (req, res) => {
+  try {
+    const { user_id, year, month } = req.body;
+
+    const fee = await MonthlyFee.findOneAndUpdate(
+      { user_id, year: Number(year), month: Number(month) },
+      { $set: { paid: true, paidDate: new Date() } },
+      { new: true }
+    );
+
+    if (!fee) return res.status(404).json({ msg: "Monthly fee record not found" });
+
+    res.json({ msg: "Marked as paid", fee });
+  } catch (err) {
+    console.log("mark-paid error:", err);
+    res.status(500).json({ msg: "Error marking paid", error: String(err) });
+  }
+});
+
+
 
 Router.post('/refferReward/:id', async (req, res) => {
   try {
