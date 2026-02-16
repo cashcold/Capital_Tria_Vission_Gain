@@ -36,7 +36,7 @@ class MonthlyFeeBoard extends Component {
   }
 
   monthName = (m) => {
-    const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return names[m - 1] || m;
   };
 
@@ -52,7 +52,7 @@ class MonthlyFeeBoard extends Component {
   render() {
     const { loading, fees, error, selectedIndex } = this.state;
 
-    const active = fees && fees.length > 0 ? (fees[selectedIndex] || fees[0]) : null;
+    const active = fees && fees.length > 0 ? fees[selectedIndex] || fees[0] : null;
 
     const totalWithdrawn = active ? Number(active.totalWithdrawn || 0) : 0;
     const miningCost10 = active ? Number(active.miningCost10 || 0) : 0;
@@ -97,8 +97,8 @@ class MonthlyFeeBoard extends Component {
           <div className="mfRuleItem">
             <i className="fas fa-coins"></i>
             <span>You Pay:</span>
-            <b>
-            <em>1.5% percent of total withdrawn amount</em></b>
+            <b>3.14% of total monthly withdrawals</b>
+            <em>(service & mining infrastructure fee)</em>
           </div>
 
           <div className="mfRuleRight">
@@ -117,7 +117,7 @@ class MonthlyFeeBoard extends Component {
               <i className="fas fa-info-circle"></i>
               <div>
                 <b>No monthly fee record yet</b>
-                <p>Your monthly fee will appear after your first withdrawal.</p>
+                <p>Your monthly fee will appear here</p>
               </div>
             </div>
           </div>
@@ -128,33 +128,45 @@ class MonthlyFeeBoard extends Component {
           <>
             {/* Summary cards */}
             <div className="mfCards">
+              {/* Total Withdrawn */}
               <div className="mfCard">
                 <div className="mfCardTop">
-                  <div className="mfCardHint">
-                    Monthly withdrawal for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
+                  <i className="fas fa-wallet"></i>
+                  <span>Total Withdrawn</span>
                 </div>
-                </div>
+
                 <div className="mfCardValue">GHC {this.fmtMoney(totalWithdrawn)}</div>
-               </div>
 
-              <div className="mfCard">
-                <div className="mfCardTop">
-                   Mining Profit for the month of {active ? `${this.monthName(active.month)} ${active.year}` : ""}
-                </div>
-                <div className="mfCardValue">GHC {this.fmtMoney(miningCost10)}</div>
                 <div className="mfCardHint">
+                  Monthly withdrawals for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
                 </div>
-
               </div>
 
+              {/* Mining Profit (10%) */}
+              <div className="mfCard">
+                <div className="mfCardTop">
+                  <i className="fas fa-industry"></i>
+                  <span>Mining Profit (10%)</span>
+                </div>
+
+                <div className="mfCardValue">GHC {this.fmtMoney(miningCost10)}</div>
+
+                <div className="mfCardHint">
+                  Mining profit for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
+                </div>
+              </div>
+
+              {/* Service Fee */}
               <div className="mfCard mfCardHighlight">
                 <div className="mfCardTop">
                   <i className="fas fa-receipt"></i>
-                  <span>Payable services Fee</span>
+                  <span>Payable Service Fee</span>
                 </div>
+
                 <div className="mfCardValue">GHC {this.fmtMoney(payableFee)}</div>
+
                 <div className="mfCardHint">
-                  1.5% percent of total withdrawn amount.(1.5% total month)
+                  3.14% service fee based on total monthly withdrawals
                 </div>
               </div>
             </div>
@@ -181,7 +193,7 @@ class MonthlyFeeBoard extends Component {
                       <th>Month</th>
                       <th>Total Withdrawn</th>
                       <th>Mining Profit (10%)</th>
-                      <th>Payable ((1.5% total of month cashout))</th>
+                      <th>Service Fee (3.14%)</th>
                       <th>Status</th>
                     </tr>
                   </thead>
@@ -201,7 +213,9 @@ class MonthlyFeeBoard extends Component {
                           <td>
                             <div className="mfMonth">
                               <i className="fas fa-clock"></i>
-                              <span>{this.monthName(f.month)} {f.year}</span>
+                              <span>
+                                {this.monthName(f.month)} {f.year}
+                              </span>
                             </div>
                           </td>
 
@@ -231,8 +245,8 @@ class MonthlyFeeBoard extends Component {
                   <div>
                     <b>Why this fee exists</b>
                     <p>
-                      We maintain mining infrastructure, secure servers, automatic processing,
-                      and continuous monitoring to keep your withdrawals smooth and reliable.
+                      This service fee supports mining server infrastructure, automated withdrawal processing,
+                      security monitoring, and 24/7 system uptime to ensure fast and reliable payouts.
                     </p>
                   </div>
                 </div>
@@ -254,23 +268,24 @@ class MonthlyFeeBoard extends Component {
               </div>
 
               {/* Notice */}
-             {active && !active.paid && (
-                  <div className="mfNotice">
-                    <i className="fas fa-info-circle"></i>
-                    <div>
-                      <b>Action Required</b>
-                      <p>
-                        Your current month service fee is <b>UNPAID</b>.
-                        <br /><br />
-                        After the end of every month, you are given <b>3 days grace period</b> to complete this payment.
-                        <br /><br />
-                        ⚠️ If the fee is not settled within these 3 days, it will be automatically deducted
-                        from your next mining activation deposit.
-                      </p>
-                    </div>
+              {active && !active.paid && (
+                <div className="mfNotice">
+                  <i className="fas fa-info-circle"></i>
+                  <div>
+                    <b>Action Required</b>
+                    <p>
+                      Your current month service fee is <b>UNPAID</b>.
+                      <br />
+                      <br />
+                      After the end of every month, you are given <b>3 days grace period</b> to complete this payment.
+                      <br />
+                      <br />
+                      ⚠️ If the fee is not settled within these 3 days, it will be automatically deducted
+                      from your next mining activation deposit.
+                    </p>
                   </div>
-                )}
-
+                </div>
+              )}
             </div>
           </>
         )}
