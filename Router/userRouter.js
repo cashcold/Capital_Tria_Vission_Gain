@@ -75,7 +75,7 @@ Router.post("/register/", async (req, res) => {
       await saveUser.save();
 
       const smsMessage =
-      `BTCShark: Welcome ${saveUser.user_Name} to Capital Gain Management Co.  Ghanaians Trusted Partner for Growth & Opportunity, Build your future with us. Try our 24hrs mining plan today. Mining easily start from 10GHC, Pay via MoMo or Bank Transfer. https://capgainco.com`;
+      `Welcome ${saveUser.user_Name} to Capital Gain Management Co.  Ghanaians Trusted Partner for Growth & Opportunity, Build your future with us. Try our 24hrs mining plan today. Mining easily start from 10GHC, Pay via MoMo or Bank Transfer. https://capgainco.com \ncontact 0203808479 or 0268253787  support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
 
        await sendSMS(saveUser.bitcoin, smsMessage);
 
@@ -820,7 +820,7 @@ Router.post("/withdraw/:id", async (req, res) => {
 
             // ✅ SEND SMS TO USER
             try {
-                const smsMessage = `Hello ${user_Name},\nPayment Sent Successfully!\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds have been sent to your Mobile Money (MoMo) number: ${bitcoin}\nTransaction Details:\nDeposit Amount: GHC ${activetDeposit}.00\nTotal Return: GHC ${TotalWithdraw}.00\nDate: ${date}\nPlease allow a short moment for the payment to reflect in your wallet.\nIf you have any questions, contact support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
+                const smsMessage = `Hello ${user_Name},\nPayment Sent Successfully!\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds have been sent to your Mobile Money (MoMo) number: ${bitcoin}\nTransaction Details:\nDeposit Amount: GHC ${activetDeposit}.00\nTotal Return: GHC ${TotalWithdraw}.00\nDate: ${date}\nPlease allow a short moment for the payment to reflect in your wallet.\nIf you have any questions, contact 0203808479 or 0268253787  support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
 
                 await sendSMS(bitcoin, smsMessage);
                 console.log("SMS Sent Successfully");
