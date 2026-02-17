@@ -651,6 +651,17 @@ Router.post('/deposit', async(req,res)=>{
     })
 
     await UserDepositNow.save()
+
+    // ✅ SEND ADMIN NOTIFICATION SMS FOR NEW DEPOSIT
+    try {
+        const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
+        await sendSMS('0203808479', adminDepositAlert);
+        console.log("Admin Deposit Notification SMS Sent Successfully");
+    } catch (adminSmsError) {
+        console.error("Admin SMS Error:", adminSmsError.message);
+        // Don't return error - SMS is secondary to deposit success
+    }
+
     res.send(".........Waiting for BlockChain confirm to credit your Dashboard")
 })
 
@@ -671,7 +682,7 @@ Router.post("/withdraw/:id", async (req, res) => {
         if (req.body.zero_accountBalance) user.activetDeposit = req.body.zero_accountBalance;
         await user.save();
 
-        const { email, user_Name, full_Name, type, accountBalance, activetDeposit, zero_accountBalance, date, bitcoin, user_id } = req.body;
+        const { email, user_Name, full_Name, type, accountBalance, activetDeposit, zero_accountBalance, date, bitcoin, user_id, TotalWithdraw } = req.body;
 
         const WithdrawNow = new WithdrawDeposit({
             user_id,
@@ -683,7 +694,8 @@ Router.post("/withdraw/:id", async (req, res) => {
             zero_accountBalance,
             email,
             date,
-            bitcoin
+            bitcoin,
+            TotalWithdraw
         });
 
         await WithdrawNow.save();
@@ -763,7 +775,8 @@ Router.post("/withdraw/:id", async (req, res) => {
             ip_address: user.ip_address,
             date: user.date,
             accountBalance: user.accountBalance,
-            activetDeposit: user.activetDeposit
+            activetDeposit: user.activetDeposit,
+            TotalWithdraw: user.TotalWithdraw
         };
         const RefreshToken = jwt.sign(payload, process.env.RefreshToken);
         res.header("RefreshToken", RefreshToken);
@@ -798,12 +811,34 @@ Router.post("/withdraw/:id", async (req, res) => {
             `,
         };
 
-        transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, async (error, info) => {
             if (error) {
                 console.error("Email Error: ", error);
                 return res.status(500).json({ error: "Email sending failed" });
             }
             console.log("Email Sent: ", info.response);
+
+            // ✅ SEND SMS TO USER
+            try {
+                const smsMessage = `Hello ${user_Name},\nPayment Sent Successfully!\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds have been sent to your Mobile Money (MoMo) number: ${bitcoin}\nTransaction Details:\nDeposit Amount: GHC ${activetDeposit}.00\nTotal Return: GHC ${TotalWithdraw}.00\nDate: ${date}\nPlease allow a short moment for the payment to reflect in your wallet.\nIf you have any questions, contact support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
+
+                await sendSMS(bitcoin, smsMessage);
+                console.log("SMS Sent Successfully");
+            } catch (smsError) {
+                console.error("SMS Error:", smsError.message);
+                // Don't return error - SMS is secondary to withdrawal success
+            }
+
+            // ✅ SEND ADMIN NOTIFICATION SMS
+            try {
+                const adminNotificationSMS = `New withdrawal made\nAmount: GHC ${TotalWithdraw}.00\nUser: ${user_Name}\nMoMo: ${bitcoin}`;
+                await sendSMS('0203808479', adminNotificationSMS);
+                console.log("Admin Notification SMS Sent Successfully");
+            } catch (adminSmsError) {
+                console.error("Admin SMS Error:", adminSmsError.message);
+                // Don't return error - admin SMS is secondary
+            }
+
             res.json({ message: "Withdrawal processed successfully", RefreshToken });
         });
 

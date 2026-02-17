@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
         type: Number
       
     }, 
+    TotalWithdraw: {
+        type: Number
+      
+    }, 
     zero_accountBalance: {
       
     }, 

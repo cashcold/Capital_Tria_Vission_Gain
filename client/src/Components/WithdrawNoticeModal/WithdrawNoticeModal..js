@@ -55,7 +55,7 @@ class WithdrawNoticeModal extends React.Component {
               <p className="wnSub">
                 Payments are released instantly from our system.
               </p>
-            </div>
+            </div> 
             <span className="wnPill">📲 MoMo</span>
           </div>
 

@@ -23,6 +23,8 @@ class WithdrawMain extends Component {
             walletAddress: '',
             withdraw_date: '',
             activetDeposit__amount: '',
+            checkPercent: 0,
+            TotalWithdraw: '',
          }
 
          this.handleChange = this.handleChange.bind(this)
@@ -54,8 +56,11 @@ class WithdrawMain extends Component {
             date: this.state.withdraw_date, 
             bitcoin: this.state.bitcoin,
             activetDeposit: this.state.activetDeposit__amount,
-            
+            checkPercent: this.state.checkPercent,
+            TotalWithdraw: this.state.TotalWithdraw
         }
+
+        console.log(Withdraw)
         let socket = io('/')
 
         socket.emit('Withdraw', Withdraw)
@@ -107,6 +112,23 @@ class WithdrawMain extends Component {
         this.setState({
             depositAmount: activetDeposit__amount
         })
+
+        // Calculate checkPercent based on deposit amount
+        let checkPercent = 0;
+        const depositAmountNum = Number(activetDeposit__amount);
+
+        if (depositAmountNum > 1000) {
+            checkPercent = depositAmountNum * 25/100;
+        } else if (depositAmountNum > 800) {
+            checkPercent = depositAmountNum * 20/100;
+        } else if (depositAmountNum >= 600) {
+            checkPercent = depositAmountNum * 15/100;
+        } else {
+            checkPercent = depositAmountNum * 10/100;
+        }
+
+        const TotalWithdraw = depositAmountNum + checkPercent;
+        this.setState({ checkPercent, TotalWithdraw });
 
         if(activetDeposit__amount > 1){
             document.querySelector(".blink_me").style.display = "none";

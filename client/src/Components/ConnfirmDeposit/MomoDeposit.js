@@ -25,7 +25,8 @@ class MomoDeposit extends Component {
             date: '',
             paymentMade: false,
             isSubmitting: false,
-            checkPercent: 0
+            checkPercent: 0,
+            TotalWithdraw: '',
             
 
             
@@ -119,6 +120,8 @@ class MomoDeposit extends Component {
    onSubmit = ()=>{
     this.setState({ isSubmitting: true });
 
+    const TotalWithdraw = Number(this.state.depositAmount) + Number(this.state.checkPercent);
+    this.setState({ TotalWithdraw });
 
         const NewDeposit = {
         user_id: this.state.user_id,
@@ -129,7 +132,8 @@ class MomoDeposit extends Component {
         depositAmount: Number(this.state.depositAmount), 
         walletAddress: this.state.walletAddress,
         date: this.state.date,
-        checkPercent: this.state.checkPercent
+        checkPercent: Number(this.state.checkPercent),
+        TotalWithdraw: TotalWithdraw
 
        }
        
@@ -192,7 +196,7 @@ class MomoDeposit extends Component {
                                 <p><span className='outAmount'></span></p>
                             </div>
 
-                           <div className="confirmBtnInfo">
+                           <div className="confirmBtnInfo"> 
                                 <p>
                                     🆔 Kindly use your User Name 
                                     <span> {this.state.user_Name}</span>  
