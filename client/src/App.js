@@ -35,6 +35,7 @@ import DepositModal from './Components/DepositModal.js/DepositModal';
 import WithdrawNoticeModal from './Components/WithdrawNoticeModal/WithdrawNoticeModal.';
 import ReferralDepositNoticeModal from './Components/ReferralDepositNoticeModal/ReferralDepositNoticeModal';
 import ReferralPerformance from './Components/ReferralPerformance/ReferralPerformance';
+import WhatsAppChannelPopup from './Components/WhatsAppChannelPopup/WhatsAppChannelPopup';
 
 
 class MainApp extends Component {
@@ -159,6 +160,7 @@ class MainApp extends Component {
                                     </div>
                             </section>
                         </section>
+                        <WhatsAppChannelPopup/>
                         <ExchangeMarquee/>
                         <Other__NavBar />
                         {/* <PriceMarquee /> */}
