@@ -10,6 +10,7 @@ import './style.css'
 import DepositModal from '../../DepositModal.js/DepositModal';
 import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.';
 import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
+import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -399,27 +400,13 @@ class AccountRouter extends Component {
                 </div>
                 )}
                 {
-                    CheckDeposit > 1 && (
-                        <section className="automining">
-                            <div className="auto-mode-box">
-                        <div className="glow-title">Auto Mining Mode not Activated</div>
-                        <div className="auto-info">
-                            When you make a withdrawal, your profit is instantly sent to your wallet,<br />
-                            and your mining plan is automatically reactivated.<br /><br />
-                            This smart Auto Mode helps us avoid repeated network fees<br />
-                            and keeps your mining seamless and uninterrupted.<br />
-                            All need to reupdate your deposit plan and everything updates automatically!
-                        </div>
-
-                        {/* Floating Coins */}
-                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" className="moving-coin" style={{ animationDelay: "0s" }} />
-                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" className="moving-coin" style={{ animationDelay: "5s", width: "30px" }} />
-                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" className="moving-coin" style={{ animationDelay: "10s", width: "50px" }} />
-                        </div>
-
-                        </section>
-
-                    )
+                CheckDeposit > 1 && (
+                       
+                <section className="autoMiningToggle">
+                    <AutoMiningStatus autoActive={this.state.user_profile_display.autoMining === true}
+                     isProvisioning={this.state.user_profile_display.autoProvisioning === true}/>
+                </section>
+                )
                 }
                 {showDepositModal && (
                 <section>

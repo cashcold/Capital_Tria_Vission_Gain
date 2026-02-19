@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     maxDeposit: {
         type: Number,
     },
+    autoMining: {
+    type: Boolean,
+    default: false
+   },
     refferReward: {
         type: Number,
     },

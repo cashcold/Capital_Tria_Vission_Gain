@@ -54,6 +54,7 @@ Router.post("/register/", async (req, res) => {
           ip_address: req.body.ip_address,
           accountBalance: Number(req.body.accountBalance),
           maxDeposit: Number(req.body.maxDeposit),
+          autoMining: req.body.autoMining,
           reffer: req.body.reffer,
           refferReward: req.body.refferReward,
           question: req.body.question,
@@ -185,6 +186,23 @@ Router.post("/register/", async (req, res) => {
 //   }
 // });
 
+// Router.get('/add-autoMining-to-users', async (req, res) => {
+//   try {
+//     const result = await User.updateMany(
+//       { autoMining: { $exists: false } }, // only users without the field
+//       { $set: { autoMining: false } }     // 👈 actual boolean value
+//     );
+
+//     res.json({
+//       message: "autoMining field added to users successfully",
+//       result
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+
 
     
     
@@ -210,6 +228,7 @@ Router.post('/login', async(req,res)=>{
                  date: user.Date,
                  accountBalance: user.accountBalance,
                  maxDeposit: user.maxDeposit,
+                 autoMining: user.autoMining,
                  activetDeposit: user.activetDeposit,
                 question: user.question,
                 question__ans: user.question__ans,
