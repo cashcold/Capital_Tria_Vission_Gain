@@ -160,7 +160,7 @@ class MainApp extends Component {
                                     </div>
                             </section>
                         </section>
-                        <WhatsAppChannelPopup/>
+                        
                         <ExchangeMarquee/>
                         <Other__NavBar />
                         {/* <PriceMarquee /> */}
