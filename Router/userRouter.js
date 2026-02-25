@@ -350,7 +350,7 @@ Router.post("/activtypassword/:token", async (req, res) => {
       // Update user password and clear reset token
       user.password = hashedPassword;
       user.restartLinkPassword = undefined;
-
+ 
       await user.save();
 
       // Setup email transporter
@@ -820,9 +820,9 @@ Router.post("/withdraw/:id", async (req, res) => {
                 <div style="font-family: Arial, sans-serif; color: #333;">
                     <h2 style="color: #2D89FF;">💸 Payment Sent!</h2>
                     <p>Hello <strong>${user_Name}</strong>,</p>
-                    <p>✅ Withdrawal amount of <strong>GHC ${activetDeposit}.00</strong> has been processed.</p>
+                    <p>✅ Withdrawal amount of <strong>GHC ${TotalWithdraw}.00</strong> has been processed.</p>
                     <ul>
-                        <li>💰 Amount: <strong>GHC ${activetDeposit}.00</strong></li>
+                        <li>💰 Amount: <strong>GHC ${TotalWithdraw}.00</strong></li>
                         <li>🗓 Date: <strong>${date}</strong></li>
                         <li>📲 MoMo: <strong>${bitcoin}</strong></li>
                     </ul>
@@ -839,7 +839,7 @@ Router.post("/withdraw/:id", async (req, res) => {
 
             // ✅ SEND SMS TO USER
             try {
-                const smsMessage = `Hello ${user_Name},\nPayment Sent Successfully!\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds have been sent to your Mobile Money (MoMo) number: ${bitcoin}\nTransaction Details:\nDeposit Amount: GHC ${activetDeposit}.00\nTotal Return: GHC ${TotalWithdraw}.00\nDate: ${date}\nPlease allow a short moment for the payment to reflect in your wallet.\nIf you have any questions, contact 0203808479 or 0268253787  support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
+                const smsMessage = `Hello ${user_Name},\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds will been sent to your Mobile Money (MoMo) number: ${bitcoin}\nPlease allow a short moment for the payment to reflect in your wallet.\nIf you have any questions, contact 0203808479 or 0268253787  support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
 
                 await sendSMS(bitcoin, smsMessage);
                 console.log("SMS Sent Successfully");
