@@ -35,10 +35,12 @@ Router.post("/register/", async (req, res) => {
       // Check if the user already exists
       const user_Name = await User.findOne({ user_Name: req.body.user_Name });
       const user = await User.findOne({ email: req.body.email });
+      const userPhone = await User.findOne({ bitcoin: req.body.bitcoin });
 
 
       if (user_Name) return res.status(400).send("Username already exists");
       if (user) return res.status(400).send("Email already exists");
+      if (userPhone) return res.status(400).send("Phone number already exists");
 
       // Hash the password
       const salt = await bcrypt.genSalt(10);
