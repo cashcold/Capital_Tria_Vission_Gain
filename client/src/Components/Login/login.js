@@ -39,7 +39,7 @@ class Login extends Component {
     
     onSubmit = (event) => {
         const userLogin = {
-            user_Name: this.state.user_Name,
+            user_Name: this.state.user_Name.trim(),
             password: this.state.password
         };
         if (!userLogin.user_Name) {
