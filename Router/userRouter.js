@@ -67,7 +67,7 @@ Router.post("/register/", async (req, res) => {
       if (req.body.reffer) {
           const referrer = await User.findOne({ user_Name: req.body.reffer });
           if (referrer) {
-              referrer.refferReward += 1; // Adjust reward amount
+              referrer.refferReward += 0.5; // Adjust reward amount
               await referrer.save();
           }
       }
