@@ -144,7 +144,7 @@ class MainApp extends Component {
         return (
             <Router>
                 <div className='mainApp animate__animated animate__zoomIn animate__slowerss'>
-                    {!this.state.token && <PopoutExample />}
+                    {/* {!this.state.token && <PopoutExample />} */}
                     {/* <div className='google__id' id="google_translate_element"></div> */}
                     <div className='container_!'>
                         <section className="MethodMomo">
@@ -159,6 +159,13 @@ class MainApp extends Component {
                                     <img src={require('./images/mobile-money.jpg')} className=''/> 
                                     </div>
                             </section>
+                        </section>
+                        <section class="grobelInvest">
+                            <img
+                                src='https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/capgainco%2FMANY%20MORE.jpg?alt=media&token=5975b784-7100-4d95-b0fe-ee411c485707'
+                                alt="Popout"
+                                className="popout-image"
+                            />
                         </section>
                         
                         <ExchangeMarquee/>

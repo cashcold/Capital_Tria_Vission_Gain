@@ -17,6 +17,7 @@ import MaizeFarm from '../MaizeFarm/MaizeFarm';
 import PigFarm from '../PigFarm/PigFarm';
 import CassavaFarmingVideo from '../CassavaFarmingVideo/CassavaFarmingVideo';
 import WhatsAppChannelPopup from '../WhatsAppChannelPopup/WhatsAppChannelPopup';
+import AuthRedirectPopup from '../AuthRedirectPopup/AuthRedirectPopup';
 
 
 
@@ -140,6 +141,7 @@ class Home extends Component {
             
             <div className='main__home'>
                 <section className='home__main__box__1'>
+                    <AuthRedirectPopup/>
                     <WhatsAppChannelPopup/>
                      <div className="home__box__2">
                          </div>
