@@ -1,0 +1,85 @@
+/* Wrapper */
+.deposit-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 30px 15px;
+  background: #f5f7fb;
+}
+
+/* Card */
+.deposit-card {
+  width: 100%;
+  max-width: 720px;
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+  animation: fadeInUp 0.4s ease;
+  border-top: 6px solid #ce1126; /* Ghana Red */
+}
+
+/* Header */
+.deposit-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.deposit-icon {
+  font-size: 28px;
+}
+
+.deposit-header h2 {
+  margin: 0;
+  color: #006b3f; /* Ghana Green */
+}
+
+/* Subtext */
+.deposit-subtext {
+  color: #555;
+  margin: 10px 0 20px;
+}
+
+/* Video */
+.video-container {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+
+.deposit-video {
+  width: 100%;
+  display: block;
+}
+
+/* Footer */
+.deposit-footer {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #444;
+  text-align: center;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .deposit-card {
+    padding: 18px;
+  }
+
+  .deposit-header h2 {
+    font-size: 18px;
+  }
+}

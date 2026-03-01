@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import ReferralDepositNoticeModal from '../ReferralDepositNoticeModal/ReferralDepositNoticeModal';
+import DepositTutorial from '../DepositTutorial/DepositTutorial';
 
 
 class DepositMain extends Component {
@@ -206,6 +207,7 @@ class DepositMain extends Component {
         return ( 
             <div className='depositMain'>
                 <ToastContainer/>
+                <DepositTutorial/>
                 <ReferralDepositNoticeModal
                 show={this.state.showReferralNotice}
                 onClose={this.closeReferralNotice}
