@@ -55,7 +55,10 @@ const userSchema = new mongoose.Schema({
     },
     date: {
         
-    }
+    },
+   duplicateWarningSent: { type: Boolean, default: false },
+    warningDate: { type: Date },
+    isFrozen: { type: Boolean, default: false }
     
 }
 ,{

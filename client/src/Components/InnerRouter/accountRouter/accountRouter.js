@@ -11,6 +11,7 @@ import DepositModal from '../../DepositModal.js/DepositModal';
 import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.';
 import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
 import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
+import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -128,7 +129,13 @@ class AccountRouter extends Component {
                  }))
                  axios.post('/users/user_deposit_display',{id}).then(data => this.setState({
                     user_deposit_display: data.data.deposit
+                    
                  }))
+
+                 sessionStorage.setItem('checkPercent', this.state.user_deposit_display.checkPercent);
+                //  user_deposit_display.checkPercent
+
+
                  axios.post('/users/depositInfo',{id}).then(data => this.setState({
                     totalDeposit: data.data
                  }))
@@ -178,6 +185,8 @@ class AccountRouter extends Component {
 
         // console.log(this.state.user_profile_display.refferReward
         // )
+
+         console.log("User data:", this.state.user_profile_display);
 
         const showInvestButton = this.state.user_balance.activetDeposit === 0;
 
@@ -343,9 +352,13 @@ class AccountRouter extends Component {
                         </div>
                         </div>
                     </section>
+                    
 
                     )
                 }
+                <section class="warning_message">
+                    <AccountStatusAlert />
+                </section>
                 
                 {
                     CheckDeposit > 0 && (
@@ -386,7 +399,7 @@ class AccountRouter extends Component {
                     </p>
                      <div class="bitcoin-mining-container">
                         <div class="mining-machine">
-                        <div class="bitcoin-logo"></div>
+                        <div class="bitcoin-logo"></div> 
                         </div>
                         <p class="deposit-info">Your deposit is active. Mining in progress...</p>
                         <div class="loading-bar-container">

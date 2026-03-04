@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 const userRouter = require('./Router/userRouter')
 const path = require('path')
 const fs = require('fs');
-const cron = require("node-cron")
 const shell = require("shelljs")
 const app = express()
 const server = require('http').createServer(app);
@@ -29,13 +28,24 @@ mongoose.connect(process.env.MONGODB_URI,
     console.log('DataBase Connected Successfully')
 })
 
+// Start scheduled jobs after DB connection
+mongoose.connection.once('open', () => {
+    try {
+        require('./Router/cronJobs/freezeDuplicates');
+        console.log('Started freezeDuplicates cron job');
+    } catch (err) {
+        console.error('Failed to start cron job:', err);
+    }
+});
+
 const PORT = process.env.PORT || 8000
 
 // Allow multiple origins for CORS
 
 app.use(cors({
-    origin: "https://capgainco.com",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["https://capgainco.com", "http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-access-token"],
     credentials: true,
 }));
 

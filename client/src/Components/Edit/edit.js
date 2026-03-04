@@ -81,10 +81,12 @@ class EditMain extends Component {
             return false;
         }
         axios.post(`/users/updateprofile/${this.state.user_id}`,EditProfil).then(res => { 
-            sessionStorage.setItem('Refres_profile_hToken',JSON.stringify(res.data))
+            // Store the new token (whether it's in res.data or res.data.token)
+            const token = res.data.token || res.data;
+            sessionStorage.setItem('x-access-token', token);
             return res.data;
         }).then(toast.success(" Update Successful")).then( setTimeout(()=>{
-            window.location ="/edit"
+            window.location ="/dashboard"
         },3000)).catch(err => {toast.error(err.response.data, {
             position: toast.POSITION.TOP_RIGHT
         });

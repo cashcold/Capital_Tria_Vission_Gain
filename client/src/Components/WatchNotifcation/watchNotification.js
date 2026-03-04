@@ -107,7 +107,7 @@ class WatchNotificationMain extends Component {
         socket.on('Withdraw', Withdraw => {
             toast.info(
                 <div className='New_Deposit_main'>
-                    <h2>User {Withdraw.user_Name}<br />Has Made a New Withdrawal of GHC{Withdraw.activetDeposit}<br />
+                    <h2>User {Withdraw.user_Name}<br />Has Made a New Withdrawal of GHC{Withdraw.TotalWithdraw}<br />
                     Phone Wallet Number: {Withdraw.bitcoin}<br />
                         Time: {Withdraw.date}
                     </h2>
@@ -138,7 +138,7 @@ class WatchNotificationMain extends Component {
                                 <div key={index} className="card">
                                     <div className="card-body">
                                         <h3 className="card-title">{bitcoinSell.user_Name}</h3>
-                                        <p className="card-text">Amount: GHC{bitcoinSell.activetDeposit} </p>
+                                        <p className="card-text">Amount: GHC{bitcoinSell.TotalWithdraw} </p>
                                         <p className="card-text">Method: <span className="bitcoinColour">{bitcoinSell.bitcoin}</span></p>
                                         <p className="card-text"><span className="dateColor">Deposit</span> Date: {new Date(bitcoinSell.date).toLocaleString()}</p>
                                     </div>

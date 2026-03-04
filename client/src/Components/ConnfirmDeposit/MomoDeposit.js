@@ -255,7 +255,7 @@ class MomoDeposit extends Component {
 
                 <div className='btnConfirm'>
                 <button 
-                className='btn btn-success' 
+                className='btn btn-success'  
                 onClick={this.onSubmit}
                 disabled={!paymentMade || isSubmitting}
             >

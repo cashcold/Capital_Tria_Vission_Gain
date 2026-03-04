@@ -1,4 +1,3 @@
-
 const express = require('express')
 const Total_TransactionModel = require('../UserModel/total_transactionModel')
 const UserDeposit = require('../UserModel/depositModel')
@@ -14,7 +13,8 @@ const nodemailer = require("nodemailer");
 const crypto = require('crypto')
 const MonthlyFee = require('../UserModel/MonthlyFeeSchema')
 const sendSMS = require("./sendSMS");
-
+const authMiddleware = require("./authMiddleware");
+const { markDuplicateWarnings } = require('./dupHelper');   // <-- add this
 
 // const twilio = require("twilio");
  
@@ -76,6 +76,8 @@ Router.post("/register/", async (req, res) => {
 
       // Save user to database
       await saveUser.save();
+
+      await markDuplicateWarnings(); 
 
       const smsMessage =
       `Welcome ${saveUser.user_Name} to Capital Gain Management Co.  Ghanaians Trusted Partner for Growth & Opportunity, Build your future with us. Try our 24hrs mining plan today. Mining easily start from 10GHC, Pay via MoMo or Bank Transfer. https://capgainco.com \ncontact 0203808479 or 0268253787  support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
@@ -175,34 +177,8 @@ Router.post("/register/", async (req, res) => {
   }
 });
 
-//  Router.get('/add-maxdeposit-to-users', async (req, res) => {
-//   try {
-//     const result = await User.updateMany(
-//       { maxDeposit: { $exists: false } },
-//       { $set: { maxDeposit: 50 } }   // 👈 default value you want
-//     );
+// One-time migration routes removed — fields added and database migrated.
 
-//     res.json(result);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-// Router.get('/add-autoMining-to-users', async (req, res) => {
-//   try {
-//     const result = await User.updateMany(
-//       { autoMining: { $exists: false } }, // only users without the field
-//       { $set: { autoMining: false } }     // 👈 actual boolean value
-//     );
-
-//     res.json({
-//       message: "autoMining field added to users successfully",
-//       result
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 
 
@@ -214,6 +190,13 @@ Router.post('/login', async(req,res)=>{
 
         return res.status(400).send(`User ${req.body.user_Name} Do Not Exist`)
     } 
+
+     // ✅ Check if account is frozen
+    if (user.isFrozen) {
+      return res.status(403).send(
+        "Your account has been suspended due to a violation of our community terms. Please contact support for assistance. Thank you."
+      );
+    }
 
     await bcrypt.compare(req.body.password, user.password,(err,isMatch)=>{
         if(!isMatch) return res.status(400).send('Wrong Password Enter ')
@@ -234,7 +217,10 @@ Router.post('/login', async(req,res)=>{
                  activetDeposit: user.activetDeposit,
                 question: user.question,
                 question__ans: user.question__ans,
-                 date: user.date
+                 date: user.date,
+                 duplicateWarningSent: user.duplicateWarningSent,
+                 warningDate: user.warningDate,
+                 isFrozen: user.isFrozen
             }
             const token = jwt.sign(payload, process.env.TokenSecret)
             res.header('x-access-token', token)
@@ -243,8 +229,41 @@ Router.post('/login', async(req,res)=>{
     })
 })
 
+// ✅ Get current user (protected route)
+Router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.user_id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+});
 
+// Admin: list duplicate (shared) bitcoin/phone groups with their users
+Router.get('/duplicates', async (req, res) => {
+  try {
+    
 
+    const groups = await User.aggregate([
+      { $match: { bitcoin: { $ne: null, $ne: '' } } },
+      { $group: {
+          _id: '$bitcoin',
+          count: { $sum: 1 },
+          users: { $push: { _id: '$_id', user_Name: '$user_Name', full_Name: '$full_Name', email: '$email', warningDate: '$warningDate', isFrozen: '$isFrozen' } }
+      }},
+      { $match: { count: { $gt: 1 } } },
+      { $sort: { count: -1 } }
+    ]);
+
+    res.json({ groups });
+  } catch (err) {
+    console.error('GET /duplicates error:', err);
+    res.status(500).json({ error: 'Server error', details: err.message });
+  }
+});
 
 Router.post("/forgotpassword", async (req, res) => {
     const userEmail = req.body.email;
@@ -1001,46 +1020,51 @@ Router.post('/withdrawReferralReward', async (req, res) => {
 
 
  Router.post("/updateprofile/:id", async (req, res) => {
-    const salt = await bcrypt.genSalt(10)
-    const editPassword = await bcrypt.hash(req.body.password, salt)
+    try {
+      const salt = await bcrypt.genSalt(10)
+      const editPassword = req.body.password ? await bcrypt.hash(req.body.password, salt) : null
 
+      const user = await User.findById(req.params.id);
+      if (!user) return res.status(404).json({ error: "User not found" });
 
-    const user = await User.findById(req.params.id);
-    if (req.body.full_Name) {
-        user.full_Name = req.body.full_Name;
-    }
-    if (req.body.password) {
-        user.password = editPassword;
-    }
-    if (req.body.bitcoin) {
-        user.bitcoin = req.body.bitcoin;
-    }
-    if (req.body.email) {
-        user.email = req.body.email;
-    }
-    await user.save();
-    
+      if (req.body.full_Name) user.full_Name = req.body.full_Name;
+      if (req.body.password) user.password = editPassword;
+      if (req.body.bitcoin) user.bitcoin = req.body.bitcoin;
+      if (req.body.email) user.email = req.body.email;
 
-    const payload = {
-        user_id: user._id,
-        full_Name: user.full_Name,
-        user_Name: user.user_Name,
-        email: user.email,
-        password: user.password,
-        bitcoin: user.bitcoin,
-        ip_address: user.ip_address,           
-        date: user.Date,
-        accountBalance: user.accountBalance,
-        activetDeposit: user.activetDeposit, 
-        date: user.date
+      await user.save();
+      
+      // Refresh duplicate warnings after phone update
+      await markDuplicateWarnings();
+      
+      // Fetch updated user with new duplicate flags
+      const updatedUser = await User.findById(req.params.id);
+      
+      const payload = {
+          user_id: updatedUser._id,
+          full_Name: updatedUser.full_Name,
+          user_Name: updatedUser.user_Name,
+          email: updatedUser.email,
+          password: updatedUser.password,
+          bitcoin: updatedUser.bitcoin,
+          ip_address: updatedUser.ip_address,           
+          date: updatedUser.date,
+          accountBalance: updatedUser.accountBalance,
+          activetDeposit: updatedUser.activetDeposit,
+          duplicateWarningSent: updatedUser.duplicateWarningSent,
+          warningDate: updatedUser.warningDate,
+          isFrozen: updatedUser.isFrozen
+      }
+      
+      // Sign with the same TokenSecret as login so frontend token is valid
+      const token = jwt.sign(payload, process.env.TokenSecret);
+      res.header('x-access-token', token);
+      res.status(200).json({ token, message: "Profile updated successfully" });
+    } catch (err) {
+      console.error("updateprofile error:", err.message);
+      res.status(500).json({ error: "Failed to update profile" });
     }
-const Refres_profile_hToken = jwt.sign(payload, process.env.Refres_profile_hToken)
-res.header('Refres_profile_hToken', Refres_profile_hToken)
-res.send(Refres_profile_hToken)
-
-
 });
-
 
 
 
@@ -1184,6 +1208,15 @@ Router.get("/admin/referral-performance", async (req, res) => {
 });
 
 
+
+Router.post("/warn-duplicates", async (req, res) => {
+  try {
+    await markDuplicateWarnings();
+    res.json({ message: "Duplicate warnings updated" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 

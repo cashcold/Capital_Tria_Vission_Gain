@@ -36,6 +36,7 @@ import WithdrawNoticeModal from './Components/WithdrawNoticeModal/WithdrawNotice
 import ReferralDepositNoticeModal from './Components/ReferralDepositNoticeModal/ReferralDepositNoticeModal';
 import ReferralPerformance from './Components/ReferralPerformance/ReferralPerformance';
 import WhatsAppChannelPopup from './Components/WhatsAppChannelPopup/WhatsAppChannelPopup';
+import AccountStatusAlert from './Components/AccountStatusAlert/AccountStatusAlert';
 
 
 class MainApp extends Component {
@@ -194,6 +195,7 @@ class MainApp extends Component {
                               <Route path='/activitPassword/:token' exact component={ActivitPassword}/> 
                               <Route path='/user_admin_watch_notification' exact component={WatchNotificationMain}/> 
                               <Route path='/ReferralPerformance' exact component={ReferralPerformance}/> 
+                              <Route path='/AccountStatusAlert' exact component={AccountStatusAlert}/> 
                             </Switch>
                         </div>
                         <FooterMain />

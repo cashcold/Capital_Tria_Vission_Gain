@@ -16,6 +16,7 @@ import DepositTransaction from '../Transacttion/depositTransaction';
 import EarningTransaction from '../Transacttion/earningTransaction';
 import ConfirmDeposit from '../ConnfirmDeposit/confirmDeposit';
 import MomoDeposit from '../ConnfirmDeposit/MomoDeposit';
+import AccountStatusAlert from '../AccountStatusAlert/AccountStatusAlert';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -98,6 +99,7 @@ class Dashboard extends Component {
 
     return (
       <div className='dashboard__main'>
+        <AccountStatusAlert />
         <section className='dashboard__section_box__1'>
           <DropdownButton className='dashboard_bot_drop' id='dropdown-item-button' title='MY DASHBOARD'>
             <Dropdown.Item href='/dashboard/account'>ACCOUNT</Dropdown.Item>

@@ -75,7 +75,7 @@ class WithdrawNoticeModal extends React.Component {
               number linked to your account: <strong>{bitcoin}</strong>.
             </p>
 
-            <p>⏳ Please allow a short moment for the payment to reflect in your wallet.</p>
+            <p>⏳ Please allow a short moment for the payment to reflect in your wallet.</p>    
 
             <p><strong>🔹 Transaction Details:</strong></p>
             <ul>

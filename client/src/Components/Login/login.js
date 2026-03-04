@@ -53,7 +53,8 @@ class Login extends Component {
         event.preventDefault();
         axios.post("/users/login", userLogin)
             .then(res => {
-                sessionStorage.setItem('x-access-token', JSON.stringify(res.data));
+                // res.data is the raw token string sent by the backend
+                sessionStorage.setItem('x-access-token', res.data);
                 return res.data;
             })
             .then(() => {
