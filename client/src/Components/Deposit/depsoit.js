@@ -78,7 +78,16 @@ class DepositMain extends Component {
 
     onSubmit = (event)=>{
         event.preventDefault()
-        
+
+        const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
+        const depositAmount = Number(this.state.depositAmount);
+
+        // CHECK MAX DEPOSIT
+        if(depositAmount > maxDeposit){
+            toast.warn("You cannot invest more than your maximum deposit. Please refer more people to enjoy higher deposit.");
+            return false;
+        }
+            
         sessionStorage.setItem('planNow', this.state.planNow)
          sessionStorage.setItem('depositAmount', this.state.depositAmount)
         sessionStorage.setItem('deposit_date', this.state.deposit_date)
@@ -114,6 +123,20 @@ class DepositMain extends Component {
     } 
     onSubmitMomo = (event)=>{
         event.preventDefault()
+
+          const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
+        const depositAmount = Number(this.state.depositAmount);
+
+        // CHECK MAX DEPOSIT
+      if(depositAmount > maxDeposit){
+            toast.warn(
+                `You cannot invest more than your maximum deposit ${maxDeposit} GHC. Please refer more people to enjoy higher deposit.`,
+                {
+                    autoClose: 30000
+                }
+            );
+            return false;
+        }
         
         sessionStorage.setItem('planNow', this.state.planNow)
          sessionStorage.setItem('depositAmount', this.state.depositAmount)
@@ -406,7 +429,12 @@ class DepositMain extends Component {
                         </div>
                         <div className="other__inner_box_2">
                             <h5>Amount to Spend (GHC):</h5>
-                            <h5 className='innerH5'><input name='depositAmount' onChange={this.handleChange('depositAmount')} placeholder='e.g GHC50'/></h5>
+                            <h5 className='innerH5'><input 
+                            type="number"
+                            name='depositAmount'
+                            onChange={this.handleChange('depositAmount')}
+                            placeholder='e.g 50'
+                            /></h5>
                         </div>
                         <div className="bit__btn">
                              <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> Bitcoin</span></h5>
