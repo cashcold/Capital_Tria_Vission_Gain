@@ -37,42 +37,46 @@ class Login extends Component {
         }
     }
     
-    onSubmit = (event) => {
-        const userLogin = {
-            user_Name: this.state.user_Name.trim(),
-            password: this.state.password
-        };
-        if (!userLogin.user_Name) {
-            toast.warning('Enter User Name');
-            return false;
-        }
-        if (!userLogin.password) {
-            toast.warning('Enter Password');
-            return false;
-        }
-        event.preventDefault();
-        axios.post("/users/login", userLogin)
-            .then(res => {
-                // res.data is the raw token string sent by the backend
-                sessionStorage.setItem('x-access-token', res.data);
-                return res.data;
-            })
-            .then(() => {
-                toast.success("Login Successful!");
-                setTimeout(() => {
-                    toast.success("LOADING ACCOUNT");
-                }, 4000);
-            })
-            .then(() => {
-                window.location = "/dashboard";
-            })
-            .catch(err => {
-                const errorMessage = err.response?.data || "An unexpected error occurred.";
-                toast.error(errorMessage, {
-                    position: toast.POSITION.TOP_RIGHT,
-                });
-            });
+   onSubmit = (event) => {
+    event.preventDefault();
+
+    const userLogin = {
+        user_Name: this.state.user_Name.trim(),
+        password: this.state.password
     };
+
+    if (!userLogin.user_Name) {
+        toast.warning('Enter User Name');
+        return;
+    }
+
+    if (!userLogin.password) {
+        toast.warning('Enter Password');
+        return;
+    }
+
+    axios.post("/users/login", userLogin)
+        .then(res => {
+
+            const token = res.data;
+
+            console.log("JWT Token:", token);
+
+            // store token
+            sessionStorage.setItem("x-access-token", token);
+
+            toast.success("Login Successful!");
+
+            setTimeout(() => {
+                window.location = "/dashboard";
+            }, 1500);
+
+        })
+        .catch(err => {
+            const errorMessage = err.response?.data || "Login failed";
+            toast.error(errorMessage);
+        });
+};
     
     componentDidMount(){
         
@@ -113,7 +117,9 @@ class Login extends Component {
                          
                             <div className="a_Links">
                                 <a href='/forgotpassword' className='btn btn-warning'>Forgot Password</a>
-                                <a href='#'  className='btn btn-danger' onClick={this.onSubmit}>Login</a>
+                                <button className='btn btn-danger' onClick={this.onSubmit}>
+                                Login
+                                </button>
                             </div>
                         </div>
                 </section>

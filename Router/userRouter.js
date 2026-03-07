@@ -62,7 +62,8 @@ Router.post("/register/", async (req, res) => {
           question: req.body.question,
           question__ans: req.body.question__ans,
           activetDeposit: Number(req.body.activetDeposit),
-          date: req.body.date
+          date: req.body.date,
+          warningDate: null
       });
 
       // Referral program logic
@@ -1218,6 +1219,41 @@ Router.post("/warn-duplicates", async (req, res) => {
   }
 });
 
+// Add missing control fields to old users
+Router.get('/fix-user-fields', async (req, res) => {
+  try {
+
+    const result = await User.updateMany(
+      {
+        $or: [
+          { isFrozen: { $exists: false } },
+          { duplicateWarningSent: { $exists: false } },
+          { warningDate: { $exists: false } }
+        ]
+      },
+      {
+        $set: {
+          isFrozen: false,
+          duplicateWarningSent: false,
+          warningDate: null
+        }
+      }
+    );
+
+    res.json({
+      message: "User fields fixed successfully",
+      matchedUsers: result.matchedCount,
+      modifiedUsers: result.modifiedCount
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Error fixing user fields",
+      error: err.message
+    });
+  }
+});
 
 
 

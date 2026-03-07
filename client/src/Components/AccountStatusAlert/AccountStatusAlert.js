@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import "./AccountStatusAlert.css";
 
 class AccountStatusAlert extends Component {
+  interval = null;
   state = { user: null, daysLeft: null };
 
   componentDidMount() {
     this.fetchUser();
-    this.interval = setInterval(this.updateDaysLeft, 1000 * 60 * 60); // update every hour
+    
   }
 
   componentWillUnmount() {
@@ -14,51 +15,67 @@ class AccountStatusAlert extends Component {
   }
 
   fetchUser = async () => {
-    try {
-      // Try both sessionStorage and localStorage
-      let token = sessionStorage.getItem("x-access-token") || localStorage.getItem("token");
-      console.log('[AccountStatusAlert] Raw token from storage:', token ? token.substring(0, 30) + '...' : null);
-      
-      if (token) {
-        try { token = JSON.parse(token); } catch {}
-      }
-      
-      console.log('[AccountStatusAlert] Token to send:', token ? token.substring(0, 30) + '...' : null);
-      
-      if (!token) {
-        console.error("❌ No token found. User not logged in.");
-        this.setState({ user: { error: "No token. Please login first." } });
-        return;
-      }
+  try {
+    const token = sessionStorage.getItem("x-access-token");
 
-      console.log('[AccountStatusAlert] Fetching /users/me with token header');
-      const res = await fetch("http://localhost:8000/users/me", {
-        headers: { "x-access-token": token }
-      })
-      
-      
-      if (!res.ok) {
-        console.error("❌ API Error:", res.status, res.statusText);
-        this.setState({ user: { error: `API error: ${res.status}` } });
-        return;
-      }
+    console.log(
+  "[AccountStatusAlert] Token from storage:",
+  token && typeof token === "string" ? token.slice(0, 30) + "..." : null
+  );
 
-      const data = await res.json();
-      this.setState({ user: data }, this.updateDaysLeft);
-    } catch (err) {
-      console.error("❌ Fetch error:", err.message);
-      this.setState({ user: { error: err.message } });
+    if (!token) {
+      console.error("❌ No token found. User not logged in.");
+      this.setState({ user: { error: "No token. Please login first." } });
+      return;
     }
-  };
+
+    const res = await fetch("/users/me", {
+      headers: { "x-access-token": token }
+    });
+
+    if (!res.ok) {
+      console.error("❌ API Error:", res.status);
+      this.setState({ user: { error: `API error: ${res.status}` } });
+      return;
+    }
+
+    const data = await res.json();
+
+      this.setState({ user: data }, () => {
+      if (data.warningDate && !data.isFrozen) {
+        this.updateDaysLeft();
+
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
+
+        this.interval = setInterval(this.updateDaysLeft, 1000 * 60 * 60);
+      }
+    });
+
+  } catch (err) {
+    console.error("❌ Fetch error:", err.message);
+    this.setState({ user: { error: err.message } });
+  }
+};
 
   updateDaysLeft = () => {
-    const { user } = this.state;
-    if (!user || !user.warningDate) return;
-    const freezeDate = new Date(user.warningDate);
-    freezeDate.setDate(freezeDate.getDate() + 3);
-    const diff = freezeDate - new Date();
-    this.setState({ daysLeft: Math.max(Math.ceil(diff / (1000 * 60 * 60 * 24)), 0) });
-  };
+  const { user } = this.state;
+
+  if (!user || !user.warningDate) return;
+
+  const freezeDate = new Date(user.warningDate);
+  freezeDate.setDate(freezeDate.getDate() + 3);
+
+  const diff = freezeDate - new Date();
+  const daysLeft = Math.max(Math.ceil(diff / (1000 * 60 * 60 * 24)), 0);
+
+  this.setState({ daysLeft });
+
+  if (daysLeft === 0 && this.interval) {
+    clearInterval(this.interval);
+  }
+};
 
   handleUpdatePhone = () => window.location.href = "/dashboard/edit";
 
@@ -67,7 +84,7 @@ class AccountStatusAlert extends Component {
   render() {
     const { user, daysLeft } = this.state;
     
-    // Show error messages
+    // Show error messages 
     if (user && user.error) {
       return (
         <div className="alert alert-warning" style={{ backgroundColor: "#ffe0b2" }}>
@@ -99,7 +116,7 @@ class AccountStatusAlert extends Component {
           <h3>May I open several accounts in your program?
             No. If we find that one member has more than one account, the entire funds will be frozen.</h3>
           <p>Update your phone to avoid account suspension.</p>
-          <p>⏳ Account will be frozen in <strong>{daysLeft}</strong> day(s)</p>
+          <p>⏳ Account will be frozen in <strong>{daysLeft ?? 0}</strong> day(s)</p>
           <button onClick={this.handleUpdatePhone}>Update Phone Number</button>
         </div>
       );
