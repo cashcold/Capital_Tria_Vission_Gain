@@ -1,4 +1,10 @@
 const express = require('express')
+const geoip = require("geoip-lite");
+const isbot = require("isbot");
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 const cors = require('cors')
 const dotEnv = require('dotenv')
 const bodyParser = require('body-parser')
@@ -6,18 +12,18 @@ const mongoose = require('mongoose')
 const userRouter = require('./Router/userRouter')
 const path = require('path')
 const fs = require('fs');
-const shell = require("shelljs")
 const app = express()
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { 
     cors: {
-        origin: "/", // Restrict to your frontend
+        origin: ["https://capgainco.com"],
         methods: ["GET", "POST"]
     }
 });
 
 
 dotEnv.config() 
+app.set("trust proxy", 1);
 
 mongoose.connect(process.env.MONGODB_URI,
     { 
@@ -49,7 +55,54 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(bodyParser.json())
+
+
+app.use((req, res, next) => {
+
+  const ip =
+    req.headers["x-forwarded-for"]?.split(",")[0] ||
+    req.socket.remoteAddress ||
+    "";
+
+  const cleanIP = ip.replace("::ffff:", "");
+
+  // allow localhost
+  if (cleanIP === "127.0.0.1" || cleanIP === "::1") {
+    return next();
+  }
+
+  const geo = geoip.lookup(cleanIP);
+  const userAgent = req.headers["user-agent"] || "";
+
+  if (isbot(userAgent) && !userAgent.includes("Googlebot")) {
+    return res.status(403).json({
+      message: "Bots are not allowed"
+    });
+  }
+
+  if (!geo || geo.country !== "GH") {
+    return res.status(403).json({
+      message: "Access denied. Ghana users only 🇬🇭"
+    });
+  }
+
+  next();
+});
+
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 60
+});
+
+app.use(limiter);
+app.use(helmet());
+app.use(mongoSanitize());
+app.use(xss());
+
+
+
+app.use(bodyParser.json({ limit: "200kb" }));
 
 io.on('connection', socket => {
    socket.on('live_deposit', live_deposit => {
