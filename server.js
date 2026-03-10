@@ -1,28 +1,23 @@
 const express = require('express')
-const isbot = require("isbot");
-const rateLimit = require("express-rate-limit");
-const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
-const xss = require("xss-clean");
-const hpp = require("hpp");
-const slowDown = require("express-slow-down");
 const cors = require('cors')
 const dotEnv = require('dotenv')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userRouter = require('./Router/userRouter')
 const path = require('path')
 const fs = require('fs');
+const shell = require("shelljs")
 const app = express()
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { 
     cors: {
-        origin: ["https://capgainco.com", "http://localhost:3000"],
+        origin: "/", // Restrict to your frontend
         methods: ["GET", "POST"]
     }
 });
 
+
 dotEnv.config() 
-app.set("trust proxy", 1);
 
 mongoose.connect(process.env.MONGODB_URI,
     { 
@@ -47,62 +42,14 @@ const PORT = process.env.PORT || 8000
 
 // Allow multiple origins for CORS
 
-
-
-
-
-app.use((req, res, next) => {
-
-  const cleanIP = req.ip.replace("::ffff:", "");
-
-  // allow localhost
-  if (cleanIP === "127.0.0.1" || cleanIP === "::1") {
-    return next();
-  }
-
-  const userAgent = req.headers["user-agent"] || "";
-
-  const allowedBots = ["googlebot", "bingbot", "duckduckbot"];
-
-  if (isbot(userAgent) && !allowedBots.some(bot => userAgent.toLowerCase().includes(bot))) {
-    return res.status(403).json({
-      message: "Bots are not allowed"
-    });
-  }
-
-  next();
-});
-
-
-const limiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 60,
-  message: {
-    status: 429,
-    message: "Too many requests. Please slow down."
-  }
-});
-
-const speedLimiter = slowDown({
-  windowMs: 60 * 1000,
-  delayAfter: 20,
-  delayMs: 500
-});
-
-
-app.use(helmet());
-app.use(mongoSanitize());
-app.use(xss());
-app.use(hpp());
-app.use(limiter);
-app.use(speedLimiter);
 app.use(cors({
     origin: ["https://capgainco.com", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "x-access-token"],
     credentials: true,
 }));
-app.use(express.json({ limit: "200kb" }));
+
+app.use(bodyParser.json())
 
 io.on('connection', socket => {
    socket.on('live_deposit', live_deposit => {
@@ -174,13 +121,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    message: "Internal Server Error"
-  });
-});
 
 server.listen(PORT, () => {
     console.log(`Server is running on local Port Number ${PORT} socket.io`)
