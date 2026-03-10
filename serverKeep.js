@@ -122,57 +122,80 @@ io.on('connection', socket => {
 });
 
 app.use('/users', userRouter)
-app.use(express.static(path.join(__dirname, "client")));
 
 app.get('/', (req, res) => {
-    const filePath = path.resolve(__dirname, './client/build', 'index.html');
+
+    const filePath = path.resolve(__dirname, 'client', 'build', 'index.html');
+
     fs.readFile(filePath, 'utf8', (err, data) => {
+
         if (err) {
-            return console.log(err);
+            console.error("INDEX ERROR:", err);
+            return res.sendFile(filePath); 
         }
 
-        data = data.replace(/\$OG_TITLE/g, 'Earn Daily Profit with Capital Gain Management Co.')
-           .replace(/\$OG_DESCRIPTION/g, "Invest easily through Mobile Money (MoMo) or your Bank and earn daily profits backed by Bitcoin cloud mining and real-world farming projects — fish, poultry, goat, and more. Trusted. Transparent. Global.")
-           .replace(/\$OG_IMAGE/g, 'https://bitcoin4uonline.com/static/media/mobile-money.10e06826.jpg'); 
-res.send(data);
+        data = data
+        .replace(/\$OG_TITLE/g, 'Earn Daily Profit with Capital Gain Management Co.')
+        .replace(/\$OG_DESCRIPTION/g, 'Invest easily through Mobile Money (MoMo) or your Bank and earn daily profits backed by Bitcoin cloud mining and real-world farming projects.')
+        .replace(/\$OG_IMAGE/g, 'https://bitcoin4uonline.com/static/media/mobile-money.10e06826.jpg');
+
+        res.send(data);
+
     });
+
 });
+
 
 app.get('/dashboard/edit', (req, res) => {
-    const filePath = path.resolve(__dirname, './client/build', 'index.html');
+
+    const filePath = path.resolve(__dirname, 'client', 'build', 'index.html');
+
     fs.readFile(filePath, 'utf8', (err, data) => {
+
         if (err) {
-            return console.log(err);
+            console.error(err);
+            return res.sendFile(filePath);
         }
 
-        const { Song_overview, Song_title, Song_img } = req.query;
-        data = data.replace(/\$OG_TITLE/g, 'edit')
-                   .replace(/\$OG_DESCRIPTION/g, 'edit profile')
-                   .replace(/\$OG_IMAGE/g, 'image');
+        data = data
+            .replace(/\$OG_TITLE/g, 'edit')
+            .replace(/\$OG_DESCRIPTION/g, 'edit profile')
+            .replace(/\$OG_IMAGE/g, 'image');
+
         res.send(data);
+
     });
+
 });
 app.get('/edit', (req, res) => {
-    const filePath = path.resolve(__dirname, './client/build', 'index.html');
+
+    const filePath = path.resolve(__dirname, 'client', 'build', 'index.html');
+
     fs.readFile(filePath, 'utf8', (err, data) => {
+
         if (err) {
-            return console.log(err);
+            console.error(err);
+            return res.sendFile(filePath);
         }
 
-        const { Song_overview, Song_title, Song_img } = req.query;
-        data = data.replace(/\$OG_TITLE/g, 'edit')
-                   .replace(/\$OG_DESCRIPTION/g, 'edit profile')
-                   .replace(/\$OG_IMAGE/g, 'image');
+        data = data
+            .replace(/\$OG_TITLE/g, 'edit')
+            .replace(/\$OG_DESCRIPTION/g, 'edit profile')
+            .replace(/\$OG_IMAGE/g, 'image');
+
         res.send(data);
+
     });
+
 });
 
-app.use(express.static("client/build"));
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static("client/build"));
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
+    
 }
 
 app.use((err, req, res, next) => {
