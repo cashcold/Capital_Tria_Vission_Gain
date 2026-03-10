@@ -148,6 +148,50 @@ class MainApp extends Component {
                     {/* {!this.state.token && <PopoutExample />} */}
                     {/* <div className='google__id' id="google_translate_element"></div> */}
                     <div className='container_!'>
+                        <section className="trust-ai-wrapper">
+
+                        <div className="trust-ai-card">
+
+                            <p className="trust-ai-text">
+                                Investment deposits and withdrawals are processed through
+                                <strong> Mobile Money </strong> and
+                                <strong> Bank Transfers </strong>
+                                under the registered company name in Ghana:
+                            </p>
+
+                            <h2 className="trust-ai-company">
+                                BTC SHARK TRADE
+                            </h2>
+
+                            <p className="trust-ai-sub">
+                                Also known as <strong>BITCOIN SHARK TRADE</strong>
+                            </p>
+
+                            <p className="trust-ai-register">
+                                Registered under the Office of the Registrar of Companies,
+                                Republic of Ghana.
+                            </p>
+
+                            <div className="trust-ai-badges">
+                                <span>✅ Fast</span>
+                                <span>✅ Safe</span>
+                                <span>✅ Fully Verified</span>
+                            </div>
+
+                            <div className="trust-ai-certificate">
+
+                                <h3>Business Certificate</h3>
+
+                                <img
+                                src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2Fbtc_sbark_trade_cert.jpg?alt=media&token=57bbd3d2-81db-4242-8d02-8f8fd63226d1"
+                                alt="BTC Shark Trade Business Certificate"
+                                />
+
+                            </div>
+
+                        </div>
+
+                        </section>
                         <section className="MethodMomo">
                             <section className="monoPAYMENT">
                                 <h1 className="animated-text">📱 Momo Payment and Bank Transfers Now Accepted!</h1>
