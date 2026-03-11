@@ -104,7 +104,7 @@ class Dashboard extends Component {
           <DropdownButton className='dashboard_bot_drop' id='dropdown-item-button' title='MY DASHBOARD'>
             <Dropdown.Item href='/dashboard/account'>ACCOUNT</Dropdown.Item>
             {/* {user_balance <= 1 && <Dropdown.Item href='/dashboard/deposit'>DEPOSIT</Dropdown.Item>} */}
-            {/* <Dropdown.Item href='/dashboard/transaction/total_transaction'>TRANSACTION</Dropdown.Item> */}
+            <Dropdown.Item href='/dashboard/transaction/total_transaction'>TRANSACTION</Dropdown.Item>|
             <Dropdown.Item href='/dashboard/edit'>EDIT</Dropdown.Item>
             <Dropdown.Item href='/' onClick={this.LogoutNow}>
               SIGN-OUT
@@ -119,7 +119,7 @@ class Dashboard extends Component {
             {/* <li>  {user_balance <= 1 && <li><a href='/dashboard/deposit'>DEPOSIT</a></li>}</li> */}
 
             <li>
-              {/* <a href='/dashboard/transaction/total_transaction'>TRANSACTION</a> */}
+              <a href='/dashboard/transaction/total_transaction'>TRANSACTION</a>
             </li>
             <li>
               <a href={`/dashboard/edit`}>EDIT</a>

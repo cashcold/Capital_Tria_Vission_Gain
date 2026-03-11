@@ -134,7 +134,7 @@ class DepositTransaction extends Component {
                             {this.state.transaction_depositInfo_query.map(recentApi =>{
                             return(
                                 <div className=''>
-                                   <h5>$ {recentApi.depositAmount}</h5>
+                                   <h5>GHC {recentApi.depositAmount}</h5>
                                  </div>
                             )
                         })}
@@ -142,19 +142,21 @@ class DepositTransaction extends Component {
                           </div>
                       <div className="total_tra__box_1 date">
                         <h4><span>Date</span></h4>
-                        {this.state.transaction_depositInfo_query.map(recentApi =>{
-                            return(
-                                <div className='dateMe'>
-                                  <h5>{moment(recentApi.createdAt).format('LLL')}</h5>
-                                 </div>
-                            )
-                        })}
+                        {this.state.transaction_depositInfo_query
+                            .sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt))
+                            .map(recentApi =>{
+                                return(
+                                    <div className='dateMe'>
+                                      <h5>{moment(recentApi.createdAt).format('LLL')}</h5>
+                                    </div>
+                                )
+                            })}
                       </div>
                     </div>
                     <p className='NoTransaction_P'></p>
                       <div className="last__transac">
                           <p className="transac_left">Total Deposit:</p>
-                          <p className="transac_right">$ {this.state.totalDeposit.map(user => user.depositAmount)}.00</p>
+                          <p className="transac_right">GHC {this.state.totalDeposit.map(user => user.depositAmount)}.00</p>
                       </div>
                    </section>
             </div>

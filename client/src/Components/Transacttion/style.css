@@ -113,12 +113,11 @@
     grid-template-columns: repeat(2,1fr);
     grid-gap: 1em;
     padding: 0em 2em;
-}
-/* .all_transaction_chat{
-    padding: 4em 0em;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-gap: 0.2em;
-} */
+    }
+    .all_transaction_chat_mobile__version h5 {
+        font-size: small;
+
+    }
+
 
 }

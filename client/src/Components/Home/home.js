@@ -605,7 +605,7 @@ class Home extends Component {
                             <div className="user-info">
                                 <img src={`https://robohash.org/${withdrawal.user_Name}`} alt="Avatar" />
                                 <h3>{withdrawal.user_Name}</h3>
-                                <p><span class="newUserColour">Amount </span> Withdraw: GHC{withdrawal.activetDeposit
+                                <p><span class="newUserColour">Amount </span> Withdraw: GHC{withdrawal.TotalWithdraw
                                 }</p>
                                 <p><span class="dateColor">Withdraw</span> Date: {new Date(withdrawal.createdAt).toLocaleString()}</p>
                             </div>

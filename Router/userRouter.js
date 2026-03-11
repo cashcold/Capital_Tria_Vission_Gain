@@ -525,62 +525,69 @@ Router.post('/depositInfo', async (req, res) => {
 });
 
 
-Router.post('/total_transaction_history',async(req,res)=>{
-   
-    user_id = req.body.id
-    fromDate = req.body.fromDate
-    endDate = req.body.endDate
-    
-    const user = await UserDeposit.findOne({user_id: req.body.id})
-     const find_User_deposit = await UserDeposit.find({"createdAt": {$gte: fromDate , $lte: endDate }})
-    const find_User_withdraw = await WithdrawDeposit.find({"createdAt": {$gte: fromDate , $lte: endDate }})
-    const both_transaction = find_User_deposit.concat(find_User_withdraw)
+Router.post('/total_transaction_history', async (req, res) => {
 
-    both_transaction.sort((a, b) => b.createdAt - a.createdAt)
+    const user_id = req.body.id;
+    const fromDate = new Date(req.body.fromDate);
+    const endDate = new Date(req.body.endDate);
 
-    if(user){
-    res.send(both_transaction)
+    try {
+
+        const find_User_deposit = await UserDeposit.find({
+            user_id: user_id,
+            createdAt: { $gte: fromDate, $lte: endDate }
+        });
+
+        const find_User_withdraw = await WithdrawDeposit.find({
+            user_id: user_id,
+            createdAt: { $gte: fromDate, $lte: endDate }
+        });
+
+        const both_transaction = find_User_deposit.concat(find_User_withdraw);
+
+        // newest transaction first
+        both_transaction.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        res.send(both_transaction);
+
+    } catch (error) {
+        res.status(500).send("Server Error");
     }
-    
-    
-})
+
+});
 
 
-Router.post('/transaction_depositInfo_query',async(req,res)=>{
-   
-    user_id = req.body.id
-    fromDate = req.body.fromDate
-    endDate = req.body.endDate
-    const user = await UserDeposit.findOne({user_id: req.body.id})
-    console.log(req.body)
-   if(user){
-       const showTransactionDate = await UserDeposit.find({"createdAt": {$gte: fromDate , $lte: endDate }})
-       
-     res.send(showTransactionDate)
-   }
+Router.post('/transaction_depositInfo_query', async (req,res)=>{
 
- 
-    
-    
-})
+    const user_id = req.body.id;
+    const fromDate = new Date(req.body.fromDate);
+    const endDate = new Date(req.body.endDate);
 
-Router.post('/transaction_withdrawInfo_query',async(req,res)=>{
-   
-    user_id = req.body.id
-    fromDate = req.body.fromDate
-    endDate = req.body.endDate
-    const user = await WithdrawDeposit.findOne({user_id: req.body.id})
-    console.log(req.body)
-   if(user){
-       const showTransactionDate = await WithdrawDeposit.find({"createdAt": {$gte: fromDate , $lte: endDate }})
-       
-     res.send(showTransactionDate)
-   }
+    const showTransactionDate = await UserDeposit.find({
+        user_id: user_id,
+        createdAt: { $gte: fromDate, $lte: endDate }
+    }).sort({ createdAt: -1 });
 
- 
-    
-    
-})
+    res.send(showTransactionDate);
+
+});
+
+Router.post('/transaction_withdrawInfo_query', async (req, res) => {
+
+    const user_id = req.body.id;
+    const fromDate = new Date(req.body.fromDate);
+    const endDate = new Date(req.body.endDate);
+
+    console.log(req.body);
+
+    const showTransactionDate = await WithdrawDeposit.find({
+        user_id: user_id,
+        createdAt: { $gte: fromDate, $lte: endDate }
+    }).sort({ createdAt: -1 }); // newest first
+
+    res.send(showTransactionDate);
+
+});
 
 
 Router.post('/checkdate', async (req, res) => {

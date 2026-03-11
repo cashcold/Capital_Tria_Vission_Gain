@@ -133,7 +133,7 @@ class WithdrawalTransaction extends Component {
                             {this.state.transaction_withdrawInfo_query.map(recentApi =>{
                             return(
                                 <div className=''>
-                                   <h5>$ {recentApi.activetDeposit}</h5>
+                                   <h5>GHC {recentApi.activetDeposit}</h5>
                                  </div>
                             )
                         })}
@@ -153,7 +153,7 @@ class WithdrawalTransaction extends Component {
                     <p className='NoTransaction_P'></p>
                       <div className="last__transac">
                           <p className="transac_left">Total  Withdrawal:</p>
-                          <p className="transac_right">$ {this.state.withdrawTotal.map(user => user.WithdrawAmount)}.00</p>
+                          <p className="transac_right">GHC {this.state.withdrawTotal.map(user => user.WithdrawAmount)}.00</p>
                       </div>
                    </section>
             </div>

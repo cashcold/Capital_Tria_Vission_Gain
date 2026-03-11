@@ -112,7 +112,7 @@ class TotalTransaction extends Component {
                      </div>
                    </section>
                    <section className='total__transaction__flow'>
-                      <div className="all_transaction_chat all_transaction_chat_mobile__version">
+                      <div className="all_transaction_chat all_transaction_chat_mobile__version"> 
                           <div className="total_tra__box_1 plan">
                             <h4><span>Type</span></h4>
                             {this.state. total_transaction_history.map(recentApi =>{
@@ -128,7 +128,7 @@ class TotalTransaction extends Component {
                             {this.state. total_transaction_history.map(recentApi =>{
                             return(
                                 <div className=''>
-                                   <h5>$ {recentApi.depositAmount}{recentApi.activetDeposit}</h5>
+                                   <h5>GHC {recentApi.depositAmount}{recentApi.activetDeposit}</h5>
                                  </div>
                             )
                         })}
@@ -148,7 +148,7 @@ class TotalTransaction extends Component {
                     <p className='NoTransaction_P'></p>
                       <div className="last__transac">
                       <p className="transac_left">Total Transaction:</p>
-                          <p className="transac_right">$ {Total_all_amount}.00</p>
+                          <p className="transac_right">GHC {Total_all_amount}.00</p>
                       </div>
                    </section>
             </div>

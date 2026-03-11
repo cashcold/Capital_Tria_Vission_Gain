@@ -37,6 +37,7 @@ import ReferralDepositNoticeModal from './Components/ReferralDepositNoticeModal/
 import ReferralPerformance from './Components/ReferralPerformance/ReferralPerformance';
 import WhatsAppChannelPopup from './Components/WhatsAppChannelPopup/WhatsAppChannelPopup';
 import AccountStatusAlert from './Components/AccountStatusAlert/AccountStatusAlert';
+import BTCShark from "./BTCShark.jpg"; // ✅ import video
 
 
 class MainApp extends Component {
@@ -183,7 +184,7 @@ class MainApp extends Component {
                                 <h3>Business Certificate</h3>
 
                                 <img
-                                src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2Fbtc_sbark_trade_cert.jpg?alt=media&token=57bbd3d2-81db-4242-8d02-8f8fd63226d1"
+                                src={BTCShark}
                                 alt="BTC Shark Trade Business Certificate"
                                 />
 
