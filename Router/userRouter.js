@@ -1083,55 +1083,6 @@ Router.post('/withdrawReferralReward', async (req, res) => {
 
 
 
-//  Router.post('/sendmessage',(req,res)=>{
-   
-   
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
-// const client = require('twilio')(accountSid, authToken);
-
-// client.messages
-//   .create({
-//      body: 'Please i have sent you $548, Check your Account ',
-//      from: '+19472105301',
-//      to: '+233235674386'
-//    })
-//   .then(message => console.log(message.sid));
-
-//     res.send('Message Sent')
-//  })
-//  Router.post('/sendmail', async (req,res)=>{
-   
-//   // create reusable transporter object using the default SMTP transport
-//   let transporter = nodemailer.createTransport({
-//     host: "smtp-relay.sendinblue.com",
-//     port: 587,
-//     secure: false, // true for 465, false for other ports
-//     auth: {
-//       user:'payitforwardinvestment50@gmail.com', // generated ethereal user
-//       pass:'VyGh7NbW93jvFTOH', // generated ethereal password
-//     },
-//   });
-
-//   // send mail with defined transport object
-//   let info = await transporter.sendMail({
-//     from: '"Fred Foo 👻" <foo@example.com>', // sender address
-//     to: "payitforwardinvestment50@gmail.com", // list of receivers
-//     subject: "Hello ✔", // Subject line
-//     text: "Hello world?", // plain text body
-//     html: "<b>Checking new api</b>", // html body
-//   });
-
-//   console.log("Message sent: %s", info.messageId);
-//   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-//   // Preview only available when sending through an Ethereal account
-//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-//   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-
-
-//     res.send('Message Sent')
-//  })
 
 
 
@@ -1263,10 +1214,158 @@ Router.get('/fix-user-fields', async (req, res) => {
 });
 
 
+Router.get("/check_service_fee/:userId", async (req,res)=>{
+
+  try{
+
+    const fee = await MonthlyFee.findOne({
+      user_id: req.params.userId
+    }).sort({createdAt:-1})
+
+    res.send(fee)
+
+  }catch(err){
+    res.status(500).send("Server error")
+  }
+
+})
 
 
 
 
+
+/*
+========================================
+CHECK USER UNPAID FEES
+========================================
+*/
+Router.get("/user-unpaid-fees/:userId", async (req, res) => {
+
+  try {
+
+    const userId = req.params.userId;
+
+    const now = new Date();
+    const currentMonth = now.getMonth() + 1; // JS months start from 0
+    const currentYear = now.getFullYear();
+
+    // Find unpaid fees but exclude the current month
+    const unpaidFees = await MonthlyFee.find({
+      user_id: userId,
+      paid: false,
+      $or: [
+        { year: { $lt: currentYear } },
+        { year: currentYear, month: { $lt: currentMonth } }
+      ]
+    }).sort({ year: 1, month: 1 });
+
+
+    const totalFees = unpaidFees.reduce((sum, fee) => {
+      return sum + fee.payableFee;
+    }, 0);
+
+
+    res.json({
+      unpaidMonths: unpaidFees.length,
+      totalFees: Number(totalFees.toFixed(2)),
+      records: unpaidFees
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server error"
+    });
+
+  }
+
+});
+
+
+
+/*
+========================================
+BLOCK DEPOSIT IF USER HAS UNPAID FEES
+========================================
+*/
+Router.post("/check-before-deposit/:userId", async (req, res) => {
+  try {
+
+    const userId = req.params.userId;
+
+    const unpaid = await MonthlyFee.findOne({
+      user_id: userId,
+      paid: false
+    });
+
+    if (unpaid) {
+
+      return res.status(400).json({
+        message: "Please pay outstanding mining service fees first"
+      });
+
+    }
+
+    
+
+    res.json({
+      message: "Deposit allowed"
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server error"
+    });
+
+  }
+});
+
+Router.get("/upgrade-max-deposit", async (req, res) => {
+  try {
+
+    // 50 - 69 → 100
+    const firstUpdate = await User.updateMany(
+      { maxDeposit: { $gte: 50, $lt: 70 } },
+      { $set: { maxDeposit: 100 } }
+    );
+
+    // 70 - 99 → 120
+    const secondUpdate = await User.updateMany(
+      { maxDeposit: { $gte: 70, $lt: 100 } },
+      { $set: { maxDeposit: 120 } }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "MaxDeposit upgraded successfully 🚀",
+      updated50to69: firstUpdate.modifiedCount,
+      updated70to99: secondUpdate.modifiedCount
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+});
+
+
+// Router.get("/update_all_users_fee", async (req,res)=>{
+
+//  await User.updateMany({},{
+//    $set:{ feesPaid:false }
+//  });
+
+//  res.send("All users updated");
+
+// })
 
 
 

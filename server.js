@@ -1,9 +1,11 @@
 const express = require('express')
 const cors = require('cors')
+const cron = require("node-cron");
 const dotEnv = require('dotenv')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userRouter = require('./Router/userRouter')
+const MonthlyFee = require('./UserModel/MonthlyFeeSchema')
 const path = require('path')
 const fs = require('fs');
 const shell = require("shelljs")
@@ -68,6 +70,11 @@ io.on('connection', socket => {
    })
 });
 
+
+
+
+
+
 app.use('/users', userRouter)
 app.use(express.static(path.join(__dirname, "client")));
 
@@ -121,6 +128,10 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
+
+
+
+
 
 server.listen(PORT, () => {
     console.log(`Server is running on local Port Number ${PORT} socket.io`)

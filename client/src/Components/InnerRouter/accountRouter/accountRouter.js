@@ -36,6 +36,9 @@ class AccountRouter extends Component {
             totalDeposit_id: '',
             login: '',
             plan: '',
+            totalFees: 0,
+            unpaidMonths: 0,
+            unpaidRecords: [],
             timestamp: '',
             redirectToHome: false,
             Refedate: '',
@@ -118,11 +121,11 @@ class AccountRouter extends Component {
                 axios.get(`/users/totalRefferReward/${decoded.user_id}`)
                 .then(response => {
                   this.setState({ totalReferralReward: response.data.totalReward });
-                })
-                .catch(error => {
+                }).catch(error => {
                   console.error("Error fetching total referral reward:", error);
                   toast.error("Failed to fetch total referral reward.");
                 });
+                
         
                  axios.post('/users/user_profile_display',{id}).then(data => this.setState({
                     user_profile_display: data.data
@@ -131,6 +134,20 @@ class AccountRouter extends Component {
                     user_deposit_display: data.data.deposit
                     
                  }))
+
+                 axios.get(`/users/user-unpaid-fees/${id}`)
+                    .then(response => {
+
+                    this.setState({
+                        totalFees: response.data.totalFees,
+                        unpaidMonths: response.data.unpaidMonths,
+                        unpaidRecords: response.data.records
+                    });
+
+                    })
+                    .catch(error => {
+                    console.error("Error fetching unpaid fees:", error);
+                    });
 
                  sessionStorage.setItem('checkPercent', this.state.user_deposit_display.checkPercent);
                 //  user_deposit_display.checkPercent
@@ -177,6 +194,11 @@ class AccountRouter extends Component {
 
 
     render() { 
+
+        const months = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+        ];
 
          if (this.state.redirectToHome) {
               return <Redirect to="/" />;
@@ -335,6 +357,25 @@ class AccountRouter extends Component {
             // debug: show withdraw detection values in console
                 return ( 
             <div className='account__router'>
+                {/* {
+                    CheckDeposit === 0 && !showDepositModal && this.state.totalFees === 0 && (
+                        <section className="div invest_ui_ux_btn">
+                        <div class="no-deposit-container">
+                        <div class="no-deposit-card">
+                            <div class="icon-wrapper">
+                            <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+                            </div>
+                            <h1>No Active Deposits</h1>
+                            <p>
+                            You currently don't have any active deposits in your mining account.
+                            Start earning by making your first deposit today!
+                            </p>
+                            <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
+                        </div>
+                        </div>
+                    </section>
+                    )
+                } */}
                 {
                     CheckDeposit === 0 && !showDepositModal && (
                         <section className="div invest_ui_ux_btn">
@@ -352,8 +393,6 @@ class AccountRouter extends Component {
                         </div>
                         </div>
                     </section>
-                    
-
                     )
                 }
                 <section class="warning_message">
@@ -407,11 +446,50 @@ class AccountRouter extends Component {
                         </div>
                     </div>
                     <button className='close-btn' onClick={this.toggleDetails}>
-                        Close
+                        Close 
                     </button>
                     </div>
                 </div>
                 )}
+               {/* {this.state.totalFees > 0 && (
+
+                <div className="fee-warning">
+
+                <h3>⚠ Mining Service Fee Outstanding</h3>
+
+                <p>You have unpaid service fees for {this.state.unpaidMonths} month(s).</p>
+
+                <div className="fee-list">
+
+                {this.state.unpaidRecords.map((fee, index) => (
+
+                <div key={index} className="fee-row">
+
+                <strong>
+                {months[fee.month - 1]} {fee.year}
+                </strong>
+
+                <p>Total Profit: GHC {fee.totalWithdrawn / 10}</p>
+
+                <p>Service Fee: GHC {fee.payableFee}</p>
+
+                </div>
+
+                ))}
+
+                </div>
+
+                <h3>Total Payable: GHC {this.state.totalFees}</h3>
+
+                <a href="/dashboard/pay-fee">
+                <button className="pay-fee-btn">
+                Pay Service Fee
+                </button>
+                </a>
+
+                </div>
+
+                )} */}
                 {
                 CheckDeposit > 1 && (
                        
@@ -445,7 +523,12 @@ class AccountRouter extends Component {
                             <h5>TOTAL INVESTMENT</h5>
                             <h5> GHC {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
                         </div>
-                        {showInvestButton && !showDepositModal && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>}
+                        {/* {showInvestButton && !showDepositModal && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>} */}
+                        {showInvestButton && !showDepositModal && this.state.totalFees === 0 && (
+                        <a href='/dashboard/deposit'>
+                            <h2 className='btn invest_btn'>INVEST</h2>
+                        </a>
+                        )}
                     
                     </div>
                     <div className="dash__box__1">
