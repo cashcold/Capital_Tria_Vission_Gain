@@ -27,6 +27,9 @@ class MomoDeposit extends Component {
             isSubmitting: false,
             checkPercent: 0,
             TotalWithdraw: '',
+            lastDepositDate: null,
+            canSubmit: true,
+            depositStatusMessage: "",
             
 
             
@@ -114,6 +117,43 @@ class MomoDeposit extends Component {
             activetDeposit,
         });
     }
+
+    checkDepositBeforeSubmit = async () => {
+
+    this.setState({ isSubmitting: true });
+
+    const userId = this.state.user_id;
+
+    try {
+
+        const res = await axios.get("/users/check-last-deposit", {
+            params: { userId }
+        });
+
+        const { canSubmit, lastDepositDate, message } = res.data;
+
+        this.setState({
+            canSubmit,
+            lastDepositDate,
+            depositStatusMessage: message
+        });
+
+        if (!canSubmit) {
+            toast.error(message, { autoClose: 30000 });
+            this.setState({ isSubmitting: false });
+            return;
+        }
+
+        // If allowed → continue submit
+        this.onSubmit();
+
+        } catch (err) {
+
+            toast.error("Unable to verify deposit status");
+            this.setState({ isSubmitting: false });
+
+        }
+    };
     
    
 
@@ -152,6 +192,8 @@ class MomoDeposit extends Component {
     render() { 
         const Amount_to_send = this.state.depositAmount * 1
         const { paymentMade, isSubmitting } = this.state;
+
+        
         return(
             <div className='confirm'>
                 <div className='confirmDepositNow'>
@@ -230,6 +272,12 @@ class MomoDeposit extends Component {
                                 <h4>
                                     ⏳ Order Status: <span>Waiting for payment</span>
                                 </h4>
+                                {this.state.lastDepositDate && (
+                                    <p style={{ color: "blue", fontWeight: "bold" }}>
+                                        🗓 Last Deposit Date:{" "}
+                                        {new Date(this.state.lastDepositDate).toLocaleString()}
+                                    </p>
+                                )}
                                 </div>
 
                            </div>
@@ -256,11 +304,11 @@ class MomoDeposit extends Component {
                 <div className='btnConfirm'>
                 <button 
                 className='btn btn-success'  
-                onClick={this.onSubmit}
+                onClick={this.checkDepositBeforeSubmit}
                 disabled={!paymentMade || isSubmitting}
-            >
+                >
                 {isSubmitting ? <div className="spinner"></div> : "CONFIRM , PAYMENT ✅"}
-            </button>
+                </button>
 
                 </div>
             </div>

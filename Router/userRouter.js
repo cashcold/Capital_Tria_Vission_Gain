@@ -1325,50 +1325,54 @@ Router.post("/check-before-deposit/:userId", async (req, res) => {
   }
 });
 
-Router.get("/upgrade-max-deposit", async (req, res) => {
+Router.get("/check-last-deposit", async (req, res) => {
   try {
 
-    // 50 - 69 → 100
-    const firstUpdate = await User.updateMany(
-      { maxDeposit: { $gte: 50, $lt: 70 } },
-      { $set: { maxDeposit: 100 } }
-    );
+    const userId = req.query.userId;
 
-    // 70 - 99 → 120
-    const secondUpdate = await User.updateMany(
-      { maxDeposit: { $gte: 70, $lt: 100 } },
-      { $set: { maxDeposit: 120 } }
-    );
+    const lastDeposit = await UserDeposit.findOne({ user_id: userId })
+      .sort({ createdAt: -1 });
 
+    if (!lastDeposit) {
+      return res.status(200).json({
+        canSubmit: true,
+        message: "No previous deposit found. You can proceed."
+      });
+    }
+
+    const now = new Date();
+    const lastDate = new Date(lastDeposit.createdAt);
+
+    const diff = now - lastDate;
+    const hours = diff / (1000 * 60 * 60);
+
+    // If less than 24 hours
+    if (hours < 24) {
+      return res.status(200).json({
+        canSubmit: false,
+        lastDepositDate: lastDeposit.createdAt,
+        hoursSinceLastDeposit: hours,
+        message: `You have already submitted a deposit on ${new Date(
+          lastDeposit.createdAt
+        ).toLocaleString()}. Please wait for blockchain activation. Your dashboard will update automatically.`
+      });
+    }
+
+    // If more than 24 hours
     res.status(200).json({
-      success: true,
-      message: "MaxDeposit upgraded successfully 🚀",
-      updated50to69: firstUpdate.modifiedCount,
-      updated70to99: secondUpdate.modifiedCount
+      canSubmit: true,
+      lastDepositDate: lastDeposit.createdAt,
+      hoursSinceLastDeposit: hours,
+      message: "You can proceed with deposit confirmation."
     });
 
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).json({
-      success: false,
-      message: "Server error"
+      message: "Internal server error"
     });
   }
 });
-
-
-// Router.get("/update_all_users_fee", async (req,res)=>{
-
-//  await User.updateMany({},{
-//    $set:{ feesPaid:false }
-//  });
-
-//  res.send("All users updated");
-
-// })
-
-
-
 
 
 
