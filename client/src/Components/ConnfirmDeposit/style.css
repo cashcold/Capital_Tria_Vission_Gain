@@ -1,245 +1,209 @@
-.confirmLine{
-    display: flex;
-}
-.confirmDepositNow{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.lastDepositConfirm{
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
+/* ===== MAIN CONTAINER ===== */
+.confirm {
+  background: #0f172a;
+  min-height: 100vh;
+  padding: 20px 15px;
+  color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.confirmLine{
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px; 
-}
-.confirm{
-    width: 90%;
-    margin: 0 auto;
-    min-height: 80vh;
-    padding: 3em 0;
-   
-    background-color:#0D1430;
-}
-.planInfo{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+/* ===== HEADER ===== */
+.confirmDepositNow h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #38bdf8;
 }
 
-.lastConfirm{
-    display: block;
-}
-.confirmBtnInfo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 1.5em;
-}
-.btnConfirm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.inputHide{
-    display: none;
-}
-.wallertNumber{
-    margin: 30px 0;
-}
-.automatic img{
-    margin: 30px 0;
-}
-.confirmDepositNow h1{
-    margin: 40px 0;
-}
-.automatic img{
-    width: 30px;
+.confirmDepositNow span {
+  color: #22c55e;
 }
 
-.planInfo p:nth-child(2){
-    color: #B9244C;
-}
-.planInfo p{
-    font-size: 1em;
-    padding: 5px 0;
-}
-
-.confirm img{
-    width: 90%;
-    margin: 0 auto;
+/* ===== IMAGE ===== */
+.blockchainQbar_pic {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 20px;
 }
 
-.confirmLine{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-gap: 12em;
-    
+/* ===== CARD ===== */
+.confirmLine {
+  max-width: 900px;
+  margin: auto;
 }
 
+.lastConfirm {
+  background: #1e293b;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* ===== INNER CONTENT ===== */
+.insideLastConfirm {
+  display: grid;
+  gap: 12px;
+}
+
+/* ===== PLAN INFO ROW ===== */
+.planInfo {
+  display: flex;
+  justify-content: space-between;
+  background: #0f172a;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.planInfo p {
+  margin: 0;
+}
+
+/* ===== HIGHLIGHT VALUES ===== */
+.outAmount1 {
+  color: #22c55e;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* ===== WALLET ADDRESS ===== */
+.wallertNumber {
+  background: #020617;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 10px;
+  word-break: break-all;
+  border: 1px solid #334155;
+}
+
+.wallertNumber span {
+  color: #38bdf8;
+  font-size: 14px;
+}
+
+/* ===== PAYMENT INFO BOX ===== */
+.confirmBtnInfo {
+  background: #020617;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  border: 1px solid #334155;
+}
+
+.confirmBtnInfo p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ===== STATUS ===== */
+.confirmBtnInfo h4 {
+  margin-top: 10px;
+}
+
+.confirmBtnInfo span {
+  color: #facc15;
+}
+
+/* ===== BUTTON AREA ===== */
 .btnConfirm {
-    display: flex;
-    justify-content: center;
-    margin: 1em 0em;
+  text-align: center;
+  margin-top: 20px;
 }
 
-.btnConfirm button {
-    background-color: #28a745;
-    color: white;
-    padding: 12px 24px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+/* ===== BUTTON STYLE ===== */
+.btn {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+  max-width: 320px;
+  transition: 0.3s;
 }
 
-.btnConfirm button:hover {
-    background-color: #218838;
-    transform: scale(1.05);
+.btn-primary {
+  background: #2563eb;
+  border: none;
 }
 
-.btnConfirm button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
+.btn-primary:hover {
+  background: #1d4ed8;
 }
 
+.btn-success {
+  background: #16a34a;
+  border: none;
+}
+
+.btn-success:hover {
+  background: #15803d;
+}
+
+/* ===== WARNING TEXT ===== */
+.confirm p[style] {
+  max-width: 700px;
+  margin: 15px auto;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ===== LOADING SPINNER ===== */
 .spinner {
-    width: 24px;
-    height: 24px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    display: inline-block;
+  border: 3px solid #ccc;
+  border-top: 3px solid #22c55e;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  margin: auto;
 }
-
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
 
-@media screen and (max-width: 768px){
-    .confirmDepositNow h1{
-        font-size: 20px;
-    }
-    .lastConfirm{
-        width: 100%;
-        min-height: 700px;
-    }
-    .lastConfirm p{
-        font-size: 1.5rem;
-    }
-    .wallertNumber{
-        margin: 30px 0;
-        font-size: 0.5rem;
-    }
-    .planInfo p{
-        font-size: 0.9rem;
-        padding: 1em 0;
-    }
-    .confirmBtnInfo p{
-        font-size: 0.9rem;
-    }
-    .confirm{
-        width: 98%;
-        margin: 0 auto;
-        min-height: 80vh;
-        padding: 3em 0;
-       
-        background-color:#0D1430;
-    }
-    .confirmLine{
-        display: grid;
-        grid-template-columns: repeat(1,1fr);
-        grid-gap: 0em;
-        
-    }
-    .blockchainQbar_pic{
-       margin: 0 auto;
-       margin-bottom: 4em;
-    }
-}
+  .confirmDepositNow h1 {
+    font-size: 20px;
+  }
 
-/* Responsive and layout improvements for the confirmation block */
-.confirmBtnInfo{
-    display: flex;
+  .planInfo {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    padding: 18px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.03);
-    color: #eaf3ff;
+    gap: 4px;
+    font-size: 14px;
+  }
+
+  .blockchainQbar_pic {
+    max-height: 160px;
+  }
+
+  .lastConfirm {
+    padding: 15px;
+  }
+
+  .confirmBtnInfo {
+    padding: 12px;
+  }
+
+  .btn {
     width: 100%;
-    max-width: 820px;
-    box-sizing: border-box;
-}
+  }
 
-.confirmBtnInfo p{ 
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.45;
-    color: #e6eef8;
-}
+  .wallertNumber {
+  background: #020617;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 40px 1px;
+  word-break: break-all;
+  border: 1px solid #334155;
+  }
 
-.confirmBtnInfo .outAmount1{
-    display: inline-block;
-    background: rgba(255,255,255,0.04);
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-weight: 700;
-    margin-left: 6px;
-}
-
-.confirmBtnInfo .wallertNumber{
-    display: inline-block;
-    background: rgba(0,0,0,0.15);
-    color: #fff;
-    padding: 6px 8px;
-    border-radius: 6px;
-    font-weight: 700;
-}
-
-.confirmBtnInfo h4{ 
-    margin: 6px 0 0 0;
-    font-size: 1rem;
-    color: #ffd166;
-}
-
-/* Ensure buttons are full-width on small screens */
-.btnConfirm{ width: 100%; }
-.btnConfirm button{ min-width: 220px; }
-
-@media screen and (max-width: 1024px){
-    .confirmLine{ grid-gap: 4em; }
-    .confirmBtnInfo{ max-width: 640px; }
-}
-
-@media screen and (max-width: 768px){
-    .confirmBtnInfo{ align-items: stretch; padding: 14px; }
-    .confirmBtnInfo p{ font-size: 0.95rem; }
-    .confirmDepositNow h1{ font-size: 18px; }
-    .wallertNumber{ font-size: 0.95rem; margin: 10px 0; }
-    .btnConfirm button{ width: 100%; font-size: 16px; padding: 12px; }
-}
-
-@media screen and (max-width: 420px){
-    .confirm{ padding: 2em 0; }
-    .confirmBtnInfo{ padding: 12px; gap: 8px; }
-    .confirmBtnInfo p{ font-size: 0.92rem; }
-    .planInfo p{ font-size: 0.9rem; }
-    .btnConfirm button{ font-size: 15px; padding: 10px; border-radius: 8px; }
 }

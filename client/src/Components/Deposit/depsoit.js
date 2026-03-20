@@ -82,9 +82,14 @@ class DepositMain extends Component {
         const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
         const depositAmount = Number(this.state.depositAmount);
 
-        // CHECK MAX DEPOSIT
-        if(depositAmount > maxDeposit){
-            toast.warn("You cannot invest more than your maximum deposit. Please refer more people to enjoy higher deposit.");
+          // CHECK MAX DEPOSIT
+      if(depositAmount > maxDeposit){
+            toast.warn(
+                `You cannot invest more than your maximum deposit ${maxDeposit} GHC. Please refer more people to enjoy higher deposit.`,
+                {
+                    autoClose: 30000
+                }
+            );
             return false;
         }
             
@@ -227,6 +232,10 @@ class DepositMain extends Component {
                
          }
          CalculatorEngine()
+
+        const Amount_to_send = this.state.depositAmount;
+        const RATE = 12; // 1 USDT = 15 GHC (you can change this anytime)
+        const usdtAmount = Amount_to_send / RATE;
         return ( 
             <div className='depositMain'>
                 <ToastContainer/>
@@ -435,14 +444,15 @@ class DepositMain extends Component {
                             onChange={this.handleChange('depositAmount')}
                             placeholder='e.g 50'
                             /></h5>
+                            <p className='usdtAmount'>USDT Amount: {usdtAmount.toFixed(2)}</p>
                         </div>
                         <div className="bit__btn">
-                             <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> Bitcoin</span></h5>
+                             <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> USDT</span></h5>
                              <h5> <input type='radio' name='ckeckWallet' onChange={this.handleChange('checkWallet')}    className='planBtn4'/><span> Momo Number</span></h5>
                         </div>
                         <div className="bit__btn ">
-                             <h5 className='bit__btn_2'><a href='#' >Pay with Bitcoin</a></h5>
-                             {/* <h5 className='bit__btn_2'><a href='' onClick={this.onSubmit}>Pay with Bitcoin</a></h5> */}
+                             {/* <h5 className='bit__btn_2'><a href='#' >Pay with Bitcoin</a></h5> */}
+                             <h5 className='bit__btn_2'><a href='' onClick={this.onSubmit}>Pay with USDT</a></h5>
                              <h5 className='bit__btn_2'><a href='' onClick={this.onSubmitMomo}>Pay with Momo Number</a></h5>
                         </div>
                     </div>

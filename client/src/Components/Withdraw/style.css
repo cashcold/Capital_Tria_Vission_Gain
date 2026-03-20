@@ -1,100 +1,208 @@
-.withdraw__main{
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 8em 0;
-    background-position: 20%;
-    background-image: linear-gradient(rgba(2, 2, 16, 0.515), rgba(3, 21, 44, 0.364)),
-                  url("../../images/digital-world-map-hologram-blue-background.jpg");
-                  min-height: 100vh;
-}
-.widthraw__h1{
-    padding: 0.8em 0em;
-    background-color: green;
-    width: 90%;
-    margin: 0 auto;
-     margin-bottom: 2em;
-}
-.All__flow__withdraw{
-    width: 90%;
-    margin: 0 auto;
-    min-height: 40vh;
-    background-color:#0D1430;
-}
-.flow__text{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-gap: 3em;
+/* ===== MAIN WRAPPER ===== */
+.withdraw__main {
+  background: #0f172a;
+  min-height: 100vh;
+  padding: 30px 15px;
+  color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.withdraw__box__1{
-   padding: 2em 0em;
-}
-.widthdraw__info{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 0em;
-    margin-bottom: 1.5em;
-}
-.width__process__1 h4{
-    color: #B9244C;
-}
-.style__h4{
-    color: #B9244C;
+/* ===== HEADER ===== */
+.widthraw__h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #38bdf8;
 }
 
-.width__method{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 0em;
-   padding: 0em 1.8em;
+/* ===== ALERT ===== */
+.textInfo {
+  text-align: center;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
-.wallet{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 0em;
-    padding: 2em 0em;
-    padding-right: 1em;
+
+/* ===== MAIN GRID ===== */
+.All__flow__withdraw {
+  max-width: 900px;
+  margin: auto;
+  display: grid;
+  gap: 20px;
 }
+
+/* ===== ACCOUNT BOX ===== */
+.withdraw__box__1 {
+  background: #1e293b;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.flow__text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.with__inner__box_1 h4 {
+  margin: 5px 0;
+}
+
+.style__h4 {
+  color: #94a3b8;
+}
+
+/* ===== STATUS SECTION ===== */
+.widthdraw__info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.width__process__1 {
+  flex: 1;
+  background: #1e293b;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.width__process__1:hover {
+  background: #334155;
+}
+
+/* ===== METHOD SECTION ===== */
+.width__method {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.method__box {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.method__box:hover {
+  transform: translateY(-5px);
+  background: #334155;
+}
+
+/* ===== BUTTON ===== */
+.withdrawBtn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.withdrawBtn:hover {
+  background: #16a34a !important;
+}
+
+/* ===== WALLET SECTION ===== */
+.wallet {
+  background: #1e293b;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+}
+
+.iconWallet {
+  margin-bottom: 10px;
+  color: #38bdf8;
+}
+
+.wallet__id h4 {
+  margin: 5px 0;
+  word-break: break-all;
+}
+
+/* ===== BLINK ANIMATION ===== */
 .blink_me {
-    animation: blinker 1s linear infinite;
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.4;
   }
-  
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
-  }
-  .textInfo{
-      width: 90%;
-      margin: 0 auto;
-      margin-bottom: 1em;
-       padding: 2em 0em;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+
+  .withdraw__main {
+    padding: 20px 10px;
   }
 
- .withdrawBtn{
-     display: none;
-     margin:  0 auto;
- }
+  .widthraw__h1 {
+    font-size: 22px;
+  }
 
-@media screen and (max-width: 768px){
-    .widthraw__h1{
-        padding: 0.8em 0em;
-        background-color: green;
-        width: 98%;
-        margin: 0 auto;
-         margin-bottom: 2em;
-    }
-    .All__flow__withdraw{
-        width: 98%;
-        margin: 0 auto;
-        min-height: 40vh;
-        background-color:#0D1430;
-    }
-    .textInfo{
-        width: 98%;
-        margin: 0 auto;
-        margin-bottom: 1em;
-         padding: 2em 0em;
-    }
+  /* Stack account info properly */
+  .flow__text {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .with__inner__box_1 h4 {
+    font-size: 15px;
+  }
+
+  /* Make status boxes vertical */
+  .widthdraw__info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .width__process__1 {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  /* Fix withdrawal method layout */
+  .width__method {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .method__box {
+    padding: 15px;
+  }
+
+  .method__box h4 {
+    font-size: 16px;
+  }
+
+  /* Button full width and bigger */
+  .withdrawBtn {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  /* Wallet section */
+  .wallet {
+    padding: 15px;
+  }
+
+  .wallet__id h4 {
+    font-size: 13px;
+  }
+
+  /* Fix long wallet address breaking */
+  .wallet__id {
+    overflow-wrap: break-word;
+    word-break: break-all;
+  }
+
 }

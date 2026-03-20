@@ -61,8 +61,22 @@ class AccountRouter extends Component {
             this.setState({ showDetails: false });
           }
         }
-      }
-      
+    }
+
+  
+
+    handlePayFee = () => {
+        sessionStorage.setItem("payFeeData", JSON.stringify({
+        user: this.state.user,
+        username: this.state.user_Name,
+        bitcoin: this.state.bitcoin,
+        unpaidRecords: this.state.unpaidRecords,
+        totalFees: this.state.totalFees
+    }));
+
+    window.location = "/PayFee";
+
+    };
 
     componentDidMount(){
 
@@ -481,11 +495,9 @@ class AccountRouter extends Component {
 
                 <h3>Total Payable: GHC {this.state.totalFees}</h3>
 
-                <a href="/dashboard/pay-fee">
-                <button className="pay-fee-btn">
+              <button onClick={this.handlePayFee}>
                 Pay Service Fee
                 </button>
-                </a>
 
                 </div>
 

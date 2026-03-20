@@ -38,6 +38,8 @@ import ReferralPerformance from './Components/ReferralPerformance/ReferralPerfor
 import WhatsAppChannelPopup from './Components/WhatsAppChannelPopup/WhatsAppChannelPopup';
 import AccountStatusAlert from './Components/AccountStatusAlert/AccountStatusAlert';
 import BTCShark from "./BTCShark.jpg"; // ✅ import video
+import PayFee from './Components/PayFee/PayFee';
+import PaymentNotice from './Components/PaymentNotice/PaymentNotice';
 
 
 class MainApp extends Component {
@@ -197,13 +199,15 @@ class MainApp extends Component {
                             <li>• 020 380 8479</li>
                             <li>• 026 825 3787</li>
                             <li>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/0203808479" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></li>
-                            <li>✉️ <strong>Email:</strong> <a href="mailto:support@capgainco.com">btcsharktrade@gmail.com</a></li>
+                            <li>✉️ <strong>Email:</strong> <a href="mailto:support@capgainco.com">support@capgainco.com</a></li>
                             </ul>
 
                         </div>
 
                         </section>
-                        <section className="MethodMomo">
+                        <PaymentNotice />
+
+                        {/* <section className="MethodMomo">
                             <section className="monoPAYMENT">
                                 <h1 className="animated-text">📱 Momo Payment and Bank Transfers Now Accepted!</h1>
                                     <p className="blinking-text">
@@ -215,7 +219,7 @@ class MainApp extends Component {
                                     <img src={require('./images/mobile-money.jpg')} className=''/> 
                                     </div>
                             </section>
-                        </section>
+                        </section> */}
                         <section class="grobelInvest">
                             <img
                                 src='https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/capgainco%2FMANY%20MORE.jpg?alt=media&token=5975b784-7100-4d95-b0fe-ee411c485707'
@@ -251,6 +255,8 @@ class MainApp extends Component {
                               <Route path='/user_admin_watch_notification' exact component={WatchNotificationMain}/> 
                               <Route path='/ReferralPerformance' exact component={ReferralPerformance}/> 
                               <Route path='/AccountStatusAlert' exact component={AccountStatusAlert}/> 
+                              <Route path='/PayFee' exact component={PayFee}/> 
+                              <Route path='/PaymentNotice' exact component={PaymentNotice}/> 
                             </Switch>
                         </div>
                         <FooterMain />

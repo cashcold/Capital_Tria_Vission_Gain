@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import jwt_decode from 'jwt-decode'
 import { io } from "socket.io-client";
+import USDT from "./usdt.png";
 
 
 class ConfirmDeposit extends Component {
@@ -24,7 +25,12 @@ class ConfirmDeposit extends Component {
             amount: '',
             date: '',
             paymentMade: false,
-            isSubmitting: false
+            isSubmitting: false,
+            checkPercent: 0,
+            TotalWithdraw: '',
+            lastDepositDate: null,
+            canSubmit: true,
+            depositStatusMessage: "",
             
 
             
@@ -67,28 +73,37 @@ class ConfirmDeposit extends Component {
     
         // Function to calculate percentage based on deposit amount
         const CalculatorEngine = () => {
-            const totalMoneyElement = document.querySelector('.toatalAllMoney');
+              
+                const totalMoneyElement = document.querySelector('.toatalAllMoney');
             if (!totalMoneyElement) return; // Ensure the element exists
     
             let checkPercent = 0;
-    
+
             if (depositAmountCheck > 1000) {
-                checkPercent = depositAmountCheck * 25/100;
-            } else if (depositAmountCheck > 800) {
-                checkPercent = depositAmountCheck * 20/100;
-            } else if (depositAmountCheck >= 600) {
-                checkPercent = depositAmountCheck * 15/100;
-            } else {
-                checkPercent = depositAmountCheck * 10/100;
-            }
-    
-            totalMoneyElement.innerHTML = `$${checkPercent.toFixed(2)}`;
-        };
+                    checkPercent = depositAmountCheck * 25 / 100;
+                } else if (depositAmountCheck > 800) {
+                    checkPercent = depositAmountCheck * 20 / 100;
+                } else if (depositAmountCheck >= 600) {
+                    checkPercent = depositAmountCheck * 15 / 100;
+                } else {
+                    checkPercent = depositAmountCheck * 10 / 100;
+                }
+
+                // Now convert AFTER calculation
+                const RATE = 12; // 1 USDT = 12 GHC
+                const usdtAmount = checkPercent / RATE;
+
+                // Update state
+                this.setState({ checkPercent });
+
+                // Display
+                totalMoneyElement.innerHTML = `USDT ${usdtAmount.toFixed(2)}`;
+                    };
     
         // Execute the function
         CalculatorEngine();
     
-        const user_id = sessionStorage.getItem('user_id');
+        const user_id = sessionStorage.getItem('user_id'); 
         const user_Name = sessionStorage.getItem('user_Name');
         const full_Name = sessionStorage.getItem('full_Name');
         const planNow = sessionStorage.getItem('planNow');
@@ -111,12 +126,51 @@ class ConfirmDeposit extends Component {
             activetDeposit,
         });
     }
+
+    checkDepositBeforeSubmit = async () => {
+
+    this.setState({ isSubmitting: true });
+
+    const userId = this.state.user_id;
+
+    try {
+
+        const res = await axios.get("/users/check-last-deposit", {
+            params: { userId }
+        });
+
+        const { canSubmit, lastDepositDate, message } = res.data;
+
+        this.setState({
+            canSubmit,
+            lastDepositDate,
+            depositStatusMessage: message
+        });
+
+        if (!canSubmit) {
+            toast.error(message, { autoClose: 30000 });
+            this.setState({ isSubmitting: false });
+            return;
+        }
+
+        // If allowed → continue submit
+        this.onSubmit();
+
+        } catch (err) {
+
+            toast.error("Unable to verify deposit status");
+            this.setState({ isSubmitting: false });
+
+        }
+    };
     
    
 
    onSubmit = ()=>{
     this.setState({ isSubmitting: true });
 
+    const TotalWithdraw = Number(this.state.depositAmount) + Number(this.state.checkPercent);
+    this.setState({ TotalWithdraw });
 
         const NewDeposit = {
         user_id: this.state.user_id,
@@ -126,8 +180,9 @@ class ConfirmDeposit extends Component {
         fixedDepositAmount: this.state.fixedDepositAmount,
         depositAmount: Number(this.state.depositAmount), 
         walletAddress: this.state.walletAddress,
-        deposit_date: this.state.deposit_date,
-        date: this.state.date
+        date: this.state.date,
+        checkPercent: Number(this.state.checkPercent),
+        TotalWithdraw: TotalWithdraw
 
        }
        
@@ -136,82 +191,85 @@ class ConfirmDeposit extends Component {
        socket.emit('NewDeposit', NewDeposit)
 
        
-       axios.post("/users/deposit", NewDeposit)
-        .then(res => {
-            toast.success(
-            "⏳ Payment submitted successfully! Please allow 5–10 minutes for network verification. Your account will be updated automatically once the payment is received and confirmed."
-            );
-        })
-        .then(() => {
-            setTimeout(() => {
-            window.location = "/dashboard";              
-            }, 10000); // 10 seconds
-        })
-        .catch(err => {
-            toast.error("❌ Something went wrong. Please try again or contact support.");
-        });
-
+       axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Mobile Money confirmation,After deposit payment have been received, Your Dashboard will auto credit in minute')}).then(res => setTimeout(()=>{
+            window.location='/dashboard'
+       },1200))
 
    }
 
 
     render() { 
-        const Amount_to_send = this.state.depositAmount * 0.084
+        const Amount_to_send = this.state.depositAmount;
+        const RATE = 12; // 1 USDT = 12 GHC (you can change this anytime)
+        const usdtAmount = Amount_to_send / RATE;
         const { paymentMade, isSubmitting } = this.state;
+        
+
+        
         return(
             <div className='confirm'>
                 <div className='confirmDepositNow'>
-                    <h1 className='animate__animated animate__flash animate__slower'><span>DEPOSIT</span>
+                     <h1 className='animate__animated animate__flash animate__slower'>USDT <span> DEPOSIT</span>
                     CONFIRMATION:</h1>
                     <ToastContainer/>
                 </div>
-                <img className='blockchainQbar_pic' src='https://images.unsplash.com/photo-1658225282648-b199eb2a4830?q=80&w=1438&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'/>
                 <div className='confirmLine'>
-                    <div className='lastConfirm'>
-                     
-                        <div className="insideLastConfirm">
-                            <div className='planInfo'>
-                                <p>Plan:</p>  
-                                <p className='planNow'>  </p>
+             <img className='blockchainQbar_pic' src={USDT} alt="USDT QR Code"/>
+                            <div className='confirmLine'>
+                                <div className='lastConfirm'>
+                                 
+                                    <div className="insideLastConfirm">
+                                        <div className='planInfo'>
+                                            <p>Plan:</p>  
+                                            <p className='planNow'>  </p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Profit:</p>
+                                            <p className='toatalAllMoney'></p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Principal Return:</p>
+                                            <p>Yes</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Principal Withdraw: Available</p>
+                                            <p>Yes</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Credit Amount:</p>
+                                            <p>USDT ${usdtAmount.toFixed(2)}</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Deposit Fee:</p>
+                                            <p>	0.00% + $0.00 (min. $0.00 max. $0.00)</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Debit Amount:</p>
+                                            <p>usdt ${usdtAmount.toFixed(2)}</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>USDT Debit Amount:</p>
+                                            <p><span className='outAmount'></span></p> 
+                                        </div>
+            
+                                        <div className='confirmBtnInfo'>
+                                            <p>Please Send only USDT (TRC20). Do not send other networks:</p>
+                                            <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{usdtAmount.toFixed(2)}</span> USDT to<br/>
+                                            <p className='wallertNumber'><span>TMmpdCUFH9xJ5efivRdyAw8MBVGqdsJmpX</span></p>
+                                            
+                                            <h4>Order status: <span>Waiting for payment</span></h4>
+                                            {this.state.lastDepositDate && (
+                                                <p style={{ color: "blue", fontWeight: "bold" }}>
+                                                    🗓 Last Deposit Date:{" "}
+                                                    {new Date(this.state.lastDepositDate).toLocaleString()}
+                                                </p>
+                                            )}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className='planInfo'>
-                                <p>Profit:</p>
-                                <p className='toatalAllMoney'></p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Principal Return:</p>
-                                <p>Yes</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Principal Withdraw: Available</p>
-                                <p>Yes</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Credit Amount:</p>
-                                <p>${this.state.depositAmount}</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Deposit Fee:</p>
-                                <p>	0.00% + $0.00 (min. $0.00 max. $0.00)</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Debit Amount:</p>
-                                <p>${this.state.depositAmount}</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>BTC Debit Amount:</p>
-                                <p><span className='outAmount'></span></p>
-                            </div>
-
-                            <div className='confirmBtnInfo'>
-                                <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{Amount_to_send}</span> $USD to<br/>
-                                <p className='wallertNumber'><span>bc1qrukzylvvwcy4vjd9f57wfzny8yhqyx7rjxs0m2</span></p>
-                                
-                                <h4>Order status: <span>Waiting for payment</span></h4>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div className='confirm'>
@@ -232,12 +290,12 @@ class ConfirmDeposit extends Component {
 
                 <div className='btnConfirm'>
                 <button 
-                className='btn btn-success' 
-                onClick={this.onSubmit}
+                className='btn btn-success'  
+                onClick={this.checkDepositBeforeSubmit}
                 disabled={!paymentMade || isSubmitting}
-            >
+                >
                 {isSubmitting ? <div className="spinner"></div> : "CONFIRM , PAYMENT ✅"}
-            </button>
+                </button>
 
                 </div>
             </div>

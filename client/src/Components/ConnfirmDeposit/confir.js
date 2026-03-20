@@ -8,7 +8,7 @@ import jwt_decode from 'jwt-decode'
 import { io } from "socket.io-client";
 
 
-class MomoDeposit extends Component {
+class ConfirmDeposit extends Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -72,26 +72,34 @@ class MomoDeposit extends Component {
     
         // Function to calculate percentage based on deposit amount
         const CalculatorEngine = () => {
-            const totalMoneyElement = document.querySelector('.toatalAllMoney');
+              
+                const totalMoneyElement = document.querySelector('.toatalAllMoney');
             if (!totalMoneyElement) return; // Ensure the element exists
     
             let checkPercent = 0;
-    
+
             if (depositAmountCheck > 1000) {
-                checkPercent = depositAmountCheck * 25/100;
-            } else if (depositAmountCheck > 800) {
-                checkPercent = depositAmountCheck * 20/100;
-            } else if (depositAmountCheck >= 600) {
-                checkPercent = depositAmountCheck * 15/100;
-            } else {
-                checkPercent = depositAmountCheck * 10/100;
-            }
+                    checkPercent = depositAmountCheck * 25 / 100;
+                } else if (depositAmountCheck > 800) {
+                    checkPercent = depositAmountCheck * 20 / 100;
+                } else if (depositAmountCheck >= 600) {
+                    checkPercent = depositAmountCheck * 15 / 100;
+                } else {
+                    checkPercent = depositAmountCheck * 10 / 100;
+                }
+
+                // Now convert AFTER calculation
+                const RATE = 12; // 1 USDT = 12 GHC
+                const usdtAmount = checkPercent / RATE;
+
+                // Update state
+                this.setState({ checkPercent });
+
+                // Display
+                totalMoneyElement.innerHTML = `USDT ${usdtAmount.toFixed(2)}`;
+                    };
     
-            this.setState({ checkPercent });
-            totalMoneyElement.innerHTML = `GHC${checkPercent.toFixed(2)}`;
-        };
-    
-        // Execute the function 
+        // Execute the function
         CalculatorEngine();
     
         const user_id = sessionStorage.getItem('user_id'); 
@@ -190,98 +198,76 @@ class MomoDeposit extends Component {
 
 
     render() { 
-        const Amount_to_send = this.state.depositAmount * 1
+        const Amount_to_send = this.state.depositAmount;
+        const RATE = 12; // 1 USDT = 12 GHC (you can change this anytime)
+        const usdtAmount = Amount_to_send / RATE;
         const { paymentMade, isSubmitting } = this.state;
+        
 
         
         return(
             <div className='confirm'>
                 <div className='confirmDepositNow'>
-                    <h1 className='animate__animated animate__flash animate__slower'><span>Momo DEPOSIT</span>
+                     <h1 className='animate__animated animate__flash animate__slower'>USDT <span> DEPOSIT</span>
                     CONFIRMATION:</h1>
                     <ToastContainer/>
                 </div>
                 <div className='confirmLine'>
-                <img src={require('../../images/mobile-money.jpg')} className=''/> 
-                    <div className='lastConfirm'>
-                        <div className="insideLastConfirm">
-                            <div className='planInfo'>
-                                <p>Plan:</p>  
-                                <p className='planNow'>  </p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Profit:</p>
-                                <p className='toatalAllMoney'></p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Principal Return:</p>
-                                <p>Yes</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Principal Withdraw: Available</p>
-                                <p>Yes</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Credit Amount:</p>
-                                <p>GHC{this.state.depositAmount}</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Deposit Fee:</p>
-                                <p>	0.00% + GHC0.00 (min. GHC0.00 max. GHC0.00)</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>Debit Amount:</p>
-                                <p>GHC{this.state.depositAmount}</p>
-                            </div>
-                            <div className='planInfo'>
-                                <p>BTC Debit Amount:</p>
-                                <p><span className='outAmount'></span></p>
-                            </div>
-
-                           <div className="confirmBtnInfo"> 
-                                <p>
-                                    🆔 Kindly use your User Name 
-                                    <span> {this.state.user_Name} </span>   
-                                     as the <strong> Reference ID / Description</strong> when making the payment.
-                                </p>
-
-                                <p>
-                                    💰 Please send exactly 
-                                    <span className="outAmount1"> {Amount_to_send} </span> GHC via Mobile Money.
-                                </p>
-
-                                 <p>
-                                    📱 <strong>Primary Payment  (AirtelTigo MoMo)</strong><br />
-                                    🔵 <span className="wallertNumber">0268253787</span><br />
-                                    👤 Account Name: <strong>Ainoo Frank</strong>
-                                </p>
-
-                                <p>
-                                    📱 <strong>Alternative Payment (Vodafone MoMo)</strong><br />
-                                    🔴 <span className="wallertNumber">0203808479</span><br />
-                                    👤 Account Name: <strong>Ainoo Frank</strong>
-                                </p>
-
-                               
-
-                                <p>
-                                    👉 Please <strong>try the AirtelTigo MoMo number first</strong>.  
-                                    If it does not go through, kindly use the <strong>Vodafone MoMo number</strong>.
-                                </p>
-
-                                <h4>
-                                    ⏳ Order Status: <span>Waiting for payment</span>
-                                </h4>
-                                {this.state.lastDepositDate && (
-                                    <p style={{ color: "blue", fontWeight: "bold" }}>
-                                        🗓 Last Deposit Date:{" "}
-                                        {new Date(this.state.lastDepositDate).toLocaleString()}
-                                    </p>
-                                )}
+             <img className='blockchainQbar_pic' src={USDT} alt="USDT QR Code"/>
+                            <div className='confirmLine'>
+                                <div className='lastConfirm'>
+                                 
+                                    <div className="insideLastConfirm">
+                                        <div className='planInfo'>
+                                            <p>Plan:</p>  
+                                            <p className='planNow'>  </p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Profit:</p>
+                                            <p className='toatalAllMoney'></p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Principal Return:</p>
+                                            <p>Yes</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Principal Withdraw: Available</p>
+                                            <p>Yes</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Credit Amount:</p>
+                                            <p>USDT ${usdtAmount.toFixed(2)}</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Deposit Fee:</p>
+                                            <p>	0.00% + $0.00 (min. $0.00 max. $0.00)</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>Debit Amount:</p>
+                                            <p>usdt ${usdtAmount.toFixed(2)}</p>
+                                        </div>
+                                        <div className='planInfo'>
+                                            <p>USDT Debit Amount:</p>
+                                            <p><span className='outAmount'></span></p> 
+                                        </div>
+            
+                                        <div className='confirmBtnInfo'>
+                                            <p>Please Send only USDT (TRC20). Do not send other networks:</p>
+                                            <p> <p>Kindly use your User Name <span> { this.state.user_Name}</span><br/> as Reference ID or Description when making Payment Transaction </p> <br/>Please send exactly <span className='outAmount1'>{usdtAmount.toFixed(2)}</span> USDT to<br/>
+                                            <p className='wallertNumber'><span>TMmpdCUFH9xJ5efivRdyAw8MBVGqdsJmpX</span></p>
+                                            
+                                            <h4>Order status: <span>Waiting for payment</span></h4>
+                                            {this.state.lastDepositDate && (
+                                                <p style={{ color: "blue", fontWeight: "bold" }}>
+                                                    🗓 Last Deposit Date:{" "}
+                                                    {new Date(this.state.lastDepositDate).toLocaleString()}
+                                                </p>
+                                            )}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-
-                           </div>
-                    </div>
+                            </div>
                     
                 </div>
 
@@ -313,13 +299,13 @@ class MomoDeposit extends Component {
                 </div>
             </div>
                
-                {/* <div className='btnConfirm'>
+                <div className='btnConfirm'>
                      <button className='btn btn-success' onClick={this.onSubmit}>I PAID CONFIRM</button>
-                 </div> */}
+                 </div>
             </div>
 
         )
     }
 }
  
-export default MomoDeposit;
+export default ConfirmDeposit;

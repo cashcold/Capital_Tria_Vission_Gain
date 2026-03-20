@@ -1,0 +1,142 @@
+/* Background */
+.pay-fee-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Card */
+.pay-fee-card {
+  background: #111827;
+  color: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Title */
+.pay-fee-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #facc15;
+}
+
+/* User Info */
+.user-info p {
+  margin: 8px 0;
+}
+
+.user-info span {
+  font-weight: bold;
+  color: #60a5fa;
+}
+
+/* Fee Section */
+.fee-breakdown {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #374151;
+}
+
+.fee-item {
+  display: flex;
+  justify-content: space-between;
+  background: #1f2937;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* BTC Box */
+.btc-section {
+  margin-top: 20px;
+}
+
+.btc-box {
+  background: #0b1220;
+  padding: 12px;
+  border-radius: 8px;
+  word-break: break-all;
+  border: 1px solid #374151;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* Button */
+.confirm-btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background: #16a34a;
+  transform: scale(1.03);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confirmBtnInfo {
+  background: #1f2937;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.confirmBtnInfo h3 {
+  color: #22c55e;
+  margin-bottom: 10px;
+}
+
+.confirmBtnInfo p {
+  font-size: 14px;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.outAmount1 {
+  font-weight: bold;
+  color: #facc15;
+}
+
+.walletNumber {
+  font-weight: bold;
+  font-size: 16px;
+  color: #60a5fa;
+}
+
+.note {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #fbbf24;
+}
+
+.status {
+  color: #facc15;
+  font-weight: bold;
+}
