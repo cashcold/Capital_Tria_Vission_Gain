@@ -57,6 +57,75 @@ const PaymentNotice = () => {
             <span className="bank-icon">🏦</span>
             <span>Bank Transfer</span>
           </div>
+
+             <div className="method-item global">
+          <span className="icon">🌐</span>
+          <span>PayPal</span>
+        </div>
+
+        <div className="method-item global cashapp">
+          <span className="icon">💵</span>
+          <span>Cash App</span>
+        </div>
+
+        <div className="method-item global">
+          <span className="icon">💼</span>
+          <span>Skrill</span>
+        </div>
+
+        <div className="method-item global">
+          <span className="icon">💎</span>
+          <span>Perfect Money</span>
+        </div>
+
+        <div className="method-item global">
+          <span className="icon">🏧</span>
+          <span>Payoneer</span>
+        </div>
+
+        <div className="method-item bank">
+          <span className="icon">🌍</span>
+          <span>Wise</span>
+        </div>
+
+        <div className="method-item bank">
+          <span className="icon">🏦</span>
+          <span>SWIFT Transfer</span>
+        </div>
+        <div className="method-item global">
+          <span className="icon">💳</span>
+            <span>Stripe</span>
+          </div>
+
+          <div className="method-item global">
+            <span className="icon">📱</span>
+            <span>Apple Pay</span>
+          </div>
+
+          <div className="method-item global">
+            <span className="icon">🤖</span>
+            <span>Google Pay</span>
+          </div>
+
+          <div className="method-item crypto">
+            <span className="icon">🟡</span>
+            <span>Binance Pay</span>
+          </div>
+
+          <div className="method-item local">
+            <span className="icon">🌍</span>
+            <span>Flutterwave</span>
+          </div>
+
+        <div className="method-item ">
+          <span className="icon">💳</span>
+          <span>Visa</span>
+        </div>
+
+        <div className="method-item ">
+          <span className="icon">💳</span>
+          <span>Mastercard</span>
+        </div>
         </div>
 
         {/* 🔥 BUTTON */}
