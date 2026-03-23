@@ -1,0 +1,1268 @@
+// import React, { Component } from 'react';
+// import { Redirect } from 'react-router-dom';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import jwt_decode from 'jwt-decode'
+// import axios from 'axios'
+// import {addDays,subMinutes} from "date-fns"
+// import moment from 'moment';   
+// import './style.css'
+// import DepositModal from '../../DepositModal.js/DepositModal';
+// import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.';
+// import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
+// import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
+// import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
+
+// class AccountRouter extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = { 
+//             user_profile_display: '',
+//             user_deposit_display: '',
+//             totalReferralReward: 0,
+//             full_Name: '',
+//             user_Name: '',
+//             ip_address: '',
+//             ip: "Loading...",
+//             bitcoin: '',
+//             user_id: '',
+//             email: '',
+//             register_date: '',
+//             accountBalance: '',
+//             activetDeposit: '',
+//             totalDeposit: [],
+//             withdrawTotal: [],
+//             user_balance: [],
+//             totalDeposit_id: '',
+//             login: '',
+//             plan: '',
+//             totalFees: 0,
+//             unpaidMonths: 0,
+//             unpaidRecords: [],
+//             timestamp: '',
+//             redirectToHome: false,
+//             Refedate: '',
+//             showDetails: false, // State for popout card visibility
+       
+//          }
+
+//          this.handleChange = this.handleChange.bind(this)
+//     }
+//     handleChange = input => (event)=>{
+//         this.setState({[input]: event.target.value})
+//     }
+
+//     componentDidUpdate(prevProps, prevState) {
+//         if (prevState.user_balance.activetDeposit !== this.state.user_balance.activetDeposit) {
+//           if (this.state.user_balance.activetDeposit > 0) {
+         
+//             this.setState({ showDetails: true });
+//           } else {
+//             this.setState({ showDetails: false });
+//           }
+//         }
+//     }
+
+  
+
+//     handlePayFee = () => {
+//         sessionStorage.setItem("payFeeData", JSON.stringify({
+//         user: this.state.user,
+//         username: this.state.user_Name,
+//         bitcoin: this.state.bitcoin,
+//         unpaidRecords: this.state.unpaidRecords,
+//         totalFees: this.state.totalFees
+//     }));
+
+//     window.location = "/PayFee";
+
+//     };
+
+//     componentDidMount(){
+
+//      axios
+//       .get("https://api64.ipify.org?format=json")
+//       .then((response) => {
+//         this.setState({ ip: response.data.ip });
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching IP:", error);
+//         this.setState({ ip: "Failed to load IP" });
+//       });
+
+       
+//       try {
+//         const token = sessionStorage.getItem('x-access-token');
+
+//         if (!token) {
+//             throw new Error('Token missing or null');
+//         }
+
+//         const decoded = jwt_decode(token); // Decode the token
+//         const currentTime = Date.now() / 1000; // Current time in seconds
+
+//         if (decoded.exp && decoded.exp < currentTime) {
+//             throw new Error('Token expired');
+//         }
+
+//         // Token is valid – set state and sessionStorage
+//         sessionStorage.setItem('user_id', decoded.user_id);
+//         sessionStorage.setItem('email', decoded.email);
+//         sessionStorage.setItem('full_Name', decoded.full_Name);
+//         sessionStorage.setItem('user_Name', decoded.user_Name);
+//         sessionStorage.setItem('accountBalance', decoded.accountBalance);
+//         sessionStorage.setItem('maxDeposit', decoded.maxDeposit);
+//         sessionStorage.setItem('bitcoin', decoded.bitcoin);
+//         sessionStorage.setItem('register_date', decoded.date);
+//         sessionStorage.setItem('ip_address', decoded.ip_address);
+
+//         this.setState({
+//             user_id: decoded.user_id,
+//             full_Name: decoded.full_Name,
+//             user_Name: decoded.user_Name,
+//             email: decoded.email,
+//             bitcoin: decoded.bitcoin,
+//             accountBalance: decoded.accountBalance,
+//             activetDeposit: decoded.activetDeposit,
+//             ip_address: decoded.ip_address,
+//             register_date: decoded.date,
+//         });
+
+
+//            const id = decoded.user_id
+        
+//                   // Fetch total referral reward
+//                 axios.get(`/users/totalRefferReward/${decoded.user_id}`)
+//                 .then(response => {
+//                   this.setState({ totalReferralReward: response.data.totalReward });
+//                 }).catch(error => {
+//                   console.error("Error fetching total referral reward:", error);
+//                   toast.error("Failed to fetch total referral reward.");
+//                 });
+                
+        
+//                  axios.post('/users/user_profile_display',{id}).then(data => this.setState({
+//                     user_profile_display: data.data
+//                  }))
+//                  axios.post('/users/user_deposit_display',{id}).then(data => this.setState({
+//                     user_deposit_display: data.data.deposit
+                    
+//                  }))
+
+//                  axios.get(`/users/user-unpaid-fees/${id}`)
+//                     .then(response => {
+
+//                     this.setState({
+//                         totalFees: response.data.totalFees,
+//                         unpaidMonths: response.data.unpaidMonths,
+//                         unpaidRecords: response.data.records
+//                     });
+
+//                     })
+//                     .catch(error => {
+//                     console.error("Error fetching unpaid fees:", error);
+//                     });
+
+//                  sessionStorage.setItem('checkPercent', this.state.user_deposit_display.checkPercent);
+//                 //  user_deposit_display.checkPercent
+
+
+//                  axios.post('/users/depositInfo',{id}).then(data => this.setState({
+//                     totalDeposit: data.data
+//                  }))
+//                   axios.post('/users/withdrawInfo',{id}).then(data => this.setState({
+//                     withdrawTotal: data.data
+//                  }))
+                  
+//                  axios.post('/users/user_balance',{id}).then(data => this.setState({
+//                    user_balance: data.data
+                   
+//                 }))
+//                 // axios.post('/users/checkdate',{id}).then(data => console.log(data.lastDate))
+//                 axios.post('/users/checkdate',{id}).then(data => this.setState({
+//                     timestamp: data.data.map(user => user.lastDate)
+//                  }))
+                 
+
+//         } catch (err) {
+//             console.warn('Token error:', err.message);
+//             sessionStorage.clear(); // Clear sessionStorage if the token is invalid
+//             this.setState({ redirectToHome: true }); // Redirect to home
+//         }
+         
+//       // Trigger the animations after component mounts
+//     const button = document.querySelector('.cashout-btn');
+//     const ring = document.querySelector('.gradient-ring');
+
+//     if (button) button.classList.add('animate-in');
+//     if (ring) ring.classList.add('spin-gradient');
+    
+
+//     }
+    
+
+    
+//     toggleDetails = () => {
+//         this.setState((prevState) => ({ showDetails: !prevState.showDetails }));
+//       };
+
+
+//     render() { 
+
+//         const months = [
+//         "January","February","March","April","May","June",
+//         "July","August","September","October","November","December"
+//         ];
+
+//          if (this.state.redirectToHome) {
+//               return <Redirect to="/" />;
+        
+//             }
+
+//         // console.log(this.state.user_profile_display.refferReward
+//         // )
+
+//          console.log("User data:", this.state.user_profile_display);
+
+//         const showInvestButton = this.state.user_balance.activetDeposit === 0;
+
+       
+
+      
+//         sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit)
+//         // JSON.stringify( sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit))
+
+    
+        
+    
+
+//        const CreditDashboard = ()=>{
+       
+
+//         const activetDeposit__amount = Number(this.state.user_balance.activetDeposit)
+//         JSON.stringify( sessionStorage.setItem('activetDeposit__amount',activetDeposit__amount))
+//         const date = new Date(`${this.state.timestamp}`);;
+
+//         const today_date = new Date();
+//         const date_24hrs = addDays(date,1)
+//         const date_3days = addDays(date,3)
+//         const date_5days = addDays(date,5)
+//         const date_7days = addDays(date,7)
+
+          
+
+//             if(activetDeposit__amount){
+//                 if(activetDeposit__amount >= 10 && activetDeposit__amount <= 599){
+//                   if(today_date > date_24hrs  && this.state.showDetails !== false){
+//                     this.setState({ showDetails: false }, () =>{
+//                         document.querySelector('.activetStatus').innerHTML = "GHC 0.00"
+//                         document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+//                         document.querySelector('.btn_balanceMe').style.display = 'block'
+//                     }
+                           
+//                 )    
+//                 }
+               
+//                 }
+//             }
+           
+//             if(activetDeposit__amount){ 
+//                 if(activetDeposit__amount >= 600 && activetDeposit__amount <= 799){
+//                   if(today_date > date_3days && this.state.showDetails !== false){
+//                     this.setState({ showDetails: false }, () =>{
+//                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
+//                         document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+//                         document.querySelector('.btn_balanceMe').style.display = 'block'
+//                     })
+//                  }
+//                 }
+//             }
+//             if(activetDeposit__amount){
+//                 if(activetDeposit__amount >= 800 && activetDeposit__amount <= 999){
+//                   if(today_date > date_5days && this.state.showDetails !== false){
+//                     this.setState({ showDetails: false }, () =>{
+//                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
+//                         document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+//                         document.querySelector('.btn_balanceMe').style.display = 'block'
+//                     })
+//                     }
+//                 }
+//             }
+//             if(activetDeposit__amount){
+//                 if(activetDeposit__amount >= 1000 && activetDeposit__amount <= 1200){
+//                   if(today_date > date_7days && this.state.showDetails !== false){
+//                     this.setState({ showDetails: false }, () =>{
+//                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
+//                         document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+//                         document.querySelector('.btn_balanceMe').style.display = 'block'
+//                     })
+//                     }
+//                 }
+//             }
+           
+//        }
+//        CreditDashboard()
+
+
+//        const CheckDeposit = this.state.user_balance.activetDeposit
+
+//        const { showDetails, user_balance } = this.state;
+
+//        const formattedDate = this.state.user_deposit_display 
+//         ? moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+//         : "No date available";
+
+//              // Logic for showing DepositModal: if timestamp date is within 5 minutes from now
+//              const now = new Date();
+//              const fiveMinutesAgo = subMinutes(now, 5);
+
+//              const timestampDate =
+//                  Array.isArray(this.state.timestamp) && this.state.timestamp.length > 0
+//                      ? new Date(this.state.timestamp[this.state.timestamp.length - 1])
+//                      : this.state.timestamp
+//                          ? new Date(this.state.timestamp)
+//                          : null;
+
+//              const showDepositModal =
+//                  timestampDate &&
+//                  !isNaN(timestampDate.getTime()) &&
+//                  timestampDate >= fiveMinutesAgo &&
+//                  timestampDate <= now;
+
+//             // Logic for showing WithdrawNoticeModal: check last withdraw record timestamp (robustly)
+//             const lastWithdraw =
+//                 Array.isArray(this.state.withdrawTotal) && this.state.withdrawTotal.length > 0
+//                     ? this.state.withdrawTotal[this.state.withdrawTotal.length - 1]
+//                     : null;
+
+//             // try common timestamp fields on the withdraw record
+//             const withdrawTimestampRaw = lastWithdraw
+//                 ? (lastWithdraw.lastWithdrawDate || lastWithdraw.date || lastWithdraw.createdAt || lastWithdraw.withdraw_date || lastWithdraw.lastDate || lastWithdraw.timestamp)
+//                 : null;
+
+//             const withdrawTimestampDate = withdrawTimestampRaw ? new Date(withdrawTimestampRaw) : null;
+
+//             const showWithdrawModal =
+//                 withdrawTimestampDate &&
+//                 !isNaN(withdrawTimestampDate.getTime()) &&
+//                 withdrawTimestampDate >= fiveMinutesAgo &&
+//                 withdrawTimestampDate <= now;
+
+//             const lastWithdrawAmount = lastWithdraw ? (lastWithdraw.WithdrawAmountlast || lastWithdraw.WithdrawAmount || lastWithdraw.amount) : null;
+
+//             // Format the withdrawal date nicely for display
+//             const formattedWithdrawDate = withdrawTimestampRaw ? moment(withdrawTimestampRaw).format('MMMM Do YYYY, h:mm:ss a') : "No date available";
+
+
+//             // debug: show withdraw detection values in console
+//                 return ( 
+//             <div className='account__router'>
+//                 {/* {
+//                     CheckDeposit === 0 && !showDepositModal && this.state.totalFees === 0 && (
+//                         <section className="div invest_ui_ux_btn">
+//                         <div class="no-deposit-container">
+//                         <div class="no-deposit-card">
+//                             <div class="icon-wrapper">
+//                             <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+//                             </div>
+//                             <h1>No Active Deposits</h1>
+//                             <p>
+//                             You currently don't have any active deposits in your mining account.
+//                             Start earning by making your first deposit today!
+//                             </p>
+//                             <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
+//                         </div>
+//                         </div>
+//                     </section>
+//                     )
+//                 } */}
+//                 {
+//                     CheckDeposit === 0 && !showDepositModal && (
+//                         <section className="div invest_ui_ux_btn">
+//                         <div class="no-deposit-container">
+//                         <div class="no-deposit-card">
+//                             <div class="icon-wrapper">
+//                             <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+//                             </div>
+//                             <h1>No Active Deposits</h1>
+//                             <p>
+//                             You currently don't have any active deposits in your mining account.
+//                             Start earning by making your first deposit today!
+//                             </p>
+//                             <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
+//                         </div>
+//                         </div>
+//                     </section>
+//                     )
+//                 }
+//                 <section class="warning_message">
+//                     <AccountStatusAlert />
+//                 </section>
+                
+//                 {
+//                     CheckDeposit > 0 && (
+//                         <section className="miningCard">
+//                         <div class="main-container">
+//                             <div class="card">
+//                                 <div class="robot-head">
+//                                 <div class="eye left-eye"></div>
+//                                 <div class="eye right-eye"></div>
+//                                 <div class="antenna"></div>
+//                                 </div>
+//                                 <div class="info">
+//                                 <h1 class="title">Active Deposit</h1>
+//                                 <p class="amount">GHC{this.state.user_balance.activetDeposit}.00</p>
+//                                 <p class="status">Status: <span class="status_active">Active</span></p>
+//                                 </div>
+//                                 <button class="view-details-btn" onClick={this.toggleDetails}>View Details</button>
+//                             </div>
+//                             </div>
+//                         </section>
+
+//                     )
+//                 }
+
+//                 {showDetails && (
+                    
+//                 <div className='popout-card'>
+//                     <div className='card-content'>
+//                     <h2>Mining Plan Details</h2>
+//                     <p>
+//                         <span>Plan </span>: {this.state.user_deposit_display.fixedDepositAmount} <br />
+//                         <span>Miner</span>: Premium Miner <br />
+//                        <span>Deposit Amount</span>: GHC{user_balance.activetDeposit}.00 <br />
+//                         <span>Mining Profit</span>: GHC{this.state.user_deposit_display.checkPercent}.00 <br />
+//                        <span>Total Return</span>: GHC{Number(user_balance.activetDeposit) + Number(this.state.user_deposit_display.checkPercent)}.00 <br />
+//                        <span>Deposit Date</span>: {formattedDate} <br />
+//                        <span className='Status'> Status</span>: Active
+//                     </p>
+//                      <div class="bitcoin-mining-container">
+//                         <div class="mining-machine">
+//                         <div class="bitcoin-logo"></div> 
+//                         </div>
+//                         <p class="deposit-info">Your deposit is active. Mining in progress...</p>
+//                         <div class="loading-bar-container">
+//                         <div class="loading-bar"></div>
+//                         </div>
+//                     </div>
+//                     <button className='close-btn' onClick={this.toggleDetails}>
+//                         Close 
+//                     </button>
+//                     </div>
+//                 </div>
+//                 )}
+//                {/* {this.state.totalFees > 0 && (
+
+//                 <div className="fee-warning">
+
+//                 <h3>⚠ Mining Service Fee Outstanding</h3>
+
+//                 <p>You have unpaid service fees for {this.state.unpaidMonths} month(s).</p>
+
+//                 <div className="fee-list">
+
+//                 {this.state.unpaidRecords.map((fee, index) => (
+
+//                 <div key={index} className="fee-row">
+
+//                 <strong>
+//                 {months[fee.month - 1]} {fee.year}
+//                 </strong>
+
+//                 <p>Total Profit: GHC {fee.totalWithdrawn / 10}</p>
+
+//                 <p>Service Fee: GHC {fee.payableFee}</p>
+
+//                 </div>
+
+//                 ))}
+
+//                 </div>
+
+//                 <h3>Total Payable: GHC {this.state.totalFees}</h3>
+
+//               <button onClick={this.handlePayFee}>
+//                 Pay Service Fee
+//                 </button>
+
+//                 </div>
+
+//                 )} */}
+//                 {
+//                 CheckDeposit > 1 && (
+                       
+//                 <section className="autoMiningToggle">
+//                     <AutoMiningStatus autoActive={this.state.user_profile_display.autoMining === true}
+//                      isProvisioning={this.state.user_profile_display.autoProvisioning === true}/>
+//                 </section>
+//                 )
+//                 }
+//                 {showDepositModal && (
+//                 <section>
+//                     <DepositModal/>
+                  
+//                 </section>
+//                 )}
+//                 {showWithdrawModal && (
+//                 <section>
+//                     <WithdrawNoticeModal
+//                         user_Name={this.state.user_Name}
+//                         activetDeposit={lastWithdrawAmount}
+//                         checkPercent={this.state.user_deposit_display.checkPercent}
+//                         bitcoin={this.state.bitcoin || (this.state.user_profile_display && this.state.user_profile_display.bitcoin)}
+//                         date={formattedWithdrawDate}
+//                     />
+//                 </section>
+//                 )}
+//                 <section className='dashboard__section_box__3'>
+//                     <div className="dash__box__1">
+//                         <i class="fas fa-coins fa-3x"></i>
+//                         <div className="dashText"> 
+//                             <h5>TOTAL INVESTMENT</h5>
+//                             <h5> GHC {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
+//                         </div>
+//                         {/* {showInvestButton && !showDepositModal && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>} */}
+//                         {showInvestButton && !showDepositModal && this.state.totalFees === 0 && (
+//                         <a href='/dashboard/deposit'>
+//                             <h2 className='btn invest_btn'>INVEST</h2>
+//                         </a>
+//                         )}
+                    
+//                     </div>
+//                     <div className="dash__box__1">
+//                         <i class="fas fa-comments-dollar fa-3x"></i>
+//                         <div className="dashText">
+//                             <h5>ACCOUNT BALANCE</h5>
+//                             <h5 className='balanceMe'> GHC {this.state.accountBalance}.00</h5>
+//                             <a className="btn_balanceMe"  href={`/dashboard/withdraw/${this.state.user_id}`}>
+//                             <div className="btn-wrapper">
+//                                     <button className="cashout-btn" >
+//                                     💸 Cash Out
+//                                     <span className="spinner"></span>
+//                                     </button>
+//                                     <div className="gradient-ring"></div>
+//                                 </div> 
+//                         </a>
+//                         </div>
+                        
+//                     </div>
+//                 </section>
+//                 <section className='welcome__user'>
+//                     <div className="welcomeText">
+//                         <h4>Welcome {this.state.user_Name}!</h4>
+//                         <h4>IP Address : {this.state.ip}</h4>
+//                     </div>
+//                 </section>
+//                 <section className='progress_bar'>
+                    
+//                 </section>
+//                 <section className='about__all'>
+//                     <div className="all__about_-box__1">
+//                         <h3>DEPOSIT HISTORY</h3>
+//                         <div className="all__box">
+//                             <p>Active Deposit :</p>
+//                             <p className='activetStatus'>GHC {this.state.user_balance.activetDeposit}.00</p>
+//                         </div>
+//                         <div className="all__box">
+//                             <p>Total Deposit :</p>
+//                             <p>GHC {this.state.totalDeposit.map(user => user.depositAmount)}.00</p>
+//                         </div>
+//                         <div className="all__box">
+//                             <p>Last Deposit :</p>
+//                             <p>GHC {this.state.totalDeposit.map(user => user.depositAmountlast)}.00</p>
+//                         </div>
+//                     </div>
+//                     <div className="all__about_-box__1">
+//                         <h3>WITHDRAW HISTORY</h3>
+//                         <div className="all__box">
+//                             <p>Pending Withdraw :</p>
+//                             <p>GHC0.00</p>
+//                         </div>
+//                         <div className="all__box">
+//                             <p>Total Withdraw :</p>
+//                             <p>GHC {this.state.withdrawTotal.map(user => user.WithdrawAmount)}.00</p>
+//                         </div>
+//                         <div className="all__box">
+//                             <p>Last Withdraw :</p>   
+//                             <p>GHC {this.state.withdrawTotal.map(user => user.WithdrawAmountlast)}.00</p>
+//                         </div>
+//                     </div>
+//                 </section>
+//                 <section className='reffer__link'>
+//                     <div className="refferNow">
+//                         <div className="reff__box_1">
+//                              <i class="fas fa-users fa-10x"></i>
+//                         </div>
+//                         <div className="reff__box_2">
+//                             <h2>Personal <span>Referral</span> Link:</h2>
+//                             <p className='reffLink'>https://capgainco.com/?ref={this.state.user_Name}</p>
+//                             <p className='btn btn-warning btn-referral'> Your Referral Reward: <span>GHC{this.state.user_profile_display.refferReward}.00</span><br/>
+//                             {this.state.user_profile_display.refferReward > 10 ? (
+//                             <button className="btn-referral-cashout" onClick={()=>{
+//                                 window.location =`/withdraw-refferReward`
+//                             }} >Cashout</button>
+//                             ) : null}
+//                             <div className="with__inner__box_dash">
+//                                 <p>Total Referral Rewards:</p>
+//                                 <p>GHC{this.state.totalReferralReward || '0'}.00</p>
+//                                 </div>
+//                              </p>
+                             
+//                         </div>
+//                     </div>
+//                 </section>
+//                 {String(this.state.user_id || "").trim() ? (
+//                 <section className="monthlyFeeSection">
+//                     <MonthlyFeeBoard userId={String(this.state.user_id)} />
+//                 </section>
+//                 ) : null}
+
+
+//             </div>
+//          );
+//     }
+// }
+ 
+// export default AccountRouter;
+
+
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import jwt_decode from 'jwt-decode'
+import axios from 'axios'
+import {addDays,subMinutes} from "date-fns"
+import moment from 'moment';   
+import './style.css'
+import DepositModal from '../../DepositModal.js/DepositModal';
+import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.';
+import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
+import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
+import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
+
+class AccountRouter extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            user_profile_display: '',
+            user_deposit_display: '',
+            totalReferralReward: 0,
+            full_Name: '',
+            user_Name: '',
+            ip_address: '',
+            ip: "Loading...",
+            bitcoin: '',
+            user_id: '',
+            email: '',
+            register_date: '',
+            accountBalance: '',
+            activetDeposit: '',
+            totalDeposit: [],
+            withdrawTotal: [],
+            user_balance: [],
+            totalDeposit_id: '',
+            login: '',
+            plan: '',
+            totalFees: 0,
+            unpaidMonths: 0,
+            unpaidRecords: [],
+            timestamp: '',
+            redirectToHome: false,
+            Refedate: '',
+            showDetails: false, // State for popout card visibility
+       
+         }
+
+         this.handleChange = this.handleChange.bind(this)
+    }
+    handleChange = input => (event)=>{
+        this.setState({[input]: event.target.value})
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.user_balance.activetDeposit !== this.state.user_balance.activetDeposit) {
+          if (this.state.user_balance.activetDeposit > 0) {
+         
+            this.setState({ showDetails: true });
+          } else {
+            this.setState({ showDetails: false });
+          }
+        }
+    }
+
+  
+
+    handlePayFee = () => {
+        sessionStorage.setItem("payFeeData", JSON.stringify({
+        user: this.state.user,
+        username: this.state.user_Name,
+        bitcoin: this.state.bitcoin,
+        unpaidRecords: this.state.unpaidRecords,
+        totalFees: this.state.totalFees
+    }));
+
+    window.location = "/PayFee";
+
+    };
+
+    componentDidMount(){
+
+     axios
+      .get("https://api64.ipify.org?format=json")
+      .then((response) => {
+        this.setState({ ip: response.data.ip });
+      })
+      .catch((error) => {
+        console.error("Error fetching IP:", error);
+        this.setState({ ip: "Failed to load IP" });
+      });
+
+       
+      try {
+        const token = sessionStorage.getItem('x-access-token');
+
+        if (!token) {
+            throw new Error('Token missing or null');
+        }
+
+        const decoded = jwt_decode(token); // Decode the token
+        const currentTime = Date.now() / 1000; // Current time in seconds
+
+        if (decoded.exp && decoded.exp < currentTime) {
+            throw new Error('Token expired');
+        }
+
+        // Token is valid – set state and sessionStorage
+        sessionStorage.setItem('user_id', decoded.user_id);
+        sessionStorage.setItem('email', decoded.email);
+        sessionStorage.setItem('full_Name', decoded.full_Name);
+        sessionStorage.setItem('user_Name', decoded.user_Name);
+        sessionStorage.setItem('accountBalance', decoded.accountBalance);
+        sessionStorage.setItem('maxDeposit', decoded.maxDeposit);
+        sessionStorage.setItem('bitcoin', decoded.bitcoin);
+        sessionStorage.setItem('register_date', decoded.date);
+        sessionStorage.setItem('ip_address', decoded.ip_address);
+
+        this.setState({
+            user_id: decoded.user_id,
+            full_Name: decoded.full_Name,
+            user_Name: decoded.user_Name,
+            email: decoded.email,
+            bitcoin: decoded.bitcoin,
+            accountBalance: decoded.accountBalance,
+            activetDeposit: decoded.activetDeposit,
+            ip_address: decoded.ip_address,
+            register_date: decoded.date,
+        });
+
+
+           const id = decoded.user_id
+        
+                  // Fetch total referral reward
+                axios.get(`/users/totalRefferReward/${decoded.user_id}`)
+                .then(response => {
+                  this.setState({ totalReferralReward: response.data.totalReward });
+                }).catch(error => {
+                  console.error("Error fetching total referral reward:", error);
+                  toast.error("Failed to fetch total referral reward.");
+                });
+                
+        
+                 axios.post('/users/user_profile_display',{id}).then(data => this.setState({
+                    user_profile_display: data.data
+                 }))
+                 axios.post('/users/user_deposit_display',{id}).then(data => this.setState({
+                    user_deposit_display: data.data.deposit
+                    
+                 }))
+
+                 axios.get(`/users/user-unpaid-fees/${id}`)
+                    .then(response => {
+
+                    this.setState({
+                        totalFees: response.data.totalFees,
+                        unpaidMonths: response.data.unpaidMonths,
+                        unpaidRecords: response.data.records
+                    });
+
+                    })
+                    .catch(error => {
+                    console.error("Error fetching unpaid fees:", error);
+                    });
+
+                 sessionStorage.setItem('checkPercent', this.state.user_deposit_display.checkPercent);
+                //  user_deposit_display.checkPercent
+
+
+                 axios.post('/users/depositInfo',{id}).then(data => this.setState({
+                    totalDeposit: data.data
+                 }))
+                  axios.post('/users/withdrawInfo',{id}).then(data => this.setState({
+                    withdrawTotal: data.data
+                 }))
+                  
+                 axios.post('/users/user_balance',{id}).then(data => this.setState({
+                   user_balance: data.data
+                   
+                }))
+                // axios.post('/users/checkdate',{id}).then(data => console.log(data.lastDate))
+                axios.post('/users/checkdate',{id}).then(data => this.setState({
+                    timestamp: data.data.map(user => user.lastDate)
+                 }))
+                 
+
+        } catch (err) {
+            console.warn('Token error:', err.message);
+            sessionStorage.clear(); // Clear sessionStorage if the token is invalid
+            this.setState({ redirectToHome: true }); // Redirect to home
+        }
+         
+      // Trigger the animations after component mounts
+    const button = document.querySelector('.cashout-btn');
+    const ring = document.querySelector('.gradient-ring');
+
+    if (button) button.classList.add('animate-in');
+    if (ring) ring.classList.add('spin-gradient');
+    
+
+    }
+    
+
+    
+    toggleDetails = () => {
+        this.setState((prevState) => ({ showDetails: !prevState.showDetails }));
+      };
+
+
+    render() { 
+
+        const months = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+        ];
+
+         if (this.state.redirectToHome) {
+              return <Redirect to="/" />;
+        
+            }
+
+        // console.log(this.state.user_profile_display.refferReward
+        // )
+
+         console.log("User data:", this.state.user_profile_display);
+
+        const showInvestButton = this.state.user_balance.activetDeposit === 0;
+
+       
+
+      
+        sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit)
+        // JSON.stringify( sessionStorage.setItem('user_active_desposit',this.state.user_balance.activetDeposit))
+
+    
+        
+    
+
+       const CreditDashboard = ()=>{
+       
+
+        const activetDeposit__amount = Number(this.state.user_balance.activetDeposit)
+        JSON.stringify( sessionStorage.setItem('activetDeposit__amount',activetDeposit__amount))
+        const date = new Date(`${this.state.timestamp}`);;
+
+        const today_date = new Date();
+        const date_24hrs = addDays(date,1)
+        const date_3days = addDays(date,3)
+        const date_5days = addDays(date,5)
+        const date_7days = addDays(date,7)
+
+          
+
+            if(activetDeposit__amount){
+                if(activetDeposit__amount <= 599){
+                  if(today_date > date_24hrs  && this.state.showDetails !== false){
+                    this.setState({ showDetails: false }, () =>{
+                        document.querySelector('.activetStatus').innerHTML = "GHC 0.00"
+                        document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+                        document.querySelector('.btn_balanceMe').style.display = 'block'
+                    }
+                      
+                        
+                )    
+                }
+               
+                }
+            }
+           
+            if(activetDeposit__amount){
+                if(activetDeposit__amount >= 600 ){
+                  if(today_date > date_3days && this.state.showDetails !== false){
+                    this.setState({ showDetails: false }, () =>{
+                        document.querySelector('.activetStatus').innerHTML = "GHC.00"
+                        document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+                        document.querySelector('.btn_balanceMe').style.display = 'block'
+                    })
+                 }
+                }
+            }
+            if(activetDeposit__amount){
+                if(activetDeposit__amount > 800){
+                  if(today_date > date_5days && this.state.showDetails !== false){
+                    this.setState({ showDetails: false }, () =>{
+                        document.querySelector('.activetStatus').innerHTML = "GHC.00"
+                        document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+                        document.querySelector('.btn_balanceMe').style.display = 'block'
+                    })
+                    }
+                }
+            }
+            if(activetDeposit__amount){
+                if(activetDeposit__amount > 1000){
+                  if(today_date > date_7days && this.state.showDetails !== false){
+                    this.setState({ showDetails: false }, () =>{
+                        document.querySelector('.activetStatus').innerHTML = "GHC.00"
+                        document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
+                        document.querySelector('.btn_balanceMe').style.display = 'block'
+                    })
+                    }
+                }
+            }
+            // if(activetDeposit__amount){
+            //     if(activetDeposit__amount > 199){
+            //       if(today_date > date_7days){
+            //             document.querySelector('.activetStatus').innerHTML = "$0.00"
+            //             document.querySelector('.balanceMe').innerHTML = "$ "+activetDeposit__amount+".00"
+            //             document.querySelector('.btn_balanceMe').style.display = 'block'
+
+                     
+                    
+            //         }else{
+                    
+            //         }
+            //     }
+            // }
+       }
+       CreditDashboard()
+
+
+       const CheckDeposit = this.state.user_balance.activetDeposit
+
+       const { showDetails, user_balance } = this.state;
+
+       const formattedDate = this.state.user_deposit_display 
+        ? moment(this.state.user_deposit_display.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+        : "No date available";
+
+             // Logic for showing DepositModal: if timestamp date is within 5 minutes from now
+             const now = new Date();
+             const fiveMinutesAgo = subMinutes(now, 5);
+
+             const timestampDate =
+                 Array.isArray(this.state.timestamp) && this.state.timestamp.length > 0
+                     ? new Date(this.state.timestamp[this.state.timestamp.length - 1])
+                     : this.state.timestamp
+                         ? new Date(this.state.timestamp)
+                         : null;
+
+             const showDepositModal =
+                 timestampDate &&
+                 !isNaN(timestampDate.getTime()) &&
+                 timestampDate >= fiveMinutesAgo &&
+                 timestampDate <= now;
+
+            // Logic for showing WithdrawNoticeModal: check last withdraw record timestamp (robustly)
+            const lastWithdraw =
+                Array.isArray(this.state.withdrawTotal) && this.state.withdrawTotal.length > 0
+                    ? this.state.withdrawTotal[this.state.withdrawTotal.length - 1]
+                    : null;
+
+            // try common timestamp fields on the withdraw record
+            const withdrawTimestampRaw = lastWithdraw
+                ? (lastWithdraw.lastWithdrawDate || lastWithdraw.date || lastWithdraw.createdAt || lastWithdraw.withdraw_date || lastWithdraw.lastDate || lastWithdraw.timestamp)
+                : null;
+
+            const withdrawTimestampDate = withdrawTimestampRaw ? new Date(withdrawTimestampRaw) : null;
+
+            const showWithdrawModal =
+                withdrawTimestampDate &&
+                !isNaN(withdrawTimestampDate.getTime()) &&
+                withdrawTimestampDate >= fiveMinutesAgo &&
+                withdrawTimestampDate <= now;
+
+            const lastWithdrawAmount = lastWithdraw ? (lastWithdraw.WithdrawAmountlast || lastWithdraw.WithdrawAmount || lastWithdraw.amount) : null;
+
+            // Format the withdrawal date nicely for display
+            const formattedWithdrawDate = withdrawTimestampRaw ? moment(withdrawTimestampRaw).format('MMMM Do YYYY, h:mm:ss a') : "No date available";
+
+
+            // debug: show withdraw detection values in console
+                return ( 
+            <div className='account__router'>
+                {/* {
+                    CheckDeposit === 0 && !showDepositModal && this.state.totalFees === 0 && (
+                        <section className="div invest_ui_ux_btn">
+                        <div class="no-deposit-container">
+                        <div class="no-deposit-card">
+                            <div class="icon-wrapper">
+                            <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+                            </div>
+                            <h1>No Active Deposits</h1>
+                            <p>
+                            You currently don't have any active deposits in your mining account.
+                            Start earning by making your first deposit today!
+                            </p>
+                            <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
+                        </div>
+                        </div>
+                    </section>
+                    )
+                } */}
+                {
+                    CheckDeposit === 0 && !showDepositModal && (
+                        <section className="div invest_ui_ux_btn">
+                        <div class="no-deposit-container">
+                        <div class="no-deposit-card">
+                            <div class="icon-wrapper">
+                            <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+                            </div>
+                            <h1>No Active Deposits</h1>
+                            <p>
+                            You currently don't have any active deposits in your mining account.
+                            Start earning by making your first deposit today!
+                            </p>
+                            <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
+                        </div>
+                        </div>
+                    </section>
+                    )
+                }
+                <section class="warning_message">
+                    <AccountStatusAlert />
+                </section>
+                
+                {
+                    CheckDeposit > 0 && (
+                        <section className="miningCard">
+                        <div class="main-container">
+                            <div class="card">
+                                <div class="robot-head">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                                <div class="antenna"></div>
+                                </div>
+                                <div class="info">
+                                <h1 class="title">Active Deposit</h1>
+                                <p class="amount">GHC{this.state.user_balance.activetDeposit}.00</p>
+                                <p class="status">Status: <span class="status_active">Active</span></p>
+                                </div>
+                                <button class="view-details-btn" onClick={this.toggleDetails}>View Details</button>
+                            </div>
+                            </div>
+                        </section>
+
+                    )
+                }
+
+                {showDetails && (
+                    
+                <div className='popout-card'>
+                    <div className='card-content'>
+                    <h2>Mining Plan Details</h2>
+                    <p>
+                        <span>Plan </span>: {this.state.user_deposit_display.fixedDepositAmount} <br />
+                        <span>Miner</span>: Premium Miner <br />
+                       <span>Deposit Amount</span>: GHC{user_balance.activetDeposit}.00 <br />
+                        <span>Mining Profit</span>: GHC{this.state.user_deposit_display.checkPercent}.00 <br />
+                       <span>Total Return</span>: GHC{Number(user_balance.activetDeposit) + Number(this.state.user_deposit_display.checkPercent)}.00 <br />
+                       <span>Deposit Date</span>: {formattedDate} <br />
+                       <span className='Status'> Status</span>: Active
+                    </p>
+                     <div class="bitcoin-mining-container">
+                        <div class="mining-machine">
+                        <div class="bitcoin-logo"></div> 
+                        </div>
+                        <p class="deposit-info">Your deposit is active. Mining in progress...</p>
+                        <div class="loading-bar-container">
+                        <div class="loading-bar"></div>
+                        </div>
+                    </div>
+                    <button className='close-btn' onClick={this.toggleDetails}>
+                        Close 
+                    </button>
+                    </div>
+                </div>
+                )}
+               {/* {this.state.totalFees > 0 && (
+
+                <div className="fee-warning">
+
+                <h3>⚠ Mining Service Fee Outstanding</h3>
+
+                <p>You have unpaid service fees for {this.state.unpaidMonths} month(s).</p>
+
+                <div className="fee-list">
+
+                {this.state.unpaidRecords.map((fee, index) => (
+
+                <div key={index} className="fee-row">
+
+                <strong>
+                {months[fee.month - 1]} {fee.year}
+                </strong>
+
+                <p>Total Profit: GHC {fee.totalWithdrawn / 10}</p>
+
+                <p>Service Fee: GHC {fee.payableFee}</p>
+
+                </div>
+
+                ))}
+
+                </div>
+
+                <h3>Total Payable: GHC {this.state.totalFees}</h3>
+
+              <button onClick={this.handlePayFee}>
+                Pay Service Fee
+                </button>
+
+                </div>
+
+                )} */}
+                {
+                CheckDeposit > 1 && (
+                       
+                <section className="autoMiningToggle">
+                    <AutoMiningStatus autoActive={this.state.user_profile_display.autoMining === true}
+                     isProvisioning={this.state.user_profile_display.autoProvisioning === true}/>
+                </section>
+                )
+                }
+                {showDepositModal && (
+                <section>
+                    <DepositModal/>
+                  
+                </section>
+                )}
+                {showWithdrawModal && (
+                <section>
+                    <WithdrawNoticeModal
+                        user_Name={this.state.user_Name}
+                        activetDeposit={lastWithdrawAmount}
+                        checkPercent={this.state.user_deposit_display.checkPercent}
+                        bitcoin={this.state.bitcoin || (this.state.user_profile_display && this.state.user_profile_display.bitcoin)}
+                        date={formattedWithdrawDate}
+                    />
+                </section>
+                )}
+                <section className='dashboard__section_box__3'>
+                    <div className="dash__box__1">
+                        <i class="fas fa-coins fa-3x"></i>
+                        <div className="dashText"> 
+                            <h5>TOTAL INVESTMENT</h5>
+                            <h5> GHC {this.state.totalDeposit.map(user => user.depositAmount)}.00</h5>
+                        </div>
+                        {/* {showInvestButton && !showDepositModal && <a href='/dashboard/deposit'><h2 className='btn invest_btn'>INVEST</h2></a>} */}
+                        {showInvestButton && !showDepositModal && this.state.totalFees === 0 && (
+                        <a href='/dashboard/deposit'>
+                            <h2 className='btn invest_btn'>INVEST</h2>
+                        </a>
+                        )}
+                    
+                    </div>
+                    <div className="dash__box__1">
+                        <i class="fas fa-comments-dollar fa-3x"></i>
+                        <div className="dashText">
+                            <h5>ACCOUNT BALANCE</h5>
+                            <h5 className='balanceMe'> GHC {this.state.accountBalance}.00</h5>
+                            <a className="btn_balanceMe"  href={`/dashboard/withdraw/${this.state.user_id}`}>
+                            <div className="btn-wrapper">
+                                    <button className="cashout-btn" >
+                                    💸 Cash Out
+                                    <span className="spinner"></span>
+                                    </button>
+                                    <div className="gradient-ring"></div>
+                                </div> 
+                        </a>
+                        </div>
+                        
+                    </div>
+                </section>
+                <section className='welcome__user'>
+                    <div className="welcomeText">
+                        <h4>Welcome {this.state.user_Name}!</h4>
+                        <h4>IP Address : {this.state.ip}</h4>
+                    </div>
+                </section>
+                <section className='progress_bar'>
+                    
+                </section>
+                <section className='about__all'>
+                    <div className="all__about_-box__1">
+                        <h3>DEPOSIT HISTORY</h3>
+                        <div className="all__box">
+                            <p>Active Deposit :</p>
+                            <p className='activetStatus'>GHC {this.state.user_balance.activetDeposit}.00</p>
+                        </div>
+                        <div className="all__box">
+                            <p>Total Deposit :</p>
+                            <p>GHC {this.state.totalDeposit.map(user => user.depositAmount)}.00</p>
+                        </div>
+                        <div className="all__box">
+                            <p>Last Deposit :</p>
+                            <p>GHC {this.state.totalDeposit.map(user => user.depositAmountlast)}.00</p>
+                        </div>
+                    </div>
+                    <div className="all__about_-box__1">
+                        <h3>WITHDRAW HISTORY</h3>
+                        <div className="all__box">
+                            <p>Pending Withdraw :</p>
+                            <p>GHC0.00</p>
+                        </div>
+                        <div className="all__box">
+                            <p>Total Withdraw :</p>
+                            <p>GHC {this.state.withdrawTotal.map(user => user.WithdrawAmount)}.00</p>
+                        </div>
+                        <div className="all__box">
+                            <p>Last Withdraw :</p>   
+                            <p>GHC {this.state.withdrawTotal.map(user => user.WithdrawAmountlast)}.00</p>
+                        </div>
+                    </div>
+                </section>
+                <section className='reffer__link'>
+                    <div className="refferNow">
+                        <div className="reff__box_1">
+                             <i class="fas fa-users fa-10x"></i>
+                        </div>
+                        <div className="reff__box_2">
+                            <h2>Personal <span>Referral</span> Link:</h2>
+                            <p className='reffLink'>https://capgainco.com/?ref={this.state.user_Name}</p>
+                            <p className='btn btn-warning btn-referral'> Your Referral Reward: <span>GHC{this.state.user_profile_display.refferReward}.00</span><br/>
+                            {this.state.user_profile_display.refferReward > 10 ? (
+                            <button className="btn-referral-cashout" onClick={()=>{
+                                window.location =`/withdraw-refferReward`
+                            }} >Cashout</button>
+                            ) : null}
+                            <div className="with__inner__box_dash">
+                                <p>Total Referral Rewards:</p>
+                                <p>GHC{this.state.totalReferralReward || '0'}.00</p>
+                                </div>
+                             </p>
+                             
+                        </div>
+                    </div>
+                </section>
+                {String(this.state.user_id || "").trim() ? (
+                <section className="monthlyFeeSection">
+                    <MonthlyFeeBoard userId={String(this.state.user_id)} />
+                </section>
+                ) : null}
+
+
+            </div>
+         );
+    }
+}
+ 
+export default AccountRouter;

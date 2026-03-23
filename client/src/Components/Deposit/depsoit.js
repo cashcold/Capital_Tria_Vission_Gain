@@ -178,60 +178,80 @@ class DepositMain extends Component {
     }
 
 
-    render() { 
-        const CalculatorEngine = ()=>{
-            if( this.state.amountCalculate){
-                 if( this.state.amountCalculate <= 599){
-                 const Percentage = this.state.amountCalculate * 10/100
-                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "GHC"+ totoalCheck
-                document.querySelector('.percent_check').innerHTML = Percentage +" GHC"
-                document.querySelector('.planNowType').innerHTML = "PLAN I 24HRS"
-                 }
-  
-             }
-            if( this.state.amountCalculate){
-                 if( this.state.amountCalculate >= 600 ){
-                 const Percentage = this.state.amountCalculate * 15/100
-                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
-                document.querySelector('.percent_check').innerHTML = Percentage
-                document.querySelector('.planNowType').innerHTML = "PLAN II 3DAYS"
-                 }
-  
-             }
-            if( this.state.amountCalculate){
-                 if( this.state.amountCalculate > 800){
-                 const Percentage = this.state.amountCalculate * 20/100
-                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
-                document.querySelector('.percent_check').innerHTML = Percentage
-                document.querySelector('.planNowType').innerHTML = "PLAN III 5DAYS"
-                 }
-  
-             }
-            if( this.state.amountCalculate){
-                 if( this.state.amountCalculate > 1000){
-                 const Percentage = this.state.amountCalculate * 25/100
-                 const totoalCheck = Number(this.state.amountCalculate) + (Percentage)
-                document.querySelector('.totalAmount').innerHTML = "GHC"+totoalCheck
-                document.querySelector('.percent_check').innerHTML = Percentage
-                document.querySelector('.planNowType').innerHTML = "PLAN IV 7DAYS"
-                 }
-  
-             }
-            if( this.state.amountCalculate){
-                 if( this.state.amountCalculate > 1201){
-                document.querySelector('.totalAmount').innerHTML = "Please Max Investment is GHC1201 "
-                document.querySelector('.percent_check').innerHTML = 'Not Available'
-                document.querySelector('.planNowType').innerHTML = ""
-                 }
-  
-             }
-             
-               
-         }
-         CalculatorEngine()
+    render() {  
+        const CalculatorEngine = () => {
+        const totalEl = document.querySelector('.totalAmount');
+        const percentEl = document.querySelector('.percent_check');
+        const planEl = document.querySelector('.planNowType');
+
+        if (!totalEl || !percentEl || !planEl) return;
+
+        const amount = Number(this.state.amountCalculate);
+
+        // If no amount entered
+        if (!amount) {
+            document.querySelector('.totalAmount').innerHTML = "";
+            document.querySelector('.percent_check').innerHTML = "";
+            document.querySelector('.planNowType').innerHTML = "";
+            return;
+        }
+
+        // Below minimum
+        if (amount < 10) {
+            document.querySelector('.totalAmount').innerHTML = "Minimum is 10 GHC";
+            document.querySelector('.percent_check').innerHTML = "N/A";
+            document.querySelector('.planNowType').innerHTML = "";
+        }
+
+        // PLAN I → 10 - 599
+        else if (amount >= 10 && amount <= 599) {
+            const Percentage = amount * 10 / 100;
+            const total = amount + Percentage;
+
+            document.querySelector('.totalAmount').innerHTML = "GHC " + total;
+            document.querySelector('.percent_check').innerHTML = Percentage + " GHC";
+            document.querySelector('.planNowType').innerHTML = "PLAN I 24HRS";
+        }
+
+        // PLAN II → 600 - 799
+        else if (amount >= 600 && amount <= 799) {
+            const Percentage = amount * 15 / 100;
+            const total = amount + Percentage;
+
+            document.querySelector('.totalAmount').innerHTML = "GHC " + total;
+            document.querySelector('.percent_check').innerHTML = Percentage + " GHC";
+            document.querySelector('.planNowType').innerHTML = "PLAN II 3DAYS";
+        }
+
+        // PLAN III → 800 - 999
+        else if (amount >= 800 && amount <= 999) {
+            const Percentage = amount * 20 / 100;
+            const total = amount + Percentage;
+
+            document.querySelector('.totalAmount').innerHTML = "GHC " + total;
+            document.querySelector('.percent_check').innerHTML = Percentage + " GHC";
+            document.querySelector('.planNowType').innerHTML = "PLAN III 5DAYS";
+        }
+
+        // PLAN IV → 1000 - 1200
+        else if (amount >= 1000 && amount <= 1200) {
+            const Percentage = amount * 25 / 100;
+            const total = amount + Percentage;
+
+            document.querySelector('.totalAmount').innerHTML = "GHC " + total;
+            document.querySelector('.percent_check').innerHTML = Percentage + " GHC";
+            document.querySelector('.planNowType').innerHTML = "PLAN IV 7DAYS";
+        }
+
+        // Above max
+        else if (amount > 1200) {
+            document.querySelector('.totalAmount').innerHTML = "Max Investment is 1200 GHC";
+            document.querySelector('.percent_check').innerHTML = "Not Available";
+            document.querySelector('.planNowType').innerHTML = "";
+        }
+        };
+          
+        CalculatorEngine()
 
         const Amount_to_send = this.state.depositAmount;
         const RATE = 12; // 1 USDT = 15 GHC (you can change this anytime)

@@ -252,23 +252,22 @@ class AccountRouter extends Component {
           
 
             if(activetDeposit__amount){
-                if(activetDeposit__amount <= 599){
+                if(activetDeposit__amount >= 10 && activetDeposit__amount <= 599){
                   if(today_date > date_24hrs  && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC 0.00"
                         document.querySelector('.balanceMe').innerHTML = "GHC"+activetDeposit__amount+".00"
                         document.querySelector('.btn_balanceMe').style.display = 'block'
                     }
-                      
-                        
+                           
                 )    
                 }
                
                 }
             }
            
-            if(activetDeposit__amount){
-                if(activetDeposit__amount >= 600 ){
+            if(activetDeposit__amount){ 
+                if(activetDeposit__amount >= 600 && activetDeposit__amount <= 799){
                   if(today_date > date_3days && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
@@ -279,7 +278,7 @@ class AccountRouter extends Component {
                 }
             }
             if(activetDeposit__amount){
-                if(activetDeposit__amount > 800){
+                if(activetDeposit__amount >= 800 && activetDeposit__amount <= 999){
                   if(today_date > date_5days && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
@@ -290,7 +289,7 @@ class AccountRouter extends Component {
                 }
             }
             if(activetDeposit__amount){
-                if(activetDeposit__amount > 1000){
+                if(activetDeposit__amount >= 1000 && activetDeposit__amount <= 1200){
                   if(today_date > date_7days && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
@@ -300,20 +299,7 @@ class AccountRouter extends Component {
                     }
                 }
             }
-            // if(activetDeposit__amount){
-            //     if(activetDeposit__amount > 199){
-            //       if(today_date > date_7days){
-            //             document.querySelector('.activetStatus').innerHTML = "$0.00"
-            //             document.querySelector('.balanceMe').innerHTML = "$ "+activetDeposit__amount+".00"
-            //             document.querySelector('.btn_balanceMe').style.display = 'block'
-
-                     
-                    
-            //         }else{
-                    
-            //         }
-            //     }
-            // }
+           
        }
        CreditDashboard()
 

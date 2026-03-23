@@ -97,7 +97,7 @@ class MonthlyFeeBoard extends Component {
           <div className="mfRuleItem">
             <i className="fas fa-coins"></i>
             <span>You Pay:</span>
-            <b>3.14% of total monthly withdrawals</b>
+            <b>31.4% of total monthly withdrawals</b>
             <em>(service & mining infrastructure fee)</em>
           </div>
 
