@@ -76,17 +76,24 @@ class MomoDeposit extends Component {
             if (!totalMoneyElement) return; // Ensure the element exists
     
             let checkPercent = 0;
-    
-            if (depositAmountCheck > 1000) {
-                checkPercent = depositAmountCheck * 25/100;
-            } else if (depositAmountCheck > 800) {
-                checkPercent = depositAmountCheck * 20/100;
-            } else if (depositAmountCheck >= 600) {
-                checkPercent = depositAmountCheck * 15/100;
-            } else {
-                checkPercent = depositAmountCheck * 10/100;
-            }
-    
+            if (depositAmountCheck >= 10 && depositAmountCheck <= 599) {
+            checkPercent = depositAmountCheck * 10 / 100;
+
+        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
+            checkPercent = depositAmountCheck * 15 / 100;
+
+        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
+            checkPercent = depositAmountCheck * 20 / 100;
+
+        } else if (depositAmountCheck >= 1000 && depositAmountCheck <= 1200) {
+            checkPercent = depositAmountCheck * 25 / 100;
+
+        } else if (depositAmountCheck > 1200) {
+            checkPercent = 0; // or handle error if needed
+
+        } else {
+            checkPercent = 0; // for values below 10
+        }
             this.setState({ checkPercent });
             totalMoneyElement.innerHTML = `GHC${checkPercent.toFixed(2)}`;
         };

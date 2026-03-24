@@ -109,33 +109,31 @@ export const tourData = [
     {
       id: 16,
       title: "What is the Mining Server Fee shown on my dashboard?",
-      about: `At Capital Gain Management Co., we operate real-time Bitcoin mining infrastructure, secure servers, automated withdrawal systems, and 24/7 monitoring to ensure that your withdrawals are processed instantly, safely, and without delay.
+      about: `At Capital Gain Management Co., we operate advanced Bitcoin mining infrastructure, high-performance servers, automated withdrawal systems, and 24/7 monitoring to ensure fast, secure, and reliable payouts.
 
-    To maintain this high-performance mining environment, a small monthly Mining Server Fee is calculated based on your total withdrawals for the month.
+To maintain and scale this system efficiently, a Mining Server Fee is applied based on your total monthly withdrawals.
 
-    Here’s how it works transparently:
+Here’s how it works:
 
-    🔹 First, we calculate 10% of your total monthly withdrawals.  
-    🔹 From that 10%, you only pay 15% as a service contribution.  
+🔹 A fixed 31.4% fee is applied to your total monthly withdrawals.  
 
-    This means you are effectively paying only **1.5% of your total withdrawals** for the entire month.
+This fee supports the full operation and sustainability of our mining platform.
 
-    💡 Example:  
-    If you withdraw GHC 350 in a month:  
-    10% mining profit = GHC 35  
-    15% of 35 = **GHC 5.25** (this is all you pay)
+💡 Example:  
+If you withdraw GHC 350 in a month:  
+31.4% of 350 = **GHC 109.90** (this is the total fee)
 
-    This small fee helps us cover:
+This fee helps us cover:
 
-    ⚙️ Mining hardware operations  
-    🖥️ Secure servers & system automation  
-    🔒 Security monitoring & fraud protection  
-    🔄 Automatic processing of withdrawals  
-    📡 24/7 system uptime and support
+⚙️ Mining hardware and equipment maintenance  
+🖥️ High-speed secure servers & automation  
+🔒 Advanced security systems & fraud prevention  
+🔄 Instant withdrawal processing  
+📡 24/7 uptime, monitoring, and technical support  
 
-    You can always see this calculation clearly on your dashboard under **Monthly Withdrawal Fee**, and it updates automatically after every withdrawal.
+You can always track this clearly on your dashboard under **Monthly Withdrawal Fee**, which updates automatically after each withdrawal.
 
-    We believe in full transparency — you see exactly what you pay and why.`
+We remain committed to transparency — you always see exactly what you are charged and why.`
     }
 
    

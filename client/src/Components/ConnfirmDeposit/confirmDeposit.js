@@ -72,36 +72,43 @@ class ConfirmDeposit extends Component {
         }
     
         // Function to calculate percentage based on deposit amount
-        const CalculatorEngine = () => {
-              
-                const totalMoneyElement = document.querySelector('.toatalAllMoney');
-            if (!totalMoneyElement) return; // Ensure the element exists
-    
+       const CalculatorEngine = () => {
+
+            const totalMoneyElement = document.querySelector('.toatalAllMoney');
+            if (!totalMoneyElement) return;
+
             let checkPercent = 0;
 
-            if (depositAmountCheck > 1000) {
-                    checkPercent = depositAmountCheck * 25 / 100;
-                } else if (depositAmountCheck > 800) {
-                    checkPercent = depositAmountCheck * 20 / 100;
-                } else if (depositAmountCheck >= 600) {
-                    checkPercent = depositAmountCheck * 15 / 100;
-                } else {
-                    checkPercent = depositAmountCheck * 10 / 100;
-                }
+            // ✅ Correct plan ranges
+            if (depositAmountCheck >= 10 && depositAmountCheck <= 599) {
+                checkPercent = depositAmountCheck * 10 / 100;
 
-                // Now convert AFTER calculation
-                const RATE = 12; // 1 USDT = 12 GHC
-                const usdtAmount = checkPercent / RATE;
+            } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
+                checkPercent = depositAmountCheck * 15 / 100;
 
-                // Update state
-                this.setState({ checkPercent });
+            } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
+                checkPercent = depositAmountCheck * 20 / 100;
 
-                // Display
-                totalMoneyElement.innerHTML = `USDT ${usdtAmount.toFixed(2)}`;
-                    };
-    
-        // Execute the function
-        CalculatorEngine();
+            } else if (depositAmountCheck >= 1000 && depositAmountCheck <= 1200) {
+                checkPercent = depositAmountCheck * 25 / 100;
+
+            } else {
+                checkPercent = 0; // below 10 or above 1200
+            }
+
+            // ✅ Convert to USDT
+            const RATE = 12; // 1 USDT = 12 GHC
+            const usdtAmount = checkPercent / RATE;
+
+            // ✅ Update state
+            this.setState({ checkPercent });
+
+            // ✅ Display result
+            totalMoneyElement.innerHTML = `USDT ${usdtAmount.toFixed(2)}`;
+            };
+
+            // Run function
+            CalculatorEngine();
     
         const user_id = sessionStorage.getItem('user_id'); 
         const user_Name = sessionStorage.getItem('user_Name');
