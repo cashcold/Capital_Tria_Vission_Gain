@@ -166,7 +166,7 @@ class MonthlyFeeBoard extends Component {
                 <div className="mfCardValue">GHC {this.fmtMoney(payableFee)}</div>
 
                 <div className="mfCardHint">
-                  3.14% service fee based on total monthly withdrawals
+                  31.4% service fee based on total monthly withdrawals
                 </div>
               </div>
             </div>
