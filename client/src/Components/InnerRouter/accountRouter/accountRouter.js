@@ -12,6 +12,7 @@ import WithdrawNoticeModal from '../../WithdrawNoticeModal/WithdrawNoticeModal.'
 import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
 import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
 import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
+import AutoFeeDeduction from '../../AutoFeeDeduction/AutoFeeDeduction';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -376,25 +377,25 @@ class AccountRouter extends Component {
                     </section>
                     )
                 } */}
-                {
-                    CheckDeposit === 0 && !showDepositModal && (
-                        <section className="div invest_ui_ux_btn">
-                        <div class="no-deposit-container">
-                        <div class="no-deposit-card">
-                            <div class="icon-wrapper">
-                            <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+                    {
+                        CheckDeposit === 0 && !showDepositModal && (
+                            <section className="div invest_ui_ux_btn">
+                            <div class="no-deposit-container">
+                            <div class="no-deposit-card">
+                                <div class="icon-wrapper">
+                                <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+                                </div>
+                                <h1>No Active Deposits</h1>
+                                <p>
+                                You currently don't have any active deposits in your mining account.
+                                Start earning by making your first deposit today!
+                                </p>
+                                <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
                             </div>
-                            <h1>No Active Deposits</h1>
-                            <p>
-                            You currently don't have any active deposits in your mining account.
-                            Start earning by making your first deposit today!
-                            </p>
-                            <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
-                        </div>
-                        </div>
-                    </section>
-                    )
-                }
+                            </div>
+                        </section>
+                        )
+                    }
                 <section class="warning_message">
                     <AccountStatusAlert />
                 </section>
@@ -484,10 +485,16 @@ class AccountRouter extends Component {
               <button onClick={this.handlePayFee}>
                 Pay Service Fee
                 </button>
+                <div className="autoFeeDeductionSection">
+                     <AutoFeeDeduction unpaidAmount={this.state.totalFees} months={this.state.unpaidMonths} />
+                </div>
+               
 
                 </div>
+                
 
                 )} */}
+            
                 {
                 CheckDeposit > 1 && (
                        

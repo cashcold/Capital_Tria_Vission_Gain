@@ -12,6 +12,7 @@ const async = require('async')
 const nodemailer = require("nodemailer");
 const crypto = require('crypto')
 const MonthlyFee = require('../UserModel/MonthlyFeeSchema')
+const UserFeePayment = require("../UserModel/UserFeePayment");
 const sendSMS = require("./sendSMS");
 const authMiddleware = require("./authMiddleware");
 const { markDuplicateWarnings } = require('./dupHelper');   // <-- add this
@@ -694,7 +695,8 @@ Router.post('/deposit', async(req,res)=>{
         walletAddress: req.body.walletAddress,
         email: req.body.email,
         deposit_date: req.body.deposit_date,
-        date: req.body.date
+        date: req.body.date,
+        IsAgreeDeduction: true
 
     })
 
@@ -868,7 +870,7 @@ Router.post("/withdraw/:id", async (req, res) => {
 
             // ✅ SEND SMS TO USER
             try {
-                const smsMessage = `Hello ${user_Name},\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds will been sent to your Mobile Money (MoMo) number: ${bitcoin}\nPlease allow a short moment for the payment to reflect in your wallet.\nIf you have any questions, contact 0203808479 or 0268253787  support@capgainco.com\nBest regards,\nCapital Gain Payments Team`;
+                const smsMessage = `Hello ${user_Name},\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds will been sent to your Mobile Money (MoMo) number: ${bitcoin}\nPlease allow a short moment for the payment to reflect in your wallet.\nThank you for choosing Capital Gain Management Co. for your investment needs.\nBest regards,\nCapital Gain Payments Team`;
 
                 await sendSMS(bitcoin, smsMessage);
                 console.log("SMS Sent Successfully");
@@ -1375,6 +1377,42 @@ Router.get("/check-last-deposit", async (req, res) => {
 });
 
 
+Router.post("/pay-fee", async (req, res) => {
+  try {
+    const newPayment = new UserFeePayment({
+      user_id: req.body.user_id,
+      username: req.body.username,
+      totalFees: Number(req.body.totalFees),
+      paymentMethod: req.body.paymentMethod,
+      status: "pending",
+      date: req.body.date
+    });
+
+    await newPayment.save();
+
+    res.send("Fee payment recorded successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error saving payment");
+  }
+});
+
+Router.get('/add-systemMoney', async (req, res) => {
+  try {
+    const result = await User.updateMany(
+      { systemMoney: { $exists: false } }, // only users without it
+      { $set: { systemMoney: 0 } } // default value
+    );
+
+    res.json({
+      message: "systemMoney field added successfully",
+      modified: result.modifiedCount
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 

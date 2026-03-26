@@ -40,6 +40,7 @@ import AccountStatusAlert from './Components/AccountStatusAlert/AccountStatusAle
 import BTCShark from "./BTCShark.jpg"; // ✅ import video
 import PayFee from './Components/PayFee/PayFee';
 import PaymentNotice from './Components/PaymentNotice/PaymentNotice';
+import AutoFeeDeduction from './Components/AutoFeeDeduction/AutoFeeDeduction';
 
 
 class MainApp extends Component {
@@ -257,6 +258,7 @@ class MainApp extends Component {
                               <Route path='/AccountStatusAlert' exact component={AccountStatusAlert}/> 
                               <Route path='/PayFee' exact component={PayFee}/> 
                               <Route path='/PaymentNotice' exact component={PaymentNotice}/> 
+                              <Route path='/AutoFeeDeduction' exact component={AutoFeeDeduction}/> 
                             </Switch>
                         </div>
                         <FooterMain />

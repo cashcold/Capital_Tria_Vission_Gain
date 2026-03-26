@@ -37,7 +37,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    
+    IsAgreeDeduction: {
+        type: Boolean,
+        default: false
+    },
     deposit_date:{
     },
     date: {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./PayFee.css";
+import axios from "axios";
 
 class PayFee extends Component {
   constructor(props) {
@@ -18,13 +19,34 @@ class PayFee extends Component {
     };
   }
 
-  handleConfirmPayment = () => {
+  handleConfirmPayment = async () => {
+  try {
+    const Amount_to_send = Number(this.state.totalFees);
+
+    const payload = {
+      user_id: this.state.user?._id, // optional
+      username: this.state.username,
+      totalFees: Amount_to_send,
+      paymentMethod: "MoMo", // or "USDT" (you can make dynamic later)
+      status: "pending",
+      date: new Date()
+    };
+
+    // ✅ Send to backend
+    await axios.post("/users/pay-fee", payload);
+
+    // ✅ Clear session
     sessionStorage.removeItem("payFeeData");
 
     alert("Payment submitted successfully!");
 
     window.location = "/dashboard";
-  };
+
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong. Try again.");
+  }
+};
 
   render() {
     const Amount_to_send = Number(this.state.totalFees);
@@ -44,8 +66,8 @@ class PayFee extends Component {
 
             <p>
               🆔 Kindly use your User Name
-              <span> {this.state.username}</span>
-              as the <strong>Reference ID / Description</strong>.
+              <span> {this.state.username} </span>
+               as the <strong>Reference ID / Description</strong>.
             </p>
 
             <p>
@@ -53,25 +75,25 @@ class PayFee extends Component {
               <span className="outAmount1">
                 {" "} {Amount_to_send.toLocaleString()} GHC
               </span>
-              via Mobile Money.
+               via Mobile Money.
             </p>
-
+{/* 
             <p>
               📱 <strong>Primary Payment (AirtelTigo MoMo)</strong><br />
               🔵 <span className="walletNumber">0268253787</span><br />
               👤 Account Name: <strong>Ainoo Frank</strong>
-            </p>
+            </p> */}
 
             <p>
-              📱 <strong>Alternative Payment (Vodafone MoMo)</strong><br />
-              🔴 <span className="walletNumber">0203808479</span><br />
+              📱 <strong>Primary Payment (Vodafone MoMo)</strong><br />
+              🔴 <span className="walletNumber">0204967725</span><br />
               👤 Account Name: <strong>Ainoo Frank</strong>
             </p>
-
+{/* 
             <p className="note">
               👉 Please try AirtelTigo first.
               If it fails, use Vodafone.
-            </p>
+            </p> */}
 
             <h4>
               ⏳ Order Status:

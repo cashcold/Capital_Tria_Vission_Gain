@@ -172,12 +172,15 @@ class ConfirmDeposit extends Component {
     };
     
    
-
-   onSubmit = ()=>{
+onSubmit = ()=>{
     this.setState({ isSubmitting: true });
 
-    const TotalWithdraw = Number(this.state.depositAmount) + Number(this.state.checkPercent);
+    const TotalWithdraw = Number(this.state.depositAmount) + Number(this.state.checkPercent); 
     this.setState({ TotalWithdraw });
+
+      // ✅ Get from sessionStorage
+        const isAgreed = sessionStorage.getItem("IsAgreeDeduction") === "true"
+        
 
         const NewDeposit = {
         user_id: this.state.user_id,
@@ -189,7 +192,8 @@ class ConfirmDeposit extends Component {
         walletAddress: this.state.walletAddress,
         date: this.state.date,
         checkPercent: Number(this.state.checkPercent),
-        TotalWithdraw: TotalWithdraw
+        TotalWithdraw: TotalWithdraw,
+         IsAgreeDeduction: isAgreed === "true" ? true : false
 
        }
        
@@ -198,7 +202,7 @@ class ConfirmDeposit extends Component {
        socket.emit('NewDeposit', NewDeposit)
 
        
-       axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Mobile Money confirmation,After deposit payment have been received, Your Dashboard will auto credit in minute')}).then(res => setTimeout(()=>{
+       axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Network  confirmation,After deposit payment have been received, Your Dashboard will auto credit in minute')}).then(res => setTimeout(()=>{
             window.location='/dashboard'
        },1200))
 

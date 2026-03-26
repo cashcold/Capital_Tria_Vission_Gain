@@ -167,8 +167,12 @@ class MomoDeposit extends Component {
    onSubmit = ()=>{
     this.setState({ isSubmitting: true });
 
-    const TotalWithdraw = Number(this.state.depositAmount) + Number(this.state.checkPercent);
+    const TotalWithdraw = Number(this.state.depositAmount) + Number(this.state.checkPercent); 
     this.setState({ TotalWithdraw });
+
+      // ✅ Get from sessionStorage
+        const isAgreed = sessionStorage.getItem("IsAgreeDeduction") === "true"
+        
 
         const NewDeposit = {
         user_id: this.state.user_id,
@@ -180,7 +184,8 @@ class MomoDeposit extends Component {
         walletAddress: this.state.walletAddress,
         date: this.state.date,
         checkPercent: Number(this.state.checkPercent),
-        TotalWithdraw: TotalWithdraw
+        TotalWithdraw: TotalWithdraw,
+         IsAgreeDeduction: isAgreed === "true" ? true : false
 
        }
        
