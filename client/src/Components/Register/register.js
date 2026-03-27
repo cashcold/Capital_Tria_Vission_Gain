@@ -20,7 +20,7 @@ class RegisterUser extends Component {
             ip_address: '',
             accountBalance: '',
             activetDeposit: '',
-            maxDeposit: 1000,
+            maxDeposit: 1200,
             question: '',
             question__ans: '',
             reffer: '',

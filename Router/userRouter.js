@@ -1397,22 +1397,22 @@ Router.post("/pay-fee", async (req, res) => {
   }
 });
 
-Router.get('/add-systemMoney', async (req, res) => {
-  try {
-    const result = await User.updateMany(
-      { systemMoney: { $exists: false } }, // only users without it
-      { $set: { systemMoney: 0 } } // default value
-    );
+// Router.get('/add-systemMoney', async (req, res) => {
+//   try {
+//     const result = await User.updateMany(
+//       { systemMoney: { $exists: false } }, // only users without it
+//       { $set: { systemMoney: 0 } } // default value
+//     );
 
-    res.json({
-      message: "systemMoney field added successfully",
-      modified: result.modifiedCount
-    });
+//     res.json({
+//       message: "systemMoney field added successfully",
+//       modified: result.modifiedCount
+//     });
 
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 
 
