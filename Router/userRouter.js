@@ -268,7 +268,7 @@ Router.get('/duplicates', async (req, res) => {
 });
 
 Router.post("/forgotpassword", async (req, res) => {
-    const userEmail = req.body.email;
+    const userEmail = req.body.email; 
 
     async.waterfall([
         (done) => {
@@ -282,7 +282,7 @@ Router.post("/forgotpassword", async (req, res) => {
             User.findOne({ email: userEmail }, async (err, user) => {
                 if (err) return done(err); // Pass error to async.waterfall
                 if (!user) {
-                    return res.status(400).json({ message: "Email not found." });
+                    return done({ status: 400, message: "Email not found." });
                 }
 
                 // Debug: Check if user is found
@@ -349,9 +349,12 @@ Router.post("/forgotpassword", async (req, res) => {
         }
     ], (err, result) => {
         if (err) {
-            console.error("Forgot password error:", err);
-            return res.status(500).json({ message: "Database error.", error: err.message });
-        }
+        console.error("Forgot password error:", err);
+
+        return res.status(err.status || 500).json({
+            message: err.message || "Something went wrong"
+        });
+    }
         res.status(200).json({ message: result });
     });
 });
@@ -638,9 +641,6 @@ Router.post('/user_profile_display',async(req,res)=>{
 })
 
 
-
-
-
 Router.post('/user_deposit_display', async (req, res) => {
     try {
         const user_id = req.body.id;
@@ -663,8 +663,6 @@ Router.post('/user_deposit_display', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
-
-
 
 Router.post('/user_balance',async(req,res)=>{
    
@@ -898,9 +896,6 @@ Router.post("/withdraw/:id", async (req, res) => {
     }
 });
 
-
-
-
 Router.get("/monthlyfee/my/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
@@ -913,7 +908,6 @@ Router.get("/monthlyfee/my/:userId", async (req, res) => {
     res.status(500).json({ msg: "Error fetching monthly fees", error: String(err) });
   }
 });
-
 
 // ✅ mark as paid (admin)
 Router.post("/monthlyfee/mark-paid", async (req, res) => {
@@ -1397,22 +1391,29 @@ Router.post("/pay-fee", async (req, res) => {
   }
 });
 
-// Router.get('/add-systemMoney', async (req, res) => {
-//   try {
-//     const result = await User.updateMany(
-//       { systemMoney: { $exists: false } }, // only users without it
-//       { $set: { systemMoney: 0 } } // default value
-//     );
+Router.get("/search-numbers", async (req, res) => {
+  try {
+    const keyword = req.query.q || "";
 
-//     res.json({
-//       message: "systemMoney field added successfully",
-//       modified: result.modifiedCount
-//     });
+    const users = await User.find({
+      bitcoin: { $regex: keyword, $options: "i" }
+    }).select("bitcoin");
 
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    const numbers = users.map(user => user.bitcoin);
+
+    res.json({
+      total: numbers.length,
+      numbers: numbers
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Error searching numbers"
+    });
+  }
+});
+
 
 
 

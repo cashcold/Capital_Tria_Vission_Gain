@@ -41,6 +41,7 @@ import BTCShark from "./BTCShark.jpg"; // ✅ import video
 import PayFee from './Components/PayFee/PayFee';
 import PaymentNotice from './Components/PaymentNotice/PaymentNotice';
 import AutoFeeDeduction from './Components/AutoFeeDeduction/AutoFeeDeduction';
+import DepositAndMiningPlanUpdate from './Components/DepositAndMiningPlanUpdate/DepositAndMiningPlanUpdate';
 
 
 class MainApp extends Component {
@@ -208,19 +209,6 @@ class MainApp extends Component {
                         </section>
                         <PaymentNotice />
 
-                        {/* <section className="MethodMomo">
-                            <section className="monoPAYMENT">
-                                <h1 className="animated-text">📱 Momo Payment and Bank Transfers Now Accepted!</h1>
-                                    <p className="blinking-text">
-                                    We are now accepting <strong>Mobile Money (Momo)</strong> and  <strong>Bank Transfer</strong> for all investors in Ghana.
-                                    <br />Wherever you are, it's now simple and easy to invest with your mobile money.
-                                    <br />Invest with any amount from GHS 10 and above! <strong>Example of Daily User Earnings, User Deposit GHS 50 and get GHC 55 in 24hrs mining plan with 10% profit</strong>. Deposit and Withdrawals payment are made through Mobile Money and Bank Transfers 
-                                    </p>
-                                    <div className="image-box">
-                                    <img src={require('./images/mobile-money.jpg')} className=''/> 
-                                    </div>
-                            </section>
-                        </section> */}
                         <section class="grobelInvest">
                             <img
                                 src='https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/capgainco%2FMANY%20MORE.jpg?alt=media&token=5975b784-7100-4d95-b0fe-ee411c485707'
@@ -233,6 +221,7 @@ class MainApp extends Component {
                         <Other__NavBar />
                         {/* <PriceMarquee /> */}
                         <Navbar />
+                        <DepositAndMiningPlanUpdate />
                         <div className='router'> 
 
                             <Switch>
@@ -259,6 +248,7 @@ class MainApp extends Component {
                               <Route path='/PayFee' exact component={PayFee}/> 
                               <Route path='/PaymentNotice' exact component={PaymentNotice}/> 
                               <Route path='/AutoFeeDeduction' exact component={AutoFeeDeduction}/> 
+                              <Route path='/DepositAndMiningPlanUpdate' exact component={DepositAndMiningPlanUpdate}/> 
                             </Switch>
                         </div>
                         <FooterMain />

@@ -24,7 +24,7 @@ class ForgotPassword extends Component {
             email: this.state.restartLinkPassword
         }
         if(!saveRestartLinkPassword.email){
-            return(toast.warning("Enter Email",{position: 'top-center'})) 
+            return(toast.warning("Enter Email",{position: 'top-center'}))    
            
         }   
 
@@ -35,7 +35,11 @@ class ForgotPassword extends Component {
             window.location = "/login";
         }, 5000); 
     })
-    .catch(err => toast.error(err.response.data, { autoClose: 5000 }));
+    .catch(err => {
+    const errorMessage =
+        err.response?.data?.message || "Something went wrong";
+        toast.error(errorMessage, { autoClose: 5000 });
+    });
 
     }
  

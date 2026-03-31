@@ -18,6 +18,7 @@
     "framer-motion": "^4.1.17",
     "gsap": "^3.5.0",
     "jwt-decode": "^2.2.0",
+    "lucide-react": "^1.7.0",
     "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.6.1",
