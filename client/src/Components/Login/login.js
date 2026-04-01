@@ -116,10 +116,11 @@ class Login extends Component {
                             </form>
                          
                             <div className="a_Links">
-                                <a href='/forgotpassword' className='btn btn-warning'>Forgot Password</a>
                                 <button className='btn btn-danger' onClick={this.onSubmit}>
                                 Login
                                 </button>
+                                <button><a href='/forgotpassword' className='btn btn-warning'>Forgot Password</a></button>
+                                
                             </div>
                         </div>
                 </section>

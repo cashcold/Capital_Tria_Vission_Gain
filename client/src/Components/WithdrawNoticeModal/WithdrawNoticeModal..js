@@ -80,9 +80,9 @@ class WithdrawNoticeModal extends React.Component {
             <p><strong>🔹 Transaction Details:</strong></p>
             <ul>
               <li>💰 Deposit Amount: <strong>GHC {activetDeposit}.00</strong></li>
-              <li>� Mining Profit: <strong>GHC {checkPercent}.00</strong></li>
+              <li>📈 Mining Profit: <strong>GHC {checkPercent}.00</strong></li>
               <li>💵 Total Return: <strong>GHC {Number(activetDeposit) + Number(checkPercent)}.00</strong></li>
-              <li>�🗓 Date: <strong>{date}</strong></li>
+              <li>🗓️ Date: <strong>{date}</strong></li>
               <li>🏦 MoMo Number: <strong>{bitcoin}</strong></li>
             </ul>
 

@@ -42,6 +42,7 @@ import PayFee from './Components/PayFee/PayFee';
 import PaymentNotice from './Components/PaymentNotice/PaymentNotice';
 import AutoFeeDeduction from './Components/AutoFeeDeduction/AutoFeeDeduction';
 import DepositAndMiningPlanUpdate from './Components/DepositAndMiningPlanUpdate/DepositAndMiningPlanUpdate';
+import AutoMiningReactivationFrontend from './Components/AutoMiningReactivationFrontend/AutoMiningReactivationFrontend';
 
 
 class MainApp extends Component {
@@ -249,6 +250,7 @@ class MainApp extends Component {
                               <Route path='/PaymentNotice' exact component={PaymentNotice}/> 
                               <Route path='/AutoFeeDeduction' exact component={AutoFeeDeduction}/> 
                               <Route path='/DepositAndMiningPlanUpdate' exact component={DepositAndMiningPlanUpdate}/> 
+                              <Route path='/AutoMiningReactivationFrontend' exact component={AutoMiningReactivationFrontend}/> 
                             </Switch>
                         </div>
                         <FooterMain />

@@ -55,7 +55,7 @@ class Navbar extends Component {
         return ( 
             <div className=' navbarMain'>
               
-               <section className='navMain'>
+               <section className='navMain'> 
                    <nav>
                        <div className='logoImg animate__animated animate__slower animate__flash'>
                          <h1>Capital Gain Management Co.</h1>

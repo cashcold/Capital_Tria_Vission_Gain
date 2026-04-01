@@ -98,7 +98,7 @@ input:focus{
         color: white;
     }
     .a_Links{
-        display: flex;
+        display: block;
         /* padding: 2em 5em; */
        
     }

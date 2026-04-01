@@ -178,8 +178,8 @@ i{
         margin-left: -2em;
     }
     .logoImg h1{
-        font-size: 1.5rem;
-        display: flex;
+        font-size: 1.3rem;
+        display: inline-flex;
     }
     .logoImg h1{
         margin-left: 1em;
