@@ -98,7 +98,7 @@ class AutoMiningReactivationFrontend extends Component {
 
   render() {
     return (
-      <div className="auto-mining-page">
+      <div className="auto-mining-root auto-mining-page">
         <div className="scene-grid auto-mining-scene-grid" />
         <div className="hero-bg-cyan" />
         <div className="hero-bg-indigo" />
@@ -127,15 +127,15 @@ class AutoMiningReactivationFrontend extends Component {
                 plan will update automatically.
               </div>
 
-              <div className="auto-mining-actions">
+               <div className="auto-mining-actions">
                 <button
-                className="auto-mining-button-3d auto-mining-primary-button"
-                type="button"
+                  className="auto-mining-cta-button auto-mining-primary-button"
+                  type="button"
                 >
-                Go to Dashboard
+                  Go to Dashboard
                 </button>
 
-                <button className="auto-mining-secondary" type="button">
+                <button className="auto-mining-secondary-button" type="button">
                   View Deposit Steps
                 </button>
               </div>
@@ -232,11 +232,6 @@ class AutoMiningReactivationFrontend extends Component {
                 <div className="auto-mining-section-title">
                   How users should update their mining plan
                 </div>
-              </div>
-
-              <div className="auto-mining-section-text">
-                Put this guide on your homepage or dashboard so users can
-                clearly see what they must do after each cashout.
               </div>
             </div>
 

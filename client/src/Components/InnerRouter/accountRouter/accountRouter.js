@@ -359,7 +359,7 @@ class AccountRouter extends Component {
             // debug: show withdraw detection values in console
                 return ( 
             <div className='account__router'>
-                {/* {
+                {
                     CheckDeposit === 0 && !showDepositModal && this.state.totalFees === 0 && (
                         <section className="div invest_ui_ux_btn">
                         <div class="no-deposit-container">
@@ -377,8 +377,8 @@ class AccountRouter extends Component {
                         </div>
                     </section>
                     )
-                } */}
-                    {
+                }
+                    {/* {
                         CheckDeposit === 0 && !showDepositModal && (
                             <section className="div invest_ui_ux_btn">
                             <div class="no-deposit-container">
@@ -396,7 +396,7 @@ class AccountRouter extends Component {
                             </div>
                         </section>
                         )
-                    }
+                    } */}
                 <section class="warning_message">
                     <AccountStatusAlert />
                 </section>
@@ -453,7 +453,7 @@ class AccountRouter extends Component {
                     </div>
                 </div>
                 )}
-               {/* {this.state.totalFees > 0 && (
+               {this.state.totalFees > 0 && (
 
                 <div className="fee-warning">
 
@@ -494,7 +494,7 @@ class AccountRouter extends Component {
                 </div>
                 
 
-                )} */}
+                )}
             
                 {
                 CheckDeposit > 1 && (
