@@ -180,12 +180,7 @@ Router.post("/register/", async (req, res) => {
 });
 
 // One-time migration routes removed — fields added and database migrated.
-
-
-
-
-    
-    
+  
 Router.post('/login', async(req,res)=>{
     const user = await User.findOne({user_Name: req.body.user_Name})
     if(!user) {
@@ -1069,17 +1064,6 @@ Router.post('/withdrawReferralReward', async (req, res) => {
       res.status(500).json({ error: "Failed to update profile" });
     }
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 Router.get("/admin/referral-performance", async (req, res) => {

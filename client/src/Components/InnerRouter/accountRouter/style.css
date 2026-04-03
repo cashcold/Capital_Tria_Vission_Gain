@@ -973,6 +973,102 @@ to {
   }
 }
 
+.balance-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #050d18, #0a1a2c);
+  font-family: Arial, sans-serif;
+}
+
+.balance-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 40px 50px;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #0c1b2f, #06101c);
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -10px 20px rgba(0,0,0,0.4);
+
+  transform: perspective(1000px) rotateX(10deg) rotateY(-8deg);
+  transition: all 0.4s ease;
+}
+
+.balance-card:hover {
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.03);
+}
+
+.balance-title {
+  color: #8ea4c4;
+  font-size: 16px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.balance-amount {
+  font-size: 64px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 6px 30px rgba(0,153,255,0.25);
+  word-break: break-word;
+  line-height: 1.1;
+}
+
+.AccountBalanceShow {
+  display: flex;
+  justify-content: center;   /* horizontal center */
+  align-items: center;       /* vertical center */
+  text-align: center;        /* center text */
+  height: 30vh;         /* full screen height */
+  width: 100%;
+}
+
+/* tablet */
+@media (max-width: 768px) {
+  .balance-card {
+    padding: 30px 25px;
+    border-radius: 20px;
+    transform: none;
+  }
+
+  .balance-title {
+    font-size: 14px;
+  }
+
+  .balance-amount {
+    font-size: 42px;
+  }
+}
+
+/* mobile */
+@media (max-width: 480px) {
+  .balance-wrapper {
+    padding: 16px;
+  }
+
+  .balance-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .balance-title {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .balance-amount {
+    font-size: 32px;
+  }
+}
 @media screen and (max-width: 768px){
   .div.invest_ui_ux_btn .no-deposit-card {
   padding: 15px;

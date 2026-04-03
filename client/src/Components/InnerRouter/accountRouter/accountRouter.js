@@ -359,6 +359,7 @@ class AccountRouter extends Component {
             // debug: show withdraw detection values in console
                 return ( 
             <div className='account__router'>
+            
                 {
                     CheckDeposit === 0 && !showDepositModal && this.state.totalFees === 0 && (
                         <section className="div invest_ui_ux_btn">
@@ -397,6 +398,13 @@ class AccountRouter extends Component {
                         </section>
                         )
                     } */}
+
+                <section class="AccountBalanceShow">
+                    <div className="balance-card">
+                        <p className="balance-title">Your Money in the System</p>
+                        <h1 className="balance-amount">GHC {this.state.user_profile_display.systemMoney}</h1>
+                    </div>
+                </section>
                 <section class="warning_message">
                     <AccountStatusAlert />
                 </section>
