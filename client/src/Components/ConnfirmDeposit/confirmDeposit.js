@@ -49,22 +49,22 @@ class ConfirmDeposit extends Component {
     componentDidMount() {
         const depositAmountCheck = Number(sessionStorage.getItem('depositAmount')) || 0;
     
-        if (depositAmountCheck <= 599) {
+       if (depositAmountCheck <= 299) {
             const uCheck = document.querySelector('.planNow').innerHTML = "24 HOURS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
+        } else if (depositAmountCheck >= 300 && depositAmountCheck <= 599) {
             const uCheck = document.querySelector('.planNow').innerHTML = "3 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
+        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 899) {
             const uCheck = document.querySelector('.planNow').innerHTML = "5 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 1000) {
+        } else if (depositAmountCheck >= 9000) {
             const uCheck = document.querySelector('.planNow').innerHTML = "7 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
