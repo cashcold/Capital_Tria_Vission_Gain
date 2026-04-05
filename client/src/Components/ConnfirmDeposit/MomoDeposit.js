@@ -48,57 +48,66 @@ class MomoDeposit extends Component {
     componentDidMount() {
         const depositAmountCheck = Number(sessionStorage.getItem('depositAmount')) || 0;
     
-        if (depositAmountCheck <= 599) {
+        if (depositAmountCheck <= 299) {
             const uCheck = document.querySelector('.planNow').innerHTML = "24 HOURS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
+        } else if (depositAmountCheck >= 300 && depositAmountCheck <= 599) {
             const uCheck = document.querySelector('.planNow').innerHTML = "3 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
+        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 899) {
             const uCheck = document.querySelector('.planNow').innerHTML = "5 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 1000) {
+        } else if (depositAmountCheck >= 9000) {
             const uCheck = document.querySelector('.planNow').innerHTML = "7 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
         }
-    
-        // Function to calculate percentage based on deposit amount
+     
+            // Function to calculate percentage based on deposit amount
         const CalculatorEngine = () => {
-            const totalMoneyElement = document.querySelector('.toatalAllMoney');
-            if (!totalMoneyElement) return; // Ensure the element exists
-    
-            let checkPercent = 0;
-            if (depositAmountCheck >= 10 && depositAmountCheck <= 599) {
+
+        const totalMoneyElement = document.querySelector('.toatalAllMoney');
+        if (!totalMoneyElement) return;
+
+        let checkPercent = 0;
+
+        // ✅ New ranges
+        if (depositAmountCheck >= 10 && depositAmountCheck <= 299) {
             checkPercent = depositAmountCheck * 10 / 100;
 
-        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
+        } else if (depositAmountCheck >= 300 && depositAmountCheck <= 599) {
             checkPercent = depositAmountCheck * 15 / 100;
 
-        } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
+        } else if (depositAmountCheck >= 600 && depositAmountCheck <= 899) {
             checkPercent = depositAmountCheck * 20 / 100;
 
-        } else if (depositAmountCheck >= 1000 && depositAmountCheck <= 1200) {
+        } else if (depositAmountCheck >= 900 && depositAmountCheck <= 1200) {
             checkPercent = depositAmountCheck * 25 / 100;
 
         } else if (depositAmountCheck > 1200) {
-            checkPercent = 0; // or handle error if needed
+            totalMoneyElement.innerHTML = "Max is 1200 GHC";
+            this.setState({ checkPercent: 0 });
+            return;
 
         } else {
-            checkPercent = 0; // for values below 10
+            checkPercent = 0; // below 10
         }
-            this.setState({ checkPercent });
-            totalMoneyElement.innerHTML = `GHC${checkPercent.toFixed(2)}`;
+
+        // ✅ Update state
+        this.setState({ checkPercent });
+
+        // ✅ Display result
+        totalMoneyElement.innerHTML = `GHC ${checkPercent.toFixed(2)}`;
         };
-    
-        // Execute the function 
+
+        // Execute the function
         CalculatorEngine();
     
         const user_id = sessionStorage.getItem('user_id'); 
@@ -162,7 +171,7 @@ class MomoDeposit extends Component {
         }
     };
     
-   
+    
 
    onSubmit = ()=>{
     this.setState({ isSubmitting: true });

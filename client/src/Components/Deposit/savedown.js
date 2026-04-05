@@ -204,7 +204,7 @@ class DepositMain extends Component {
         }
 
         // PLAN I → 10 - 599
-       else if (amount >= 10 && amount <= 299) {
+        else if (amount >= 10 && amount <= 599) {
             const Percentage = amount * 10 / 100;
             const total = amount + Percentage;
 
@@ -213,8 +213,8 @@ class DepositMain extends Component {
             document.querySelector('.planNowType').innerHTML = "PLAN I 24HRS";
         }
 
-        
-        else if (amount >= 300 && amount <= 599) {
+        // PLAN II → 600 - 799
+        else if (amount >= 600 && amount <= 799) {
             const Percentage = amount * 15 / 100;
             const total = amount + Percentage;
 
@@ -223,8 +223,8 @@ class DepositMain extends Component {
             document.querySelector('.planNowType').innerHTML = "PLAN II 3DAYS";
         }
 
-       
-        else if (amount >= 600 && amount <= 899) {
+        // PLAN III → 800 - 999
+        else if (amount >= 800 && amount <= 999) {
             const Percentage = amount * 20 / 100;
             const total = amount + Percentage;
 
@@ -233,8 +233,8 @@ class DepositMain extends Component {
             document.querySelector('.planNowType').innerHTML = "PLAN III 5DAYS";
         }
 
-
-        else if (amount >= 900 && amount <= 1200) {
+        // PLAN IV → 1000 - 1200
+        else if (amount >= 1000 && amount <= 1200) {
             const Percentage = amount * 25 / 100;
             const total = amount + Percentage;
 
@@ -249,7 +249,6 @@ class DepositMain extends Component {
             document.querySelector('.percent_check').innerHTML = "Not Available";
             document.querySelector('.planNowType').innerHTML = "";
         }
-
         };
           
         CalculatorEngine()
@@ -337,7 +336,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>24HRS</h4>
-                                            <h4>GHC10 - GHC299	</h4>
+                                            <h4>GHC10 - GHC599	</h4>
                                             <h4>10</h4>
                                         </div>
                                     </div>
@@ -365,7 +364,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>3 DAYS</h4>
-                                            <h4>GHC300 - GHC599	</h4>
+                                            <h4>GHC600 - GHC799	</h4>
                                             <h4>15</h4>
                                         </div>
                                     </div>
@@ -392,7 +391,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>5 DAYS</h4>
-                                            <h4>GHC600 - GHC899	</h4>
+                                            <h4>GHC800 - GHC999	</h4>
                                             <h4>20</h4>
                                         </div>
                                     </div>
@@ -419,7 +418,7 @@ class DepositMain extends Component {
                                      <div className="depositInfo__box__1">
                                         <div className="depositInfo__innerbox__1">
                                             <h4>7 DAYS</h4>
-                                            <h4>GHC900 - GHC1200	</h4>
+                                            <h4>GHC1000 - GHC1200	</h4>
                                             <h4>25</h4>
                                         </div>
                                     </div>

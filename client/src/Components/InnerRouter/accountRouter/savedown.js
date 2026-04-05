@@ -13,6 +13,7 @@ import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
 import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
 import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
 import AutoFeeDeduction from '../../AutoFeeDeduction/AutoFeeDeduction';
+import AutoMiningReactivationFrontend from '../../AutoMiningReactivationFrontend/AutoMiningReactivationFrontend';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -253,7 +254,7 @@ class AccountRouter extends Component {
           
 
             if(activetDeposit__amount){
-                if(activetDeposit__amount >= 10 && activetDeposit__amount <= 299){
+                if(activetDeposit__amount >= 10 && activetDeposit__amount <= 599){
                   if(today_date > date_24hrs  && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC 0.00"
@@ -268,7 +269,7 @@ class AccountRouter extends Component {
             }
            
             if(activetDeposit__amount){ 
-                if(activetDeposit__amount >= 300 && activetDeposit__amount <= 599){
+                if(activetDeposit__amount >= 600 && activetDeposit__amount <= 799){
                   if(today_date > date_3days && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
@@ -279,7 +280,7 @@ class AccountRouter extends Component {
                 }
             }
             if(activetDeposit__amount){
-                if(activetDeposit__amount >= 600 && activetDeposit__amount <= 899){
+                if(activetDeposit__amount >= 800 && activetDeposit__amount <= 999){
                   if(today_date > date_5days && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
@@ -290,7 +291,7 @@ class AccountRouter extends Component {
                 }
             }
             if(activetDeposit__amount){
-                if(activetDeposit__amount >= 900 && activetDeposit__amount <= 1200){
+                if(activetDeposit__amount >= 1000 && activetDeposit__amount <= 1200){
                   if(today_date > date_7days && this.state.showDetails !== false){
                     this.setState({ showDetails: false }, () =>{
                         document.querySelector('.activetStatus').innerHTML = "GHC.00"
@@ -358,6 +359,7 @@ class AccountRouter extends Component {
             // debug: show withdraw detection values in console
                 return ( 
             <div className='account__router'>
+            
                 {
                     CheckDeposit === 0 && !showDepositModal && this.state.totalFees === 0 && (
                         <section className="div invest_ui_ux_btn">
@@ -377,7 +379,27 @@ class AccountRouter extends Component {
                     </section>
                     )
                 }
-                 <section class="AccountBalanceShow">
+                    {/* {
+                        CheckDeposit === 0 && !showDepositModal && (
+                            <section className="div invest_ui_ux_btn">
+                            <div class="no-deposit-container">
+                            <div class="no-deposit-card">
+                                <div class="icon-wrapper">
+                                <img src="https://images.unsplash.com/photo-1639843885527-43b098a9661a?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="No Deposit" class="no-deposit-icon"/>
+                                </div>
+                                <h1>No Active Deposits</h1>
+                                <p>
+                                You currently don't have any active deposits in your mining account.
+                                Start earning by making your first deposit today!
+                                </p>
+                                <button class="deposit-button"> <a href='/dashboard/deposit'>Make a Deposit</a></button>
+                            </div>
+                            </div>
+                        </section>
+                        )
+                    } */}
+
+                <section class="AccountBalanceShow">
                     <div className="balance-card">
                         <p className="balance-title">Your Money in the System</p>
                         <h1 className="balance-amount">GHC {this.state.user_profile_display.systemMoney}</h1>
@@ -491,6 +513,13 @@ class AccountRouter extends Component {
                 </section>
                 )
                 }
+               {Number(this.state?.user_profile_display?.systemMoney || 0) > 1 &&
+                this.state?.user_profile_display?.autoMining === true && (
+                <section className="systemMoneyAlertAutoMining">
+                    <AutoMiningReactivationFrontend />
+                </section>
+                )}
+
                 {showDepositModal && (
                 <section>
                     <DepositModal/>

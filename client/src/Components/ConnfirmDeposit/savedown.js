@@ -80,16 +80,16 @@ class ConfirmDeposit extends Component {
             let checkPercent = 0;
 
             // ✅ Correct plan ranges
-            if (depositAmountCheck >= 10 && depositAmountCheck <= 299) {
+            if (depositAmountCheck >= 10 && depositAmountCheck <= 599) {
                 checkPercent = depositAmountCheck * 10 / 100;
 
-            } else if (depositAmountCheck >= 300 && depositAmountCheck <= 599) {
+            } else if (depositAmountCheck >= 600 && depositAmountCheck <= 799) {
                 checkPercent = depositAmountCheck * 15 / 100;
 
-            } else if (depositAmountCheck >= 600 && depositAmountCheck <= 899) {
+            } else if (depositAmountCheck >= 800 && depositAmountCheck <= 999) {
                 checkPercent = depositAmountCheck * 20 / 100;
 
-            } else if (depositAmountCheck >= 900 && depositAmountCheck <= 1200) {
+            } else if (depositAmountCheck >= 1000 && depositAmountCheck <= 1200) {
                 checkPercent = depositAmountCheck * 25 / 100;
 
             } else {

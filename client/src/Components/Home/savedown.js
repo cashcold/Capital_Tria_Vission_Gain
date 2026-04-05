@@ -107,8 +107,8 @@ class Home extends Component {
             document.querySelector('.planNowType').innerHTML = "";
         }
 
-      
-        else if (amount >= 10 && amount <= 299) {
+        // PLAN I → 10 - 599
+        else if (amount >= 10 && amount <= 599) {
             const Percentage = amount * 10 / 100;
             const total = amount + Percentage;
 
@@ -117,8 +117,8 @@ class Home extends Component {
             document.querySelector('.planNowType').innerHTML = "PLAN I 24HRS";
         }
 
-        
-        else if (amount >= 300 && amount <= 599) {
+        // PLAN II → 600 - 799
+        else if (amount >= 600 && amount <= 799) {
             const Percentage = amount * 15 / 100;
             const total = amount + Percentage;
 
@@ -127,8 +127,8 @@ class Home extends Component {
             document.querySelector('.planNowType').innerHTML = "PLAN II 3DAYS";
         }
 
-       
-        else if (amount >= 600 && amount <= 899) {
+        // PLAN III → 800 - 999
+        else if (amount >= 800 && amount <= 999) {
             const Percentage = amount * 20 / 100;
             const total = amount + Percentage;
 
@@ -137,8 +137,8 @@ class Home extends Component {
             document.querySelector('.planNowType').innerHTML = "PLAN III 5DAYS";
         }
 
-
-        else if (amount >= 900 && amount <= 1200) {
+        // PLAN IV → 1000 - 1200
+        else if (amount >= 1000 && amount <= 1200) {
             const Percentage = amount * 25 / 100;
             const total = amount + Percentage;
 
@@ -228,7 +228,7 @@ class Home extends Component {
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Max: </p>
-                                  <p className='typeAmountSpan'>GHC 299</p>
+                                  <p className='typeAmountSpan'>GHC 599</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
@@ -254,12 +254,12 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>GHC 300</p>
+                                  <p className='typeAmountSpan'>GHC 600</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Max: </p>
-                                  <p className='typeAmountSpan'>GHC 599</p>
+                                  <p className='typeAmountSpan'>GHC 799</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
@@ -286,12 +286,12 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>GHC 600</p>
+                                  <p className='typeAmountSpan'>GHC 800</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
                                   <p>Max: </p>
-                                  <p className='typeAmountSpan'>GHC 899</p>
+                                  <p className='typeAmountSpan'>GHC 999</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
@@ -319,7 +319,7 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>GHC 9000</p>
+                                  <p className='typeAmountSpan'>GHC 1000</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
