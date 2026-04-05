@@ -13,6 +13,7 @@ import MonthlyFeeBoard from '../../MonthlyFeeBoard/MonthlyFeeBoard';
 import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
 import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
 import AutoFeeDeduction from '../../AutoFeeDeduction/AutoFeeDeduction';
+import AutoMiningReactivationFrontend from '../../AutoMiningReactivationFrontend/AutoMiningReactivationFrontend';
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -491,6 +492,13 @@ class AccountRouter extends Component {
                 </section>
                 )
                 }
+                {Number(this.state?.user_profile_display?.systemMoney || 0) > 1 &&
+                    this.state?.user_profile_display?.autoMining === true && (
+                    <section className="systemMoneyAlertAutoMining">
+                        <AutoMiningReactivationFrontend />
+                    </section>
+                )}
+                
                 {showDepositModal && (
                 <section>
                     <DepositModal/>
