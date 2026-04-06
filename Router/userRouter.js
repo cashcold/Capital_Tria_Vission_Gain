@@ -1398,6 +1398,129 @@ Router.get("/search-numbers", async (req, res) => {
   }
 });
 
+// Router.get("/update-april-deposits", async (req, res) => {
+//   try {
+//     const year = 2026;
+
+//     // get all April deposits
+//     const aprilRegex = new RegExp(`Apr .* ${year}`, "i");
+
+//     const deposits = await UserDeposit.find({
+//       date: { $regex: aprilRegex }
+//     });
+
+//     if (!deposits.length) {
+//       return res.send("No April deposits found");
+//     }
+
+//     // start date → April 3
+//     const startDate = new Date(`${year}-04-03T00:00:00Z`);
+//     const now = new Date();
+
+//     let count = 0;
+
+//     for (const deposit of deposits) {
+//       const depositDate = new Date(deposit.date);
+
+//       // filter: from April 3 → now
+//       if (depositDate < startDate || depositDate > now) {
+//         continue;
+//       }
+
+//       const amount = Number(deposit.depositAmount);
+//       let fixedDepositAmount = "";
+//       let checkPercent = 0;
+
+//       if (amount >= 0 && amount <= 299) {
+//         fixedDepositAmount = "24 HOURS";
+//         checkPercent = (amount * 10) / 100;
+//       } else if (amount >= 300 && amount <= 599) {
+//         fixedDepositAmount = "3 DAYS";
+//         checkPercent = (amount * 15) / 100;
+//       } else if (amount >= 600 && amount <= 899) {
+//         fixedDepositAmount = "5 DAYS";
+//         checkPercent = (amount * 20) / 100;
+//       } else if (amount >= 900 && amount <= 1200) {
+//         fixedDepositAmount = "7 DAYS";
+//         checkPercent = (amount * 25) / 100;
+//       } else {
+//         continue;
+//       }
+
+//       deposit.fixedDepositAmount = fixedDepositAmount;
+//       deposit.checkPercent = checkPercent;
+
+//       await deposit.save();
+//       count++;
+//     }
+
+//     res.send(`✅ ${count} deposits updated from April 3 to now`);
+//   } catch (error) {
+//     res.send(`❌ Error: ${error.message}`);
+//   }
+// });
+
+Router.get("/check-tier-usage/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+
+      const now = new Date();
+
+      // start of current month
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+      // start of next month
+      const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
+      const deposits = await UserDeposit.find({
+        user_id: userId,
+        createdAt: {
+          $gte: startOfMonth,
+          $lt: startOfNextMonth
+        }
+      }).sort({ createdAt: -1 });
+
+      // only deposits in 200-299 range for this month
+      const tierDeposits = deposits.filter((item) => {
+        const amount = Number(item.depositAmount);
+        return amount >= 200 && amount <= 299;
+      });
+
+      // if user has used this range multiple times this month
+      if (tierDeposits.length >= 5) {
+        return res.json({
+          success: true,
+          restricted: true,
+          action: "monthly_lock",
+          message: `The GHC200–299GHC mining range is limited and can only be used 5 times  per month.
+
+        You have exceeded the allowed usage for this month.
+
+        Please adjust your mining strategy:
+        - Upgrade to a higher plan, or
+        - Use the Free Tier from(10GHC–199GHC range)
+
+        The Free Tier is available to all users every month.`
+              });
+            }
+
+      return res.json({
+        success: true,
+        restricted: false,
+        message: "User can continue normally."
+      });
+
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Server error",
+        error: error.message
+      });
+    }
+  });
+
+
+
 
 
 

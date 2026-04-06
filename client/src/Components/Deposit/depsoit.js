@@ -57,6 +57,7 @@ class DepositMain extends Component {
                   throw new Error('Token expired');
               }
             const id = decoded.user_id
+            this.setState({ user_id: id });
             axios.post('/users/user_profile_display',{id})
             .then(data => this.setState({user_profile_display: data.data}))
 
@@ -75,65 +76,80 @@ class DepositMain extends Component {
         })
         console.log(this.state.date)
     }
+        onSubmit = async (event) => {
+            event.preventDefault();
 
-    onSubmit = (event)=>{
-        event.preventDefault()
+            const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
+            const depositAmount = Number(this.state.depositAmount);
+
+            if (depositAmount > maxDeposit) {
+                toast.warn(
+                    `You cannot invest more than your maximum deposit ${maxDeposit} GHC. Please refer more people to enjoy higher deposit.`,
+                    {
+                        autoClose: 30000
+                    }
+                );
+                return false;
+            }
+
+            try {
+                const res = await axios.get(
+                    `/users/check-tier-usage/${this.state.user_id}`
+                );
+
+                if (res.data.restricted) {
+                    toast.warning(res.data.message, {
+                        autoClose: 10000
+                    });
+                    return false;
+                }
+            } catch (err) {
+                console.log(err);
+                toast.error("Error checking deposit rules");
+                return false;
+            }
+
+            sessionStorage.setItem('planNow', this.state.planNow);
+            sessionStorage.setItem('depositAmount', this.state.depositAmount);
+            sessionStorage.setItem('deposit_date', this.state.deposit_date);
+
+            const DepositForm = {
+                user_id: this.state.user_id,
+                user_Name: this.state.user_Name,
+                full_Name: this.state.full_Name,
+                planNow: this.state.planNow,
+                depositAmount: this.state.depositAmount,
+                activetDeposit: this.state.depositAmount,
+                walletAddress: this.state.walletAddress,
+                date: this.state.date,
+                checkWallet: this.state.checkWallet,
+            };
+
+            if (!DepositForm.planNow) {
+                toast.warn('Select Plan');
+                return false;
+            }
+            if (!DepositForm.depositAmount) {
+                toast.warn('Amount to Spend');
+                return false;
+            }
+            if (!DepositForm.checkWallet) {
+                toast.warn('Select Deposit Method');
+                return false;
+            }
+
+            setTimeout(() => {
+                window.location = '/dashboard/confirm_deposit';
+            }, 600);
+        }
+    onSubmitMomo = async (event) => {
+        event.preventDefault();
 
         const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
         const depositAmount = Number(this.state.depositAmount);
 
-          // CHECK MAX DEPOSIT
-      if(depositAmount > maxDeposit){
-            toast.warn(
-                `You cannot invest more than your maximum deposit ${maxDeposit} GHC. Please refer more people to enjoy higher deposit.`,
-                {
-                    autoClose: 30000
-                }
-            );
-            return false;
-        }
-            
-        sessionStorage.setItem('planNow', this.state.planNow)
-         sessionStorage.setItem('depositAmount', this.state.depositAmount)
-        sessionStorage.setItem('deposit_date', this.state.deposit_date)
-
-        const DepositForm = {
-            user_id: this.state.user_id,
-            user_Name: this.state.user_Name,
-            full_Name: this.state.full_Name,
-            planNow: this.state.planNow,
-            depositAmount: this.state.depositAmount,
-            activetDeposit: this.state.depositAmount,
-            walletAddress: this.state.walletAddress,
-            date: this.state.date,
-            checkWallet: this.state.checkWallet,
-
-        }
-
-        if(!DepositForm.planNow){
-            toast.warn('Select Plan')
-            return false
-        }
-        if(!DepositForm.depositAmount){
-            toast.warn('Amount to Spend')
-            return false
-        }
-        if(!DepositForm.checkWallet){
-            toast.warn('Select Deposit Method')
-            return false
-        }
-        setTimeout(()=>{
-            window.location='/dashboard/confirm_deposit'
-        },600)
-    } 
-    onSubmitMomo = (event)=>{
-        event.preventDefault()
-
-          const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
-        const depositAmount = Number(this.state.depositAmount);
-
         // CHECK MAX DEPOSIT
-      if(depositAmount > maxDeposit){
+        if (depositAmount > maxDeposit) {
             toast.warn(
                 `You cannot invest more than your maximum deposit ${maxDeposit} GHC. Please refer more people to enjoy higher deposit.`,
                 {
@@ -142,10 +158,27 @@ class DepositMain extends Component {
             );
             return false;
         }
-        
-        sessionStorage.setItem('planNow', this.state.planNow)
-         sessionStorage.setItem('depositAmount', this.state.depositAmount)
-        sessionStorage.setItem('deposit_date', this.state.deposit_date)
+
+        try {
+            const res = await axios.get(
+                `/users/check-tier-usage/${this.state.user_id}`
+            );
+
+            if (res.data.restricted) {
+                toast.warning(res.data.message, {
+                    autoClose: 60000
+                });
+                return false;
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error("Error checking deposit rules");
+            return false;
+        }
+
+        sessionStorage.setItem('planNow', this.state.planNow);
+        sessionStorage.setItem('depositAmount', this.state.depositAmount);
+        sessionStorage.setItem('deposit_date', this.state.deposit_date);
 
         const DepositForm = {
             user_id: this.state.user_id,
@@ -157,24 +190,24 @@ class DepositMain extends Component {
             walletAddress: this.state.walletAddress,
             date: this.state.date,
             checkWallet: this.state.checkWallet,
+        };
 
+        if (!DepositForm.planNow) {
+            toast.warn('Select Plan');
+            return false;
+        }
+        if (!DepositForm.depositAmount) {
+            toast.warn('Amount to Spend');
+            return false;
+        }
+        if (!DepositForm.checkWallet) {
+            toast.warn('Select Deposit Method');
+            return false;
         }
 
-        if(!DepositForm.planNow){
-            toast.warn('Select Plan')
-            return false
-        }
-        if(!DepositForm.depositAmount){
-            toast.warn('Amount to Spend')
-            return false
-        }
-        if(!DepositForm.checkWallet){
-            toast.warn('Select Deposit Method')
-            return false
-        }
-        setTimeout(()=>{
-            window.location='/dashboard/MomoDeposit'
-        },600)
+        setTimeout(() => {
+            window.location = '/dashboard/MomoDeposit';
+        }, 600);
     }
 
 
@@ -203,7 +236,7 @@ class DepositMain extends Component {
             document.querySelector('.planNowType').innerHTML = "";
         }
 
-        // PLAN I → 10 - 599
+        
        else if (amount >= 10 && amount <= 299) {
             const Percentage = amount * 10 / 100;
             const total = amount + Percentage;
@@ -465,6 +498,7 @@ class DepositMain extends Component {
                             onChange={this.handleChange('depositAmount')}
                             placeholder='e.g 50'
                             /></h5>
+
                             <p className='usdtAmount'>USDT Amount: {usdtAmount.toFixed(2)}</p>
                         </div>
                         <div className="bit__btn">
