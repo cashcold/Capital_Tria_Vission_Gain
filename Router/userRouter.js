@@ -1460,64 +1460,62 @@ Router.get("/search-numbers", async (req, res) => {
 //   }
 // });
 
-Router.get("/check-tier-usage/:userId", async (req, res) => {
-    try {
-      const { userId } = req.params;
+Router.get("/check-tier-usage/:userId/:amount", async (req, res) => {
+  try {
+    const { userId, amount } = req.params;
+    const depositAmount = Number(amount);
 
-      const now = new Date();
+    const now = new Date();
 
-      // start of current month
-      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
-      // start of next month
-      const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    const deposits = await UserDeposit.find({
+      user_id: userId,
+      createdAt: {
+        $gte: startOfMonth,
+        $lt: startOfNextMonth
+      }
+    }).sort({ createdAt: -1 });
 
-      const deposits = await UserDeposit.find({
-        user_id: userId,
-        createdAt: {
-          $gte: startOfMonth,
-          $lt: startOfNextMonth
-        }
-      }).sort({ createdAt: -1 });
+    const tierDeposits = deposits.filter((item) => {
+      const amt = Number(item.depositAmount);
+      return amt >= 200 && amt <= 299;
+    });
 
-      // only deposits in 200-299 range for this month
-      const tierDeposits = deposits.filter((item) => {
-        const amount = Number(item.depositAmount);
-        return amount >= 200 && amount <= 299;
-      });
+    const tryingRestrictedRange = depositAmount >= 200 && depositAmount <= 299;
 
-      // if user has used this range multiple times this month
-      if (tierDeposits.length >= 5) {
-        return res.json({
-          success: true,
-          restricted: true,
-          action: "monthly_lock",
-          message: `The GHC200–299GHC mining range is limited and can only be used 5 times  per month.
-
-        You have exceeded the allowed usage for this month.
-
-        Please adjust your mining strategy:
-        - Upgrade to a higher plan, or
-        - Use the Free Tier from(10GHC–199GHC range)
-
-        The Free Tier is available to all users every month.`
-              });
-            }
-
+    if (tierDeposits.length >= 5 && tryingRestrictedRange) {
       return res.json({
         success: true,
-        restricted: false,
-        message: "User can continue normally."
-      });
+        restricted: true,
+        action: "monthly_lock",
+        message: `The GHC200–299 mining range is limited and can only be used 5 times per month.
 
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Server error",
-        error: error.message
+You have exceeded the allowed usage for this month.
+
+Please adjust your mining strategy:
+- Upgrade to a higher plan, or
+- Use the Free Tier from (10GHC–199GHC range)
+
+The Free Tier is available to all users every month.`
       });
     }
-  });
+
+    return res.json({
+      success: true,
+      restricted: false,
+      message: "User can continue normally."
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message
+    });
+  }
+});
 
 
 

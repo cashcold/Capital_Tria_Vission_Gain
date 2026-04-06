@@ -94,7 +94,7 @@ class DepositMain extends Component {
 
             try {
                 const res = await axios.get(
-                    `/users/check-tier-usage/${this.state.user_id}`
+                    `/users/check-tier-usage/${this.state.user_id}/${this.state.depositAmount}`
                 );
 
                 if (res.data.restricted) {
@@ -161,7 +161,7 @@ class DepositMain extends Component {
 
         try {
             const res = await axios.get(
-                `/users/check-tier-usage/${this.state.user_id}`
+               `/users/check-tier-usage/${this.state.user_id}/${this.state.depositAmount}`
             );
 
             if (res.data.restricted) {
