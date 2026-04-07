@@ -778,7 +778,7 @@ Router.post("/withdraw/:id", async (req, res) => {
           // 10% mining profit (for display on dashboard)
           const miningCost10 = +(total * 0.10).toFixed(2);
 
-          // service fee ≈ 3.143% of total withdrawals
+   
           const payableFee = +(total * (11 / 350)).toFixed(2); // exact ratio so 350 => 11.00 always
 
 

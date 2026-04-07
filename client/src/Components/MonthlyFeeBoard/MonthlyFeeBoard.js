@@ -193,7 +193,7 @@ class MonthlyFeeBoard extends Component {
                       <th>Month</th>
                       <th>Total Withdrawn</th>
                       <th>Mining Profit (10%)</th>
-                      <th>Service Fee (3.14%)</th>
+                      <th>Service Fee (31.4%)</th>
                       <th>Status</th>
                     </tr>
                   </thead>

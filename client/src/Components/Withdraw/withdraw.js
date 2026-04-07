@@ -117,14 +117,20 @@ class WithdrawMain extends Component {
         let checkPercent = 0;
         const depositAmountNum = Number(activetDeposit__amount);
 
-        if (depositAmountNum > 1000) {
-            checkPercent = depositAmountNum * 25/100;
-        } else if (depositAmountNum > 800) {
-            checkPercent = depositAmountNum * 20/100;
-        } else if (depositAmountNum >= 600) {
-            checkPercent = depositAmountNum * 15/100;
+        if (depositAmountNum >= 10 && depositAmountNum <= 299) {
+            checkPercent = depositAmountNum * 10 / 100;
+
+        } else if (depositAmountNum >= 300 && depositAmountNum <= 599) {
+            checkPercent = depositAmountNum * 15 / 100;
+
+        } else if (depositAmountNum >= 600 && depositAmountNum <= 899) {
+            checkPercent = depositAmountNum * 20 / 100;
+
+        } else if (depositAmountNum >= 900 && depositAmountNum <= 1200) {
+            checkPercent = depositAmountNum * 25 / 100;
+
         } else {
-            checkPercent = depositAmountNum * 10/100;
+            checkPercent = 0; // fallback (optional)
         }
 
         const TotalWithdraw = depositAmountNum + checkPercent;
