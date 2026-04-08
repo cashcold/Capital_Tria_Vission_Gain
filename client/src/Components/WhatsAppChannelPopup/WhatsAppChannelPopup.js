@@ -10,13 +10,11 @@ class WhatsAppChannelPopup extends Component {
   };
 
   componentDidMount() {
-    // Session-based: hide only for the current tab session
-    const dismissed = sessionStorage.getItem("wa_channel_popup_dismissed");
+    const dismissed = sessionStorage.getItem("wa_popup_dismissed");
     if (dismissed === "1") return;
 
     this.timer = setTimeout(() => {
       this.setState({ open: true }, () => {
-        // lock scroll when open
         document.body.style.overflow = "hidden";
       });
     }, 15000);
@@ -30,9 +28,8 @@ class WhatsAppChannelPopup extends Component {
   closePopup = () => {
     const { dontShowAgain } = this.state;
 
-    // Save only for this session (refresh won't show, but closing tab/browser resets it)
     if (dontShowAgain) {
-      sessionStorage.setItem("wa_channel_popup_dismissed", "1");
+      sessionStorage.setItem("wa_popup_dismissed", "1");
     }
 
     this.setState({ open: false }, () => {
@@ -44,18 +41,25 @@ class WhatsAppChannelPopup extends Component {
     this.setState((prev) => ({ dontShowAgain: !prev.dontShowAgain }));
   };
 
-  joinChannel = () => {
-    const url = "https://whatsapp.com/channel/0029VbCUcWm7YSd2bAPC4431";
+  joinGroup = () => {
+    const url =
+      "https://chat.whatsapp.com/Iw42G2UNmvL6E0o94ezj2P?mode=gi_t";
 
-    // Optional: if user checked "don't show again" when joining
     if (this.state.dontShowAgain) {
-      sessionStorage.setItem("wa_channel_popup_dismissed", "1");
+      sessionStorage.setItem("wa_popup_dismissed", "1");
     }
 
     window.open(url, "_blank", "noopener,noreferrer");
     this.setState({ open: false }, () => {
       document.body.style.overflow = "";
     });
+  };
+
+  joinChannel = () => {
+    const url =
+      "https://whatsapp.com/channel/0029VbCUcWm7YSd2bAPC4431";
+
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   stopOverlayClose = (e) => {
@@ -78,7 +82,7 @@ class WhatsAppChannelPopup extends Component {
           onClick={this.stopOverlayClose}
           role="dialog"
           aria-modal="true"
-          aria-label="Join WhatsApp Channel"
+          aria-label="Join WhatsApp Community"
         >
           <button
             className="waPopClose"
@@ -88,6 +92,7 @@ class WhatsAppChannelPopup extends Component {
             ✕
           </button>
 
+          {/* HEADER */}
           <div className="waPopTop">
             <div className="waPopLogo" aria-hidden="true">
               <span className="waPopDot" />
@@ -96,34 +101,63 @@ class WhatsAppChannelPopup extends Component {
             </div>
 
             <div className="waPopTitleWrap">
-              <h3 className="waPopTitle">NEW WHATSAPP CHANNEL</h3>
+              <h3 className="waPopTitle">
+                JOIN OUR WHATSAPP COMMUNITY
+              </h3>
               <p className="waPopSub">
-                Join our new WhatsApp channel community platform for updates and
-                many more.
+                Be part of our community. Join the main group to share ideas and
+                connect, or follow our channel for updates.
               </p>
             </div>
           </div>
 
-          <div className="waPopInfo">
-            <div className="waPopBadge">🤖 LIVE UPDATES</div>
-            <div className="waPopBadge">⚡ FAST NOTICES</div>
-            <div className="waPopBadge">✅ TRUSTED</div>
-          </div>
+          {/* MAIN GROUP - PRIMARY */}
+          <div className="waPopSection">
+            <h4 className="waPopSectionTitle">
+              👥 Main WhatsApp Group
+            </h4>
+            <p className="waPopSectionText">
+              Open for everyone to post, share ideas, ask questions, and connect
+              in real-time.
+            </p>
 
-          <div className="waPopActions">
             <button
               className="waPopBtn waPopBtnPrimary"
-              onClick={this.joinChannel}
+              onClick={this.joinGroup}
             >
-              Join Now
+              Join Group Now
               <span className="waPopBtnGlow" />
             </button>
+          </div>
 
-            <button className="waPopBtn waPopBtnGhost" onClick={this.closePopup}>
+          {/* CHANNEL - SECONDARY */}
+          <div className="waPopSection waPopSecondary">
+            <h4 className="waPopSectionTitle">
+              📢 WhatsApp Channel
+            </h4>
+            <p className="waPopSectionText">
+              Get fast updates, announcements, and important notices.
+            </p>
+
+            <button
+              className="waPopBtn waPopBtnGhost"
+              onClick={this.joinChannel}
+            >
+              Follow Channel
+            </button>
+          </div>
+
+          {/* ACTIONS */}
+          <div className="waPopActions">
+            <button
+              className="waPopBtn waPopBtnGhost"
+              onClick={this.closePopup}
+            >
               Not Now
             </button>
           </div>
 
+          {/* CHECKBOX */}
           <label className="waPopCheck">
             <input
               type="checkbox"

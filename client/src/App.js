@@ -222,7 +222,7 @@ class MainApp extends Component {
                         <Other__NavBar />
                         {/* <PriceMarquee /> */}
                         <Navbar />
-                        <DepositAndMiningPlanUpdate />
+                        {/* <DepositAndMiningPlanUpdate /> */}
                         <div className='router'> 
 
                             <Switch>
