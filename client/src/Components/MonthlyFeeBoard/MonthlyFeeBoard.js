@@ -55,14 +55,18 @@ class MonthlyFeeBoard extends Component {
     const active = fees && fees.length > 0 ? fees[selectedIndex] || fees[0] : null;
 
     const totalWithdrawn = active ? Number(active.totalWithdrawn || 0) : 0;
-    const miningCost10 = active ? Number(active.miningCost10 || 0) : 0;
+
+    // supports new field miningCost31, but falls back to old miningCost10
+    const miningCost31 = active
+      ? Number(active.miningCost31 ?? active.miningCost10 ?? 0)
+      : 0;
+
     const payableFee = active ? Number(active.payableFee || 0) : 0;
 
     const statusText = active ? (active.paid ? "PAID" : "UNPAID") : "—";
 
     return (
       <div className="mfWrap">
-        {/* Header */}
         <div className="mfHeader">
           <div className="mfHeaderLeft">
             <div className="mfIconPulse">
@@ -84,12 +88,11 @@ class MonthlyFeeBoard extends Component {
           </div>
         </div>
 
-        {/* Rules */}
         <div className="mfRuleBar">
           <div className="mfRuleItem">
             <i className="fas fa-percentage"></i>
             <span>Mining Percent:</span>
-            <b></b>
+            <b>31.4%</b>
           </div>
 
           <div className="mfRuleDot"></div>
@@ -107,7 +110,6 @@ class MonthlyFeeBoard extends Component {
           </div>
         </div>
 
-        {/* Loading / Error / Empty */}
         {loading && <div className="mfBox">Loading your mining fee details…</div>}
         {error && <div className="mfError">{error}</div>}
 
@@ -123,12 +125,9 @@ class MonthlyFeeBoard extends Component {
           </div>
         )}
 
-        {/* Main content */}
         {!loading && !error && fees.length > 0 && (
           <>
-            {/* Summary cards */}
             <div className="mfCards">
-              {/* Total Withdrawn */}
               <div className="mfCard">
                 <div className="mfCardTop">
                   <i className="fas fa-wallet"></i>
@@ -142,25 +141,23 @@ class MonthlyFeeBoard extends Component {
                 </div>
               </div>
 
-              {/* Mining Profit (10%) */}
               <div className="mfCard">
                 <div className="mfCardTop">
                   <i className="fas fa-industry"></i>
-                  <span>Mining Profit (10%)</span>
+                  <span>Mining Profits </span>
                 </div>
 
-                <div className="mfCardValue">GHC {this.fmtMoney(miningCost10)}</div>
+                <div className="mfCardValue">GHC {this.fmtMoney(miningCost31)}</div>
 
                 <div className="mfCardHint">
-                  Mining profit for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
+                  31.4% mining charge for {active ? `${this.monthName(active.month)} ${active.year}` : ""}
                 </div>
               </div>
 
-              {/* Service Fee */}
               <div className="mfCard mfCardHighlight">
                 <div className="mfCardTop">
                   <i className="fas fa-receipt"></i>
-                  <span>Payable Service Fee</span>
+                  <span>Payable Service Fee </span>
                 </div>
 
                 <div className="mfCardValue">GHC {this.fmtMoney(payableFee)}</div>
@@ -171,7 +168,6 @@ class MonthlyFeeBoard extends Component {
               </div>
             </div>
 
-            {/* Table */}
             <div className="mfTableWrap">
               <div className="mfTableHead">
                 <div className="mfTableHeadLeft">
@@ -192,7 +188,7 @@ class MonthlyFeeBoard extends Component {
                     <tr>
                       <th>Month</th>
                       <th>Total Withdrawn</th>
-                      <th>Mining Profit (10%)</th>
+                      <th>Mining Fee (31.4%)</th>
                       <th>Service Fee (31.4%)</th>
                       <th>Status</th>
                     </tr>
@@ -202,6 +198,7 @@ class MonthlyFeeBoard extends Component {
                     {fees.map((f, idx) => {
                       const isActive = idx === selectedIndex;
                       const paid = !!f.paid;
+                      const rowMiningCost31 = Number(f.miningCost31 ?? f.miningCost10 ?? 0);
 
                       return (
                         <tr
@@ -220,7 +217,7 @@ class MonthlyFeeBoard extends Component {
                           </td>
 
                           <td>GHC {this.fmtMoney(f.totalWithdrawn)}</td>
-                          <td>GHC {this.fmtMoney(f.miningCost10)}</td>
+                          <td>GHC {this.fmtMoney(rowMiningCost31)}</td>
                           <td className="mfPay">GHC {this.fmtMoney(f.payableFee)}</td>
 
                           <td>
@@ -236,7 +233,6 @@ class MonthlyFeeBoard extends Component {
                 </table>
               </div>
 
-              {/* Mining message */}
               <div className="mfMessage">
                 <div className="mfMsgLeft">
                   <div className="mfMsgIcon">
@@ -267,7 +263,6 @@ class MonthlyFeeBoard extends Component {
                 </div>
               </div>
 
-              {/* Notice */}
               {active && !active.paid && (
                 <div className="mfNotice">
                   <i className="fas fa-info-circle"></i>
@@ -277,10 +272,7 @@ class MonthlyFeeBoard extends Component {
                       Your current month service fee is <b>UNPAID</b>.
                       <br />
                       <br />
-                      After the end of every month, you are given <b>3 days grace period</b> to complete this payment.
-                      <br />
-                      <br />
-                      ⚠️ If the fee is not settled within these 3 days, it will be automatically deducted
+                      ⚠️ If the fee is not settled within ending of month, it will be automatically deducted
                       from your next mining activation deposit.
                     </p>
                   </div>

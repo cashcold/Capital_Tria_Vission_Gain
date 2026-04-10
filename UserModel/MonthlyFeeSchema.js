@@ -12,8 +12,8 @@ const MonthlyFeeSchema = new mongoose.Schema(
     month: { type: Number, required: true, index: true }, // 1-12
 
     totalWithdrawn: { type: Number, default: 0 },
-    miningCost10: { type: Number, default: 0 }, // 10% of totalWithdrawn
-    payableFee: { type: Number, default: 0 },  // 20% of miningCost10 (2% of totalWithdrawn)
+    miningCost10: { type: Number, default: 0 }, 
+    payableFee: { type: Number, default: 0 },  
 
     paid: { type: Boolean, default: false },
     paidDate: { type: Date, default: null },

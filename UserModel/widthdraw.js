@@ -19,11 +19,13 @@ const userSchema = new mongoose.Schema({
     }, 
     activetDeposit: {
         type: Number
-      
     }, 
+    checkPercent: {
+        type: Number,
+        default: 0
+    },
     TotalWithdraw: {
         type: Number
-      
     }, 
     zero_accountBalance: {
       

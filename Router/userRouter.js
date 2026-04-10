@@ -725,7 +725,7 @@ Router.post("/withdraw/:id", async (req, res) => {
         if (req.body.zero_accountBalance) user.activetDeposit = req.body.zero_accountBalance;
         await user.save();
 
-        const { email, user_Name, full_Name, type, accountBalance, activetDeposit, zero_accountBalance, date, bitcoin, user_id, TotalWithdraw } = req.body;
+        const { email, user_Name, full_Name, type, accountBalance, activetDeposit, zero_accountBalance, date, bitcoin, user_id, checkPercent, TotalWithdraw } = req.body;
 
         const WithdrawNow = new WithdrawDeposit({
             user_id,
@@ -734,6 +734,7 @@ Router.post("/withdraw/:id", async (req, res) => {
             type,
             accountBalance,
             activetDeposit,
+            checkPercent,
             zero_accountBalance,
             email,
             date,
@@ -763,26 +764,26 @@ Router.post("/withdraw/:id", async (req, res) => {
             {
               $group: {
                 _id: "$user_id",
-                totalWithdrawn: {
+                totalWithdrawnAmount: {
                   $sum: {
-                    $convert: { input: "$activetDeposit", to: "double", onError: 0, onNull: 0 }
+                    $convert: { input: "$TotalWithdraw", to: "double", onError: 0, onNull: 0 }
+                  }
+                },
+                totalCheckPercentAmount: {
+                  $sum: {
+                    $convert: { input: "$checkPercent", to: "double", onError: 0, onNull: 0 }
                   }
                 }
               }
             }
           ]);
 
-                    // calculate totals
-          const total = toNumberSafe(agg?.[0]?.totalWithdrawn || 0);
-
-          // 10% mining profit (for display on dashboard)
-          const miningCost10 = +(total * 0.10).toFixed(2);
-
-   
-          const payableFee = +(total * (11 / 350)).toFixed(2); // exact ratio so 350 => 11.00 always
-
-
-
+          // calculate totals
+          const totalWithdrawn = toNumberSafe(agg?.[0]?.totalWithdrawnAmount || 0);
+          const totalProfit = toNumberSafe(agg?.[0]?.totalCheckPercentAmount || 0);
+          const rate = 0.314;
+          const miningCost10 = +totalProfit.toFixed(2); // total profit (checkPercent)
+          const payableFee = +(totalProfit * rate).toFixed(2); // 31.4% of profit
 
           await MonthlyFee.updateOne(
             { user_id: user_id, year, month },
@@ -796,7 +797,7 @@ Router.post("/withdraw/:id", async (req, res) => {
                 email: email || "",
                 bitcoin: bitcoin || "",
 
-                totalWithdrawn: total,
+                totalWithdrawn: totalWithdrawn,
                 miningCost10,
                 payableFee,
               },
