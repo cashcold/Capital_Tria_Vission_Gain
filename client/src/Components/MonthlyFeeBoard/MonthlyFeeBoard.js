@@ -92,7 +92,7 @@ class MonthlyFeeBoard extends Component {
           <div className="mfRuleItem">
             <i className="fas fa-percentage"></i>
             <span>Mining Percent:</span>
-            <b>31.4%</b>
+            <b>10%, 15% 20% 25%</b>
           </div>
 
           <div className="mfRuleDot"></div>
@@ -188,7 +188,7 @@ class MonthlyFeeBoard extends Component {
                     <tr>
                       <th>Month</th>
                       <th>Total Withdrawn</th>
-                      <th>Mining Fee (31.4%)</th>
+                      <th>Mining Profits</th>
                       <th>Service Fee (31.4%)</th>
                       <th>Status</th>
                     </tr>
