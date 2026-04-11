@@ -1,0 +1,148 @@
+/* Lock background scroll */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal container */
+.modal-card {
+  background: #0b0f19;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 14px;
+  padding: 40px 30px;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 255, 170, 0.08),
+              0 20px 80px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(0, 255, 170, 0.15);
+  animation: popIn 0.35s ease;
+}
+
+/* Pop animation */
+@keyframes popIn {
+  from {
+    transform: translateY(40px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #00ffaa;
+  transform: rotate(90deg);
+}
+
+/* Badge */
+.modal-badge {
+  display: inline-block;
+  background: rgba(0, 255, 170, 0.08);
+  color: #00ffaa;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(0, 255, 170, 0.2);
+}
+
+/* Title */
+.modal-title {
+  font-size: 26px;
+  color: #ffffff;
+  margin-bottom: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Text */
+.modal-text {
+  font-size: 15px;
+  color: #cbd5e1;
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+/* Highlight important text */
+.modal-text strong {
+  color: #00ffaa;
+}
+
+/* Signoff */
+.modal-signoff {
+  margin-top: 25px;
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+/* Subtle divider */
+.modal-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  right: 30px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-card {
+    padding: 30px 22px;
+  }
+
+  .modal-title {
+    font-size: 22px;
+  }
+
+  .modal-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-card {
+    padding: 25px 18px;
+  }
+
+  .modal-title {
+    font-size: 20px;
+  }
+}

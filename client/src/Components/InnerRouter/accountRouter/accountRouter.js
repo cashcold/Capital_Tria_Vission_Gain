@@ -14,6 +14,8 @@ import AutoMiningStatus from '../../AutoMiningStatus/AutoMiningStatus';
 import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
 import AutoFeeDeduction from '../../AutoFeeDeduction/AutoFeeDeduction';
 import AutoMiningReactivationFrontend from '../../AutoMiningReactivationFrontend/AutoMiningReactivationFrontend';
+import InvestorNoticeModal from '../../InvestorNoticeModal/InvestorNoticeModal';
+
 
 class AccountRouter extends Component {
     constructor(props) {
@@ -387,6 +389,7 @@ class AccountRouter extends Component {
                 <section class="warning_message">
                     <AccountStatusAlert />
                 </section>
+                <InvestorNoticeModal userName={this.state.user_Name} />
                 
                 {
                     CheckDeposit > 0 && (
