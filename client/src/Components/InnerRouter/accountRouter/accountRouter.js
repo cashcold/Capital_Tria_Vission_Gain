@@ -389,7 +389,7 @@ class AccountRouter extends Component {
                 <section class="warning_message">
                     <AccountStatusAlert />
                 </section>
-                <InvestorNoticeModal userName={this.state.user_Name} />
+                {/* <InvestorNoticeModal userName={this.state.user_Name} /> */}
                 
                 {
                     CheckDeposit > 0 && (
