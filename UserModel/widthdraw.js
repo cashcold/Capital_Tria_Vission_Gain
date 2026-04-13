@@ -37,6 +37,14 @@ const userSchema = new mongoose.Schema({
     bitcoin: {
         type: String,
     },
+    lastWithdrawIp: {
+    type: String,
+    default: null
+    },
+    lastWithdrawAt: {
+        type: Date,
+        default: null
+    },
     date:{
         type: String,
         require: true,

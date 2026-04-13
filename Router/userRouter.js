@@ -771,9 +771,37 @@ Router.post("/updateAccountBalance/:id", async (req, res) => {
     res.send('Balance update');
 });
 
+
+
 // ✅ WITHDRAW ROUTE (UPDATED WITH MONTHLY FEE AUTO UPDATE)
+
 Router.post("/withdraw/:id", async (req, res) => {
-    try {
+  
+      try {
+            const userIp =
+          req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
+          req.socket?.remoteAddress ||
+          req.ip;
+
+      const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+
+      const recentWithdraw = await WithdrawDeposit.findOne({
+          lastWithdrawIp: userIp,
+          user_id: req.body.user_id, // safer version
+          lastWithdrawAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
+      });
+
+      if (recentWithdraw) {
+          return res.status(400).send(`Duplicate IP Detected.
+
+      A recent withdrawal was made from this IP address within the last 12 hours.
+
+      Multiple accounts are not allowed. If we detect more than one account associated with the same user, all funds may be frozen.
+
+      Please try again after 12 hours.`);
+      }
+
+
         const user = await User.findById(req.params.id);
         if (!user) return res.status(404).json({ error: "User not found" });
 
@@ -794,8 +822,11 @@ Router.post("/withdraw/:id", async (req, res) => {
             email,
             date,
             bitcoin,
-            TotalWithdraw
+            TotalWithdraw,
+            lastWithdrawIp: userIp,
+            lastWithdrawAt: new Date()
         });
+        
 
         await WithdrawNow.save();
 
@@ -946,6 +977,181 @@ Router.post("/withdraw/:id", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+// Router.post("/withdraw/:id", async (req, res) => {
+//     try {
+//         const user = await User.findById(req.params.id);
+//         if (!user) return res.status(404).json({ error: "User not found" });
+
+//         if (req.body.zero_accountBalance) user.activetDeposit = req.body.zero_accountBalance;
+//         await user.save();
+
+//         const { email, user_Name, full_Name, type, accountBalance, activetDeposit, zero_accountBalance, date, bitcoin, user_id, checkPercent, TotalWithdraw } = req.body;
+
+//         const WithdrawNow = new WithdrawDeposit({
+//             user_id,
+//             user_Name,
+//             full_Name,
+//             type,
+//             accountBalance,
+//             activetDeposit,
+//             checkPercent,
+//             zero_accountBalance,
+//             email,
+//             date,
+//             bitcoin,
+//             TotalWithdraw
+//         });
+
+//         await WithdrawNow.save();
+
+//         // ✅ ✅ ✅ AUTO UPDATE MONTHLY FEE AFTER WITHDRAWAL ✅ ✅ ✅
+//         try {
+//           const now = new Date();
+//           const year = now.getUTCFullYear();
+//           const month = now.getUTCMonth() + 1;
+
+//           const start = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
+//           const end = new Date(Date.UTC(year, month, 1, 0, 0, 0));
+
+//           const agg = await WithdrawDeposit.aggregate([
+//             {
+//               $match: {
+//                 type: "Withdrawal",
+//                 user_id: user_id,
+//                 createdAt: { $gte: start, $lt: end },
+//               },
+//             },
+//             {
+//               $group: {
+//                 _id: "$user_id",
+//                 totalWithdrawnAmount: {
+//                   $sum: {
+//                     $convert: { input: "$TotalWithdraw", to: "double", onError: 0, onNull: 0 }
+//                   }
+//                 },
+//                 totalCheckPercentAmount: {
+//                   $sum: {
+//                     $convert: { input: "$checkPercent", to: "double", onError: 0, onNull: 0 }
+//                   }
+//                 }
+//               }
+//             }
+//           ]);
+
+//           // calculate totals
+//           const totalWithdrawn = toNumberSafe(agg?.[0]?.totalWithdrawnAmount || 0);
+//           const totalProfit = toNumberSafe(agg?.[0]?.totalCheckPercentAmount || 0);
+//           const rate = 0.314;
+//           const miningCost10 = +totalProfit.toFixed(2); // total profit (checkPercent)
+//           const payableFee = +(totalProfit * rate).toFixed(2); // 31.4% of profit
+
+//           await MonthlyFee.updateOne(
+//             { user_id: user_id, year, month },
+//             {
+//               $set: {
+//                 user_id: user_id,
+//                 year,
+//                 month,
+//                 user_Name: user_Name || "",
+//                 full_Name: full_Name || "",
+//                 email: email || "",
+//                 bitcoin: bitcoin || "",
+
+//                 totalWithdrawn: totalWithdrawn,
+//                 miningCost10,
+//                 payableFee,
+//               },
+//               $setOnInsert: { paid: false, paidDate: null },
+//             },
+//             { upsert: true }
+//           );
+//         } catch (e) {
+//           console.log("Auto monthly fee update failed:", e.message);
+//         }
+
+//         // Refresh token
+//         const payload = {
+//             user_id: user._id,
+//             full_Name: user.full_Name,
+//             user_Name: user.user_Name,
+//             email: user.email,
+//             bitcoin: user.bitcoin,
+//             ip_address: user.ip_address,
+//             date: user.date,
+//             accountBalance: user.accountBalance,
+//             activetDeposit: user.activetDeposit,
+//             TotalWithdraw: user.TotalWithdraw
+//         };
+//         const RefreshToken = jwt.sign(payload, process.env.RefreshToken);
+//         res.header("RefreshToken", RefreshToken);
+
+//         // Email
+//         const transporter = nodemailer.createTransport({
+//             host: "mail.capgainco.com",
+//             port: 465,
+//             secure: true,
+//             auth: {
+//                 user: process.env.SMTP_USER,
+//                 pass: process.env.SMTP_PASS,
+//             },
+//             tls: { rejectUnauthorized: false },
+//         });
+
+//         const mailOptions = {
+//             from: '"💰 Capital Gain Payments" <support@capgainco.com>',
+//             to: email,
+//             subject: "🚀 Payment Confirmation",
+//             html: `
+//                 <div style="font-family: Arial, sans-serif; color: #333;">
+//                     <h2 style="color: #2D89FF;">💸 Payment Sent!</h2>
+//                     <p>Hello <strong>${user_Name}</strong>,</p>
+//                     <p>✅ Withdrawal amount of <strong>GHC ${TotalWithdraw}.00</strong> has been processed.</p>
+//                     <ul>
+//                         <li>💰 Amount: <strong>GHC ${TotalWithdraw}.00</strong></li>
+//                         <li>🗓 Date: <strong>${date}</strong></li>
+//                         <li>📲 MoMo: <strong>${bitcoin}</strong></li>
+//                     </ul>
+//                 </div>
+//             `,
+//         };
+
+//         transporter.sendMail(mailOptions, async (error, info) => {
+//             if (error) {
+//                 console.error("Email Error: ", error);
+//                 return res.status(500).json({ error: "Email sending failed" });
+//             }
+//             console.log("Email Sent: ", info.response);
+
+//             // ✅ SEND SMS TO USER
+//             try {
+//                 const smsMessage = `Hello ${user_Name},\nCongratulations! Your withdrawal amount of GHC ${TotalWithdraw}.00 has been successfully completed.\nFunds will been sent to your Mobile Money (MoMo) number: ${bitcoin}\nPlease allow a short moment for the payment to reflect in your wallet.\nThank you for choosing Capital Gain Management Co. for your investment needs.\nBest regards,\nCapital Gain Payments Team`;
+
+//                 await sendSMS(bitcoin, smsMessage);
+//                 console.log("SMS Sent Successfully");
+//             } catch (smsError) {
+//                 console.error("SMS Error:", smsError.message);
+//                 // Don't return error - SMS is secondary to withdrawal success
+//             }
+
+//             // ✅ SEND ADMIN NOTIFICATION SMS
+//             try {
+//                 const adminNotificationSMS = `New withdrawal made\nAmount: GHC ${TotalWithdraw}.00\nUser: ${user_Name}\nMoMo: ${bitcoin}`;
+//                 await sendSMS('0203808479', adminNotificationSMS);
+//                 console.log("Admin Notification SMS Sent Successfully");
+//             } catch (adminSmsError) {
+//                 console.error("Admin SMS Error:", adminSmsError.message);
+//                 // Don't return error - admin SMS is secondary
+//             }
+
+//             res.json({ message: "Withdrawal processed successfully", RefreshToken });
+//         });
+
+//     } catch (error) {
+//         console.error("Withdrawal Error: ", error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// });
 
 Router.get("/monthlyfee/my/:userId", async (req, res) => {
   try {

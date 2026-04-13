@@ -10,22 +10,23 @@ import { io } from "socket.io-client";
 class WithdrawMain extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            depositAmount: '0',
-            zero_accountBalance: '0',
-            user_id: '',
-            user_Name: '',
-            type: 'Withdrawal',
-            email: '',
-            accountBalance: '',
-            bitcoin: '',
-            activetDeposit: '',
-            walletAddress: '',
-            withdraw_date: '',
-            activetDeposit__amount: '',
-            checkPercent: 0,
-            TotalWithdraw: '',
-         }
+      this.state = { 
+        depositAmount: '0',
+        zero_accountBalance: '0',
+        user_id: '',
+        user_Name: '',
+        type: 'Withdrawal',
+        email: '',
+        accountBalance: '',
+        bitcoin: '',
+        activetDeposit: '',
+        walletAddress: '',
+        withdraw_date: '',
+        activetDeposit__amount: '',
+        checkPercent: 0,
+        TotalWithdraw: '',
+        withdrawStatusMessage: '',
+    }
 
          this.handleChange = this.handleChange.bind(this)
          this.WithdrawNowFound = this.WithdrawNowFound.bind(this)
@@ -36,46 +37,62 @@ class WithdrawMain extends Component {
         this.setState({[input]: event.target.value})
     }
 
-    WithdrawNowFound = ()=>{
-        this.setState({depositAmount: Number(0)})
-        setTimeout(()=>
-        {toast.success(`Payment will be sent to your account`)},800)
+   WithdrawNowFound = async (e) => {
+    e.preventDefault();
 
-        // sessionStorage.removeItem('token')
-        
+    this.setState({
+        withdrawStatusMessage: ''
+    });
 
-        const Withdraw = { 
-            user_id: this.state.user_id,
-            accountBalance: this.state.accountBalance,
-            activetDeposit: this.state.activetDeposit__amount,
-            zero_accountBalance: this.state.zero_accountBalance,
-            user_Name: this.state.user_Name,
-            full_Name: this.state.user_Name,
-            type: this.state.type,
-            email: this.state.email,
-            date: this.state.withdraw_date, 
-            bitcoin: this.state.bitcoin,
-            activetDeposit: this.state.activetDeposit__amount,
-            checkPercent: this.state.checkPercent,
-            TotalWithdraw: this.state.TotalWithdraw
-        }
+    const Withdraw = {
+        user_id: this.state.user_id,
+        accountBalance: this.state.accountBalance,
+        activetDeposit: this.state.activetDeposit__amount,
+        zero_accountBalance: this.state.zero_accountBalance,
+        user_Name: this.state.user_Name,
+        full_Name: this.state.full_Name,
+        type: this.state.type,
+        email: this.state.email,
+        date: this.state.withdraw_date,
+        bitcoin: this.state.bitcoin,
+        checkPercent: this.state.checkPercent,
+        TotalWithdraw: this.state.TotalWithdraw
+    };
 
-        console.log(Withdraw)
-        let socket = io('/')
+    try {
+        const id = this.props.match.params.id;
 
-        socket.emit('Withdraw', Withdraw)
-        const id  = this.props.match.params.id
-        
-        axios.post(`/users/withdraw/${id}`,Withdraw).then(res => { 
-            sessionStorage.setItem('RefreshToken',JSON.stringify(res.data))
-            return res.data;
-        }).then(res => {toast.success("Account Update") }).then(setTimeout(()=>{
-            window.location='/dashboard'
-        },5000))
+        const response = await axios.post(`/users/withdraw/${id}`, Withdraw);
 
-       
-        
+        // only emit after backend approves
+        let socket = io('/');
+        socket.emit('Withdraw', Withdraw);
+
+        sessionStorage.setItem('RefreshToken', JSON.stringify(response.data));
+
+        toast.success("Account Updated Successfully", {
+            autoClose: false
+        });
+
+        setTimeout(() => {
+            window.location = '/dashboard';
+        }, 3000);
+
+    } catch (error) {
+       const message =
+        error?.response?.data?.error ||
+        error?.response?.data ||
+        "Withdrawal failed";
+
+        toast.error(message, { autoClose: false });
+
+        this.setState({
+            withdrawStatusMessage: message
+        });
+
+        return;
     }
+};
 
     componentDidMount(){
         
@@ -145,7 +162,15 @@ class WithdrawMain extends Component {
     render() { 
         return ( 
             <div className='withdraw__main'>
-                <ToastContainer/>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={false}
+                    newestOnTop
+                    closeOnClick
+                    pauseOnHover
+                    draggable
+                    style={{ zIndex: 9999 }}
+                />
                 <h1 className='widthraw__h1'>WITHDRAW FUND</h1>
                 <div className="textInfo blink_me alert alert-danger  " role="alert" >
                      <h5>You have no funds to withdraw.</h5>
@@ -184,7 +209,14 @@ class WithdrawMain extends Component {
                         </div>
                         <div className="method__box">
                             <h4 className=''>GHC{this.state.TotalWithdraw}.00</h4><br/>
-                            <a href='#' className='btn btn-success withdrawBtn ' onClick={this.WithdrawNowFound}>WITHDRAW BALANCE</a>
+                            {this.state.withdrawStatusMessage && (
+                                <p style={{ color: "red", fontWeight: "bold" }}>
+                                    ⚠️ {this.state.withdrawStatusMessage}
+                                </p>
+                            )}
+                            <a href='#' className='btn btn-success withdrawBtn' onClick={this.WithdrawNowFound}>
+                                WITHDRAW BALANCE
+                            </a>
                         </div>
                         <div className="method__box">
                             <h4  className='btn btn-danger'>GHC0.00</h4>
