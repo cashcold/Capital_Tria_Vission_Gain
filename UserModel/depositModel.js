@@ -41,6 +41,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    lastDepositIp: {
+    type: String,
+    default: null,
+    },
+    lastDepositAt: {
+        type: Date,
+        default: null,
+    },
     deposit_date:{
     },
     date: {

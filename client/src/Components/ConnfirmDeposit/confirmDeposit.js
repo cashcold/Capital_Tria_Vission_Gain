@@ -64,7 +64,7 @@ class ConfirmDeposit extends Component {
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
             }, 900);
-        } else if (depositAmountCheck >= 9000) {
+        } else if (depositAmountCheck >= 900 && depositAmountCheck <= 1200) {
             const uCheck = document.querySelector('.planNow').innerHTML = "7 DAYS";
             setTimeout(() => {
                 this.setState({ fixedDepositAmount: uCheck });
@@ -134,9 +134,12 @@ class ConfirmDeposit extends Component {
         });
     }
 
-    checkDepositBeforeSubmit = async () => {
+   checkDepositBeforeSubmit = async () => {
 
-    this.setState({ isSubmitting: true });
+    this.setState({
+        isSubmitting: true,
+        depositStatusMessage: ""
+    });
 
     const userId = this.state.user_id;
 
@@ -151,28 +154,35 @@ class ConfirmDeposit extends Component {
         this.setState({
             canSubmit,
             lastDepositDate,
-            depositStatusMessage: message
+            depositStatusMessage: message || ""
         });
 
         if (!canSubmit) {
-            toast.error(message, { autoClose: 30000 });
-            this.setState({ isSubmitting: false });
+            toast.error(message, { autoClose: false });
+
+            this.setState({
+                isSubmitting: false,
+                depositStatusMessage: message || ""
+            });
+
             return;
         }
 
-        // If allowed → continue submit
         this.onSubmit();
 
-        } catch (err) {
+    } catch (err) {
 
-            toast.error("Unable to verify deposit status");
-            this.setState({ isSubmitting: false });
+        toast.error("Unable to verify deposit status", { autoClose: false });
 
-        }
-    };
+        this.setState({
+            isSubmitting: false,
+            depositStatusMessage: "Unable to verify deposit status"
+        });
+    }
+};
     
    
-onSubmit = ()=>{
+    onSubmit = async ()=>{
     this.setState({ isSubmitting: true });
 
     const TotalWithdraw = Number(this.state.depositAmount) + Number(this.state.checkPercent); 
@@ -197,14 +207,34 @@ onSubmit = ()=>{
 
        }
        
-       let socket = io('/')
+       try {
+    let socket = io('/');
+    socket.emit('NewDeposit', NewDeposit);
 
-       socket.emit('NewDeposit', NewDeposit)
+    await axios.post("/users/deposit", NewDeposit);
 
-       
-       axios.post( "/users/deposit",NewDeposit).then(res => {toast.success('...Waiting for Network  confirmation,After deposit payment have been received, Your Dashboard will auto credit in minute')}).then(res => setTimeout(()=>{
-            window.location='/dashboard'
-       },1200))
+    toast.success(
+        '...Waiting for Network confirmation, After deposit payment has been received, your Dashboard will auto credit in minute',
+        { autoClose: false }
+    );
+
+    setTimeout(() => {
+        window.location = '/dashboard';
+    }, 1200);
+
+} catch (error) {
+
+    const message =
+        error?.response?.data ||
+        "Deposit request failed. Please try again.";
+
+    toast.error(message, { autoClose: false });
+
+    this.setState({
+        isSubmitting: false,
+        depositStatusMessage: message
+    });
+}
 
    }
 
@@ -222,7 +252,15 @@ onSubmit = ()=>{
                 <div className='confirmDepositNow'>
                      <h1 className='animate__animated animate__flash animate__slower'>USDT <span> DEPOSIT</span>
                     CONFIRMATION:</h1>
-                    <ToastContainer/>
+                    <ToastContainer
+                    position="top-center"
+                    autoClose={false}
+                    newestOnTop
+                    closeOnClick
+                    pauseOnHover
+                    draggable
+                    style={{ zIndex: 9999 }}
+                />
                 </div>
                 <div className='confirmLine'>
              <img className='blockchainQbar_pic' src={USDT} alt="USDT QR Code"/>
@@ -300,6 +338,11 @@ onSubmit = ()=>{
                 </p>
 
                 <div className='btnConfirm'>
+                 {this.state.depositStatusMessage && (
+                    <p style={{ color: "red", fontWeight: "bold", marginTop: "10px" }}>
+                        ⚠️ {this.state.depositStatusMessage}
+                    </p>
+                )}
                 <button 
                 className='btn btn-success'  
                 onClick={this.checkDepositBeforeSubmit}

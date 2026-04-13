@@ -674,39 +674,94 @@ Router.post('/user_balance',async(req,res)=>{
 })
 
 
-
-
-Router.post('/deposit', async(req,res)=>{
-    
-    const UserDepositNow = new UserDeposit({
-        user_id: req.body.user_id,
-        user_Name: req.body.user_Name,
-        full_Name: req.body.full_Name,
-        fixedDepositAmount: (req.body.fixedDepositAmount),
-        depositAmount: Number(req.body.depositAmount),
-        checkPercent: Number(req.body.checkPercent),
-        walletAddress: req.body.walletAddress,
-        email: req.body.email,
-        deposit_date: req.body.deposit_date,
-        date: req.body.date,
-        IsAgreeDeduction: true
-
-    })
-
-    await UserDepositNow.save()
-
-    // ✅ SEND ADMIN NOTIFICATION SMS FOR NEW DEPOSIT
+Router.post('/deposit', async (req, res) => {
     try {
-        const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
-        await sendSMS('0203808479', adminDepositAlert);
-        console.log("Admin Deposit Notification SMS Sent Successfully");
-    } catch (adminSmsError) {
-        console.error("Admin SMS Error:", adminSmsError.message);
-        // Don't return error - SMS is secondary to deposit success
-    }
+        const userIp =
+            req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+            req.socket?.remoteAddress ||
+            req.ip;
 
-    res.send(".........Waiting for BlockChain confirm to credit your Dashboard")
-})
+        const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+
+        const duplicateIpMessage = `Duplicate IP Detected.
+        A recent deposit was made from this IP address within the last 12 hours.
+        May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
+        Please try again after 12 hours.`;
+
+        const existingDeposit = await UserDeposit.findOne({
+            lastDepositIp: userIp,
+            lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
+        });
+
+        if (existingDeposit) {
+            return res.status(400).send(duplicateIpMessage);
+        }
+
+        const UserDepositNow = new UserDeposit({
+            user_id: req.body.user_id,
+            user_Name: req.body.user_Name,
+            full_Name: req.body.full_Name,
+            fixedDepositAmount: req.body.fixedDepositAmount,
+            depositAmount: Number(req.body.depositAmount),
+            checkPercent: Number(req.body.checkPercent),
+            walletAddress: req.body.walletAddress,
+            email: req.body.email,
+            deposit_date: req.body.deposit_date,
+            date: req.body.date,
+            IsAgreeDeduction: true,
+            lastDepositIp: userIp,
+            lastDepositAt: new Date()
+        });
+
+        await UserDepositNow.save();
+
+        try {
+            const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
+            await sendSMS('0203808479', adminDepositAlert);
+            console.log("Admin Deposit Notification SMS Sent Successfully");
+        } catch (adminSmsError) {
+            console.error("Admin SMS Error:", adminSmsError.message);
+        }
+
+        return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Server error");
+    }
+});
+
+
+// Router.post('/deposit', async(req,res)=>{
+    
+//     const UserDepositNow = new UserDeposit({
+//         user_id: req.body.user_id,
+//         user_Name: req.body.user_Name,
+//         full_Name: req.body.full_Name,
+//         fixedDepositAmount: (req.body.fixedDepositAmount),
+//         depositAmount: Number(req.body.depositAmount),
+//         checkPercent: Number(req.body.checkPercent),
+//         walletAddress: req.body.walletAddress,
+//         email: req.body.email,
+//         deposit_date: req.body.deposit_date,
+//         date: req.body.date,
+//         IsAgreeDeduction: true
+
+//     })
+
+//     await UserDepositNow.save()
+
+//     // ✅ SEND ADMIN NOTIFICATION SMS FOR NEW DEPOSIT
+//     try {
+//         const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
+//         await sendSMS('0203808479', adminDepositAlert);
+//         console.log("Admin Deposit Notification SMS Sent Successfully");
+//     } catch (adminSmsError) {
+//         console.error("Admin SMS Error:", adminSmsError.message);
+//         // Don't return error - SMS is secondary to deposit success
+//     }
+
+//     res.send(".........Waiting for BlockChain confirm to credit your Dashboard")
+// })
 
 Router.post("/updateAccountBalance/:id", async (req, res) => {
     console.log(req.body.accountBalance)
@@ -1517,6 +1572,7 @@ The Free Tier is available to all users every month.`
     });
   }
 });
+
 
 
 
