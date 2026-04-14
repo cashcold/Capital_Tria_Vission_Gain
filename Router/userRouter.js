@@ -1841,11 +1841,11 @@ Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
       });
     }
 
-    // Profit threshold = 170% of systemMoney
-    const profitThreshold = (170 / 100) * systemMoney;
+    // Profit threshold = 150% of systemMoney
+    const profitThreshold = (150 / 100) * systemMoney;
 
-    // next investment limit = 40% of systemMoney
-    const maxAllowedInvestment = (systemMoney * 40) / 100;
+    // next investment limit = 30% of systemMoney
+    const maxAllowedInvestment = (systemMoney * 30) / 100;
 
     // Check if profit limit reached
     if (totalProfitEarned >= profitThreshold) {
@@ -1862,11 +1862,11 @@ Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
           totalProfitEarned,
           profitThreshold,
           maxAllowedInvestment,
-          message: `⛔ INVESTMENT BLOCKED! You have reached your monthly profit limit of 170% . Your current profit is GHC${totalProfitEarned.toFixed(2)}. To continue enjoying this package, please top up your systemMoney. At the moment, the maximum deposit you can make is GHC${maxAllowedInvestment.toFixed(2)}, which is 40% of your systemMoney. Your requested deposit of GHC${depositAmount.toFixed(2)} is above this allowed limit. You will regain full access automatically every month. Thank you.`,
+          message: `⛔ INVESTMENT BLOCKED! You have reached your monthly profit limit of 150% . Your current profit is GHC${totalProfitEarned.toFixed(2)}. To continue enjoying this package, please top up your systemMoney. At the moment, the maximum deposit you can make is GHC${maxAllowedInvestment.toFixed(2)}, which is 30% of your systemMoney. Your requested deposit of GHC${depositAmount.toFixed(2)} is above this allowed limit. You will regain full access automatically every month. Thank you.`,
         });
       }
 
-      // At profit limit but deposit within 40% cap - ALLOWED
+      // At profit limit but deposit within 30% cap - ALLOWED
       return res.status(200).json({
         success: true,
         restricted: false,
@@ -1878,7 +1878,7 @@ Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
         totalProfitEarned,
         profitThreshold,
         maxAllowedInvestment,
-        message: `✅ DEPOSIT ALLOWED (LIMITED MODE). You've reached your monthly profit limit (GHC${profitThreshold.toFixed(2)}). Current profit: GHC${totalProfitEarned.toFixed(2)}. Your deposit of GHC${depositAmount.toFixed(2)} is within the 40% cap (GHC${maxAllowedInvestment.toFixed(2)}). Proceeding with limited deposit.`,
+        message: `✅ DEPOSIT ALLOWED (LIMITED MODE). You've reached your monthly profit limit 150%. Current profit: GHC${totalProfitEarned.toFixed(2)}. Your deposit of GHC${depositAmount.toFixed(2)} is within the 30% cap (GHC${maxAllowedInvestment.toFixed(2)}). Proceeding with limited deposit.`,
       });
     }
 
@@ -1894,7 +1894,7 @@ Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
       totalProfitEarned,
       profitThreshold,
       maxAllowedInvestment: null,
-      message: `✅ INVESTMENT ALLOWED! Current profit: GHC${totalProfitEarned.toFixed(2)}. Profit limit (170%): GHC${profitThreshold.toFixed(2)}. Remaining to limit: GHC${(profitThreshold - totalProfitEarned).toFixed(2)}. Keep investing!`,
+      message: `✅ INVESTMENT ALLOWED! Current profit: GHC${totalProfitEarned.toFixed(2)}. Profit limit (150%): GHC${profitThreshold.toFixed(2)}. Remaining to limit: GHC${(profitThreshold - totalProfitEarned).toFixed(2)}. Keep investing!`,
     });
   } catch (error) {
     console.error("check-profit-limit error:", error);
