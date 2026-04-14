@@ -68,7 +68,7 @@ class AutoMiningReactivationFrontend extends Component {
   }
 
   renderSteps() {
-    const { steps } = this.state;
+    const { steps } = this.state;  
 
     return steps.map((step) => (
       <div key={step.no} className="step-card glass-panel auto-mining-step">
@@ -97,6 +97,7 @@ class AutoMiningReactivationFrontend extends Component {
   }
 
   render() {
+     const { user_Name} = this.props;
     return (
       <div className="auto-mining-root auto-mining-page">
         <div className="scene-grid auto-mining-scene-grid" />
@@ -112,7 +113,7 @@ class AutoMiningReactivationFrontend extends Component {
               </div>
 
               <div className="auto-mining-title">
-                After <span className="cyan">Cashout</span>,
+                Hello! {user_Name}, After <span className="cyan">Cashout</span>,
                 <br />
                 reactivate your mining plan{" "}
                 <span className="indigo">in 4 simple steps</span>

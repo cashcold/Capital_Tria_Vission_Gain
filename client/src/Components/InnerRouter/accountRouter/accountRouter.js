@@ -309,6 +309,7 @@ class AccountRouter extends Component {
 
 
        const CheckDeposit = this.state.user_balance.activetDeposit
+       
 
        const { showDetails, user_balance } = this.state;
 
@@ -498,7 +499,7 @@ class AccountRouter extends Component {
                 {Number(this.state?.user_profile_display?.systemMoney || 0) > 1 &&
                     this.state?.user_profile_display?.autoMining === true && (
                     <section className="systemMoneyAlertAutoMining">
-                        <AutoMiningReactivationFrontend />
+                        <AutoMiningReactivationFrontend  user_Name={this.state.user_Name} />
                     </section>
                 )}
                 

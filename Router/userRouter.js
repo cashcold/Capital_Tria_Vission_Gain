@@ -1,10 +1,10 @@
 const express = require('express')
 const Total_TransactionModel = require('../UserModel/total_transactionModel')
 const UserDeposit = require('../UserModel/depositModel')
+const User = require('../UserModel/userModel')
 const WithdrawDeposit = require('../UserModel/widthdraw')
 const ReferralReward = require('../UserModel/ReferralReward')
 const bcrypt = require('bcryptjs')
-const User = require('../UserModel/userModel')
 const mailgun = require('mailgun-js')
 const dotEnv = require('dotenv')
 const jwt = require('jsonwebtoken')
@@ -1780,7 +1780,130 @@ The Free Tier is available to all users every month.`
 });
 
 
+Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
+  try {
+    const { userId, amount } = req.params;
+    const depositAmount = Number(amount);
 
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        restricted: true,
+        message: "User ID is required",
+      });
+    }
+
+    if (isNaN(depositAmount) || depositAmount <= 0) {
+      return res.status(400).json({
+        success: false,
+        restricted: true,
+        message: "Invalid deposit amount",
+      });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        restricted: true,
+        message: "User not found",
+      });
+    }
+
+    // Get current month date range
+    const now = new Date();
+    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+    // Query deposits from current month only
+    const deposits = await UserDeposit.find({
+      user_id: userId,
+      createdAt: {
+        $gte: firstDayOfMonth,
+        $lte: lastDayOfMonth
+      }
+    });
+
+    const totalProfitEarned = deposits.reduce((sum, deposit) => {
+      return sum + Number(deposit.checkPercent || 0);
+    }, 0);
+
+    const systemMoney = Number(user.systemMoney || 0);
+
+    // Verify systemMoney exists
+    if (systemMoney <= 0) {
+      return res.status(400).json({
+        success: false,
+        restricted: true,
+        message: "Invalid system money. Please contact support.",
+      });
+    }
+
+    // Profit threshold = 170% of systemMoney
+    const profitThreshold = (170 / 100) * systemMoney;
+
+    // next investment limit = 40% of systemMoney
+    const maxAllowedInvestment = (systemMoney * 40) / 100;
+
+    // Check if profit limit reached
+    if (totalProfitEarned >= profitThreshold) {
+      // At profit limit - check if new deposit exceeds 40% cap
+      if (depositAmount > maxAllowedInvestment) {
+        return res.status(200).json({
+          success: true,
+          restricted: true,
+          user_id: user._id,
+          full_Name: user.full_Name,
+          user_Name: user.user_Name,
+          email: user.email,
+          systemMoney,
+          totalProfitEarned,
+          profitThreshold,
+          maxAllowedInvestment,
+          message: `⛔ INVESTMENT BLOCKED! You have reached your monthly profit limit of 170% . Your current profit is GHC${totalProfitEarned.toFixed(2)}. To continue enjoying this package, please top up your systemMoney. At the moment, the maximum deposit you can make is GHC${maxAllowedInvestment.toFixed(2)}, which is 40% of your systemMoney. Your requested deposit of GHC${depositAmount.toFixed(2)} is above this allowed limit. You will regain full access automatically every month. Thank you.`,
+        });
+      }
+
+      // At profit limit but deposit within 40% cap - ALLOWED
+      return res.status(200).json({
+        success: true,
+        restricted: false,
+        user_id: user._id,
+        full_Name: user.full_Name,
+        user_Name: user.user_Name,
+        email: user.email,
+        systemMoney,
+        totalProfitEarned,
+        profitThreshold,
+        maxAllowedInvestment,
+        message: `✅ DEPOSIT ALLOWED (LIMITED MODE). You've reached your monthly profit limit (GHC${profitThreshold.toFixed(2)}). Current profit: GHC${totalProfitEarned.toFixed(2)}. Your deposit of GHC${depositAmount.toFixed(2)} is within the 40% cap (GHC${maxAllowedInvestment.toFixed(2)}). Proceeding with limited deposit.`,
+      });
+    }
+
+    // Below profit limit - normal investment
+    return res.status(200).json({
+      success: true,
+      restricted: false,
+      user_id: user._id,
+      full_Name: user.full_Name,
+      user_Name: user.user_Name,
+      email: user.email,
+      systemMoney,
+      totalProfitEarned,
+      profitThreshold,
+      maxAllowedInvestment: null,
+      message: `✅ INVESTMENT ALLOWED! Current profit: GHC${totalProfitEarned.toFixed(2)}. Profit limit (170%): GHC${profitThreshold.toFixed(2)}. Remaining to limit: GHC${(profitThreshold - totalProfitEarned).toFixed(2)}. Keep investing!`,
+    });
+  } catch (error) {
+    console.error("check-profit-limit error:", error);
+    return res.status(500).json({
+      success: false,
+      restricted: true,
+      message: "Server error",
+    });
+  }
+});
 
 
 

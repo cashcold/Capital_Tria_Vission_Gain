@@ -56,25 +56,31 @@ class DepositMain extends Component {
               if (decoded.exp && decoded.exp < currentTime) {
                   throw new Error('Token expired');
               }
-            const id = decoded.user_id
-            this.setState({ user_id: id });
+            const id = decoded.user_id;
+            const user_Name = sessionStorage.getItem('user_Name');
+            const full_Name = sessionStorage.getItem('full_Name');
+            const email = sessionStorage.getItem('email');
+            
+            this.setState({ 
+                user_id: id,
+                user_Name,
+                full_Name,
+                email
+            });
+            
             axios.post('/users/user_profile_display',{id})
             .then(data => this.setState({user_profile_display: data.data}))
+            .catch(err => {
+                console.error('Error fetching user profile:', err);
+                toast.error('Failed to load user profile. Please reload the page.');
+            });
 
-        const user_Name = sessionStorage.getItem('user_Name');
-         this.setState({
-            user_Name: user_Name,
-        });
-
-        const deposit_date = new Date().toString()
+        const deposit_date = new Date().toString();
+        const DateTime = new Date().toString();
         this.setState({
-            deposit_date
-        })
-        const DateTime = new Date().toString()
-        this.setState({
+            deposit_date,
             date: DateTime
-        })
-        console.log(this.state.date)
+        });
     }
         onSubmit = async (event) => {
             event.preventDefault();
@@ -82,31 +88,48 @@ class DepositMain extends Component {
             const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
             const depositAmount = Number(this.state.depositAmount);
 
+            // Validate minimum amount
+            if (depositAmount < 10) {
+                toast.warn('Minimum deposit is GHC10', { autoClose: 5000 });
+                return false;
+            }
+
             if (depositAmount > maxDeposit) {
                 toast.warn(
                     `You cannot invest more than your maximum deposit ${maxDeposit} GHC. Please refer more people to enjoy higher deposit.`,
-                    {
-                        autoClose: 30000
-                    }
+                    { autoClose: 30000 }
                 );
                 return false;
             }
 
             try {
-                const res = await axios.get(
-                    `/users/check-tier-usage/${this.state.user_id}/${this.state.depositAmount}`
-                );
+            // Check tier usage (max deposit limit)
+            const tierRes = await axios.get(
+               `/users/check-tier-usage/${this.state.user_id}/${depositAmount}`
+            );
 
-                if (res.data.restricted) {
-                    toast.warning(res.data.message, {
-                        autoClose: 10000
-                    });
-                    return false;
-                }
-            } catch (err) {
-                console.log(err);
-                toast.error("Error checking deposit rules");
+            if (tierRes.data.restricted) {
+                toast.warning(tierRes.data.message, {
+                    autoClose: 60000
+                });
                 return false;
+            }
+
+            // Check profit limit (170% threshold + 40% cap)
+            const profitRes = await axios.get(
+               `/users/check-profit-limit/${this.state.user_id}/${depositAmount}`
+            );
+
+            if (profitRes.data.restricted) {
+                toast.warning(profitRes.data.message, {
+                    autoClose: 60000
+                });
+                return false;
+            }
+        } catch (err) {
+            console.error('Deposit validation error:', err);
+            toast.error("Error checking deposit rules. Please try again.");
+            return false;
             }
 
             sessionStorage.setItem('planNow', this.state.planNow);
@@ -126,15 +149,15 @@ class DepositMain extends Component {
             };
 
             if (!DepositForm.planNow) {
-                toast.warn('Select Plan');
+                toast.warn('Select Plan', { autoClose: 5000 });
                 return false;
             }
             if (!DepositForm.depositAmount) {
-                toast.warn('Amount to Spend');
+                toast.warn('Enter Amount to Spend', { autoClose: 5000 });
                 return false;
             }
             if (!DepositForm.checkWallet) {
-                toast.warn('Select Deposit Method');
+                toast.warn('Select Deposit Method', { autoClose: 5000 });
                 return false;
             }
 
@@ -160,19 +183,30 @@ class DepositMain extends Component {
         }
 
         try {
-            const res = await axios.get(
-               `/users/check-tier-usage/${this.state.user_id}/${this.state.depositAmount}`
+            const tierRes = await axios.get(
+               `/users/check-tier-usage/${this.state.user_id}/${depositAmount}`
             );
 
-            if (res.data.restricted) {
-                toast.warning(res.data.message, {
+            if (tierRes.data.restricted) {
+                toast.warning(tierRes.data.message, {
+                    autoClose: 60000
+                });
+                return false;
+            }
+
+            const profitRes = await axios.get(
+               `/users/check-profit-limit/${this.state.user_id}/${depositAmount}`
+            );
+
+            if (profitRes.data.restricted) {
+                toast.warning(profitRes.data.message, {
                     autoClose: 60000
                 });
                 return false;
             }
         } catch (err) {
-            console.log(err);
-            toast.error("Error checking deposit rules");
+            console.error('Deposit validation error:', err);
+            toast.error("Error checking deposit rules. Please try again.");
             return false;
         }
 
@@ -409,7 +443,7 @@ class DepositMain extends Component {
                 <section className='deposit__box__1'>
                     <div className="deposit__1">
                         <div className="depositInfo__lay__1">
-                            <h3> <input type='radio' name='planNow' value='5 days' onChange={this.handleChange('planNow')}className='planBtn4'/>  Plan 3</h3>
+                            <h3> <input type='radio' name='planNow' value='5 DAYS' onChange={this.handleChange('planNow')}className='planBtn4'/>  Plan 3</h3>
                         </div>
                         <div className="depositInfo__lay__2">
                              <div className="depositInfo__box__1">
@@ -507,8 +541,8 @@ class DepositMain extends Component {
                         </div>
                         <div className="bit__btn ">
                              {/* <h5 className='bit__btn_2'><a href='#' >Pay with Bitcoin</a></h5> */}
-                             <h5 className='bit__btn_2'><a href='' onClick={this.onSubmit}>Pay with USDT</a></h5>
-                             <h5 className='bit__btn_2'><a href='' onClick={this.onSubmitMomo}>Pay with Momo Number</a></h5>
+                             <h5 className='bit__btn_2'><button type='button' className='depositActionButton' onClick={this.onSubmit}>Pay with USDT</button></h5>
+                             <h5 className='bit__btn_2'><button type='button' className='depositActionButton' onClick={this.onSubmitMomo}>Pay with Momo Number</button></h5>
                         </div>
                     </div>
                 </section>
