@@ -1743,23 +1743,23 @@ Router.get("/check-tier-usage/:userId/:amount", async (req, res) => {
 
     const tierDeposits = deposits.filter((item) => {
       const amt = Number(item.depositAmount);
-      return amt >= 200 && amt <= 299;
+      return amt >= 114 && amt <= 299;
     });
 
-    const tryingRestrictedRange = depositAmount >= 200 && depositAmount <= 299;
+    const tryingRestrictedRange = depositAmount >= 114 && depositAmount <= 299;
 
     if (tierDeposits.length >= 5 && tryingRestrictedRange) {
       return res.json({
         success: true,
         restricted: true,
         action: "monthly_lock",
-        message: `The GHC200–299 mining range is limited and can only be used 5 times per month.
+        message: `The GHC114–299 mining range is limited and can only be used 5 times per month.
 
 You have exceeded the allowed usage for this month.
 
 Please adjust your mining strategy:
 - Upgrade to a higher plan, or
-- Use the Free Tier from (10GHC–199GHC range)
+- Use the Free Tier from (10GHC–114GHC range)
 
 The Free Tier is available to all users every month.`
       });
