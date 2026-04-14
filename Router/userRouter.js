@@ -4,6 +4,7 @@ const UserDeposit = require('../UserModel/depositModel')
 const User = require('../UserModel/userModel')
 const WithdrawDeposit = require('../UserModel/widthdraw')
 const ReferralReward = require('../UserModel/ReferralReward')
+const SystemMoneyTopup = require("../UserModel/SystemMoneyTopupSchema");
 const bcrypt = require('bcryptjs')
 const mailgun = require('mailgun-js')
 const dotEnv = require('dotenv')
@@ -1905,7 +1906,35 @@ Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
   }
 });
 
+Router.post("/topup-systemmoney", async (req, res) => {
+  try {
+    const { username, amount } = req.body;
 
+    if (!username || !amount) {
+      return res.status(400).json({
+        message: "Username and amount are required",
+      });
+    }
+
+    const newTopup = new SystemMoneyTopup({
+      username,
+      amount,
+      status: "pending",
+    });
+
+    await newTopup.save();
+
+    res.status(201).json({
+      message: "Topup request submitted successfully",
+      data: newTopup,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+});
 
 
 

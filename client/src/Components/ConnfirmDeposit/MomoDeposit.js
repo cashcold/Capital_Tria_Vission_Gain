@@ -274,7 +274,7 @@ class MomoDeposit extends Component {
                                     as the <strong> Reference ID / Description</strong> when making the payment.
                                 </p>
 
-                                <p>
+                                <p> 
                                     💰 Please send exactly
                                     <span className="outAmount1"> {Amount_to_send} </span> GHC via Mobile Money.
                                 </p>

@@ -46,12 +46,21 @@ class AccountRouter extends Component {
             timestamp: '',
             redirectToHome: false,
             Refedate: '',
+             showTopupPopup: false,
+            topupAmount: "",
+            username: "",
+            user_profile_display: {
+                systemMoney: 0
+            },
             showDetails: false, // State for popout card visibility
        
          }
 
          this.handleChange = this.handleChange.bind(this)
     }
+    handleAmountChange = (e) => {
+    this.setState({ topupAmount: e.target.value });
+    };
     handleChange = input => (event)=>{
         this.setState({[input]: event.target.value})
     }
@@ -66,6 +75,43 @@ class AccountRouter extends Component {
           }
         }
     }
+
+    handleTopupRequest = async () => {
+  try {
+    const { topupAmount, user_Name } = this.state;
+
+    if (!topupAmount || Number(topupAmount) <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
+
+    const response = await fetch("/users/topup-systemmoney", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: user_Name,
+        amount: Number(topupAmount),
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message);
+      this.setState({
+        topupAmount: "",
+        showTopupPopup: false,
+      });
+    } else {
+      alert(data.message || "Failed to submit topup request");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Server error");
+  }
+};
 
   
 
@@ -212,6 +258,7 @@ class AccountRouter extends Component {
 
 
     render() { 
+
 
         const months = [
         "January","February","March","April","May","June",
@@ -381,12 +428,81 @@ class AccountRouter extends Component {
                     </section>
                     )
                 }
-                 <section class="AccountBalanceShow">
+               <section className="AccountBalanceShow">
                     <div className="balance-card">
                         <p className="balance-title">Your Money in the System</p>
-                        <h1 className="balance-amount">GHC {this.state.user_profile_display.systemMoney}</h1>
+                        <h1 className="balance-amount">
+                        GHC {this.state.user_profile_display.systemMoney}
+                        </h1>
+
+                        <button
+                        className="topup-btn"
+                        onClick={() => this.setState({ showTopupPopup: true })}
+                        >
+                        Topup Your SystemMoney
+                        </button>
                     </div>
-                </section>
+                    </section>
+                    {this.state.showTopupPopup && (
+  <div className="pay-fee-wrapper">
+    <div className="pay-fee-card">
+      <button
+        className="close-popup-btn"
+        onClick={() => this.setState({ showTopupPopup: false })}
+      >
+        ×
+      </button>
+
+      <h2>💰 SystemMoney Topup Payment</h2>
+
+      <div className="confirmBtnInfo">
+        <h3>Enter Topup Amount</h3>
+
+        <input
+          type="number"
+          placeholder="Enter amount"
+          value={this.state.topupAmount}
+          onChange={this.handleAmountChange}
+          className="topup-input"
+        />
+
+        <p>
+          🆔 Kindly use your User Name
+          <span> {this.state.user_Name} </span>
+          as the <strong>Reference ID / Description</strong>.
+        </p>
+
+        <p>
+          💰 Please send exactly
+          <span className="outAmount1">
+            {" "}{Number(this.state.topupAmount || 0).toLocaleString()} GHC
+          </span>
+          via Mobile Money.
+        </p>
+
+       <p>
+            📱 <strong>Primary Payment (AirtelTigo MoMo)</strong><br />
+            🔵 <span className="wallertNumber">0268253787</span><br />
+            👤 Account Name: <strong>Ainoo Frank</strong>
+        </p>
+
+        <p>
+            📱 <strong>Alternative Payment (Vodafone MoMo)</strong><br />
+            🔴 <span className="wallertNumber">0203808479</span><br />
+            👤 Account Name: <strong>Ainoo Frank</strong>
+        </p>
+
+
+        <button
+          className="confirm-btn"
+          onClick={this.handleTopupRequest}
+        >
+          Submit Topup Request
+        </button>
+      </div>
+    </div>
+  </div>
+)}
                 <section class="warning_message">
                     <AccountStatusAlert />
                 </section>
@@ -621,6 +737,7 @@ class AccountRouter extends Component {
                 <section className="monthlyFeeSection">
                     <MonthlyFeeBoard userId={String(this.state.user_id)} />
                 </section>
+                
                 ) : null}
 
 
