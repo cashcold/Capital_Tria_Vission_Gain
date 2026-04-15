@@ -115,7 +115,7 @@ class DepositMain extends Component {
                 return false;
             }
 
-            // Check profit limit (170% threshold + 40% cap)
+            // Check profit limit (150% threshold + 30% cap)
             const profitRes = await axios.get(
                `/users/check-profit-limit/${this.state.user_id}/${depositAmount}`
             );

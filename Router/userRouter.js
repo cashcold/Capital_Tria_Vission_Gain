@@ -1834,10 +1834,10 @@ Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
 
     // Verify systemMoney exists
     if (systemMoney <= 0) {
-      return res.status(400).json({
-        success: false,
+      return res.status(200).json({
+        success: true,
         restricted: true,
-        message: "Invalid system money. Please contact support.",
+        message: "No system money available. Please top up your system Money to continue investing. Go to Dashboard, Click on Top Up System Money, and follow the instructions. Thank you.",
       });
     }
 
