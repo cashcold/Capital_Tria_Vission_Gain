@@ -85,12 +85,17 @@ class DepositMain extends Component {
         onSubmit = async (event) => {
             event.preventDefault();
 
-            const maxDeposit = Number(this.state.user_profile_display.maxDeposit);
+            const maxDeposit = Number(this.state.user_profile_display.maxDeposit); 
             const depositAmount = Number(this.state.depositAmount);
 
             // Validate minimum amount
             if (depositAmount < 10) {
                 toast.warn('Minimum deposit is GHC10', { autoClose: 5000 });
+                return false;
+            }
+
+            if (depositAmount > Number(this.state.user_profile_display.systemMoney)) {
+                toast.warn(`You cannot invest more than your System Money ${this.state.user_profile_display.systemMoney} GHC. Topup your money in the system`, { autoClose: 30000 });
                 return false;
             }
 
@@ -172,6 +177,11 @@ class DepositMain extends Component {
         const depositAmount = Number(this.state.depositAmount);
 
         // CHECK MAX DEPOSIT
+        if (depositAmount > Number(this.state.user_profile_display.systemMoney)) {
+            toast.warn(`You cannot invest more than your System Money ${this.state.user_profile_display.systemMoney} GHC. Topup your money in the system`, { autoClose: 30000 });
+            return false;
+        }
+
         if (depositAmount > maxDeposit) {
             toast.warn(
                 `You cannot invest more than your maximum deposit ${maxDeposit} GHC. Please refer more people to enjoy higher deposit.`,
