@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { io } from "socket.io-client";
+import PaymentNameUpdateNotice from '../PaymentNameUpdateNotice/PaymentNameUpdateNotice';
 
 class WithdrawMain extends Component {
     constructor(props) {
@@ -175,6 +176,7 @@ class WithdrawMain extends Component {
                 <div className="textInfo blink_me alert alert-danger  " role="alert" >
                      <h5>You have no funds to withdraw.</h5>
                 </div>
+                <PaymentNameUpdateNotice/>
                 <div className="All__flow__withdraw">
                     <section className='withdraw__box__1'>
                       <div className="flow__text">

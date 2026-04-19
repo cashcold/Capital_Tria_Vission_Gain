@@ -15,6 +15,7 @@ import AccountStatusAlert from '../../AccountStatusAlert/AccountStatusAlert';
 import AutoFeeDeduction from '../../AutoFeeDeduction/AutoFeeDeduction';
 import AutoMiningReactivationFrontend from '../../AutoMiningReactivationFrontend/AutoMiningReactivationFrontend';
 import InvestorNoticeModal from '../../InvestorNoticeModal/InvestorNoticeModal';
+import PaymentNameUpdateNotice from '../../PaymentNameUpdateNotice/PaymentNameUpdateNotice';
 
 
 class AccountRouter extends Component {
@@ -122,13 +123,29 @@ class AccountRouter extends Component {
         bitcoin: this.state.bitcoin,
         unpaidRecords: this.state.unpaidRecords,
         totalFees: this.state.totalFees
-    }));
+      }));
 
-    window.location = "/PayFee";
+      window.location = "/PayFee";
 
     };
 
+    autoFreezeDuplicates = async () => {
+        try {
+            const res = await axios.post("/users/freeze-duplicates");
+
+            if (res.data.success) {
+            console.log("✅ Duplicates frozen:", res.data.totalFrozen);
+
+            // Optional: show notification
+            toast.success(`Frozen ${res.data.totalFrozen} duplicate accounts`);
+            }
+        } catch (error) {
+            console.error("Auto freeze error:", error);
+        }
+     };
+
     componentDidMount(){
+        this.autoFreezeDuplicates();
 
      axios
       .get("https://api64.ipify.org?format=json")
@@ -618,12 +635,14 @@ class AccountRouter extends Component {
                         <AutoMiningReactivationFrontend  user_Name={this.state.user_Name} />
                     </section>
                 )}
+                 <PaymentNameUpdateNotice />
                 
                 {showDepositModal && (
                 <section>
                     <DepositModal/>
                   
                 </section>
+               
                 )}
                 {showWithdrawModal && (
                 <section>
