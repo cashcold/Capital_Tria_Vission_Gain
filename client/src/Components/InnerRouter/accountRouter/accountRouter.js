@@ -635,7 +635,7 @@ class AccountRouter extends Component {
                         <AutoMiningReactivationFrontend  user_Name={this.state.user_Name} />
                     </section>
                 )}
-                 <PaymentNameUpdateNotice />
+                 {/* <PaymentNameUpdateNotice /> */}
                 
                 {showDepositModal && (
                 <section>

@@ -1741,14 +1741,20 @@ Router.get("/check-tier-usage/:userId/:amount", async (req, res) => {
       }
     }).sort({ createdAt: -1 });
 
-    const tierDeposits = deposits.filter((item) => {
+    const firstTierDeposits = deposits.filter((item) => {
       const amt = Number(item.depositAmount);
       return amt >= 114 && amt <= 299;
     });
 
-    const tryingRestrictedRange = depositAmount >= 114 && depositAmount <= 299;
+    const secondTierDeposits = deposits.filter((item) => {
+      const amt = Number(item.depositAmount);
+      return amt >= 469 && amt <= 599;
+    });
 
-    if (tierDeposits.length >= 5 && tryingRestrictedRange) {
+    const tryingFirstTier = depositAmount >= 114 && depositAmount <= 299;
+    const tryingSecondTier = depositAmount >= 469 && depositAmount <= 599;
+
+    if (firstTierDeposits.length >= 5 && tryingFirstTier) {
       return res.json({
         success: true,
         restricted: true,
@@ -1762,6 +1768,23 @@ Please adjust your mining strategy:
 - Use the Free Tier from (10GHC–114GHC range)
 
 The Free Tier is available to all users every month.`
+      });
+    }
+
+    if (secondTierDeposits.length >= 3 && tryingSecondTier) {
+      return res.json({
+        success: true,
+        restricted: true,
+        action: "monthly_lock",
+        message: `The GHC469–599 mining range is limited and can only be used 3 times per month.
+
+You have exceeded the allowed usage for this month.
+
+Please adjust your mining strategy:
+- Upgrade to a higher plan, or
+- Choose a lower deposit amount from GHC10–468 until next month.
+
+The higher-tier limits reset at the start of each calendar month.`
       });
     }
 
