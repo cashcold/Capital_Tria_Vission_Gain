@@ -323,7 +323,7 @@ class Home extends Component {
                            <div className="typeAmount_box_1">
                               <div className="innerTypeAmount">
                                   <p>Min: </p>
-                                  <p className='typeAmountSpan'>GHC 9000</p>
+                                  <p className='typeAmountSpan'>GHC 900</p>
                               </div>
                                <span className='spanMainType'></span>
                               <div className="innerTypeAmount innerTypeAmount2">
