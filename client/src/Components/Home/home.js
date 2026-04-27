@@ -18,6 +18,8 @@ import PigFarm from '../PigFarm/PigFarm';
 import CassavaFarmingVideo from '../CassavaFarmingVideo/CassavaFarmingVideo';
 import WhatsAppChannelPopup from '../WhatsAppChannelPopup/WhatsAppChannelPopup';
 import AuthRedirectPopup from '../AuthRedirectPopup/AuthRedirectPopup';
+import NetworkUpdate from '../NetworkUpdate/NetworkUpdate';
+import InvestorFeePopup from '../InvestorFeePopup/InvestorFeePopup';
 
 
 
@@ -196,6 +198,8 @@ class Home extends Component {
                 </section>
                 <CloudMiningAnimation/>
                 <BusinessModel/>
+                {/* <NetworkUpdate/> */}
+                <InvestorFeePopup/>
                 
                 <section class="co_ing">
                     <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FTHE%20CRYTO%20MINING%20POWERHOUSE.jpg?alt=media&token=97841213-86fb-48c0-aef8-f8df4833c900" alt="Capgainco " />

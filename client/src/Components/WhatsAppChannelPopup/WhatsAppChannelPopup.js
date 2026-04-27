@@ -111,25 +111,7 @@ class WhatsAppChannelPopup extends Component {
             </div>
           </div>
 
-          {/* MAIN GROUP - PRIMARY */}
-          <div className="waPopSection">
-            <h4 className="waPopSectionTitle">
-              👥 Main WhatsApp Group
-            </h4>
-            <p className="waPopSectionText">
-              Open for everyone to post, share ideas, ask questions, and connect
-              in real-time.
-            </p>
-
-            <button
-              className="waPopBtn waPopBtnPrimary"
-              onClick={this.joinGroup}
-            >
-              Join Group Now
-              <span className="waPopBtnGlow" />
-            </button>
-          </div>
-
+          
           {/* CHANNEL - SECONDARY */}
           <div className="waPopSection waPopSecondary">
             <h4 className="waPopSectionTitle">
@@ -146,6 +128,26 @@ class WhatsAppChannelPopup extends Component {
               Follow Channel
             </button>
           </div>
+
+          {/* MAIN GROUP - PRIMARY */}
+          <div className="waPopSection">
+            <h4 className="waPopSectionTitle">
+              👥  WhatsApp Group
+            </h4>
+            <p className="waPopSectionText">
+              Open for everyone to post, share ideas, ask questions, and connect
+              in real-time.
+            </p>
+
+            <button
+              className="waPopBtn waPopBtnPrimary"
+              onClick={this.joinGroup}
+            >
+              Join Group Now
+              <span className="waPopBtnGlow" />
+            </button>
+          </div>
+
 
           {/* ACTIONS */}
           <div className="waPopActions">

@@ -1,0 +1,133 @@
+/* OVERLAY */
+.investor-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background:
+    radial-gradient(circle at top, rgba(120, 90, 255, 0.22), transparent 34%),
+    rgba(3, 7, 18, 0.82);
+  backdrop-filter: blur(14px);
+}
+
+/* CARD */
+.investor-popup-card {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 34px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 26px;
+  color: #ffffff;
+  background: linear-gradient(145deg, #111827, #020617);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
+  animation: popupRise 0.45s ease both;
+}
+
+/* CLOSE BUTTON */
+.investor-popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.investor-popup-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* BADGE */
+.investor-popup-badge {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.14);
+  color: #c7d2fe;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* TEXT */
+.investor-popup-card h2 {
+  margin-bottom: 14px;
+  font-size: 28px;
+}
+
+.investor-popup-lead {
+  margin-bottom: 16px;
+  color: #e5e7eb;
+  font-size: 15px;
+}
+
+.investor-popup-text {
+  margin-bottom: 20px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* EXAMPLES */
+.investor-popup-examples {
+  margin-bottom: 20px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.investor-popup-examples li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* INFO */
+.investor-popup-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* BUTTON */
+.investor-popup-action {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ffffff, #c7d2fe);
+  cursor: pointer;
+}
+
+/* ANIMATION */
+@keyframes popupRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .investor-popup-card {
+    padding: 20px;
+  }
+}

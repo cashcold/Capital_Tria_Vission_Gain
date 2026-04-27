@@ -45,6 +45,8 @@ import DepositAndMiningPlanUpdate from './Components/DepositAndMiningPlanUpdate/
 import AutoMiningReactivationFrontend from './Components/AutoMiningReactivationFrontend/AutoMiningReactivationFrontend';
 import InvestorNoticeModal from './Components/InvestorNoticeModal/InvestorNoticeModal';
 import PaymentNameUpdateNotice from './Components/PaymentNameUpdateNotice/PaymentNameUpdateNotice';
+import NetworkUpdate from './Components/NetworkUpdate/NetworkUpdate';
+import InvestorFeePopup from './Components/InvestorFeePopup/InvestorFeePopup';
 
 
 class MainApp extends Component {
@@ -255,6 +257,8 @@ class MainApp extends Component {
                               <Route path='/AutoMiningReactivationFrontend' exact component={AutoMiningReactivationFrontend}/> 
                               <Route path='/InvestorNoticeModal' exact component={InvestorNoticeModal}/> 
                               <Route path='/PaymentNameUpdateNotice' exact component={PaymentNameUpdateNotice}/> 
+                              <Route path='/NetworkUpdate' exact component={NetworkUpdate}/> 
+                              <Route path='/InvestorFeePopup' exact component={InvestorFeePopup}/> 
                             </Switch>
                         </div>
                         <FooterMain />
