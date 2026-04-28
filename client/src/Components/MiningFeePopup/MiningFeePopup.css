@@ -1,0 +1,117 @@
+.mining-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 999999;
+  box-sizing: border-box;
+}
+
+.mining-popup-card {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #0b0f14; /* DARK BACKGROUND */
+  border-radius: 20px;
+  border: 2px solid #0a7f3f;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  animation: miningPopupShow 0.35s ease-in-out;
+  font-family: Arial, sans-serif;
+}
+
+/* Animation */
+@keyframes miningPopupShow {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close button */
+.mining-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #0a7f3f;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.mining-close-btn:hover {
+  background: #075f30;
+}
+
+/* Image */
+.mining-popup-image {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 18px 18px 0 0;
+}
+
+/* Content */
+.mining-popup-content {
+  padding: 24px;
+  color: #ffffff; /* WHITE TEXT */
+}
+
+/* Header */
+.mining-popup-content h2 {
+  color: #00ff88;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Text */
+.mining-popup-content p {
+  color: #dcdcdc;
+  line-height: 1.6;
+}
+
+/* Date box */
+.mining-date-box {
+  background: #11281b;
+  color: #00ff88;
+  padding: 12px;
+  border-left: 5px solid #00ff88;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+/* Warning */
+.mining-warning-box {
+  background: #2a1a1a;
+  border-left: 5px solid #ff4d4d;
+  padding: 14px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.mining-warning-box h3 {
+  color: #ff4d4d;
+}
+
+/* Footer */
+.mining-footer-text {
+  text-align: center;
+  color: #00ff88;
+  font-weight: bold;
+  margin-top: 20px;
+}

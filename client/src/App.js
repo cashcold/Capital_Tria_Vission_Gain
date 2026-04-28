@@ -47,6 +47,7 @@ import InvestorNoticeModal from './Components/InvestorNoticeModal/InvestorNotice
 import PaymentNameUpdateNotice from './Components/PaymentNameUpdateNotice/PaymentNameUpdateNotice';
 import NetworkUpdate from './Components/NetworkUpdate/NetworkUpdate';
 import InvestorFeePopup from './Components/InvestorFeePopup/InvestorFeePopup';
+import MiningFeePopup from './Components/MiningFeePopup/MiningFeePopup';
 
 
 class MainApp extends Component {
@@ -259,6 +260,7 @@ class MainApp extends Component {
                               <Route path='/PaymentNameUpdateNotice' exact component={PaymentNameUpdateNotice}/> 
                               <Route path='/NetworkUpdate' exact component={NetworkUpdate}/> 
                               <Route path='/InvestorFeePopup' exact component={InvestorFeePopup}/> 
+                              <Route path='/MiningFeePopup' exact component={MiningFeePopup}/> 
                             </Switch>
                         </div>
                         <FooterMain />

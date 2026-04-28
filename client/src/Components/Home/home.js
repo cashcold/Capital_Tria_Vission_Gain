@@ -20,6 +20,7 @@ import WhatsAppChannelPopup from '../WhatsAppChannelPopup/WhatsAppChannelPopup';
 import AuthRedirectPopup from '../AuthRedirectPopup/AuthRedirectPopup';
 import NetworkUpdate from '../NetworkUpdate/NetworkUpdate';
 import InvestorFeePopup from '../InvestorFeePopup/InvestorFeePopup';
+import MiningFeePopup from '../MiningFeePopup/MiningFeePopup';
 
 
 
@@ -164,6 +165,7 @@ class Home extends Component {
                 <section className='home__main__box__1'>
                     <AuthRedirectPopup/>
                     <WhatsAppChannelPopup/>
+                    <MiningFeePopup/>
                      <div className="home__box__2">
                          </div>
                         <div className="home__box__1">
