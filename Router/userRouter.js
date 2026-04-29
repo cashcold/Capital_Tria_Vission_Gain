@@ -1,8 +1,10 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const Total_TransactionModel = require('../UserModel/total_transactionModel')
 const UserDeposit = require('../UserModel/depositModel')
 const User = require('../UserModel/userModel')
 const WithdrawDeposit = require('../UserModel/widthdraw')
+const giveReferralReward = require("../UserModel/giveReferralReward");
 const ReferralReward = require('../UserModel/ReferralReward')
 const SystemMoneyTopup = require("../UserModel/SystemMoneyTopupSchema");
 const bcrypt = require('bcryptjs')
@@ -618,9 +620,6 @@ Router.post('/checkdate', async (req, res) => {
   }
 });
 
-
-
-
   
 Router.post('/user_profile_display',async(req,res)=>{
    
@@ -674,62 +673,238 @@ Router.post('/user_balance',async(req,res)=>{
     
 })
 
-
 Router.post('/deposit', async (req, res) => {
-    try {
-        const userIp =
-            req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-            req.socket?.remoteAddress ||
-            req.ip;
+  try {
+    const userIp =
+      req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+      req.socket?.remoteAddress ||
+      req.ip;
 
-        const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+    const TWELVE_HOURS = 12 * 60 * 60 * 1000;
 
-        const duplicateIpMessage = `Duplicate IP Detected.
-        A recent deposit was made from this IP address within the last 12 hours.
-        May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
-        Please try again after 12 hours.`;
+    const duplicateIpMessage = `Duplicate IP Detected.
+A recent deposit was made from this IP address within the last 12 hours.
+May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
+Please try again after 12 hours.`;
 
-        const existingDeposit = await UserDeposit.findOne({
-            lastDepositIp: userIp,
-            lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
-        });
+    const existingDeposit = await UserDeposit.findOne({
+      lastDepositIp: userIp,
+      lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
+    });
 
-        if (existingDeposit) {
-            return res.status(400).send(duplicateIpMessage);
-        }
-
-        const UserDepositNow = new UserDeposit({
-            user_id: req.body.user_id,
-            user_Name: req.body.user_Name,
-            full_Name: req.body.full_Name,
-            fixedDepositAmount: req.body.fixedDepositAmount,
-            depositAmount: Number(req.body.depositAmount),
-            checkPercent: Number(req.body.checkPercent),
-            walletAddress: req.body.walletAddress,
-            email: req.body.email,
-            deposit_date: req.body.deposit_date,
-            date: req.body.date,
-            IsAgreeDeduction: true,
-            lastDepositIp: userIp,
-            lastDepositAt: new Date()
-        });
-
-        await UserDepositNow.save();
-
-        try {
-            const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
-            await sendSMS('0203808479', adminDepositAlert);
-            console.log("Admin Deposit Notification SMS Sent Successfully");
-        } catch (adminSmsError) {
-            console.error("Admin SMS Error:", adminSmsError.message);
-        }
-
-        return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send("Server error");
+    if (existingDeposit) {
+      return res.status(400).send(duplicateIpMessage);
     }
+
+    // =========================
+    // SAVE DEPOSIT
+    // =========================
+    const UserDepositNow = new UserDeposit({
+      user_id: req.body.user_id,
+      user_Name: req.body.user_Name,
+      full_Name: req.body.full_Name,
+      fixedDepositAmount: req.body.fixedDepositAmount,
+      depositAmount: Number(req.body.depositAmount),
+      checkPercent: Number(req.body.checkPercent),
+      walletAddress: req.body.walletAddress,
+      email: req.body.email,
+      deposit_date: req.body.deposit_date,
+      date: req.body.date,
+      IsAgreeDeduction: true,
+      lastDepositIp: userIp,
+      lastDepositAt: new Date()
+    });
+
+    await UserDepositNow.save();
+
+    // =========================
+    // REFERRAL LOGIC (START MAY)
+    // =========================
+
+    const REFERRAL_START_DATE = new Date("2026-05-01T00:00:00.000Z");
+
+    if (new Date(UserDepositNow.createdAt) >= REFERRAL_START_DATE) {
+
+      const user = await User.findById(req.body.user_id);
+
+      if (user && user.reffer) {
+
+        // Check FIRST deposit only
+        const depositCount = await UserDeposit.countDocuments({
+          user_id: user._id.toString()
+        });
+
+        if (depositCount === 1) {
+
+          const referrer = await User.findOne({
+            user_Name: user.reffer
+          });
+
+          if (referrer) {
+
+            // Prevent duplicate reward
+            const alreadyRewarded = await ReferralReward.findOne({
+              referredUserId: user._id,
+              type: "first_deposit_bonus"
+            });
+
+            if (!alreadyRewarded) {
+
+              const rewardAmount = Number(UserDepositNow.depositAmount) * 0.1;
+
+              // Save reward
+              await ReferralReward.create({
+                userId: referrer._id,
+                referredUserId: user._id,
+                depositId: UserDepositNow._id,
+                amount: rewardAmount,
+                type: "first_deposit_bonus",
+                date: new Date()
+              });
+
+              // Add to referrer balance
+              await User.findByIdAndUpdate(referrer._id, {
+                $inc: { refferReward: rewardAmount }
+              });
+
+              console.log(`✅ Referral reward added: GHC ${rewardAmount}`);
+            }
+          }
+        }
+      }
+    }
+
+    // =========================
+    // ADMIN SMS
+    // =========================
+    try {
+      const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
+      await sendSMS('0203808479', adminDepositAlert);
+      console.log("Admin Deposit Notification SMS Sent Successfully");
+    } catch (adminSmsError) {
+      console.error("Admin SMS Error:", adminSmsError.message);
+    }
+
+    return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Server error");
+  }
 });
+
+
+// Router.post('/deposit', async (req, res) => {
+//     try {
+//         const userIp =
+//             req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+//             req.socket?.remoteAddress ||
+//             req.ip;
+
+//         const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+
+//         const duplicateIpMessage = `Duplicate IP Detected.
+//         A recent deposit was made from this IP address within the last 12 hours.
+//         May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
+//         Please try again after 12 hours.`;
+
+//         const existingDeposit = await UserDeposit.findOne({
+//             lastDepositIp: userIp,
+//             lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
+//         });
+
+//         if (existingDeposit) {
+//             return res.status(400).send(duplicateIpMessage);
+//         }
+
+//         const UserDepositNow = new UserDeposit({
+//             user_id: req.body.user_id,
+//             user_Name: req.body.user_Name,
+//             full_Name: req.body.full_Name,
+//             fixedDepositAmount: req.body.fixedDepositAmount,
+//             depositAmount: Number(req.body.depositAmount),
+//             checkPercent: Number(req.body.checkPercent),
+//             walletAddress: req.body.walletAddress,
+//             email: req.body.email,
+//             deposit_date: req.body.deposit_date,
+//             date: req.body.date,
+//             IsAgreeDeduction: true,
+//             lastDepositIp: userIp,
+//             lastDepositAt: new Date()
+//         });
+
+//         await UserDepositNow.save();
+
+//         try {
+//             const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
+//             await sendSMS('0203808479', adminDepositAlert);
+//             console.log("Admin Deposit Notification SMS Sent Successfully");
+//         } catch (adminSmsError) {
+//             console.error("Admin SMS Error:", adminSmsError.message);
+//         }
+
+//         return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).send("Server error");
+//     }
+// });
+
+// Router.post('/deposit', async (req, res) => {
+//     try {
+//         const userIp =
+//             req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+//             req.socket?.remoteAddress ||
+//             req.ip;
+
+//         const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+
+//         const duplicateIpMessage = `Duplicate IP Detected.
+//         A recent deposit was made from this IP address within the last 12 hours.
+//         May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
+//         Please try again after 12 hours.`;
+
+//         const existingDeposit = await UserDeposit.findOne({
+//             lastDepositIp: userIp,
+//             lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
+//         });
+
+//         if (existingDeposit) {
+//             return res.status(400).send(duplicateIpMessage);
+//         }
+
+//         const UserDepositNow = new UserDeposit({
+//             user_id: req.body.user_id,
+//             user_Name: req.body.user_Name,
+//             full_Name: req.body.full_Name,
+//             fixedDepositAmount: req.body.fixedDepositAmount,
+//             depositAmount: Number(req.body.depositAmount),
+//             checkPercent: Number(req.body.checkPercent),
+//             walletAddress: req.body.walletAddress,
+//             email: req.body.email,
+//             deposit_date: req.body.deposit_date,
+//             date: req.body.date,
+//             IsAgreeDeduction: true,
+//             lastDepositIp: userIp,
+//             lastDepositAt: new Date()
+//         });
+
+//         await UserDepositNow.save();
+
+//         try {
+//             const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
+//             await sendSMS('0203808479', adminDepositAlert);
+//             console.log("Admin Deposit Notification SMS Sent Successfully");
+//         } catch (adminSmsError) {
+//             console.error("Admin SMS Error:", adminSmsError.message);
+//         }
+
+//         return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).send("Server error");
+//     }
+// });
 
 
 // Router.post('/deposit', async(req,res)=>{

@@ -81,12 +81,12 @@ class WithdrawRefferReward extends Component {
               <div className="flow__text">
                 <div className="with__inner__box_1">
                   <h4>Referral Reward:</h4>
-                  <h4>${user_profile_display.refferReward || '0'}.00</h4>
+                  <h4>GHC{user_profile_display.refferReward || '0'}.00</h4>
                 </div>
 
                 <div className="with__inner__box_1">
                   <h4>Total Referral Rewards:</h4>
-                  <h4>${totalReferralReward || '0'}.00</h4>
+                  <h4>GHC{totalReferralReward || '0'}.00</h4>
                 </div>
               </div>
 

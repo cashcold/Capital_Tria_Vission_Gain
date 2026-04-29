@@ -21,6 +21,7 @@ import AuthRedirectPopup from '../AuthRedirectPopup/AuthRedirectPopup';
 import NetworkUpdate from '../NetworkUpdate/NetworkUpdate';
 import InvestorFeePopup from '../InvestorFeePopup/InvestorFeePopup';
 import MiningFeePopup from '../MiningFeePopup/MiningFeePopup';
+import ReferralBonusPopup from '../ReferralBonusPopup/ReferralBonusPopup';
 
 
 
@@ -166,6 +167,7 @@ class Home extends Component {
                     <AuthRedirectPopup/>
                     <WhatsAppChannelPopup/>
                     <MiningFeePopup/>
+                    <ReferralBonusPopup/>
                      <div className="home__box__2">
                          </div>
                         <div className="home__box__1">
