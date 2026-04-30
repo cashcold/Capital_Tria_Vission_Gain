@@ -110,15 +110,9 @@ export const tourData = [
       id: 16,
       title: "What is the Mining Server Fee shown on my dashboard?",
       about: `At Capital Gain Management Co., we operate advanced Bitcoin mining infrastructure, high-performance servers, automated withdrawal systems, and 24/7 monitoring to ensure fast, secure, and reliable payouts.
-
 To maintain and scale this system efficiently, a Mining Server Fee is applied based on your total monthly withdrawals.
-
-Here’s how it works:
-
-🔹 A fixed 31.4% fee is applied to your total monthly withdrawals.  
-
+Here’s how it works:🔹 A fixed 31.4% fee is applied to your total monthly withdrawals.  
 This fee supports the full operation and sustainability of our mining platform.
-
 💡 Example:  
 If you withdraw GHC 350 in a month:  
 31.4% of 350 = **GHC 109.90** (this is the total fee)
@@ -134,8 +128,51 @@ This fee helps us cover:
 You can always track this clearly on your dashboard under **Monthly Withdrawal Fee**, which updates automatically after each withdrawal.
 
 We remain committed to transparency — you always see exactly what you are charged and why.`
-    }
+},
+ {
+      id: 17,
+      title: "How many days does it take to receive my money when I close my account or taken funds from the system?",
+      about: `⏳ The processing time depends on your account duration:
 
-   
-   
-  ];
+      🗓️ Existing Investors (More than 1 month):
+      ✅ Up to 7 working days
+
+      🗓️ New Investors (First deposit / Less than 1 month):
+      ⏳ Up to 14 working days
+
+      📌 Reason:
+      Your funds are actively engaged in ongoing operations and field investments. Therefore, time is required to safely retrieve and process the funds without affecting the system or other investors.
+
+      🔒 This policy helps us:
+      ✅ Protect all investors
+      ✅ Maintain system stability
+      ✅ Ensure continuous profit generation
+
+      🙏 We kindly ask for your patience and understanding during this process.
+
+      💚 Capgainco.com – Grow Together. Succeed Together.`
+  },
+   {
+      id: 18,
+      title: "How much do you earn when you refer someone to make their first deposit?",
+      about: `🎁 When you refer someone and they make their first deposit, you will receive:
+
+💰 10% cash bonus instantly
+
+📊 Examples:
+
+💵 If your referral deposits GHC 100 → You earn GHC 10
+💵 If your referral deposits GHC 500 → You earn GHC 50
+💵 If your referral deposits GHC 1,000 → You earn GHC 100
+💵 If your referral deposits GHC 2,000 → You earn GHC 200
+
+🚀 The more people you refer, the more you earn!
+
+🙏 Start inviting your friends, family, and business partners today and grow your income.
+
+💚 Capgainco.com – Grow Together. Succeed Together.`,
+     
+    },
+
+];
+
