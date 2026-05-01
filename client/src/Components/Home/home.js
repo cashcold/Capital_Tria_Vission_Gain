@@ -166,7 +166,7 @@ class Home extends Component {
                 <section className='home__main__box__1'>
                     <AuthRedirectPopup/>
                     <WhatsAppChannelPopup/>
-                    <MiningFeePopup/>
+                    {/* <MiningFeePopup/> */}
                     <ReferralBonusPopup/>
                      <div className="home__box__2">
                          </div>
@@ -203,7 +203,7 @@ class Home extends Component {
                 <CloudMiningAnimation/>
                 <BusinessModel/>
                 {/* <NetworkUpdate/> */}
-                <InvestorFeePopup/>
+                {/* <InvestorFeePopup/> */}
                 
                 <section class="co_ing">
                     <img src="https://firebasestorage.googleapis.com/v0/b/the-christ-d3d67.appspot.com/o/nextplatform%2FTHE%20CRYTO%20MINING%20POWERHOUSE.jpg?alt=media&token=97841213-86fb-48c0-aef8-f8df4833c900" alt="Capgainco " />

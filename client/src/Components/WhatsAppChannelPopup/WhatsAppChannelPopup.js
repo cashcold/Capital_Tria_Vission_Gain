@@ -38,7 +38,9 @@ class WhatsAppChannelPopup extends Component {
   };
 
   toggleDontShow = () => {
-    this.setState((prev) => ({ dontShowAgain: !prev.dontShowAgain }));
+    this.setState((prev) => ({
+      dontShowAgain: !prev.dontShowAgain,
+    }));
   };
 
   joinGroup = () => {
@@ -50,6 +52,7 @@ class WhatsAppChannelPopup extends Component {
     }
 
     window.open(url, "_blank", "noopener,noreferrer");
+
     this.setState({ open: false }, () => {
       document.body.style.overflow = "";
     });
@@ -60,6 +63,16 @@ class WhatsAppChannelPopup extends Component {
       "https://whatsapp.com/channel/0029VbCUcWm7YSd2bAPC4431";
 
     window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  joinChat = () => {
+    const url = "https://wa.me/233203808479";
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  callAdmin = () => {
+    window.location.href = "tel:0203808479";
   };
 
   stopOverlayClose = (e) => {
@@ -92,7 +105,6 @@ class WhatsAppChannelPopup extends Component {
             ✕
           </button>
 
-          {/* HEADER */}
           <div className="waPopTop">
             <div className="waPopLogo" aria-hidden="true">
               <span className="waPopDot" />
@@ -106,13 +118,29 @@ class WhatsAppChannelPopup extends Component {
               </h3>
               <p className="waPopSub">
                 Be part of our community. Join the main group to share ideas and
-                connect, or follow our channel for updates.
+                connect, follow our channel for updates, chat directly with admin,
+                or call us for quick support.
               </p>
             </div>
           </div>
 
-          
-          {/* CHANNEL - SECONDARY */}
+          <div className="waPopSection">
+            <h4 className="waPopSectionTitle">
+              💬 Chat With Admin
+            </h4>
+            <p className="waPopSectionText">
+              Need help or have questions? Chat directly with admin on WhatsApp
+              for quick support.
+            </p>
+
+            <button
+              className="waPopBtn"
+              onClick={this.joinChat}
+            >
+              Chat on WhatsApp
+            </button>
+          </div>
+
           <div className="waPopSection waPopSecondary">
             <h4 className="waPopSectionTitle">
               📢 WhatsApp Channel
@@ -129,27 +157,22 @@ class WhatsAppChannelPopup extends Component {
             </button>
           </div>
 
-          {/* MAIN GROUP - PRIMARY */}
           <div className="waPopSection">
             <h4 className="waPopSectionTitle">
-              👥  WhatsApp Group
+              📞 Call Admin
             </h4>
             <p className="waPopSectionText">
-              Open for everyone to post, share ideas, ask questions, and connect
-              in real-time.
+              Prefer to speak directly? Call us now for immediate assistance.
             </p>
 
             <button
-              className="waPopBtn waPopBtnPrimary"
-              onClick={this.joinGroup}
+              className="waPopBtn"
+              onClick={this.callAdmin}
             >
-              Join Group Now
-              <span className="waPopBtnGlow" />
+              Call Now
             </button>
           </div>
 
-
-          {/* ACTIONS */}
           <div className="waPopActions">
             <button
               className="waPopBtn waPopBtnGhost"
@@ -159,7 +182,6 @@ class WhatsAppChannelPopup extends Component {
             </button>
           </div>
 
-          {/* CHECKBOX */}
           <label className="waPopCheck">
             <input
               type="checkbox"

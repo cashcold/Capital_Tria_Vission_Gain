@@ -52,8 +52,12 @@ const PaymentNotice = () => {
             <img src={usdtImg} alt="USDT" />
             <span>USDT (TRC20)</span>
           </div>
+           <div className="method-item">
+            <span className="bank-icon">🏦</span>
+            <span>Bank Transfer</span>
+          </div>
 
-          <div className="method-item">
+          {/* <div className="method-item">
             <span className="bank-icon">🏦</span>
             <span>Bank Transfer</span>
           </div>
@@ -76,8 +80,8 @@ const PaymentNotice = () => {
         <div className="method-item global">
           <span className="icon">💎</span>
           <span>Perfect Money</span>
-        </div>
-
+        </div> */}
+{/* 
         <div className="method-item global">
           <span className="icon">🏧</span>
           <span>Payoneer</span>
@@ -115,7 +119,7 @@ const PaymentNotice = () => {
           <div className="method-item local">
             <span className="icon">🌍</span>
             <span>Flutterwave</span>
-          </div>
+          </div> */}
 
         <div className="method-item ">
           <span className="icon">💳</span>
@@ -130,7 +134,7 @@ const PaymentNotice = () => {
 
         {/* 🔥 BUTTON */}
         <button className="start-btn">
-          🚀 Start Investing Now
+          🚀 Start Mining  Now
         </button>
 
       </div>

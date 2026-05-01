@@ -110,12 +110,20 @@ export const tourData = [
       id: 16,
       title: "What is the Mining Server Fee shown on my dashboard?",
       about: `At Capital Gain Management Co., we operate advanced Bitcoin mining infrastructure, high-performance servers, automated withdrawal systems, and 24/7 monitoring to ensure fast, secure, and reliable payouts.
+
 To maintain and scale this system efficiently, a Mining Server Fee is applied based on your total monthly withdrawals.
-Here’s how it works:🔹 A fixed 31.4% fee is applied to your total monthly withdrawals.  
+
+Here’s how it works:
+
+🔹 A fixed 31.4% fee is applied to every withdrawal made on your investment account.  
 This fee supports the full operation and sustainability of our mining platform.
-💡 Example:  
-If you withdraw GHC 350 in a month:  
-31.4% of 350 = **GHC 109.90** (this is the total fee)
+
+💡 Example of service fee deduction (31.4%):
+
+• Withdrawal profit ₵10 → Fee 31.4% → You receive ₵6.86  
+• Withdrawal profit ₵50 → Fee 31.4% → You receive ₵34.30  
+• Withdrawal profit ₵80 → Fee 31.4% → You receive ₵54.88  
+• Withdrawal profit ₵300 → Fee 31.4% → You receive ₵205.80
 
 This fee helps us cover:
 
