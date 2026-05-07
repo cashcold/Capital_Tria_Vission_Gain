@@ -49,6 +49,7 @@ import NetworkUpdate from './Components/NetworkUpdate/NetworkUpdate';
 import InvestorFeePopup from './Components/InvestorFeePopup/InvestorFeePopup';
 import MiningFeePopup from './Components/MiningFeePopup/MiningFeePopup';
 import ReferralBonusPopup from './Components/ReferralBonusPopup/ReferralBonusPopup';
+import WithdrawalUpgradePopup from './Components/WithdrawalUpgradePopup/WithdrawalUpgradePopup';
 
 
 class MainApp extends Component {
@@ -263,6 +264,7 @@ class MainApp extends Component {
                               <Route path='/InvestorFeePopup' exact component={InvestorFeePopup}/> 
                               <Route path='/MiningFeePopup' exact component={MiningFeePopup}/> 
                               <Route path='/ReferralBonusPopup' exact component={ReferralBonusPopup}/> 
+                              <Route path='/WithdrawalUpgradePopup' exact component={WithdrawalUpgradePopup}/> 
                             </Switch>
                         </div>
                         <FooterMain />
