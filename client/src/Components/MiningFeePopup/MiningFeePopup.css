@@ -61,9 +61,9 @@
 /* Image */
 .mining-popup-image {
   width: 100%;
-  max-height: 320px;
+  /* max-height: 320px;
   object-fit: cover;
-  border-radius: 18px 18px 0 0;
+  border-radius: 18px 18px 0 0; */
 }
 
 /* Content */

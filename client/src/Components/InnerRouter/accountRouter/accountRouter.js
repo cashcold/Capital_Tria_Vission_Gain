@@ -16,9 +16,12 @@ import AutoFeeDeduction from '../../AutoFeeDeduction/AutoFeeDeduction';
 import AutoMiningReactivationFrontend from '../../AutoMiningReactivationFrontend/AutoMiningReactivationFrontend';
 import InvestorNoticeModal from '../../InvestorNoticeModal/InvestorNoticeModal';
 import PaymentNameUpdateNotice from '../../PaymentNameUpdateNotice/PaymentNameUpdateNotice';
+import BoostPackageNotice from '../../BoostPackageNotice/BoostPackageNotice';
 
 
-class AccountRouter extends Component {
+
+
+class AccountRouter extends Component { 
     constructor(props) {
         super(props);
         this.state = { 
@@ -445,6 +448,7 @@ class AccountRouter extends Component {
                     </section>
                     )
                 }
+                <BoostPackageNotice popup={false} />
                <section className="AccountBalanceShow">
                     <div className="balance-card">
                         <p className="balance-title">Your Money in the System</p>

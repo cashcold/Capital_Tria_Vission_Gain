@@ -50,6 +50,9 @@ import InvestorFeePopup from './Components/InvestorFeePopup/InvestorFeePopup';
 import MiningFeePopup from './Components/MiningFeePopup/MiningFeePopup';
 import ReferralBonusPopup from './Components/ReferralBonusPopup/ReferralBonusPopup';
 import WithdrawalUpgradePopup from './Components/WithdrawalUpgradePopup/WithdrawalUpgradePopup';
+import BoostPackageNotice from './Components/BoostPackageNotice/BoostPackageNotice';
+import BoostPackageDetails from './Components/BoostPackageNotice/BoostPackageDetails';
+import boostPoster from "./boostPoster.png";
 
 
 class MainApp extends Component {
@@ -161,6 +164,89 @@ class MainApp extends Component {
                     {/* {!this.state.token && <PopoutExample />} */}
                     {/* <div className='google__id' id="google_translate_element"></div> */}
                     <div className='container_!'>
+                                        <section className="boosterMain">
+                <div
+                        
+                    >
+
+                        <div className="boostCard">
+
+
+                        <img
+                            src={boostPoster}
+                            alt="Boost Package"
+                            className="boostImage"
+                        />
+
+                        <div className="boostContent">
+
+                            <h1>🚀 14-DAY BOOST PACKAGE</h1>
+
+                            <div className="packageGrid">
+
+                            <div className="packageBox">
+                                <span>📈 Profit</span>
+                                <h2>30%</h2>
+                            </div>
+
+                            <div className="packageBox">
+                                <span>⏳ Duration</span>
+                                <h2>14 Days</h2>
+                            </div>
+
+                            </div>
+
+                            <div className="packageGrid">
+
+                            <div className="packageBox">
+                                <span>💰 Minimum</span>
+                                <h2>1300 GHC</h2>
+                            </div>
+
+                            <div className="packageBox">
+                                <span>🏦 Maximum</span>
+                                <h2>2500 GHC</h2>
+                            </div>
+
+                            </div>
+
+                            <div className="serviceFee">
+                            ✅ Reduced Withdrawal Service Fee — ONLY 20%
+                            </div>
+
+                            <p className="description">
+                            Unlike our regular plans with a 31.4%
+                            withdrawal service fee, this special
+                            package comes with a LOWER 20% service
+                            fee to help you keep more of your earnings.
+                            </p>
+
+                            <div className="benefits">
+
+                            <div className="benefit">
+                                📈 Fast Growth
+                            </div>
+
+                            <div className="benefit">
+                                💰 Better Returns
+                            </div>
+
+                            <div className="benefit">
+                                ⚡ Faster Cycles
+                            </div>
+
+                            </div>
+
+
+                            <div className="footerText">
+                            CAPGAINCO.COM <br />
+                            Grow Together. Succeed Together.
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                        </section>
                         <section className="trust-ai-wrapper">
 
                         <div className="trust-ai-card">
@@ -265,6 +351,12 @@ class MainApp extends Component {
                               <Route path='/MiningFeePopup' exact component={MiningFeePopup}/> 
                               <Route path='/ReferralBonusPopup' exact component={ReferralBonusPopup}/> 
                               <Route path='/WithdrawalUpgradePopup' exact component={WithdrawalUpgradePopup}/> 
+                              <Route path='/BoostPackageNotice' exact component={BoostPackageNotice}/> 
+                              <Route path='/dashboard-boost-package' exact component={BoostPackageDetails}/> 
+                              {/* <Route
+                                    path="/boost-package"
+                                    element={<BoostPackageDetails />}
+                                    /> */}
                             </Switch>
                         </div>
                         <FooterMain />

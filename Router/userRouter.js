@@ -7,6 +7,7 @@ const WithdrawDeposit = require('../UserModel/widthdraw')
 const giveReferralReward = require("../UserModel/giveReferralReward");
 const ReferralReward = require('../UserModel/ReferralReward')
 const SystemMoneyTopup = require("../UserModel/SystemMoneyTopupSchema");
+const BoostPackage = require('../UserModel/BoostPackageModel');
 const bcrypt = require('bcryptjs')
 const mailgun = require('mailgun-js')
 const dotEnv = require('dotenv')
@@ -620,6 +621,9 @@ Router.post('/checkdate', async (req, res) => {
   }
 });
 
+
+
+
   
 Router.post('/user_profile_display',async(req,res)=>{
    
@@ -673,6 +677,7 @@ Router.post('/user_balance',async(req,res)=>{
     
 })
 
+
 Router.post('/deposit', async (req, res) => {
   try {
     const userIp =
@@ -680,231 +685,54 @@ Router.post('/deposit', async (req, res) => {
       req.socket?.remoteAddress ||
       req.ip;
 
-    const TWELVE_HOURS = 12 * 60 * 60 * 1000;
+        const TWELVE_HOURS = 12 * 60 * 60 * 1000;
 
-    const duplicateIpMessage = `Duplicate IP Detected.
-A recent deposit was made from this IP address within the last 12 hours.
-May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
-Please try again after 12 hours.`;
+        const duplicateIpMessage = `Duplicate IP Detected.
+        A recent deposit was made from this IP address within the last 12 hours.
+        May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
+        Please try again after 12 hours.`;
 
-    const existingDeposit = await UserDeposit.findOne({
-      lastDepositIp: userIp,
-      lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
-    });
-
-    if (existingDeposit) {
-      return res.status(400).send(duplicateIpMessage);
-    }
-
-    // =========================
-    // SAVE DEPOSIT
-    // =========================
-    const UserDepositNow = new UserDeposit({
-      user_id: req.body.user_id,
-      user_Name: req.body.user_Name,
-      full_Name: req.body.full_Name,
-      fixedDepositAmount: req.body.fixedDepositAmount,
-      depositAmount: Number(req.body.depositAmount),
-      checkPercent: Number(req.body.checkPercent),
-      walletAddress: req.body.walletAddress,
-      email: req.body.email,
-      deposit_date: req.body.deposit_date,
-      date: req.body.date,
-      IsAgreeDeduction: true,
-      lastDepositIp: userIp,
-      lastDepositAt: new Date()
-    });
-
-    await UserDepositNow.save();
-
-    // =========================
-    // REFERRAL LOGIC (START MAY)
-    // =========================
-
-    const REFERRAL_START_DATE = new Date("2026-05-01T00:00:00.000Z");
-
-    if (new Date(UserDepositNow.createdAt) >= REFERRAL_START_DATE) {
-
-      const user = await User.findById(req.body.user_id);
-
-      if (user && user.reffer) {
-
-        // Check FIRST deposit only
-        const depositCount = await UserDeposit.countDocuments({
-          user_id: user._id.toString()
+        const existingDeposit = await UserDeposit.findOne({
+            lastDepositIp: userIp,
+            lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
         });
 
-        if (depositCount === 1) {
-
-          const referrer = await User.findOne({
-            user_Name: user.reffer
-          });
-
-          if (referrer) {
-
-            // Prevent duplicate reward
-            const alreadyRewarded = await ReferralReward.findOne({
-              referredUserId: user._id,
-              type: "first_deposit_bonus"
-            });
-
-            if (!alreadyRewarded) {
-
-              const rewardAmount = Number(UserDepositNow.depositAmount) * 0.1;
-
-              // Save reward
-              await ReferralReward.create({
-                userId: referrer._id,
-                referredUserId: user._id,
-                depositId: UserDepositNow._id,
-                amount: rewardAmount,
-                type: "first_deposit_bonus",
-                date: new Date()
-              });
-
-              // Add to referrer balance
-              await User.findByIdAndUpdate(referrer._id, {
-                $inc: { refferReward: rewardAmount }
-              });
-
-              console.log(`✅ Referral reward added: GHC ${rewardAmount}`);
-            }
-          }
+        if (existingDeposit) {
+            return res.status(400).send(duplicateIpMessage);
         }
-      }
+
+        const UserDepositNow = new UserDeposit({
+            user_id: req.body.user_id,
+            user_Name: req.body.user_Name,
+            full_Name: req.body.full_Name,
+            fixedDepositAmount: req.body.fixedDepositAmount,
+            depositAmount: Number(req.body.depositAmount),
+            checkPercent: Number(req.body.checkPercent),
+            walletAddress: req.body.walletAddress,
+            email: req.body.email,
+            deposit_date: req.body.deposit_date,
+            date: req.body.date,
+            IsAgreeDeduction: true,
+            lastDepositIp: userIp,
+            lastDepositAt: new Date()
+        });
+
+        await UserDepositNow.save();
+
+        try {
+            const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
+            await sendSMS('0203808479', adminDepositAlert);
+            console.log("Admin Deposit Notification SMS Sent Successfully");
+        } catch (adminSmsError) {
+            console.error("Admin SMS Error:", adminSmsError.message);
+        }
+
+        return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Server error");
     }
-
-    // =========================
-    // ADMIN SMS
-    // =========================
-    try {
-      const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
-      await sendSMS('0203808479', adminDepositAlert);
-      console.log("Admin Deposit Notification SMS Sent Successfully");
-    } catch (adminSmsError) {
-      console.error("Admin SMS Error:", adminSmsError.message);
-    }
-
-    return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
-
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send("Server error");
-  }
 });
-
-
-// Router.post('/deposit', async (req, res) => {
-//     try {
-//         const userIp =
-//             req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-//             req.socket?.remoteAddress ||
-//             req.ip;
-
-//         const TWELVE_HOURS = 12 * 60 * 60 * 1000;
-
-//         const duplicateIpMessage = `Duplicate IP Detected.
-//         A recent deposit was made from this IP address within the last 12 hours.
-//         May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
-//         Please try again after 12 hours.`;
-
-//         const existingDeposit = await UserDeposit.findOne({
-//             lastDepositIp: userIp,
-//             lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
-//         });
-
-//         if (existingDeposit) {
-//             return res.status(400).send(duplicateIpMessage);
-//         }
-
-//         const UserDepositNow = new UserDeposit({
-//             user_id: req.body.user_id,
-//             user_Name: req.body.user_Name,
-//             full_Name: req.body.full_Name,
-//             fixedDepositAmount: req.body.fixedDepositAmount,
-//             depositAmount: Number(req.body.depositAmount),
-//             checkPercent: Number(req.body.checkPercent),
-//             walletAddress: req.body.walletAddress,
-//             email: req.body.email,
-//             deposit_date: req.body.deposit_date,
-//             date: req.body.date,
-//             IsAgreeDeduction: true,
-//             lastDepositIp: userIp,
-//             lastDepositAt: new Date()
-//         });
-
-//         await UserDepositNow.save();
-
-//         try {
-//             const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
-//             await sendSMS('0203808479', adminDepositAlert);
-//             console.log("Admin Deposit Notification SMS Sent Successfully");
-//         } catch (adminSmsError) {
-//             console.error("Admin SMS Error:", adminSmsError.message);
-//         }
-
-//         return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).send("Server error");
-//     }
-// });
-
-// Router.post('/deposit', async (req, res) => {
-//     try {
-//         const userIp =
-//             req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-//             req.socket?.remoteAddress ||
-//             req.ip;
-
-//         const TWELVE_HOURS = 12 * 60 * 60 * 1000;
-
-//         const duplicateIpMessage = `Duplicate IP Detected.
-//         A recent deposit was made from this IP address within the last 12 hours.
-//         May I open several accounts in your program? No. If we find that one member has more than one account, the entire funds will be frozen.
-//         Please try again after 12 hours.`;
-
-//         const existingDeposit = await UserDeposit.findOne({
-//             lastDepositIp: userIp,
-//             lastDepositAt: { $gte: new Date(Date.now() - TWELVE_HOURS) }
-//         });
-
-//         if (existingDeposit) {
-//             return res.status(400).send(duplicateIpMessage);
-//         }
-
-//         const UserDepositNow = new UserDeposit({
-//             user_id: req.body.user_id,
-//             user_Name: req.body.user_Name,
-//             full_Name: req.body.full_Name,
-//             fixedDepositAmount: req.body.fixedDepositAmount,
-//             depositAmount: Number(req.body.depositAmount),
-//             checkPercent: Number(req.body.checkPercent),
-//             walletAddress: req.body.walletAddress,
-//             email: req.body.email,
-//             deposit_date: req.body.deposit_date,
-//             date: req.body.date,
-//             IsAgreeDeduction: true,
-//             lastDepositIp: userIp,
-//             lastDepositAt: new Date()
-//         });
-
-//         await UserDepositNow.save();
-
-//         try {
-//             const adminDepositAlert = `New deposit received\nAmount: GHC ${req.body.depositAmount}\nUser: ${req.body.user_Name}`;
-//             await sendSMS('0203808479', adminDepositAlert);
-//             console.log("Admin Deposit Notification SMS Sent Successfully");
-//         } catch (adminSmsError) {
-//             console.error("Admin SMS Error:", adminSmsError.message);
-//         }
-
-//         return res.send(".........Waiting for BlockChain confirm to credit your Dashboard");
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).send("Server error");
-//     }
-// });
 
 
 // Router.post('/deposit', async(req,res)=>{
@@ -1916,20 +1744,14 @@ Router.get("/check-tier-usage/:userId/:amount", async (req, res) => {
       }
     }).sort({ createdAt: -1 });
 
-    const firstTierDeposits = deposits.filter((item) => {
+    const tierDeposits = deposits.filter((item) => {
       const amt = Number(item.depositAmount);
       return amt >= 114 && amt <= 299;
     });
 
-    const secondTierDeposits = deposits.filter((item) => {
-      const amt = Number(item.depositAmount);
-      return amt >= 469 && amt <= 599;
-    });
+    const tryingRestrictedRange = depositAmount >= 114 && depositAmount <= 299;
 
-    const tryingFirstTier = depositAmount >= 114 && depositAmount <= 299;
-    const tryingSecondTier = depositAmount >= 469 && depositAmount <= 599;
-
-    if (firstTierDeposits.length >= 5 && tryingFirstTier) {
+    if (tierDeposits.length >= 5 && tryingRestrictedRange) {
       return res.json({
         success: true,
         restricted: true,
@@ -1943,23 +1765,6 @@ Please adjust your mining strategy:
 - Use the Free Tier from (10GHC–114GHC range)
 
 The Free Tier is available to all users every month.`
-      });
-    }
-
-    if (secondTierDeposits.length >= 3 && tryingSecondTier) {
-      return res.json({
-        success: true,
-        restricted: true,
-        action: "monthly_lock",
-        message: `The GHC469–599 mining range is limited and can only be used 3 times per month.
-
-You have exceeded the allowed usage for this month.
-
-Please adjust your mining strategy:
-- Upgrade to a higher plan, or
-- Choose a lower deposit amount from GHC10–468 until next month.
-
-The higher-tier limits reset at the start of each calendar month.`
       });
     }
 
@@ -2032,10 +1837,10 @@ Router.get("/check-profit-limit/:userId/:amount", async (req, res) => {
 
     // Verify systemMoney exists
     if (systemMoney <= 0) {
-      return res.status(200).json({
-        success: true,
+      return res.status(400).json({
+        success: false,
         restricted: true,
-        message: "No system money available. Please top up your system Money to continue investing. Go to Dashboard, Click on Top Up System Money, and follow the instructions. Thank you.",
+        message: "Invalid system money. Please contact support.",
       });
     }
 
@@ -2135,287 +1940,126 @@ Router.post("/topup-systemmoney", async (req, res) => {
 });
 
 
-function normalizeFullName(fullName = "") {
-  return fullName
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, " ")
-    .split(" ")
-    .filter(Boolean)
-    .sort()
-    .join(" ");
-}
 
-Router.get("/check-duplicate-names", async (req, res) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Router.post("/boost-package", async (req, res) => {
   try {
-    const users = await User.find({}, {
-      full_Name: 1,
-      email: 1,
-      isFrozen: 1,
-      createdAt: 1
+    const { user_id, user_Name, amount, packageName, profit, duration, status } = req.body;
+
+    if (!user_id || !user_Name || !amount || !packageName || !profit || !duration) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields: user_id, user_Name, amount, packageName, profit, duration"
+      });
+    }
+
+    const newBoostPackage = new BoostPackage({
+      user_id,
+      user_Name,
+      amount: Number(amount),
+      packageName,
+      profit: Number(profit),
+      duration,
+      status: status || "active"
     });
 
-    const grouped = {};
+    await newBoostPackage.save();
 
-    for (const user of users) {
-      const normalizedName = normalizeFullName(user.full_Name);
-      if (!normalizedName) continue;
-
-      if (!grouped[normalizedName]) {
-        grouped[normalizedName] = [];
-      }
-
-      grouped[normalizedName].push(user);
-    }
-
-    const duplicates = [];
-
-    for (const normalizedName in grouped) {
-      if (grouped[normalizedName].length > 1) {
-        duplicates.push({
-          normalizedName,
-          count: grouped[normalizedName].length,
-          users: grouped[normalizedName]
-        });
-      }
-    }
-
-    return res.status(200).json({
+    res.status(201).json({
       success: true,
-      totalDuplicateGroups: duplicates.length,
-      duplicates
+      message: "Boost package purchased successfully",
+      data: newBoostPackage
     });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({
+    console.error("Boost package error:", error);
+    res.status(500).json({
       success: false,
-      message: "Server error"
+      message: "Server error",
+      error: error.message
     });
   }
 });
 
-Router.post("/lock-duplicate-names", async (req, res) => {
+Router.get("/boost-packages/:userId", async (req, res) => { 
   try {
-    const users = await User.find({}, {
-      full_Name: 1,
-      email: 1,
-      isFrozen: 1,
-      createdAt: 1
-    });
+    const { userId } = req.params;
 
-    const grouped = {};
+    const boostPackages = await BoostPackage.find({ user_id: userId }).sort({ createdAt: -1 });
 
-    for (const user of users) {
-      const normalizedName = normalizeFullName(user.full_Name);
-      if (!normalizedName) continue;
-
-      if (!grouped[normalizedName]) {
-        grouped[normalizedName] = [];
-      }
-
-      grouped[normalizedName].push(user);
-    }
-
-    const lockedGroups = [];
-    let totalLocked = 0;
-
-    for (const normalizedName in grouped) {
-      const matchedUsers = grouped[normalizedName];
-
-      if (matchedUsers.length > 1) {
-        // keep oldest account, lock the rest
-        const sortedUsers = matchedUsers.sort(
-          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-        );
-
-        const keepUser = sortedUsers[0];
-        const usersToLock = sortedUsers.slice(1);
-
-        const idsToLock = usersToLock
-          .filter(user => !user.isFrozen)
-          .map(user => user._id);
-
-        if (idsToLock.length > 0) {
-          await User.updateMany(
-            { _id: { $in: idsToLock } },
-            {
-              $set: {
-                isFrozen: true
-              }
-            }
-          );
-
-          totalLocked += idsToLock.length;
-
-          lockedGroups.push({
-            normalizedName,
-            keptUser: {
-              _id: keepUser._id,
-              full_Name: keepUser.full_Name,
-              email: keepUser.email
-            },
-            lockedUsers: usersToLock.map(user => ({
-              _id: user._id,
-              full_Name: user.full_Name,
-              email: user.email
-            }))
-          });
-        }
-      }
-    }
-
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
-      message: "Duplicate accounts processed successfully",
-      totalLocked,
-      lockedGroups
+      data: boostPackages
     });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({
+    console.error("Get boost packages error:", error);
+    res.status(500).json({
       success: false,
-      message: "Server error"
+      message: "Server error",
+      error: error.message
     });
   }
 });
-
-Router.post("/freeze-duplicates", async (req, res) => {
-  try {
-    const users = await User.find({}, {
-      full_Name: 1,
-      isFrozen: 1,
-      createdAt: 1
-    });
-
-    const normalize = (name = "") =>
-      name
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, " ")
-        .split(" ")
-        .filter(Boolean)
-        .sort()
-        .join(" ");
-
-    const grouped = {};
-
-    // group users by normalized name
-    for (const user of users) {
-      const key = normalize(user.full_Name);
-      if (!key) continue;
-
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(user);
-    }
-
-    let totalFrozen = 0;
-    const results = [];
-
-    for (const key in grouped) {
-      const group = grouped[key];
-
-      if (group.length > 1) {
-        // sort by oldest account
-        const sorted = group.sort(
-          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-        );
-
-        const keep = sorted[0]; // keep oldest
-        const duplicates = sorted.slice(1);
-
-        const idsToFreeze = duplicates
-          .filter(u => !u.isFrozen)
-          .map(u => u._id);
-
-        if (idsToFreeze.length > 0) {
-          await User.updateMany(
-            { _id: { $in: idsToFreeze } },
-            { $set: { isFrozen: true } }
-          );
-
-          totalFrozen += idsToFreeze.length;
-        }
-
-        results.push({
-          name: key,
-          kept: keep._id,
-          frozen: idsToFreeze
-        });
-      }
-    }
-
-    res.json({
-      success: true,
-      totalFrozen,
-      groups: results
-    });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false });
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Router.post('/widthdraw/:id', async(req,res)=>{

@@ -23,6 +23,7 @@ import InvestorFeePopup from '../InvestorFeePopup/InvestorFeePopup';
 import MiningFeePopup from '../MiningFeePopup/MiningFeePopup';
 import ReferralBonusPopup from '../ReferralBonusPopup/ReferralBonusPopup';
 import WithdrawalUpgradePopup from '../WithdrawalUpgradePopup/WithdrawalUpgradePopup';
+import BoostPackageNotice from '../BoostPackageNotice/BoostPackageNotice';
 
 
 
@@ -165,9 +166,10 @@ class Home extends Component {
             
             <div className='main__home'>
                 <section className='home__main__box__1'>
+                    {/* <BoostPackageNotice popup={true}/> */}
                     <AuthRedirectPopup/>
                     <WhatsAppChannelPopup/>
-                    {/* <MiningFeePopup/> */}
+                    <MiningFeePopup/>
                     <ReferralBonusPopup/>
                     <WithdrawalUpgradePopup/>
                      <div className="home__box__2">

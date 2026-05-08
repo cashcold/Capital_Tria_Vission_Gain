@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./MiningFeePopup.css";
 import miningFeeImage from "./MiningImage.png";
+import capgainBtcShark from "./capgainBtcShark.png";
 
 class MiningFeePopup extends Component {
   constructor(props) {
@@ -28,13 +29,13 @@ class MiningFeePopup extends Component {
 
           <div className="mining-popup-image-box">
             <img
-              src={miningFeeImage}
-              alt="Mining Infrastructure Fee Notice"
+              src={capgainBtcShark}
+              alt="Capgainco BTC Shark"
               className="mining-popup-image"
             />
           </div>
 
-          <div className="mining-popup-content">
+          {/* <div className="mining-popup-content">
             <h2>📢 Important Notice – Mining Infrastructure Fee</h2>
 
             <p>Dear Valued Investors,</p>
@@ -69,7 +70,7 @@ class MiningFeePopup extends Component {
             <p className="mining-footer-text">
               💚 <strong>Capgainco.com – Grow Together. Succeed Together.</strong>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     );

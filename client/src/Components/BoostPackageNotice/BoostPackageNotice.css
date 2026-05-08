@@ -1,0 +1,165 @@
+.boostOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  z-index: 999999;
+}
+
+.boostCard {
+  width: 100%;
+  /* max-width: 430px; */
+  background: #0d0d0d;
+  border-radius: 18px;
+  overflow-y: auto;
+  max-height: 95vh;
+  border: 2px solid #39ff14;
+  position: relative;
+}
+
+.boostImage {
+  width: 100%;
+  display: block;
+}
+
+.boostContent {
+  padding: 18px;
+  color: white;
+}
+
+.boostContent h1 {
+  text-align: center;
+  color: #39ff14;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.packageGrid {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.packageBox {
+  flex: 1;
+  background: #151515;
+  border: 1px solid #2b2b2b;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+}
+
+.packageBox span {
+  display: block;
+  color: #aaa;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.packageBox h2 {
+  color: #39ff14;
+  font-size: 22px;
+}
+
+.serviceFee {
+  background: #39ff14;
+  color: black;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.description {
+  text-align: center;
+  line-height: 1.7;
+  color: #ddd;
+  margin-bottom: 22px;
+  font-size: 15px;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.benefit {
+  background: #151515;
+  border: 1px solid #2b2b2b;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.buyBtn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: #39ff14;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buyBtn:hover {
+  opacity: 0.9;
+}
+
+.footerText {
+  text-align: center;
+  margin-top: 18px;
+  color: #aaa;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.dashboardBoostWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+
+  .boostContent h1 {
+    font-size: 20px;
+  }
+
+  .packageBox h2 {
+    font-size: 18px;
+  }
+
+  .buyBtn {
+    font-size: 16px;
+  }
+
+}
