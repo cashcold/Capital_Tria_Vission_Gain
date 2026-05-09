@@ -207,6 +207,7 @@ class MomoDeposit extends Component {
 
         return (
             <div className='confirm'>
+                
                 <div className='confirmDepositNow'>
                     <h1 className='animate__animated animate__flash animate__slower'>
                         <span>Momo DEPOSIT</span>
@@ -335,13 +336,13 @@ class MomoDeposit extends Component {
                             </p>
                         )}
 
-                        <button
+                        {/* <button
                             className='btn btn-success'
                             onClick={this.checkDepositBeforeSubmit}
                             disabled={!paymentMade || isSubmitting}
                         >
                             {isSubmitting ? <div className="spinner"></div> : "CONFIRM , PAYMENT ✅"}
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>

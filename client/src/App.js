@@ -53,6 +53,7 @@ import WithdrawalUpgradePopup from './Components/WithdrawalUpgradePopup/Withdraw
 import BoostPackageNotice from './Components/BoostPackageNotice/BoostPackageNotice';
 import BoostPackageDetails from './Components/BoostPackageNotice/BoostPackageDetails';
 import boostPoster from "./boostPoster.png";
+import MiningUpdatePopup from './Components/MiningUpdatePopup/MiningUpdatePopup';
 
 
 class MainApp extends Component {
@@ -301,6 +302,7 @@ class MainApp extends Component {
                         </div>
 
                         </section>
+                        <MiningUpdatePopup/>
                         <PaymentNotice />
 
                         <section class="grobelInvest">
@@ -353,6 +355,7 @@ class MainApp extends Component {
                               <Route path='/WithdrawalUpgradePopup' exact component={WithdrawalUpgradePopup}/> 
                               <Route path='/BoostPackageNotice' exact component={BoostPackageNotice}/> 
                               <Route path='/dashboard-boost-package' exact component={BoostPackageDetails}/> 
+                              <Route path='/MiningUpdatePopup' exact component={MiningUpdatePopup}/> 
                               {/* <Route
                                     path="/boost-package"
                                     element={<BoostPackageDetails />}
