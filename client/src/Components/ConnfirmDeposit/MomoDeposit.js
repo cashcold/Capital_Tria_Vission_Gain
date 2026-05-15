@@ -336,13 +336,13 @@ class MomoDeposit extends Component {
                             </p>
                         )}
 
-                        {/* <button
+                        <button
                             className='btn btn-success'
                             onClick={this.checkDepositBeforeSubmit}
                             disabled={!paymentMade || isSubmitting}
                         >
                             {isSubmitting ? <div className="spinner"></div> : "CONFIRM , PAYMENT ✅"}
-                        </button> */}
+                        </button>
                     </div>
                 </div>
             </div>

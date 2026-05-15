@@ -216,9 +216,9 @@ class WithdrawMain extends Component {
                                     ⚠️ {this.state.withdrawStatusMessage}
                                 </p>
                             )}
-                            {/* <a href='#' className='btn btn-success withdrawBtn' onClick={this.WithdrawNowFound}>
+                            <a href='#' className='btn btn-success withdrawBtn' onClick={this.WithdrawNowFound}>
                                 WITHDRAW BALANCE
-                            </a> */}
+                            </a>
                         </div>
                         <div className="method__box">
                             <h4  className='btn btn-danger'>GHC0.00</h4>
