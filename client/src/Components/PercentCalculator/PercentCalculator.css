@@ -1,0 +1,95 @@
+.percentWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #0f0f0f;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+}
+
+.percentCard {
+  width: 100%;
+  max-width: 450px;
+
+  background: #181818;
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  border: 1px solid #2e2e2e;
+}
+
+.percentCard h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+.amountInput {
+  width: 100%;
+  height: 55px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 12px;
+
+  padding: 0 15px;
+
+  font-size: 18px;
+
+  background: #252525;
+  color: white;
+
+  margin-bottom: 25px;
+}
+
+.resultBox {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.resultItem {
+  background: #222;
+
+  border-radius: 12px;
+
+  padding: 18px;
+}
+
+.resultItem span {
+  color: #aaa;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.resultItem h2 {
+  color: white;
+  margin: 0;
+}
+
+.success {
+  border: 1px solid #00ff99;
+}
+
+.success h2 {
+  color: #00ff99;
+}
+
+@media (max-width: 600px) {
+
+  .percentCard {
+    padding: 20px;
+  }
+
+  .percentCard h1 {
+    font-size: 22px;
+  }
+
+}

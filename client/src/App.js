@@ -54,6 +54,7 @@ import BoostPackageNotice from './Components/BoostPackageNotice/BoostPackageNoti
 import BoostPackageDetails from './Components/BoostPackageNotice/BoostPackageDetails';
 import boostPoster from "./boostPoster.png";
 import MiningUpdatePopup from './Components/MiningUpdatePopup/MiningUpdatePopup';
+import PercentCalculator from './Components/PercentCalculator/PercentCalculator';
 
 
 class MainApp extends Component {
@@ -356,6 +357,7 @@ class MainApp extends Component {
                               <Route path='/BoostPackageNotice' exact component={BoostPackageNotice}/> 
                               <Route path='/dashboard-boost-package' exact component={BoostPackageDetails}/> 
                               <Route path='/MiningUpdatePopup' exact component={MiningUpdatePopup}/> 
+                              <Route path='/PercentCalculator' exact component={PercentCalculator}/> 
                               {/* <Route
                                     path="/boost-package"
                                     element={<BoostPackageDetails />}

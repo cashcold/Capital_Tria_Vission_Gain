@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { io } from "socket.io-client";
+import PercentCalculator from '../PercentCalculator/PercentCalculator';
 
 class WatchNotificationMain extends Component {
     constructor(props) {
@@ -130,6 +131,7 @@ class WatchNotificationMain extends Component {
                 <ToastContainer />
                 <section className="watch_not">
                     <h1>WATCH THE NOTIFICATION!!!</h1>
+                    <PercentCalculator/>
 
                     <section className="displayBothTrans">
                         <section className="displayNewBitcoinSell">
