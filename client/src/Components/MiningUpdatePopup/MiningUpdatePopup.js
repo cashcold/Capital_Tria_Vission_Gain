@@ -49,56 +49,62 @@ class MiningUpdatePopup extends Component {
 
           <div className="miningContent">
 
-            <h1>
-              📢 IMPORTANT MINING SYSTEM UPDATE
-            </h1>
+          <h1>
+            🚀 WE ARE FULLY BACK!
+          </h1>
+
+          <p>
+            ✅ Maintenance Successfully Completed
+          </p>
+
+          <p>
+            ⚙️ Our platform systems have been successfully
+            optimized and upgraded to provide a faster,
+            smoother, and more reliable experience for all users.
+          </p>
+
+          <p>
+            ⛏️ Blockchain mining activation is now working
+            successfully and mining operations are active again.
+          </p>
+
+          <p>
+            🚀 Investors can now continue activating mining
+            packages and growing their investments with confidence.
+          </p>
+
+          <div className="miningInfoBox">
 
             <p>
-              ⚙️ We are currently upgrading and improving our
-              Blockchain Mining System to provide a more
-              stable and reliable experience for all users.
+              ✅ Mining Activation Working Successfully
             </p>
 
             <p>
-              📌 During this update period, some mining
-              activations may fail temporarily, while others
-              may still go through successfully.
+              ✅ Faster & More Stable Platform
             </p>
 
             <p>
-              🔧 Our technical team is working hard to fix and
-              optimize the blockchain mining activation process
-              as quickly as possible.
+              ✅ Improved User Experience
             </p>
 
-            <div className="miningInfoBox">
-
-              <p>
-                ✅ Your account remains safe
-              </p>
-
-              <p>
-                ✅ Your funds remain secure
-              </p>
-
-              <p>
-                ✅ Failed mining activations will be handled appropriately
-              </p>
-
-            </div>
-
-            <p className="thankYouText">
-              🙏 We sincerely appreciate your patience,
-              trust, and continued support during this
-              upgrade process.
+            <p>
+              ✅ Secure & Transparent Operations
             </p>
-
-            <div className="companyText">
-              CAPGAINCO.COM <br />
-              Grow Together. Succeed Together.
-            </div>
 
           </div>
+
+          <p className="thankYouText">
+            💚 Thank you for your patience,
+            trust, and continued support
+            throughout the maintenance period.
+          </p>
+
+          <div className="companyText">
+            CAPGAINCO.COM <br />
+            Grow Together. Succeed Together.
+          </div>
+
+        </div>
         </div>
       </div>
     );

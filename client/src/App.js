@@ -302,7 +302,7 @@ class MainApp extends Component {
                         </div>
 
                         </section>
-                        {/* <MiningUpdatePopup/> */}
+                        <MiningUpdatePopup/>
                         <PaymentNotice />
 
                         <section class="grobelInvest">
