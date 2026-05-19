@@ -171,7 +171,7 @@ class Home extends Component {
                     <WhatsAppChannelPopup/>
                     <MiningFeePopup/>
                     <ReferralBonusPopup/>
-                    {/* <WithdrawalUpgradePopup/> */}
+                    <WithdrawalUpgradePopup/>
                      <div className="home__box__2">
                          </div>
                         <div className="home__box__1">

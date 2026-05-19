@@ -41,53 +41,44 @@ class WithdrawalUpgradePopup extends Component {
 
           <div className="withdrawalContent">
 
-            <h2>📢 IMPORTANT ANNOUNCEMENT</h2>
+<h2>📢 IMPORTANT ANNOUNCEMENT</h2>
 
-            <p>
-              ⚙️ We are upgrading our payment system to serve you
-              better and more reliably.
-            </p>
+<p>
+  ⚙️ BTC SHARK TRADE & CapGainCo are committed to giving you more flexibility and faster investments!
+</p>
 
-            <p>
-              📌 We wish to inform you that if your recent withdrawal
-              was not successful, it may have been caused by a
-              temporary issue with the MoMo API payment system.
-            </p>
+<p>
+  📌 You can now buy **two packages at the same time** to maximize your growth and returns.
+</p>
 
-            <p>
-              ✅ Kindly note that your withdrawal amount has been
-              fully reversed and credited back to your account.
-            </p>
+<h3>💰 PAYMENT OPTIONS AVAILABLE</h3>
 
-            <p>
-              🔒 Your funds remain safe and intact.
-            </p>
+<p>
+  💵 <strong>Mobile Money (MoMo)</strong> — MTN, Vodafone, AirtelTigo, G-Money. Fast, secure, and convenient.
+</p>
 
-            <p>
-              🚫 We do not keep anyone’s money in pending.
-              Your trust and security are our top priority.
-            </p>
+<p>
+  🏦 <strong>Bank Transfer</strong> — Safe, reliable, and trusted for all Ghanaian banks.
+</p>
 
-            <h3>🏦 CURRENT WITHDRAWAL METHOD</h3>
+<p>
+  💱 <strong>USDT Payment</strong> — Pay using Tether (USDT) for crypto-savvy investors.  
+  Quick and borderless.
+</p>
 
-            <p>
-              💳 GHANA BANK — Bank to Bank Transfer
-            </p>
+<p>
+  🔒 Your funds remain secure at all times. We do not hold anyone’s money in pending status.
+</p>
 
-            <p>
-              💬 Anyone who is ready for bank payment can kindly
-              chat with the administration for assistance.
-            </p>
+<p>
+  💬 For assistance with any payment option, please contact our administration team.
+</p>
 
-            <p>
-              🙏 Thank you for your patience and continued trust.
-            </p>
-
-            <strong>
-              CAPGAINCO.COM <br />
-              Grow Together. Succeed Together.
-            </strong>
-
+<strong>
+  CAPGAINCO.COM <br />
+  BTC SHARK TRADE — Registered Company in Ghana 🇬🇭 <br />
+  Grow Together. Succeed Together.
+</strong>
           </div>
         </div>
       </div>
