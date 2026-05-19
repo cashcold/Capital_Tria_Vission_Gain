@@ -56,11 +56,16 @@ class AccountRouter extends Component {
             user_profile_display: {
                 systemMoney: 0
             },
-            showDetails: false, // State for popout card visibility
-       
-         }
-
-         this.handleChange = this.handleChange.bind(this)
+             packages: [
+        { name: "Package 1", profit : "up to 25%",  duration: "24hours to 7 Days", ServiceFee: "31.4%   " },
+        { name: "Package 2", profit: "30%", duration: "14 Days", ServiceFee: "20%   " },
+        ],
+          selectedPackage: null,   // store the clicked package
+          showModal: false,        // show/hide modal
+        showDetails: false, // State for popout card visibility 
+        }
+            this.handleChange = this.handleChange.bind(this)
+            this.handlePackageClick = this.handlePackageClick.bind(this)
     }
     handleAmountChange = (e) => {
     this.setState({ topupAmount: e.target.value });
@@ -68,16 +73,24 @@ class AccountRouter extends Component {
     handleChange = input => (event)=>{
         this.setState({[input]: event.target.value})
     }
+    handlePackageClick = (pkg) => {
+    this.setState({
+        selectedPackage: pkg,
+        showModal: true,
+        showDetails: true, // show popout card when clicked
+    });
+    };
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.user_balance.activetDeposit !== this.state.user_balance.activetDeposit) {
-          if (this.state.user_balance.activetDeposit > 0) {
-         
-            this.setState({ showDetails: true });
-          } else {
-            this.setState({ showDetails: false });
-          }
-        }
+         if (prevState.user_balance.activetDeposit !== this.state.user_balance.activetDeposit) {
+    if (this.state.user_balance.activetDeposit > 0) {
+      // User has an active mining package
+      this.setState({ showDetails: true, noActivePackage: false });
+    } else {
+      // User does NOT have any active mining package
+      this.setState({ showDetails: false, noActivePackage: true });
+    }
+  }
     }
 
     handleTopupRequest = async () => {
@@ -261,11 +274,11 @@ class AccountRouter extends Component {
         }
          
       // Trigger the animations after component mounts
-    const button = document.querySelector('.cashout-btn');
-    const ring = document.querySelector('.gradient-ring');
+            const button = document.querySelector('.cashout-btn');
+            const ring = document.querySelector('.gradient-ring');
 
-    if (button) button.classList.add('animate-in');
-    if (ring) ring.classList.add('spin-gradient');
+            if (button) button.classList.add('animate-in');
+            if (ring) ring.classList.add('spin-gradient');
     
 
     }
@@ -279,6 +292,7 @@ class AccountRouter extends Component {
 
     render() { 
 
+      
 
         const months = [
         "January","February","March","April","May","June",
@@ -424,7 +438,7 @@ class AccountRouter extends Component {
 
             // Format the withdrawal date nicely for display
             const formattedWithdrawDate = withdrawTimestampRaw ? moment(withdrawTimestampRaw).format('MMMM Do YYYY, h:mm:ss a') : "No date available";
-
+             const { packages } = this.state;
 
             // debug: show withdraw detection values in console
                 return ( 
@@ -448,7 +462,7 @@ class AccountRouter extends Component {
                     </section>
                     )
                 }
-                <BoostPackageNotice popup={false} />
+                {/* <BoostPackageNotice popup={false} /> */}
                <section className="AccountBalanceShow">
                     <div className="balance-card">
                         <p className="balance-title">Your Money in the System</p>
@@ -527,6 +541,41 @@ class AccountRouter extends Component {
                 <section class="warning_message">
                     <AccountStatusAlert />
                 </section>
+                {/* <section class="packagesList">
+                    <div className="packagesWrapper">
+                        <h1 className="header">🚀 My Investment Packages</h1>
+                        <div className="packagesGrid">
+                            {this.state.packages.map((pkg, index) => (
+                                <div key={index} className="packageCard" onClick={() => this.handlePackageClick(pkg)}>
+                                <div className="packageHeader">
+                                    <h2>{pkg.name}</h2>
+                                    <span className="duration">{pkg.duration}</span>
+                                </div>
+                                <div className="packageBody">
+                                    <p>💰 Profit: {pkg.profit}</p>
+                                    <p>⚡ Service Fee: {pkg.ServiceFee}</p>
+                                    <p>📈 Realistic Growth</p>
+                                </div>
+                                <button className="investBtn">View details</button>
+                                <div className="roboticGlow"></div>
+                                </div>
+                            ))}
+                            </div>
+                    </div>
+                </section> */}
+                 {/* Popout for selected package */}
+            {/* {this.state.showModal && this.state.selectedPackage && (
+                <div className="modalOverlay" onClick={this.closeModal}>
+                    <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+                        <h2>{this.state.selectedPackage.name} Details</h2>
+                        <p>💰 Profit: {this.state.selectedPackage.profit}</p>
+                        <p>⏳ Duration: {this.state.selectedPackage.duration}</p>
+                        <p>⚡ Service Fee: {this.state.selectedPackage.ServiceFee}</p>
+                        <button onClick={this.closeModal}>Close</button>
+                    </div>
+                </div>
+            )} */}
+
                 {/* <InvestorNoticeModal userName={this.state.user_Name} /> */}
                 
                 {

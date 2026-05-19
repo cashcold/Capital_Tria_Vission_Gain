@@ -55,6 +55,8 @@ import BoostPackageDetails from './Components/BoostPackageNotice/BoostPackageDet
 import boostPoster from "./boostPoster.png";
 import MiningUpdatePopup from './Components/MiningUpdatePopup/MiningUpdatePopup';
 import PercentCalculator from './Components/PercentCalculator/PercentCalculator';
+import PackageDetails from './Components/PackageDetails/PackageDetails';
+// import PackageDetails from './Components/PackageDetails/PackageDetails';
 
 
 class MainApp extends Component {
@@ -303,7 +305,7 @@ class MainApp extends Component {
                         </div>
 
                         </section>
-                        <MiningUpdatePopup/>
+                        {/* <MiningUpdatePopup/> */}
                         <PaymentNotice />
 
                         <section class="grobelInvest">
@@ -358,10 +360,8 @@ class MainApp extends Component {
                               <Route path='/dashboard-boost-package' exact component={BoostPackageDetails}/> 
                               <Route path='/MiningUpdatePopup' exact component={MiningUpdatePopup}/> 
                               <Route path='/PercentCalculator' exact component={PercentCalculator}/> 
-                              {/* <Route
-                                    path="/boost-package"
-                                    element={<BoostPackageDetails />}
-                                    /> */}
+                              <Route path='/PackageDetails' exact component={PackageDetails}/> 
+                            
                             </Switch>
                         </div>
                         <FooterMain />
